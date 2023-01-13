@@ -5,19 +5,18 @@
 
 <template>
 	<header>
-		<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+		<HelloWorld msg="This is Jesse's app!" />
 
-		<div class="wrapper">
-			<HelloWorld msg="You did it!" />
-
-			<nav>
-				<RouterLink to="/">Home</RouterLink>
-				<RouterLink to="/about">About</RouterLink>
-			</nav>
-		</div>
+		<nav>
+			<RouterLink to="/">Home</RouterLink>
+			<RouterLink to="/about">About</RouterLink>
+			<RouterLink to="/test">Test</RouterLink>
+		</nav>
 	</header>
-
-	<RouterView />
+	<main class="outlet">
+		<RouterView />
+	</main>
+	<footer>footer</footer>
 </template>
 
 <style scoped>
