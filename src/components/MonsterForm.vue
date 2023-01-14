@@ -1,12 +1,26 @@
 <script setup>
 	import { reactive } from "vue";
-	const monster = reactive({
-		name: "Blonde",
-		age: 5,
+	import { useAlbumsStore } from "@/stores/albums";
+
+	const library = useAlbumsStore();
+
+	const album = reactive({
+		name: "",
+		age: "",
 	});
 
 	function save() {
-		alert("Save!");
+		const record = {
+			name: album.name,
+			age: album.age,
+		};
+		library.add(record);
+		clear();
+	}
+
+	function clear() {
+		album.name = "";
+		album.age = "";
 	}
 </script>
 
@@ -14,15 +28,21 @@
 	<form autocomplete="off" @submit.prevent="save()">
 		<div class="form-field">
 			<label for="x">Name?</label>
-			<input id="x" type="number" required min="0" v-model="monster.name" />
+			<input id="x" type="text" required min="0" v-model="album.name" />
 		</div>
 		<div class="form-field">
-			<label for="y">What is the width of the room?</label>
-			<input id="y" type="number" required min="0" v-model.number="monster.age" />
+			<label for="y">Age?</label>
+			<input id="y" type="number" required min="0" v-model.number="album.age" />
 		</div>
 
 		<button type="submit">Calculate</button>
 	</form>
+
+	<ul>
+		<li v-for="album in library.list">
+			{{ album.name }}
+		</li>
+	</ul>
 </template>
 
 <style scoped lang="scss">
