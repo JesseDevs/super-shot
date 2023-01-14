@@ -1,7 +1,10 @@
 action-links {
 	display: flex;
 	gap: 5px;
-	cursor: pointer;
+
+	button {
+		cursor: pointer;
+	}
 }
 
 #menu-toggle:checked~.menu a:hover {
