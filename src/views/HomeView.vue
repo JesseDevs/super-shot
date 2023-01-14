@@ -1,9 +1,11 @@
 <script setup>
-	import TheWelcome from "../components/TheWelcome.vue";
+	import MonsterForm from "../components/MonsterForm.vue";
 </script>
 
 <template>
 	<main>
-		<TheWelcome />
+		<h1>Welcome</h1>
+
+		<MonsterForm />
 	</main>
 </template>
