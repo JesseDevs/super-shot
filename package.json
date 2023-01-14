@@ -7,7 +7,8 @@
 		"build:dev": "vite build --mode development",
 		"build": "vite build",
 		"preview": "vite preview",
-		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+		"deploy": "vite build && cp dist/index.html dist/200.html && surge dist"
 	},
 	"dependencies": {
 		"pinia": "^2.0.28",
