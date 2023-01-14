@@ -11,6 +11,7 @@
 			<RouterLink to="/">Home</RouterLink>
 			<RouterLink to="/about">About</RouterLink>
 			<RouterLink to="/test">Test</RouterLink>
+			<RouterLink to="/test:thing">Test:thing</RouterLink>
 		</nav>
 	</header>
 	<main class="outlet">
