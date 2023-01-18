@@ -71,6 +71,10 @@
 			left: 8%;
 			top: 50%;
 		}
+
+		label {
+			font-weight: 500;
+		}
 		span.input-helper {
 			content: "";
 			background-color: var(--support);
