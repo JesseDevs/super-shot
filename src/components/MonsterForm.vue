@@ -70,6 +70,7 @@
 		input:focus + span.input-helper {
 			left: 8%;
 			top: 50%;
+			width: 80%;
 		}
 
 		label {

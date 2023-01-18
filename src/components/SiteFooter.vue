@@ -2,7 +2,9 @@
 
 <template>
 	<footer>
-		<inner-column> </inner-column>
+		<inner-column>
+			<a href="https://github.com/JesseDevs/super-shot">GitHub</a>
+		</inner-column>
 	</footer>
 </template>
 
