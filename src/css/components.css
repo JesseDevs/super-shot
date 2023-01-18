@@ -13,6 +13,7 @@ button {
 	cursor: pointer;
 	position: relative;
 	background-color: rgba(0, 0, 0, 0);
+	color: var(--black);
 	user-select: none;
 	-webkit-user-select: none;
 	touch-action: manipulation;
@@ -36,15 +37,14 @@ button {
 	}
 }
 
-@media (hover: hover) {
-	.button:hover {
-		color: var(--page);
-	}
 
-	.button:hover:after {
-		top: 0px;
-		left: 0px;
+.button:hover {
+	color: var(--page);
+}
 
-		background-color: var(--color);
-	}
+.button:hover:after {
+	top: 0px;
+	left: 0px;
+
+	background-color: var(--color);
 }

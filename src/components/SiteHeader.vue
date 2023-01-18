@@ -20,6 +20,9 @@
 </template>
 
 <style lang="scss">
+	header inner-column {
+		padding: 1rem 1rem;
+	}
 	nav.site-menu {
 		display: none;
 		position: absolute;
