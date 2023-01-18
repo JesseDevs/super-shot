@@ -28,14 +28,16 @@
 </script>
 
 <template>
-	<form autocomplete="off" @submit.prevent="save()">
+	<form class="monster-form" autocomplete="off" @submit.prevent="save()">
 		<div class="form-field">
 			<label for="x">Name?</label>
 			<input id="x" type="text" required min="0" v-model="monster.name" />
+			<span class="input-helper" />
 		</div>
 		<div class="form-field">
 			<label for="y">Age?</label>
 			<input id="y" type="number" required min="0" v-model.number="monster.age" />
+			<span class="input-helper" />
 		</div>
 
 		<button class="button" type="submit">Calculate</button>
@@ -43,7 +45,7 @@
 </template>
 
 <style lang="scss">
-	form {
+	form.monster-form {
 		padding: 10px;
 		margin: 20px auto;
 		max-width: 700px;
@@ -57,12 +59,28 @@
 		margin-bottom: 20px;
 		justify-content: center;
 		align-items: center;
+		position: relative;
 
 		input {
-			width: 60%;
-			padding: 7px 0;
+			width: 85%;
+			padding: 7px 10px;
 			font-size: 1.1rem;
-			text-align: center;
+		}
+
+		input:focus + span.input-helper {
+			left: 8%;
+			top: 50%;
+		}
+		span.input-helper {
+			content: "";
+			background-color: var(--support);
+			width: 85%;
+			z-index: -2;
+			position: absolute;
+			height: 50%;
+			top: 60%;
+			left: 10%;
+			transition: 0.2s;
 		}
 	}
 </style>
