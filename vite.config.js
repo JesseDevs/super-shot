@@ -6,7 +6,14 @@ import eslint from "@rollup/plugin-eslint";
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
-		vue(),
+		vue({
+			template: {
+				compilerOptions: {
+					// treat all tags with a dash as custom elements
+					isCustomElement: (tag) => tag.includes("-"),
+				},
+			},
+		}),
 		{
 			...eslint({
 				include: "src/**/*.+(js)",

@@ -3,7 +3,8 @@
 	"tabWidth": 3,
 	"semi": true,
 	"trailingComma": "all",
-	"printWidth": 120,
+	"printWidth": 100,
+	"prettier.singleQuote": true,
 	"bracketSpacing": true,
 	"vueIndentScriptAndStyle": true
 }
