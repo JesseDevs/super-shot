@@ -1,0 +1,126 @@
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	position: relative;
+	font-weight: normal;
+}
+
+body, #app {
+	display: contents;
+}
+
+vue-app {
+	position: relative;
+	z-index: -100;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	color: var(--color-text);
+	background: var(--page);
+	transition: color 0.5s, background-color 0.5s;
+	line-height: 1.5;
+	font-family: 'Sofia Sans', sans-serif;
+	font-weight: 400;
+	text-rendering: optimizeLegibility;
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+main {
+	flex-grow: 1;
+}
+
+inner-column {
+	display: block;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 1.5rem 15PX;
+	max-width: 1000px;
+}
+
+article-grid,
+text-content,
+module,
+label,
+input,
+field,
+button {
+	display: block;
+	width: 100%;
+}
+
+/* display elements */
+
+a {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+a p {
+	display: inline;
+}
+
+p a {
+	display: inline-block;
+	text-decoration: underline;
+	color: blue;
+}
+
+p {
+	line-height: 1.4;
+	max-width: 60ch;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+picture {
+	display: block;
+}
+
+picture img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+.hide {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.gs_reveal {
+	opacity: 0;
+	visibility: hidden;
+	will-change: transform, opacity;
+}
