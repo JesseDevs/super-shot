@@ -14,34 +14,55 @@
 		const record = {
 			id: slugid.nice(),
 			name: product.name,
-			slug: product.toLowerCase().replace(/ /g, "-"),
+			slug: product.name.toLowerCase().replace(/ /g, "-"),
 			desc: product.desc,
-			category: product.category,
+			category: product.category.toLowerCase(),
 			tags: product.tags,
 		};
-		// monsters.add(record);
+		menu.add(record);
 		clear();
 	}
 
 	function clear() {
 		product.name = "";
-		product.age = "";
 	}
 </script>
 
 <template>
-	<form class="monster-form" autocomplete="off" @submit.prevent="save()">
+	<form class="product-form" autocomplete="off" @submit.prevent="save()">
 		<div class="form-field">
 			<label for="x">Name?</label>
 			<div>
-				<input id="x" type="text" required min="0" v-model="monster.name" />
+				<input id="x" type="text" required v-model="product.name" />
 				<span class="input-helper"></span>
 			</div>
 		</div>
 		<div class="form-field">
-			<label for="y">Age?</label>
+			<label for="y">Category?</label>
 			<div>
-				<input id="y" type="number" required min="0" v-model.number="monster.age" />
+				<select id="y" v-model="product.category">
+					<option disabled value="">Please select one</option>
+					<option>Coffee</option>
+					<option>Donuts</option>
+					<option>Sandwiches</option>
+				</select>
+				<span class="input-helper"></span>
+			</div>
+		</div>
+		<div class="form-field">
+			<label for="z">Description?</label>
+			<div class="contains-textarea">
+				<textarea id="z" type="text" v-model="product.desc">
+Enter Description...
+</textarea
+				>
+				<span class="input-helper"></span>
+			</div>
+		</div>
+		<div class="form-field">
+			<label for="w">Tags?</label>
+			<div>
+				<input id="w" type="text" multiple separator="/" v-model="product.tags" />
 				<span class="input-helper"></span>
 			</div>
 		</div>
@@ -70,18 +91,40 @@
 		div {
 			width: 85%;
 		}
-		input {
-			padding: 7px 10px;
-			font-size: 1.1rem;
+
+		div.contains-textarea {
+			height: 100px;
 		}
 
-		input:focus + span.input-helper {
+		select {
+			border: 1px solid black;
+		}
+
+		input,
+		select,
+		textarea {
+			width: 100%;
+			font-family: "Sofia Sans", sans-serif;
+			padding: 7px 10px;
+			font-size: 1.1rem;
+			border: 1px solid black;
+			outline: none;
+			resize: none;
+			&:focus {
+				border: 1px solid var(--support);
+				outline: 1px solid var(--support);
+			}
+		}
+
+		textarea {
+			min-height: 100px;
+		}
+
+		input:focus + span.input-helper,
+		select:focus + span.input-helper,
+		textarea:focus + span.input-helper {
 			right: 0%;
 			bottom: 0%;
-		}
-		input:focus {
-			border: 2px solid var(--support);
-			outline: none;
 		}
 
 		label {
