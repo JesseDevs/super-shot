@@ -9,6 +9,7 @@
 
 body, #app {
 	display: contents;
+	font-family: 'Sofia Sans', sans-serif;
 }
 
 vue-app {

@@ -12,7 +12,8 @@
 			<nav class="site-menu">
 				<ul>
 					<li><RouterLink @click="ui.toggleMenu()" to="/">Home</RouterLink></li>
-					<li><RouterLink @click="ui.toggleMenu()" to="/monsters">Monsters</RouterLink></li>
+
+					<li><RouterLink @click="ui.toggleMenu()" to="/menu">Menu</RouterLink></li>
 				</ul>
 			</nav>
 		</inner-column>
