@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import MonsterListView from "../views/MonsterListView.vue";
-import MonsterDetailView from "../views/MonsterDetailView.vue";
+
+import MenuListView from "../views/menu/MenuListView.vue";
+import MenuDetailView from "../views/menu/MenuDetailView.vue";
+
+import ProductListView from "../views/product/ProductListView.vue";
+import ProductDetailView from "../views/product/ProductDetailView.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,19 +16,31 @@ const router = createRouter({
 			component: HomeView,
 		},
 		{
-			path: "/monsters",
-			name: "monsters",
-			component: () => import("../views/MonstersView.vue"),
+			path: "/menu",
+			name: "menu",
+			component: () => import("../views/MenuView.vue"),
 			children: [
 				{
 					path: "",
 					name: "list",
-					component: MonsterListView,
+					component: MenuListView,
 				},
 				{
 					path: ":slug",
 					name: "detail",
-					component: MonsterDetailView,
+					component: MenuDetailView,
+					children: [
+						{
+							path: "",
+							name: "product-list",
+							component: ProductListView,
+						},
+						{
+							path: "product-:id",
+							name: "detail",
+							component: ProductDetailView,
+						},
+					],
 				},
 			],
 		},
