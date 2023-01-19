@@ -1,5 +1,5 @@
 <script setup>
-	import MonsterForm from "../components/MonsterForm.vue";
+	import MenuProductForm from "../components/MenuProductForm.vue";
 </script>
 
 <template>
@@ -10,12 +10,12 @@
 			</module-thing>
 		</inner-column>
 	</section>
-
+	<!-- 
 	<section>
 		<inner-column>
 			<module-thing>
-				<MonsterForm />
+				<MenuProductForm />
 			</module-thing>
 		</inner-column>
-	</section>
+	</section> -->
 </template>
