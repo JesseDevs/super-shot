@@ -104,7 +104,7 @@ Enter Description...
 		select,
 		textarea {
 			width: 100%;
-			font-family: "Sofia Sans", sans-serif;
+			font-family: "Montserrat", sans-serif;
 			padding: 7px 10px;
 			font-size: 1.1rem;
 			border: 1px solid black;
