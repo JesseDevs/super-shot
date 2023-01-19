@@ -23,7 +23,7 @@ html {
 }
 
 html {
-	--page: rgb(249 244 227);
+	--page: rgb(250, 247, 238);
 	--color: rgb(195 107 84);
 	--color-soft: rgb(237, 191, 176);
 	--color-mute: rgb(199 123 100);
@@ -31,6 +31,7 @@ html {
 
 	--support: rgb(68 68 68);
 	--support-soft: rgb(92, 91, 91);
+	--support-light: rgb(169, 169, 169);
 }
 
 

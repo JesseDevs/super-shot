@@ -22,7 +22,7 @@ vue-app {
 	background: var(--page);
 	transition: color 0.5s, background-color 0.5s;
 	line-height: 1.5;
-	font-family: 'Sofia Sans', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-weight: 400;
 	text-rendering: optimizeLegibility;
 	scroll-behavior: smooth;
