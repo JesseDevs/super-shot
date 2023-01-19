@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import CreateView from "../views/CreateView.vue";
 
 import MenuListView from "../views/menu/MenuListView.vue";
 import MenuDetailView from "../views/menu/MenuDetailView.vue";
@@ -43,6 +44,11 @@ const router = createRouter({
 					],
 				},
 			],
+		},
+		{
+			path: "/create",
+			name: "create",
+			component: CreateView,
 		},
 	],
 });

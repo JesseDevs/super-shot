@@ -19,7 +19,7 @@ export const useMenuStore = defineStore("menu", function () {
 		},
 		{
 			title: "Donuts",
-			slug: "donut",
+			slug: "donuts",
 			products: [
 				{
 					id: "falfh2382fb",
@@ -33,7 +33,7 @@ export const useMenuStore = defineStore("menu", function () {
 		},
 		{
 			title: "Sandwiches",
-			slug: "sandwich",
+			slug: "sandwiches",
 			products: [
 				{
 					id: "aflnswf82f29fh",
@@ -47,7 +47,18 @@ export const useMenuStore = defineStore("menu", function () {
 		},
 	]);
 
+	function add(record) {
+		var cate = record.category;
+		const x = categories.find(function (c) {
+			return c.slug == cate;
+		});
+
+		x.products.push(record);
+		console.log(x.products);
+	}
+
 	return {
+		add,
 		categories,
 	};
 });

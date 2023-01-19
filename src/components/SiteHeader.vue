@@ -14,6 +14,8 @@
 					<li><RouterLink @click="ui.toggleMenu()" to="/">Home</RouterLink></li>
 
 					<li><RouterLink @click="ui.toggleMenu()" to="/menu">Menu</RouterLink></li>
+
+					<li><RouterLink @click="ui.toggleMenu()" to="/create">Create</RouterLink></li>
 				</ul>
 			</nav>
 		</inner-column>
