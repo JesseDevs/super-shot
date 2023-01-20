@@ -5,17 +5,34 @@
 <template>
 	<section>
 		<inner-column>
-			<module-thing>
-				<h1 class="loud-voice">Welcome</h1>
-			</module-thing>
+			<home-module>
+				<h1 class="attention-voice">*ReDACTED* CLASSICS & NEW FAVORITES</h1>
+
+				<p class="tiny-voice home-intro">
+					Our menu is full of great-tasting items that will get you going and keep you running throughout
+					your busy day. Plus, they’re always made to order—just the way you like.
+				</p>
+
+				<button class="button">Sign In</button>
+			</home-module>
 		</inner-column>
 	</section>
-	<!-- 
-	<section>
-		<inner-column>
-			<module-thing>
-				<MenuProductForm />
-			</module-thing>
-		</inner-column>
-	</section> -->
 </template>
+
+<style lang="scss">
+	home-module {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		gap: 10px;
+		h1 {
+			max-width: 23ch;
+			font-weight: 700;
+		}
+	}
+	.home-intro {
+		max-width: 50ch;
+	}
+</style>
