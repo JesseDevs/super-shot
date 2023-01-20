@@ -13,7 +13,7 @@
 					your busy day. Plus, they’re always made to order—just the way you like.
 				</p>
 
-				<button class="button">Sign In</button>
+				<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
 			</home-module>
 		</inner-column>
 	</section>

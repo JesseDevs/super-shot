@@ -14,6 +14,8 @@ export const useMenuStore = defineStore("menu", function () {
 					desc: "Freshly brewed and full of flavor, our Iced Coffee gets you energized and ready to go.",
 					category: "coffee",
 					tags: ["iced", "cold"],
+					price: 3.99,
+					size: "M",
 				},
 			],
 		},
@@ -28,6 +30,7 @@ export const useMenuStore = defineStore("menu", function () {
 					desc: "They’re made in a variety of delicious flavors and free of artificial dyes, so it’s easy to try them all.",
 					category: "donuts",
 					tags: ["snack", "bite", "treat"],
+					price: 1.49,
 				},
 			],
 		},
@@ -38,23 +41,28 @@ export const useMenuStore = defineStore("menu", function () {
 				{
 					id: "aflnswf82f29fh",
 					name: "Bacon, Egg & Cheese",
-					slug: name.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+					slug: "bacon-egg-cheese",
 					desc: "A breakfast classic featuring cherrywood smoked bacon, egg and American cheese.",
 					category: "sandwich",
 					tags: ["meal", "bacon", "cheese", "bagel"],
+					price: 4.99,
 				},
 			],
 		},
 	]);
+	//JSON. parse (localStorage. getItem(menu)) || []
+	// LocalStorage. setItem("menu", JSON.stringify(menu, null,2));
+
+	function getCategory(x) {
+		return categories.find(function (c) {
+			return c.slug == x;
+		});
+	}
 
 	function add(record) {
-		var cate = record.category;
-		const x = categories.find(function (c) {
-			return c.slug == cate;
-		});
-
-		x.products.push(record);
-		console.log(x.products);
+		var rec = record.category;
+		var cate = getCategory(rec);
+		cate.products.push(record);
 	}
 
 	return {

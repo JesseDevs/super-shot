@@ -7,6 +7,12 @@ export const useInterfaceStore = defineStore("interface", function () {
 		mainMenuOpen.value = !mainMenuOpen.value;
 	}
 
+	function specificToggle() {
+		if (mainMenuOpen.value == true) {
+			mainMenuOpen.value = !mainMenuOpen.value;
+		}
+	}
+
 	const menuClass = computed(() => {
 		if (mainMenuOpen.value) {
 			return "toggle-open";
@@ -18,6 +24,7 @@ export const useInterfaceStore = defineStore("interface", function () {
 	return {
 		mainMenuOpen,
 		toggleMenu,
+		specificToggle,
 		menuClass,
 	};
 });
