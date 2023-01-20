@@ -22,6 +22,12 @@
 						/>
 					</svg>
 				</button>
+
+				<RouterLink class="strict-voice" to="/">LOGO.</RouterLink>
+
+				<button class="location-btn">
+					<img src="@/assets/images/location-icon.svg" alt="location icon" />
+				</button>
 			</nav>
 
 			<nav class="site-menu bottom-row">
@@ -47,11 +53,23 @@
 		gap: 10px;
 	}
 
+	nav.top-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			font-weight: 900;
+		}
+	}
+
 	nav.bottom-row {
 		display: block;
 		position: static;
 		height: auto;
 		margin: auto -1rem;
+		border-top: 2px solid var(--support-light);
 
 		ul {
 			display: flex;
@@ -63,7 +81,7 @@
 				width: 100%;
 			}
 			a {
-				padding: 3.5px 7px;
+				padding: 7px 7px;
 				color: var(--support);
 				font-weight: 700;
 				text-align: center;
@@ -87,7 +105,8 @@
 		}
 	}
 
-	.menu-toggle {
+	.menu-toggle,
+	.location-btn {
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
@@ -96,9 +115,14 @@
 		width: 40px;
 		height: 50px;
 	}
+	.location-btn {
+		width: 30px;
+		height: 30px;
+	}
+
 	.line {
 		fill: none;
-		stroke: var(--support-light);
+		stroke: var(--support-soft);
 		stroke-width: 6;
 		transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
 			stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
