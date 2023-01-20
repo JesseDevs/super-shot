@@ -23,21 +23,32 @@
 					</svg>
 				</button>
 
-				<RouterLink class="strict-voice" to="/">LOGO.</RouterLink>
+				<RouterLink class="strict-voice" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
-				<button class="location-btn">
+				<RouterLink class="location-btn" to="/sign-in">
 					<img src="@/assets/images/location-icon.svg" alt="location icon" />
-				</button>
+				</RouterLink>
 			</nav>
 
 			<nav class="site-menu bottom-row">
+				<signin-block>
+					<RouterLink class="small-voice" @click="ui.toggleMenu()" to="/sign-up">Sign Up</RouterLink
+					><RouterLink class="small-voice" to="/sign-in" @click="ui.toggleMenu()">Sign In</RouterLink>
+					<span class="tiny-voice">Not a Dunkin' Rewards memeber?</span>
+				</signin-block>
 				<ul>
-					<li><RouterLink class="small-voice" to="/">Home</RouterLink></li>
-
-					<li><RouterLink class="small-voice" to="/menu">Menu</RouterLink></li>
+					<li>
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/">Home</RouterLink>
+					</li>
 
 					<li>
-						<RouterLink class="small-voice" to="/create">Create</RouterLink>
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/menu">Menu</RouterLink>
+					</li>
+
+					<li>
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/create"
+							>Create</RouterLink
+						>
 					</li>
 				</ul>
 			</nav>
@@ -51,6 +62,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+
+	signin-block {
+		display: none;
 	}
 
 	nav.top-row {
@@ -99,12 +114,6 @@
 		}
 	}
 
-	header.toggle-open {
-		nav.site-menu {
-			display: block;
-		}
-	}
-
 	.menu-toggle,
 	.location-btn {
 		background-color: transparent;
@@ -139,6 +148,9 @@
 		stroke-dasharray: 60 207;
 		stroke-width: 6;
 	}
+
+	/// OPEN
+	///
 	header.toggle-open .line1 {
 		stroke-dasharray: 90 207;
 		stroke-dashoffset: -134;
@@ -153,5 +165,76 @@
 		stroke-dasharray: 90 207;
 		stroke-dashoffset: -134;
 		stroke-width: 6;
+	}
+
+	header.toggle-open {
+		signin-block {
+			display: grid;
+			grid-template-columns: 100px 100px;
+			text-align: center;
+			justify-content: center;
+			align-items: center;
+			row-gap: 10px;
+			padding: 7px;
+			background-color: var(--page-support);
+			a {
+				max-width: fit-content;
+				margin: 0 auto;
+				padding: 5px 10px;
+				text-transform: uppercase;
+				border-radius: 50px;
+				font-weight: 600;
+			}
+			a:first-of-type {
+				grid-column: 1;
+				background-color: var(--page);
+				border: 1px solid var(--support);
+			}
+			a:last-of-type {
+				grid-column: 2;
+				color: var(--page);
+				background-color: var(--color-mute);
+				border: 1px solid var(--color-mute);
+			}
+			span {
+				grid-column: span 2;
+			}
+		}
+
+		nav.site-menu {
+			position: fixed;
+
+			height: 100vh;
+			width: 100%;
+			z-index: 10;
+			top: 76px;
+			ul {
+				display: flex;
+				height: 80%;
+				flex-direction: column;
+				max-width: none;
+				background-color: var(--white);
+				justify-content: flex-start;
+				padding: 13px 0;
+
+				li {
+					width: 100%;
+				}
+				a {
+					padding: 7px 50px;
+					color: var(--support);
+					font-weight: 700;
+					text-align: left;
+					border-bottom: none;
+					font-size: clamp(0.94rem, calc(0.87rem + 0.34vw), 1.13rem);
+					line-height: 1.4;
+
+					&:hover {
+						border-bottom: none;
+						color: var(--color);
+					}
+				}
+			}
+		}
 	}
 </style>
