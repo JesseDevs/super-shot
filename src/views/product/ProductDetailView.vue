@@ -8,15 +8,16 @@
 	const category = menu.categories.find(function (record) {
 		return record.slug == route.params.slug;
 	});
+
+	const products = category.products;
+
+	const product = products.find(function (record) {
+		return record.id == route.params.id;
+	});
 </script>
 
 <template>
-	<inner-column>
-		<module-thing>
-			<h2 class="chant-voice">{{ category.title }}</h2>
-			<div class="product-outlet">
-				<RouterView :products="products" />
-			</div>
-		</module-thing>
-	</inner-column>
+	<category-card>
+		<h2 class="chant-voice">{{ product.name }}</h2>
+	</category-card>
 </template>
