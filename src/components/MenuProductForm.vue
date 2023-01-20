@@ -97,12 +97,14 @@ Enter Description...
 		}
 
 		select {
+			appearance: none;
 			border: 1px solid black;
 		}
 
 		input,
 		select,
 		textarea {
+			border-radius: none;
 			width: 100%;
 			font-family: "Montserrat", sans-serif;
 			padding: 7px 10px;

@@ -38,17 +38,21 @@ button {
 	}
 }
 
+@media (hover: hover) {
 
-.button:hover {
-	color: var(--page);
+	.button:hover {
+		color: var(--page);
+	}
+
+	.button:hover:after {
+		top: 0px;
+		left: 0px;
+
+		background-color: var(--color);
+	}
 }
 
-.button:hover:after {
-	top: 0px;
-	left: 0px;
 
-	background-color: var(--color);
-}
 
 .button-60 {
 	align-items: center;

@@ -8,8 +8,8 @@
 </script>
 
 <template>
-	<module-thing>
-		<ul>
+	<menu-list>
+		<ul class="main-grid">
 			<li v-for="category in menu.categories">
 				<RouterLink :to="`menu/${category.slug}`">
 					<category-card>
@@ -18,5 +18,11 @@
 				</RouterLink>
 			</li>
 		</ul>
-	</module-thing>
+	</menu-list>
 </template>
+
+<style lang="scss">
+	menu-list {
+		display: block;
+	}
+</style>
