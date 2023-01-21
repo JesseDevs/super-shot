@@ -1,7 +1,9 @@
 <script setup>
 	import { useRoute } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
+	import { useCartStore } from "@/stores/cart";
 
+	const cart = useCartStore();
 	const route = useRoute();
 	const menu = useMenuStore();
 
@@ -19,5 +21,6 @@
 <template>
 	<category-card>
 		<h2 class="chant-voice">{{ product.name }}</h2>
+		<button @click="cart.addItem(product)">Add to cart</button>
 	</category-card>
 </template>
