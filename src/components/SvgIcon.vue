@@ -9,10 +9,10 @@
 
 <style lang="scss">
 	div.contains-svg {
-		width: 40px;
-		height: 40px;
+		width: 30px;
+		height: 30px;
 		svg * {
-			fill: black;
+			fill: var(--support);
 		}
 	}
 </style>
