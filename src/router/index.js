@@ -23,22 +23,22 @@ const router = createRouter({
 			children: [
 				{
 					path: "",
-					name: "list",
+					name: "menu/list",
 					component: MenuListView,
 				},
 				{
 					path: ":slug",
-					name: "detail",
+					name: "menu/detail",
 					component: MenuDetailView,
 					children: [
 						{
 							path: "",
-							name: "product-list",
+							name: "menu/detail/product-list",
 							component: ProductListView,
 						},
 						{
 							path: ":id",
-							name: "detail",
+							name: "menu/detail/product-detail",
 							component: ProductDetailView,
 						},
 					],

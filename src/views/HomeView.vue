@@ -1,5 +1,6 @@
 <script setup>
 	import MenuProductForm from "../components/MenuProductForm.vue";
+	import CheckoutBtn from "../components/CheckoutBtn.vue";
 </script>
 
 <template>
@@ -14,6 +15,7 @@
 				</p>
 
 				<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
+				<CheckoutBtn />
 			</home-module>
 		</inner-column>
 	</section>
