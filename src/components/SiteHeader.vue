@@ -2,8 +2,8 @@
 	import { RouterLink, useRoute } from "vue-router";
 	import { useInterfaceStore } from "@/stores/interface";
 	import { useCartStore } from "../stores/cart";
-	import location from "@/assets/images/location-icon.vue";
 	import burger from "@/assets/images/burger-icon.vue";
+	import SvgIcon from "../components/SvgIcon.vue";
 
 	const ui = useInterfaceStore();
 	const route = useRoute();
@@ -20,11 +20,11 @@
 
 				<RouterLink class="strict-voice" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
-				<RouterLink class="location-btn" to="/cart">
+				<RouterLink class="strict-voice" @click="ui.specificToggle()" to="/cart">
+					<SvgIcon icon="basket" />
 					<div class="items-cart-value">
 						{{ cart.itemsInCart }}
 					</div>
-					<location />
 				</RouterLink>
 			</nav>
 
@@ -48,6 +48,9 @@
 							>Create</RouterLink
 						>
 					</li>
+					<li v-if="ui.mainMenuOpen">
+						<a target="git" href="https://github.com/JesseDevs/super-shot">GitHub</a>
+					</li>
 				</ul>
 			</nav>
 		</inner-column>
@@ -70,16 +73,19 @@
 		width: 20px;
 		height: 20px;
 		position: absolute;
-		top: -5px;
-		right: -5px;
-		background-color: black;
-		color: red;
+		top: -9px;
+		right: -9px;
+		background-color: var(--color-soft);
+		border: 1px solid var(--color-mute);
+		color: var(--black-mute);
 		border-radius: 50px;
 		z-index: 10;
-		font-size: 0.9rem;
+		font-size: 0.75rem;
+		font-weight: 600;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	}
 
 	nav.top-row {
