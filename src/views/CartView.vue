@@ -13,7 +13,6 @@
 				<h2 class="chant-voice">Cart</h2>
 				{{ cart.checkoutTotal }}
 
-				<SvgIcon icon="bell" />
 				<ul>
 					<li v-for="item in cart.purchasingCart">{{ item.name }} - {{ item.price }}</li>
 				</ul>

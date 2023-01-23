@@ -1,0 +1,52 @@
+<script setup>
+	import { useCartStore } from "../stores/cart";
+	import { useInterfaceStore } from "@/stores/interface";
+
+	const ui = useInterfaceStore();
+	const cart = useCartStore();
+</script>
+<template>
+	<checkout-block v-if="!ui.mainMenuOpen">
+		<checkout-btn v-if="cart.itemsInCart !== 0">
+			<p>$ {{ cart.checkoutTotal }}</p>
+			<span>Add to order</span>
+		</checkout-btn>
+		<checkout-btn v-else><span>Start Order</span> </checkout-btn>
+	</checkout-block>
+</template>
+
+<style lang="scss">
+	checkout-block {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 85px;
+		z-index: 100;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--page);
+	}
+
+	checkout-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 15px;
+		width: 240px;
+		border: 1px solid black;
+		margin: 0 auto;
+		padding: 15px 25px;
+		border-radius: 50px;
+		background-color: var(--color-soft);
+		p {
+			font-weight: 500;
+		}
+		span {
+			text-transform: uppercase;
+			font-weight: 800;
+			font-size: 0.85rem;
+		}
+	}
+</style>
