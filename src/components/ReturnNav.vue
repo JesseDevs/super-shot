@@ -1,7 +1,5 @@
 <script setup>
 	import { RouterLink, useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-
 	const route = useRoute();
 </script>
 
@@ -11,7 +9,7 @@
 			<p>&lt;</p>
 			<RouterLink class="small-voice" to="/menu">Menu</RouterLink>
 			<p>/</p>
-			<RouterLink class="small-voice" to="/menu">Menu</RouterLink>
+			<a class="small-voice" @click="$router.back()"> {{ route.path }}</a>
 		</div>
 	</return-nav>
 </template>
@@ -28,6 +26,7 @@
 
 			a {
 				font-weight: 500;
+				cursor: pointer;
 
 				&:hover {
 					color: var(--color);

@@ -1,24 +1,21 @@
 <script setup>
-	import { RouterView, useRoute } from "vue-router";
+	import { RouterView } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
 	import CheckoutBtn from "../components/CheckoutBtn.vue";
 	import ReturnNav from "../components/ReturnNav.vue";
-	const menu = useMenuStore();
+	import ModuleThing from "../components/ModuleThing.vue";
+	import { useRoute } from "vue-router";
+
 	const route = useRoute();
+	const menu = useMenuStore();
 </script>
 <template>
 	<section>
 		<inner-column>
-			<ReturnNav v-if="$route.path == '/menu'" />
+			<ReturnNav :v-show="route == home" />
 
-			<menu-module>
-				<h1 class="attention-voice">CLASSICS & NEW FAVORITES</h1>
+			<ModuleThing />
 
-				<p class="category-intro">
-					Our menu is full of great-tasting items that will get you going and keep you running throughout
-					your busy day. Plus, they’re always made to order—just the way you like.
-				</p>
-			</menu-module>
 			<div class="outlet">
 				<RouterView :menu="menu" />
 				<CheckoutBtn />

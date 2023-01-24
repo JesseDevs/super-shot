@@ -19,8 +19,8 @@
 </script>
 
 <template>
-	<category-card>
+	<edit-block>
 		<h2 class="chant-voice">{{ product.name }}</h2>
 		<button @click="cart.addItem(product)">Add to cart</button>
-	</category-card>
+	</edit-block>
 </template>

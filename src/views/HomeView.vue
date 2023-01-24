@@ -1,14 +1,16 @@
 <script setup>
-	import MenuProductForm from "../components/MenuProductForm.vue";
 	import CheckoutBtn from "../components/CheckoutBtn.vue";
+	import ModuleThing from "../components/ModuleThing.vue";
 </script>
 
 <template>
 	<section>
 		<inner-column>
 			<home-module>
-				<h1>HOME</h1>
+				<ModuleThing />
+
 				<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
+
 				<CheckoutBtn />
 			</home-module>
 		</inner-column>
