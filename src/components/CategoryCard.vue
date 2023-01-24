@@ -15,7 +15,66 @@
 </script>
 
 <template>
-	<category-card>
-		<h1 class="loud-voice">{{ category.title }}</h1>
-	</category-card>
+	<li v-for="category in menu.categories">
+		<RouterLink :to="`menu/${category.slug}`">
+			<category-card>
+				<picture>
+					<img :src="`${category.imageURL}`" :alt="`${category.slug}`" loading="lazy" />
+				</picture>
+				<div class="name-highlight">
+					<span>{{ category.title.toUpperCase() }}</span>
+				</div>
+			</category-card>
+		</RouterLink>
+	</li>
 </template>
+
+<style lang="scss">
+	category-card {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: stretch;
+		gap: 20px;
+		border: 1px solid var(--support-mute);
+		border-radius: 10px;
+		padding: 24px 30px;
+		height: 100%;
+		transition: background-color 0.8s;
+
+		&:hover {
+			background-color: var(--color-soft);
+		}
+
+		picture {
+			max-width: 100%;
+			margin: 0 auto;
+			line-height: 0;
+
+			img {
+				max-height: 200px;
+				max-width: 212px;
+				width: auto;
+				height: auto;
+			}
+		}
+	}
+
+	.name-highlight {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		background-color: var(--off-color);
+		border-radius: 50px;
+		margin: 0 auto;
+
+		width: 200px;
+		height: 40px;
+
+		span {
+			color: var(--page);
+			font-weight: 800;
+		}
+	}
+</style>

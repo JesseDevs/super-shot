@@ -10,13 +10,7 @@
 <template>
 	<menu-list>
 		<ul class="main-grid">
-			<li v-for="category in menu.categories">
-				<RouterLink :to="`menu/${category.slug}`">
-					<category-card>
-						<h2 class="chant-voice">{{ category.title }}</h2>
-					</category-card>
-				</RouterLink>
-			</li>
+			<CategoryCard />
 		</ul>
 	</menu-list>
 </template>

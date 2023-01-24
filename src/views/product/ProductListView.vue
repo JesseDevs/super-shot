@@ -16,7 +16,9 @@
 		<li v-for="product in category.products">
 			<RouterLink :to="`${category.slug}/${product.id}`">
 				<category-card>
-					<h2 class="chant-voice">{{ product.name }}</h2>
+					<picture>
+						<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
+					</picture>
 					<div class="name-highlight">
 						<span>{{ product.name.toUpperCase() }}</span>
 					</div>
@@ -30,16 +32,30 @@
 	category-card {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-end;
 		align-items: center;
 		gap: 20px;
 		border: 1px solid var(--support-mute);
 		border-radius: 10px;
 		padding: 24px 30px;
+		height: 100%;
 		transition: background-color 0.8s;
 
 		&:hover {
 			background-color: var(--color-soft);
+		}
+
+		picture {
+			max-width: 100%;
+			margin: 0 auto;
+			line-height: 0;
+
+			img {
+				max-height: 200px;
+				max-width: 212px;
+				width: auto;
+				height: auto;
+			}
 		}
 	}
 
@@ -48,7 +64,7 @@
 		justify-content: center;
 		align-items: center;
 
-		background-color: var(--color-dark);
+		background-color: var(--off-color);
 		border-radius: 50px;
 		margin: 0 auto;
 
