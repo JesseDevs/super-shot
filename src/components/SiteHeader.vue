@@ -18,7 +18,7 @@
 					<burger />
 				</button>
 
-				<RouterLink class="strict-voice" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
+				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
 				<RouterLink class="strict-voice" @click="ui.specificToggle()" to="/cart">
 					<SvgIcon icon="basket" />
@@ -60,9 +60,15 @@
 <style lang="scss">
 	header inner-column {
 		padding: 1rem 1rem;
+		padding-bottom: 0px;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+
+		.logo {
+			color: var(--off-color);
+			text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+		}
 	}
 
 	signin-block {
