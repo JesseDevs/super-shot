@@ -1,6 +1,8 @@
 <script setup>
 	import { reactive } from "vue";
 	import { useUsersStore } from "@/stores/users";
+	import { useRouter } from "vue-router";
+	const router = useRouter();
 
 	defineProps({
 		msg: {
@@ -22,6 +24,7 @@
 				if (user.username == form.username && user.password == form.password) {
 					users.isLoggedIn = true;
 					users.currentUser = user;
+					router.push("/create");
 				}
 			});
 		}
@@ -30,8 +33,6 @@
 
 <template>
 	<login-modal>
-		{{ users.isLoggedIn }}
-
 		<form class="login-form" autocomplete="off" @submit.prevent="checkLogin()">
 			<div class="form-field">
 				<label for="x">Username *</label>

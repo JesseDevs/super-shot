@@ -17,7 +17,7 @@
 			slug: product.name.toLowerCase().replace(/ /g, "-"),
 			desc: product.desc,
 			category: product.category.toLowerCase(),
-			tags: product.tags,
+			image: product.imageURL,
 		};
 		menu.add(record);
 		clear();
@@ -60,9 +60,9 @@ Enter Description...
 			</div>
 		</div>
 		<div class="form-field">
-			<label for="w">Tags?</label>
+			<label for="w">Image URL?</label>
 			<div>
-				<input id="w" type="text" multiple separator="/" v-model="product.tags" />
+				<input id="w" type="text" v-model="product.imageURL" />
 				<span class="input-helper"></span>
 			</div>
 		</div>
