@@ -38,8 +38,13 @@
 		border: 1px solid black;
 		margin: 0 auto;
 		padding: 15px 25px;
-		border-radius: 50px;
+		border-radius: 20px;
 		background-color: var(--color-soft);
+		transition: 0.25s;
+		user-select: none;
+		cursor: pointer;
+		-webkit-user-select: none;
+		touch-action: manipulation;
 		p {
 			font-weight: 500;
 		}
@@ -47,6 +52,11 @@
 			text-transform: uppercase;
 			font-weight: 800;
 			font-size: 0.85rem;
+		}
+
+		&:hover {
+			box-shadow: inset 0 0 0 2em var(--color);
+			color: var(--page);
 		}
 	}
 </style>
