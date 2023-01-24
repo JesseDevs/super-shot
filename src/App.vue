@@ -31,7 +31,7 @@
 <style lang="scss">
 	main.addSpace {
 		section > inner-column {
-			padding-bottom: 100px;
+			padding-bottom: 120px;
 		}
 	}
 </style>
