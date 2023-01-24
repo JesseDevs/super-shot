@@ -23,18 +23,21 @@ html {
 }
 
 html {
-	--page: rgb(247, 246, 246);
+	--page: rgb(243, 244, 247);
 	--page-support: rgb(242, 230, 206);
-	--color: rgb(195 107 84);
-	--color-soft: rgb(237, 191, 176);
+
+	--color: #c36b54;
+	--color-soft: #edbfb0;
 	--color-mute: rgb(199 123 100);
 	--color-dark: rgb(144, 83, 69);
+
+	--off-color: #91577C;
+	--off-color-soft: #AA889B;
 
 	--support: rgb(68 68 68);
 	--support-soft: rgb(92, 91, 91);
 	--support-mute: rgb(179, 179, 179);
 	--support-light: rgb(203, 203, 203);
-
 }
 
 
