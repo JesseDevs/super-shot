@@ -11,10 +11,10 @@
 </script>
 
 <template>
-	<module-thing>
+	<detail-block>
 		<h2 class="chant-voice">{{ category.title }}</h2>
 		<div class="product-outlet">
 			<RouterView :category="category" />
 		</div>
-	</module-thing>
+	</detail-block>
 </template>
