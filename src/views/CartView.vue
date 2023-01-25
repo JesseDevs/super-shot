@@ -9,14 +9,14 @@
 <template>
 	<section>
 		<inner-column>
-			<module-thing>
+			<cart-thing>
 				<h2 class="chant-voice">Cart</h2>
 				{{ cart.checkoutTotal }}
 
 				<ul>
 					<li v-for="item in cart.purchasingCart">{{ item.name }} - {{ item.price }}</li>
 				</ul>
-			</module-thing>
+			</cart-thing>
 		</inner-column>
 	</section>
 </template>

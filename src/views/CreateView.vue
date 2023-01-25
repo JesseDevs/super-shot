@@ -8,13 +8,23 @@
 <template>
 	<section>
 		<inner-column>
-			<module-thing v-if="users.isLoggedIn">
+			<create-thing v-if="users.isLoggedIn">
 				<h2 class="chant-voice">Create A Product</h2>
 				<MenuProductForm />
-			</module-thing>
-			<module-thing v-else>
+			</create-thing>
+			<create-thing v-else>
 				<h2 class="chant-voice">Not Logged In</h2>
-			</module-thing>
+			</create-thing>
 		</inner-column>
 	</section>
 </template>
+<style lang="scss">
+	create-thing {
+		display: block;
+		max-width: 450px;
+
+		button {
+			margin-top: 20px;
+		}
+	}
+</style>
