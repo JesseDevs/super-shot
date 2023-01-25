@@ -8,8 +8,10 @@
 		<div>
 			<p>&lt;</p>
 			<RouterLink class="small-voice" to="/menu">Menu</RouterLink>
-			<p>/</p>
-			<a class="small-voice" @click="$router.back()"> {{ route.path }}</a>
+			/
+			<a v-if="route.name == 'menu/detail/product-detail'" class="small-voice" @click="$router.back()">{{
+				route.params.slug
+			}}</a>
 		</div>
 	</return-nav>
 </template>
@@ -27,6 +29,10 @@
 			a {
 				font-weight: 500;
 				cursor: pointer;
+
+				+ a {
+					text-transform: capitalize;
+				}
 
 				&:hover {
 					color: var(--color);

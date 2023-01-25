@@ -1,17 +1,33 @@
 <script setup>
 	import { useCartStore } from "../stores/cart";
 	import { useInterfaceStore } from "@/stores/interface";
+	import { computed } from "vue";
+	import { useRoute } from "vue-router";
+
+	const route = useRoute();
+
+	const buttonText = computed(function () {
+		if (route.path === "/home") {
+			return "Finish Order";
+		} else if (route.path === "/menu") {
+			return "DUNKIN’ CLASSICS & NEW FAVORITES";
+		} else {
+			return "Page not found";
+		}
+	});
 
 	const ui = useInterfaceStore();
 	const cart = useCartStore();
 </script>
 <template>
 	<checkout-block v-if="!ui.mainMenuOpen">
-		<checkout-btn v-if="cart.itemsInCart !== 0">
-			<p>$ {{ cart.checkoutTotal }}</p>
-			<span>Add to order</span>
-		</checkout-btn>
-		<checkout-btn v-else><span>Start Order</span> </checkout-btn>
+		<RouterLink @click="ui.specificToggle()" class="small-voice" to="/cart">
+			<checkout-btn v-if="cart.itemsInCart !== 0">
+				<p>$ {{ cart.checkoutTotal }}</p>
+				<span>Add to order</span>
+			</checkout-btn>
+			<checkout-btn v-else><span>Start Order</span> </checkout-btn>
+		</RouterLink>
 	</checkout-block>
 </template>
 
@@ -21,7 +37,7 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: 85px;
+		height: 70px;
 		z-index: 100;
 		display: flex;
 		justify-content: center;

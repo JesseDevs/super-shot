@@ -4,7 +4,9 @@
 	import { useCartStore } from "../stores/cart";
 	import burger from "@/assets/images/burger-icon.vue";
 	import SvgIcon from "../components/SvgIcon.vue";
+	import { useUsersStore } from "../stores/users";
 
+	const users = useUsersStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
 	const cart = useCartStore();
@@ -44,8 +46,15 @@
 					</li>
 
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/create"
+						<RouterLink
+							v-if="users.isLoggedIn"
+							@click="ui.specificToggle()"
+							class="small-voice"
+							to="/create"
 							>Create</RouterLink
+						>
+						<RouterLink v-else @click="ui.specificToggle()" class="small-voice" to="/search"
+							>Search</RouterLink
 						>
 					</li>
 					<li v-if="ui.mainMenuOpen">

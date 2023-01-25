@@ -38,7 +38,6 @@
 		border: 1px solid var(--support-mute);
 		border-radius: 10px;
 		padding: 24px 30px;
-		max-width: 340px;
 		height: 300px;
 		transition: background-color 0.8s;
 
