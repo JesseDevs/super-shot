@@ -15,4 +15,5 @@
 
 .main-grid li a {
 	height: 100%;
+	max-width: 340px;
 }
