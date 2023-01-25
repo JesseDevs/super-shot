@@ -12,7 +12,7 @@
 <template>
 	<section>
 		<inner-column>
-			<ReturnNav :v-show="route == home" />
+			<ReturnNav v-if="route.path !== '/menu'" />
 
 			<ModuleThing />
 
