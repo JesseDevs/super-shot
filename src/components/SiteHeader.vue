@@ -1,10 +1,12 @@
 <script setup>
+	import { ref } from "vue";
 	import { RouterLink, useRoute } from "vue-router";
 	import { useInterfaceStore } from "@/stores/interface";
 	import { useCartStore } from "../stores/cart";
 	import burger from "@/assets/images/burger-icon.vue";
 	import SvgIcon from "../components/SvgIcon.vue";
 	import SignInBlock from "../components/SignInBlock.vue";
+	import CartModal from "../components/CartModal.vue";
 	import { useProfilesStore } from "../stores/profile";
 
 	const profiles = useProfilesStore();
@@ -14,7 +16,7 @@
 </script>
 
 <template>
-	<header :class="`${route.name} ${ui.menuClass}`">
+	<header :class="`${route.name} ${ui.menuClass} ${ui.cartClass}`">
 		<inner-column>
 			<nav class="top-row">
 				<button class="menu-toggle" @click="ui.toggleMenu()" type="submit" aria-label="Main Menu">
@@ -23,14 +25,14 @@
 
 				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
-				<RouterLink class="strict-voice" @click="ui.specificToggle()" to="/cart">
+				<div class="strict-voice" @click="ui.toggleCart()">
 					<SvgIcon icon="basket" />
 					<div class="items-cart-value">
 						{{ cart.itemsInCart }}
 					</div>
-				</RouterLink>
+				</div>
 			</nav>
-
+			<CartModal />
 			<nav class="site-menu bottom-row">
 				<SignInBlock />
 				<ul>
@@ -84,6 +86,7 @@
 
 	signin-block {
 		display: none;
+		transition: all ease-in-out 1000ms;
 	}
 
 	div.items-cart-value {
@@ -215,6 +218,7 @@
 			row-gap: 10px;
 			padding: 7px;
 			background-color: var(--page-support);
+
 			a {
 				max-width: fit-content;
 				margin: 0 auto;
@@ -241,7 +245,6 @@
 
 		nav.site-menu {
 			position: fixed;
-
 			height: 100vh;
 			width: 100%;
 			z-index: 10;

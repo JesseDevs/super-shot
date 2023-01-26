@@ -3,6 +3,20 @@ import { defineStore } from "pinia";
 
 export const useInterfaceStore = defineStore("interface", function () {
 	const mainMenuOpen = ref(false);
+	const cartMenuOpen = ref(false);
+
+	function toggleCart() {
+		cartMenuOpen.value = !cartMenuOpen.value;
+	}
+
+	const cartClass = computed(() => {
+		if (cartMenuOpen.value) {
+			return "cart-open";
+		} else {
+			return "cart-close";
+		}
+	});
+
 	function toggleMenu() {
 		mainMenuOpen.value = !mainMenuOpen.value;
 	}
@@ -24,6 +38,9 @@ export const useInterfaceStore = defineStore("interface", function () {
 	return {
 		mainMenuOpen,
 		toggleMenu,
+		cartMenuOpen,
+		cartClass,
+		toggleCart,
 		specificToggle,
 		menuClass,
 	};
