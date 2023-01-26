@@ -24,6 +24,7 @@ html {
 
 html {
 	--page: rgb(243, 244, 247);
+	--page-opacity: rgb(243 244 247 /.8);
 	--page-support: rgb(242, 230, 206);
 
 	--color: #c36b54;
