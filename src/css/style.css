@@ -15,7 +15,6 @@
 .main-grid li {
 	transition: all 1s ease-in-out 300ms;
 	border-radius: 10px;
-	border: 1px solid var(--support-mute);
 }
 
 .main-grid li a {

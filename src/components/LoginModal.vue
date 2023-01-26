@@ -22,7 +22,7 @@
 		if (form.username && form.password) {
 			profiles.database.forEach((user) => {
 				if (user.username == form.username && user.password == form.password) {
-					profiles.isLoggedIn = true;
+					profiles.isLoggedIn == true;
 					profiles.currentUser = user;
 					profiles.saveToStorage(user);
 					router.push("/create");

@@ -1,5 +1,5 @@
 <script setup>
-	import { computed } from "vue";
+	import { computed, ref } from "vue";
 	import { RouterView } from "vue-router";
 	import SiteHeader from "./components/SiteHeader.vue";
 	import SiteFooter from "./components/SiteFooter.vue";

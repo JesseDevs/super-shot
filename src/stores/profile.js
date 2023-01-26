@@ -12,6 +12,7 @@ export const useProfilesStore = defineStore("Profiles", function () {
 	]);
 
 	const currentUser = ref(JSON.parse(localStorage.getItem("currentUser")) || {});
+
 	const isLoggedIn = computed(function () {
 		if (currentUser.value) {
 			return true;

@@ -28,3 +28,10 @@
 		<span class="tiny-voice">Checkout your Dunkin' Rewards</span>
 	</signin-block>
 </template>
+<style lang="scss">
+	signin-block {
+		h3 {
+			grid-column: span 2;
+		}
+	}
+</style>

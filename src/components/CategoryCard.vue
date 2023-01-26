@@ -37,6 +37,7 @@
 		border-radius: 10px;
 		gap: 20px;
 
+		border: 2px solid var(--support-mute);
 		padding: 10px;
 		padding-bottom: 25px;
 		height: 300px;
@@ -57,7 +58,8 @@
 		margin: 0 auto;
 		padding: 10px;
 
-		width: 244px;
+		width: 80%;
+		max-width: 244px;
 		height: 40px;
 
 		span {
