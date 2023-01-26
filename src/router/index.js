@@ -70,6 +70,11 @@ const router = createRouter({
 			name: "search",
 			component: () => import("../views/SearchView.vue"),
 		},
+		{
+			path: "/profile",
+			name: "profile",
+			component: () => import("../views/ProfileView.vue"),
+		},
 	],
 });
 

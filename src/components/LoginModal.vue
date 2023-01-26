@@ -1,6 +1,6 @@
 <script setup>
 	import { reactive } from "vue";
-	import { useUsersStore } from "@/stores/users";
+	import { useProfilesStore } from "@/stores/profile";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
 
@@ -16,14 +16,15 @@
 		password: "",
 	});
 
-	const users = useUsersStore();
+	const profiles = useProfilesStore();
 
 	function checkLogin() {
 		if (form.username && form.password) {
-			users.database.forEach((user) => {
+			profiles.database.forEach((user) => {
 				if (user.username == form.username && user.password == form.password) {
-					users.isLoggedIn = true;
-					users.currentUser = user;
+					profiles.isLoggedIn = true;
+					profiles.currentUser = user;
+					profiles.saveToStorage(user);
 					router.push("/create");
 				}
 			});

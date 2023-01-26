@@ -4,9 +4,10 @@
 	import { useCartStore } from "../stores/cart";
 	import burger from "@/assets/images/burger-icon.vue";
 	import SvgIcon from "../components/SvgIcon.vue";
-	import { useUsersStore } from "../stores/users";
+	import SignInBlock from "../components/SignInBlock.vue";
+	import { useProfilesStore } from "../stores/profile";
 
-	const users = useUsersStore();
+	const profiles = useProfilesStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
 	const cart = useCartStore();
@@ -31,11 +32,7 @@
 			</nav>
 
 			<nav class="site-menu bottom-row">
-				<signin-block>
-					<RouterLink class="small-voice" @click="ui.toggleMenu()" to="/sign-up">Sign Up</RouterLink
-					><RouterLink class="small-voice" to="/sign-in" @click="ui.toggleMenu()">Sign In</RouterLink>
-					<span class="tiny-voice">Not a Dunkin' Rewards memeber?</span>
-				</signin-block>
+				<SignInBlock />
 				<ul>
 					<li>
 						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/">Home</RouterLink>
@@ -47,7 +44,7 @@
 
 					<li>
 						<RouterLink
-							v-if="users.isLoggedIn"
+							v-if="profiles.isLoggedIn"
 							@click="ui.specificToggle()"
 							class="small-voice"
 							to="/create"
@@ -55,6 +52,11 @@
 						>
 						<RouterLink v-else @click="ui.specificToggle()" class="small-voice" to="/search"
 							>Search</RouterLink
+						>
+					</li>
+					<li>
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/profile"
+							>Profile</RouterLink
 						>
 					</li>
 					<li v-if="ui.mainMenuOpen">
@@ -223,14 +225,14 @@
 			}
 			a:first-of-type {
 				grid-column: 1;
-				background-color: var(--page);
-				border: 1px solid var(--support);
-			}
-			a:last-of-type {
-				grid-column: 2;
 				color: var(--page);
 				background-color: var(--color-mute);
 				border: 1px solid var(--color-mute);
+			}
+			a:last-of-type {
+				grid-column: 2;
+				background-color: var(--page);
+				border: 1px solid var(--support);
 			}
 			span {
 				grid-column: span 2;

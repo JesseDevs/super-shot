@@ -3,7 +3,10 @@
 	import { useInterfaceStore } from "@/stores/interface";
 	import { computed } from "vue";
 	import { useRoute } from "vue-router";
+	import { useProfilesStore } from "../stores/profile";
 
+	const profiles = useProfilesStore();
+	const profile = profiles.currentUser;
 	const route = useRoute();
 
 	const buttonText = computed(function () {
@@ -42,7 +45,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--page);
+		background-color: var(--page-opacity);
 	}
 
 	checkout-btn {
