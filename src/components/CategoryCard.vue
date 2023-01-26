@@ -18,7 +18,7 @@
 	<li v-for="category in menu.categories">
 		<RouterLink :to="`menu/${category.slug}`">
 			<category-card>
-				<picture>
+				<picture class="item-picture">
 					<img :src="`${category.imageURL}`" :alt="`${category.slug}`" loading="lazy" />
 				</picture>
 				<div class="name-highlight">
@@ -44,19 +44,6 @@
 
 		&:hover {
 			background-color: var(--color-soft);
-		}
-
-		picture {
-			max-width: 100%;
-			margin: 0 auto;
-			line-height: 0;
-
-			img {
-				max-height: 185px;
-				max-width: 180px;
-				width: auto;
-				height: auto;
-			}
 		}
 	}
 

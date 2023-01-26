@@ -41,7 +41,7 @@
 </script>
 <template>
 	<module-thing>
-		<h1 class="chant-voice">{{ titleBasedOnRoute }}</h1>
+		<h1 class="strict-voice">{{ titleBasedOnRoute }}</h1>
 
 		<p class="intro">
 			{{ textBasedOnRoute }}

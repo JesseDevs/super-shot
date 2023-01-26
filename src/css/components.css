@@ -42,7 +42,7 @@ textarea:focus+span.input-helper {
 	padding: 13px 20px 13px;
 	outline: 0;
 	border-radius: 10px;
-	border: 1px solid black;
+	border: 2px solid black;
 	cursor: pointer;
 	position: relative;
 	background-color: var(--color-soft);

@@ -54,7 +54,7 @@
 		align-items: center;
 		gap: 15px;
 		width: 240px;
-		border: 1px solid black;
+		border: 2px solid black;
 		margin: 0 auto;
 		padding: 15px 25px;
 		border-radius: 20px;
