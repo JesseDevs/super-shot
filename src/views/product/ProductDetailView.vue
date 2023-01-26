@@ -38,7 +38,7 @@
 
 			<button class="button" @click="cart.addItem(product)">Add to cart</button>
 		</landing-block>
-
+		<p>Size</p>
 		<div class="cup-size">
 			<div v-for="size in product.sizes" @click="selectSize(size)" :class="{ selected: size.selected }">
 				{{ size.size }}
@@ -61,8 +61,9 @@
 			font-weight: 500;
 			background-color: var(--page-soft);
 
-			width: 50px;
-			height: 50px;
+			transition: background-color ease-in-out 300ms;
+			width: 40px;
+			height: 40px;
 			text-transform: uppercase;
 			cursor: pointer;
 		}
