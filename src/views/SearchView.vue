@@ -9,7 +9,7 @@
 	const categories = menu.categories;
 	let allProducts = categories.flatMap((category) => category.products);
 
-	const searchString = ref("");
+	let searchString = ref("");
 
 	const filtered = computed(function () {
 		return allProducts.filter(function (item) {
@@ -25,7 +25,8 @@
 				<label for="">Search</label>
 				<input type="text" v-model="searchString" />
 			</form>
-			<h2 class="attention-voice">Results for {{ searchString }}</h2>
+			<h2 class="attention-voice" v-if="searchString !== ''">Results for {{ searchString }}</h2>
+			<h2 class="chant-voice" v-else>Results for All Products</h2>
 
 			<ul class="main-grid">
 				<li v-for="item in filtered">

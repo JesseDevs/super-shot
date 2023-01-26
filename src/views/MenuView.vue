@@ -14,12 +14,11 @@
 		<inner-column>
 			<ReturnNav v-if="route.path !== '/menu'" />
 
-			<ModuleThing />
+			<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" />
 
-			<div class="outlet">
-				<RouterView :menu="menu" />
-				<CheckoutBtn />
-			</div>
+			<RouterView :menu="menu" />
+
+			<CheckoutBtn />
 		</inner-column>
 	</section>
 </template>
