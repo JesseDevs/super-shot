@@ -34,12 +34,13 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		gap: 20px;
-		border: 1px solid var(--support-mute);
 		border-radius: 10px;
-		padding: 24px 30px;
+		gap: 20px;
+
+		padding: 10px;
+		padding-bottom: 25px;
 		height: 300px;
-		transition: background-color 0.8s;
+		transition: background-color ease-in-out 300ms;
 
 		&:hover {
 			background-color: var(--color-soft);
@@ -52,7 +53,7 @@
 
 			img {
 				max-height: 185px;
-				max-width: 200px;
+				max-width: 180px;
 				width: auto;
 				height: auto;
 			}
@@ -67,8 +68,9 @@
 		background-color: var(--off-color);
 		border-radius: 50px;
 		margin: 0 auto;
+		padding: 10px;
 
-		width: 200px;
+		width: 244px;
 		height: 40px;
 
 		span {

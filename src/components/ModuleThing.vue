@@ -1,14 +1,27 @@
 <script setup>
 	import { computed } from "vue";
 	import { useRoute } from "vue-router";
+	import { useMenuStore } from "@/stores/menu";
+	import { useProfilesStore } from "../stores/profile";
 
+	const profiles = useProfilesStore();
+	const profile = profiles.currentUser;
+	const menu = useMenuStore();
 	const route = useRoute();
+
+	const category = menu.categories.find(function (record) {
+		return record.slug == route.params.slug;
+	});
 
 	const titleBasedOnRoute = computed(function () {
 		if (route.path === "/") {
 			return "Welcome to the home page";
 		} else if (route.path === "/menu") {
 			return "DUNKIN’ CLASSICS & NEW FAVORITES";
+		} else if (route.path === "/profile") {
+			return `Welcome to your profile ${profile.name}`;
+		} else if (route.path === "/menu/coffee") {
+			return "COFFEE";
 		} else {
 			return "Page not found";
 		}
@@ -19,6 +32,8 @@
 			return "👋🏼";
 		} else if (route.path === "/menu") {
 			return "Our menu is full of great-tasting items that will get you going and keep you running throughout your busy day. Plus, they’re always made to order—just the way you like.";
+		} else if (route.path === "/menu/coffee") {
+			return "Freshly crafted beverages served in a variety of delicious flavors. Ask to try your favorite beverages hot or served over ice.";
 		} else {
 			return "Page not found";
 		}
@@ -47,6 +62,7 @@
 		h1 {
 			max-width: 23ch;
 			font-weight: 800;
+			line-height: 1.3;
 		}
 
 		.intro {

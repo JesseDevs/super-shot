@@ -101,34 +101,6 @@ Enter Description...
 			border: 1px solid black;
 		}
 
-		input,
-		select,
-		textarea {
-			border-radius: none;
-			width: 100%;
-			font-family: "Montserrat", sans-serif;
-			padding: 7px 10px;
-			font-size: 1.1rem;
-			border: 1px solid black;
-			outline: none;
-			resize: none;
-			&:focus {
-				border: 1px solid var(--support);
-				outline: 1px solid var(--support);
-			}
-		}
-
-		textarea {
-			min-height: 100px;
-		}
-
-		input:focus + span.input-helper,
-		select:focus + span.input-helper,
-		textarea:focus + span.input-helper {
-			right: 0%;
-			bottom: 0%;
-		}
-
 		label {
 			font-weight: 500;
 		}
