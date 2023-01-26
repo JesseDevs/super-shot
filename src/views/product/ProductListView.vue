@@ -16,7 +16,7 @@
 		<li v-for="product in category.products">
 			<RouterLink :to="`${category.slug}/${product.id}`">
 				<category-card>
-					<picture>
+					<picture class="item-picture">
 						<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
 					</picture>
 					<div class="name-highlight">

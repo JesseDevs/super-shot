@@ -15,10 +15,15 @@ export const useMenuStore = defineStore("menu", function () {
 					slug: "iced-coffee",
 					desc: "Freshly brewed and full of flavor, our Iced Coffee gets you energized and ready to go.",
 					category: "coffee",
+					tagline: "THE PERFECT PICK-ME-UP",
 					imageURL:
 						"https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/iced_coffee.png",
 					price: 3.99,
-					size: "M",
+					sizes: [
+						{ id: 1, size: "s", selected: false },
+						{ id: 2, size: "m", selected: true },
+						{ id: 3, size: "l", selected: false },
+					],
 				},
 			],
 		},
