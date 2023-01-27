@@ -1,18 +1,16 @@
 <script setup>
 	import CheckoutBtn from "../components/CheckoutBtn.vue";
 	import ModuleThing from "../components/ModuleThing.vue";
-	import { useProfilesStore } from "../stores/profile";
 
-	const profiles = useProfilesStore();
+	defineProps(["pageData"]);
 </script>
 
 <template>
 	<section>
 		<inner-column>
 			<home-module>
-				<ModuleThing />
+				<ModuleThing :pageData="pageData" />
 
-				<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
 				<RouterView />
 
 				<CheckoutBtn />

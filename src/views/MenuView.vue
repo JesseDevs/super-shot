@@ -5,6 +5,7 @@
 	import ReturnNav from "../components/ReturnNav.vue";
 	import ModuleThing from "../components/ModuleThing.vue";
 	import { useRoute } from "vue-router";
+	defineProps(["pageData"]);
 
 	const route = useRoute();
 	const menu = useMenuStore();
@@ -14,7 +15,7 @@
 		<inner-column>
 			<ReturnNav v-if="route.path !== '/menu'" />
 
-			<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" />
+			<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" />
 
 			<RouterView :menu="menu" />
 

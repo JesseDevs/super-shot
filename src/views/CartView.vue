@@ -1,6 +1,6 @@
 <script setup>
 	import MenuProductForm from "../components/MenuProductForm.vue";
-	import { useCartStore } from "../stores/cart";
+	import { useCartStore } from "../stores/Cart";
 	import SvgIcon from "../components/SvgIcon.vue";
 
 	const cart = useCartStore();

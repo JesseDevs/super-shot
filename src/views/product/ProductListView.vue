@@ -1,4 +1,5 @@
 <script setup>
+	import { computed } from "vue";
 	import { useRoute } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
 	import CategoryCard from "../../components/CategoryCard.vue";
@@ -6,23 +7,23 @@
 	const route = useRoute();
 	const menu = useMenuStore();
 
-	const category = menu.categories.find(function (record) {
-		return record.slug == route.params.slug;
+	const allProducts = computed(function () {
+		const filtered = [];
 	});
 </script>
 
 <template>
 	<ul class="main-grid">
-		<li v-for="product in category.products">
-			<RouterLink :to="`${category.slug}/${product.id}`">
-				<category-card>
+		<li v-for="product in allProducts">
+			<RouterLink :to="`menu/${product.slug}/${product.id}`">
+				<general-card>
 					<picture class="item-picture">
 						<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
 					</picture>
 					<div class="name-highlight">
-						<span>{{ product.name.toUpperCase() }}</span>
+						<span>{{ product.name }}</span>
 					</div>
-				</category-card>
+				</general-card>
 			</RouterLink>
 		</li>
 	</ul>

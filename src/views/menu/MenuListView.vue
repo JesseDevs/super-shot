@@ -10,7 +10,9 @@
 <template>
 	<menu-list>
 		<ul class="main-grid">
-			<CategoryCard />
+			<li v-for="category in menu.categories">
+				<CategoryCard :category="category" />
+			</li>
 		</ul>
 	</menu-list>
 </template>

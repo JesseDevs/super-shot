@@ -1,7 +1,7 @@
 <script setup>
 	import { computed } from "vue";
 	import MenuProductForm from "../components/MenuProductForm.vue";
-	import { useProfilesStore } from "../stores/profile";
+	import { useProfilesStore } from "../stores/Profiles";
 
 	const profiles = useProfilesStore();
 	const admin = computed(function () {
@@ -21,7 +21,7 @@
 			<create-thing v-else>
 				<h2 class="chant-voice">Woah. Looks like you don't have access to this page.</h2>
 				<p class="intro">Maybe sign in?</p>
-				<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
+				<button class="button" @click="profiles.signIn(profile)">Sign In</button>
 			</create-thing>
 		</inner-column>
 	</section>
