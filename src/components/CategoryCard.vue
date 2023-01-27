@@ -1,36 +1,22 @@
 <script setup>
-	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-
-	const route = useRoute();
-	const menu = useMenuStore();
-
-	const category = menu.categories.find(function (record) {
-		return record.slug == route.params.slug;
-	});
-
-	defineProps({
-		category: Object,
-	});
+	defineProps(["category"]);
 </script>
 
 <template>
-	<li v-for="category in menu.categories">
-		<RouterLink :to="`menu/${category.slug}`">
-			<category-card>
-				<picture class="item-picture">
-					<img :src="`${category.imageURL}`" :alt="`${category.slug}`" loading="lazy" />
-				</picture>
-				<div class="name-highlight">
-					<span>{{ category.title.toUpperCase() }}</span>
-				</div>
-			</category-card>
-		</RouterLink>
-	</li>
+	<RouterLink :to="`menu/${category.slug}`">
+		<general-card>
+			<picture class="item-picture">
+				<img :src="`${category.imageURL}`" :alt="`${category.slug}`" loading="lazy" />
+			</picture>
+			<div class="name-highlight">
+				<span>{{ category.title.toUpperCase() }}</span>
+			</div>
+		</general-card>
+	</RouterLink>
 </template>
 
 <style lang="scss">
-	category-card {
+	general-card {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;

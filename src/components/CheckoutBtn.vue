@@ -1,21 +1,27 @@
 <script setup>
-	import { useCartStore } from "../stores/cart";
+	import { useCartStore } from "../stores/Cart";
 	import { useInterfaceStore } from "@/stores/interface";
 	import { computed } from "vue";
 	import { useRoute } from "vue-router";
-	import { useProfilesStore } from "../stores/profile";
+	import { useProfilesStore } from "../stores/Profiles";
 
 	const profiles = useProfilesStore();
 	const profile = profiles.currentUser;
 	const route = useRoute();
 
-	const buttonText = computed(function () {
-		if (route.path === "/home") {
-			return "Finish Order";
-		} else if (route.path === "/menu") {
-			return "DUNKIN’ CLASSICS & NEW FAVORITES";
+	const redirect = computed(function () {
+		if (route.path === "/") {
+			return "menu";
 		} else {
-			return "Page not found";
+			return "/checkout";
+		}
+	});
+
+	const buttonText = computed(function () {
+		if (route.path === "/menu") {
+			return "Checkout";
+		} else {
+			return "Finish Order";
 		}
 	});
 
@@ -24,10 +30,10 @@
 </script>
 <template>
 	<checkout-block v-if="!ui.mainMenuOpen">
-		<RouterLink @click="ui.specificToggle()" class="small-voice" to="/cart">
+		<RouterLink @click="ui.specificToggle()" class="small-voice" :to="`/${redirect}`">
 			<checkout-btn v-if="cart.itemsInCart !== 0">
 				<p>$ {{ cart.checkoutTotal }}</p>
-				<span>Add to order</span>
+				<span>{{ buttonText }}</span>
 			</checkout-btn>
 			<checkout-btn v-else><span>Start Order</span> </checkout-btn>
 		</RouterLink>

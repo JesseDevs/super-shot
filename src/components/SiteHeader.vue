@@ -7,7 +7,7 @@
 	import SvgIcon from "../components/SvgIcon.vue";
 	import SignInBlock from "../components/SignInBlock.vue";
 	import CartModal from "../components/CartModal.vue";
-	import { useProfilesStore } from "../stores/profile";
+	import { useProfilesStore } from "../stores/Profiles";
 
 	const profiles = useProfilesStore();
 	const ui = useInterfaceStore();

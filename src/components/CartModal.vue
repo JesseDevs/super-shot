@@ -1,7 +1,7 @@
 <script setup>
 	import { useCartStore } from "../stores/cart";
 	import SvgIcon from "../components/SvgIcon.vue";
-	import { useProfilesStore } from "../stores/profile";
+	import { useProfilesStore } from "../stores/Profiles";
 
 	const profiles = useProfilesStore();
 	const cart = useCartStore();

@@ -1,15 +1,8 @@
 <script setup>
 	import { reactive } from "vue";
-	import { useProfilesStore } from "@/stores/profile";
+	import { useProfilesStore } from "@/stores/Profiles";
 	import { useRouter } from "vue-router";
 	const router = useRouter();
-
-	defineProps({
-		msg: {
-			type: String,
-			required: true,
-		},
-	});
 
 	const form = reactive({
 		username: "",
@@ -33,24 +26,26 @@
 </script>
 
 <template>
-	<login-modal>
-		<form class="login-form" autocomplete="off" @submit.prevent="checkLogin()">
-			<div class="form-field">
-				<label for="x">Username *</label>
-				<div>
-					<input id="x" type="text" required v-model="form.username" />
-					<span class="input-helper"></span>
+	<inner-column>
+		<login-modal>
+			<form class="login-form" autocomplete="off" @submit.prevent="checkLogin()">
+				<div class="form-field">
+					<label for="x">Username *</label>
+					<div>
+						<input id="x" type="text" required v-model="form.username" />
+						<span class="input-helper"></span>
+					</div>
 				</div>
-			</div>
-			<div class="form-field">
-				<label for="y">Password *</label>
-				<div>
-					<input id="y" type="password" required v-model="form.password" />
-					<span class="input-helper"></span>
+				<div class="form-field">
+					<label for="y">Password *</label>
+					<div>
+						<input id="y" type="password" required v-model="form.password" />
+						<span class="input-helper"></span>
+					</div>
 				</div>
-			</div>
 
-			<button class="button" type="submit">{{ msg }}</button>
-		</form>
-	</login-modal>
+				<button class="button" type="submit">Log In</button>
+			</form>
+		</login-modal>
+	</inner-column>
 </template>

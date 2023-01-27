@@ -1,17 +1,16 @@
 <script setup>
 	import { computed } from "vue";
 	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-	import { useProfilesStore } from "../stores/profile";
+	import { useProfilesStore } from "../stores/Profiles";
 
+	defineProps(["pageData"]);
 	const profiles = useProfilesStore();
 	const profile = profiles.currentUser;
-	const menu = useMenuStore();
 	const route = useRoute();
 
-	const category = menu.categories.find(function (record) {
-		return record.slug == route.params.slug;
-	});
+	// const category = menu.categories.find(function (record) {
+	// 	return record.slug == route.params.slug;
+	// });
 
 	const titleBasedOnRoute = computed(function () {
 		if (route.path === "/") {
@@ -41,10 +40,10 @@
 </script>
 <template>
 	<module-thing>
-		<h1 class="strict-voice">{{ titleBasedOnRoute }}</h1>
+		<h1 class="strict-voice">{{ pageData.title }}</h1>
 
 		<p class="intro">
-			{{ textBasedOnRoute }}
+			{{ pageData.subHeading }}
 		</p>
 	</module-thing>
 </template>
