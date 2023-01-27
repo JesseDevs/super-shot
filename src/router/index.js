@@ -1,10 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import CreateView from "../views/CreateView.vue";
-
 import MenuListView from "../views/menu/MenuListView.vue";
-import MenuDetailView from "../views/menu/MenuDetailView.vue";
-
 import ProductListView from "../views/product/ProductListView.vue";
 import ProductDetailView from "../views/product/ProductDetailView.vue";
 
@@ -14,11 +11,26 @@ const router = createRouter({
 		{
 			path: "/",
 			name: "home",
+			props: {
+				pageData: {
+					title: "Welcome to the home page",
+					subHeading: "👋🏼",
+					buttonText: "Finish Order",
+				},
+			},
 			component: HomeView,
 		},
 		{
 			path: "/menu",
 			name: "menu",
+			props: {
+				pageData: {
+					title: "DUNKIN’ CLASSICS & NEW FAVORITES",
+					subHeading:
+						"Our menu is full of great-tasting items that will get you going and keep you running throughout your busy day. Plus, they’re always made to order—just the way you like.",
+					buttonText: "Checkout",
+				},
+			},
 			component: () => import("../views/MenuView.vue"),
 			children: [
 				{
@@ -28,12 +40,12 @@ const router = createRouter({
 				},
 				{
 					path: ":slug",
-					name: "menu/detail",
-					component: MenuDetailView,
+					name: "menu/category/product-list",
+					component: ProductListView,
 					children: [
 						{
 							path: "",
-							name: "menu/detail/product-list",
+							name: "menu/category/product-list",
 							component: ProductListView,
 						},
 						{
@@ -51,16 +63,6 @@ const router = createRouter({
 			component: CreateView,
 		},
 		{
-			path: "/sign-in",
-			name: "sign-in",
-			component: () => import("../views/SignInView.vue"),
-		},
-		{
-			path: "/sign-up",
-			name: "sign-up",
-			component: () => import("../views/SignUpView.vue"),
-		},
-		{
 			path: "/cart",
 			name: "cart",
 			component: () => import("../views/CartView.vue"),
@@ -74,6 +76,11 @@ const router = createRouter({
 			path: "/profile",
 			name: "profile",
 			component: () => import("../views/ProfileView.vue"),
+		},
+		{
+			path: "/sign-up",
+			name: "sign-up",
+			component: () => import("../views/SignUpView.vue"),
 		},
 	],
 });

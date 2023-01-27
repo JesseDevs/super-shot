@@ -1,4 +1,4 @@
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, onMounted, watch } from "vue";
 import { defineStore } from "pinia";
 
 export const useCartStore = defineStore("cart", function () {
@@ -31,6 +31,20 @@ export const useCartStore = defineStore("cart", function () {
 		purchasingCart.push(record);
 		console.log(purchasingCart);
 	}
+
+	onMounted(function () {
+		if (localStorage.getItem("myData")) {
+			purchasingCart.items = JSON.parse(localStorage.getItem("myData"));
+		} else {
+			// nothin
+		}
+	});
+
+	watch(purchasingCart, function (newState, oldState) {
+		if (newState !== oldState) {
+			localStorage.setItem("myData", JSON.stringify(newState.items));
+		}
+	});
 
 	return {
 		addItem,

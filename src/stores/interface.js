@@ -19,6 +19,7 @@ export const useInterfaceStore = defineStore("interface", function () {
 
 	function toggleMenu() {
 		mainMenuOpen.value = !mainMenuOpen.value;
+		cartMenuOpen.value = false;
 	}
 
 	function specificToggle() {
