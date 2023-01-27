@@ -1,0 +1,26 @@
+[
+	{
+		"title": "Coffee",
+		"slug": "coffee",
+		"info": "Freshly crafted beverages served in a variety of delicious flavors. Ask to try your favorite beverages hot or served over ice.",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/iced_coffee.png"
+	},
+	{
+		"title": "Donuts",
+		"slug": "donuts",
+		"info": "Every shape, any size and irresistibly delicious—each bite will brighten your day.",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/donuts/DNK00840_5Munchkins_lib_RGB@2x.png"
+	},
+	{
+		"title": "Sandwiches",
+		"slug": "sandwiches",
+		"info": "Freshly made with delicious ingredients, these items are stacked with flavor.",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/sandwiches-and-more/DNK00686_BaconEggCheeseBagel_200px@2x.png"
+	},
+	{
+		"title": "Frozen Drinks",
+		"slug": "frozen-drinks",
+		"info": "Freshly blended creations that turn your favorite flavors into refreshingly frozen treats.",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/frozen-drinks/DNK00533_FrozenCoffee_200px@2x.png"
+	}
+]

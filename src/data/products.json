@@ -1,0 +1,57 @@
+[
+	{
+		"id": "fanlf2fn2f82n",
+		"name": "Iced Coffee",
+		"slug": "iced-coffee",
+		"desc": "Freshly brewed and full of flavor, our Iced Coffee gets you energized and ready to go.",
+		"category": "coffee",
+		"tagline": "THE PERFECT PICK-ME-UP",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/iced_coffee.png",
+		"price": 3.99,
+		"sizes": [
+			{
+				"id": 1,
+				"size": "s",
+				"selected": false
+			},
+			{
+				"id": 2,
+				"size": "m",
+				"selected": true
+			},
+			{
+				"id": 3,
+				"size": "l",
+				"selected": false
+			}
+		]
+	},
+	{
+		"id": "fanlff3i92f82n",
+		"name": "Donut Hole",
+		"slug": "donut-hole",
+		"desc": "They’re made in a variety of delicious flavors and free of artificial dyes, so it’s easy to try them all.",
+		"category": "donuts",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/donuts/DNK00840_5Munchkins_lib_RGB@2x.png",
+		"price": 1.49
+	},
+	{
+		"id": "230rnnfsls",
+		"name": "Frozen Coffee",
+		"slug": "frozen-coffe",
+		"desc": "Our energizing Frozen Coffee is smooth, creamy and full of real Dunkin’® flavor—making it the perfect way to cool off.",
+		"category": "frozen-drinks",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/frozen-drinks/DNK00533_FrozenCoffee_200px@2x.png",
+		"price": 3.99,
+		"size": "M"
+	},
+	{
+		"id": "f2f2nf0nlw",
+		"name": "Bacon, Egg & Cheese",
+		"slug": "bacon-egg-cheese",
+		"desc": "A breakfast classic featuring cherrywood smoked bacon, egg and American cheese.",
+		"category": "sandwiches",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/sandwiches-and-more/DNK00686_BaconEggCheeseBagel_200px@2x.png",
+		"price": 4.99
+	}
+]
