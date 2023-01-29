@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import CreateView from "../views/CreateView.vue";
 import MenuListView from "../views/menu/MenuListView.vue";
+import MenuDetailView from "../views/menu/MenuDetailView.vue";
 import ProductListView from "../views/product/ProductListView.vue";
 import ProductDetailView from "../views/product/ProductDetailView.vue";
 
@@ -15,7 +16,6 @@ const router = createRouter({
 				pageData: {
 					title: "Welcome to the home page",
 					subHeading: "👋🏼",
-					buttonText: "Finish Order",
 				},
 			},
 			component: HomeView,
@@ -23,15 +23,14 @@ const router = createRouter({
 		{
 			path: "/menu",
 			name: "menu",
+			component: () => import("../views/MenuView.vue"),
 			props: {
 				pageData: {
 					title: "DUNKIN’ CLASSICS & NEW FAVORITES",
 					subHeading:
 						"Our menu is full of great-tasting items that will get you going and keep you running throughout your busy day. Plus, they’re always made to order—just the way you like.",
-					buttonText: "Checkout",
 				},
 			},
-			component: () => import("../views/MenuView.vue"),
 			children: [
 				{
 					path: "",
@@ -40,12 +39,12 @@ const router = createRouter({
 				},
 				{
 					path: ":slug",
-					name: "menu/category/product-list",
-					component: ProductListView,
+					name: "menu/detail",
+					component: MenuDetailView,
 					children: [
 						{
 							path: "",
-							name: "menu/category/product-list",
+							name: "menu/detail/product-list",
 							component: ProductListView,
 						},
 						{
@@ -63,9 +62,9 @@ const router = createRouter({
 			component: CreateView,
 		},
 		{
-			path: "/cart",
-			name: "cart",
-			component: () => import("../views/CartView.vue"),
+			path: "/checkout",
+			name: "checkout",
+			component: () => import("../views/CheckoutView.vue"),
 		},
 		{
 			path: "/search",
@@ -81,6 +80,15 @@ const router = createRouter({
 			path: "/sign-up",
 			name: "sign-up",
 			component: () => import("../views/SignUpView.vue"),
+		},
+		{
+			path: "/:pathMatch(.*)",
+			name: "not-found",
+			pageData: {
+				title: "404",
+				subHeading: "Off to the wrong foot...",
+			},
+			component: () => import("../views/MyErrorView.vue"),
 		},
 	],
 });
