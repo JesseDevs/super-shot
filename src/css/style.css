@@ -9,7 +9,6 @@
 	flex-direction: column;
 
 	gap: 15px;
-
 }
 
 .main-grid li {
@@ -30,6 +29,10 @@
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
 	}
+}
+
+.main-form {
+	max-width: 500px;
 }
 
 picture.item-picture {

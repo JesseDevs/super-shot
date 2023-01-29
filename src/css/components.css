@@ -3,20 +3,18 @@ button {
 }
 
 input,
-select,
 textarea {
 	border-radius: none;
 	width: 100%;
 	font-family: "Montserrat", sans-serif;
 	padding: 7px 10px;
 	font-size: 1.1rem;
-	border: 1px solid black;
+	border: 1px solid var(--support);
 	outline: none;
 	resize: none;
 }
 
 input:focus,
-select:focus,
 textarea:focus {
 	border: 1px solid var(--support);
 	outline: 1px solid var(--support);
@@ -34,16 +32,18 @@ textarea:focus+span.input-helper {
 }
 
 .button {
-	font-size: 16px;
-	font-weight: 500;
-	font-family: 'Montserrat', sans-serif;
-	letter-spacing: 1px;
+	font-size: 15px;
+	font-weight: 600;
+	font-family: 'Lato', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+
 	max-width: 150px;
 	min-width: fit-content;
-	padding: 13px 20px 13px;
+	padding: 10px 20px;
 	outline: 0;
-	border-radius: 10px;
-	border: 2px solid black;
+	border-radius: 50px;
+	border: 1.5px solid black;
 	cursor: pointer;
 	position: relative;
 	background-color: var(--color-soft);
