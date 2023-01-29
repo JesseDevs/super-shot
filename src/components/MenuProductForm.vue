@@ -29,7 +29,7 @@
 </script>
 
 <template>
-	<form class="product-form" autocomplete="off" @submit.prevent="save()">
+	<form class="main-form" autocomplete="off" @submit.prevent="save()">
 		<div class="form-field">
 			<label for="x">Name?</label>
 			<div>
@@ -72,12 +72,6 @@ Enter Description...
 </template>
 
 <style lang="scss">
-	form.monster-form {
-		padding: 10px;
-		margin: 20px auto;
-		max-width: 700px;
-	}
-
 	div.form-field {
 		display: flex;
 		flex-direction: column;

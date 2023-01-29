@@ -28,7 +28,7 @@
 <template>
 	<inner-column>
 		<login-modal>
-			<form class="login-form" autocomplete="off" @submit.prevent="checkLogin()">
+			<form class="main-form" autocomplete="off" @submit.prevent="checkLogin()">
 				<div class="form-field">
 					<label for="x">Username *</label>
 					<div>

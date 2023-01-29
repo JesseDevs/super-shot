@@ -2,44 +2,28 @@
 	import { computed } from "vue";
 	import { useRoute } from "vue-router";
 	import { useProfilesStore } from "../stores/Profiles";
+	import { useMenuStore } from "@/stores/menu";
 
 	defineProps(["pageData"]);
 	const profiles = useProfilesStore();
 	const profile = profiles.currentUser;
 	const route = useRoute();
+	const menu = useMenuStore();
 
-	// const category = menu.categories.find(function (record) {
-	// 	return record.slug == route.params.slug;
-	// });
-
-	const titleBasedOnRoute = computed(function () {
-		if (route.path === "/") {
-			return "Welcome to the home page";
-		} else if (route.path === "/menu") {
-			return "DUNKIN’ CLASSICS & NEW FAVORITES";
-		} else if (route.path === "/profile") {
-			return `Welcome to your profile ${profile.name}`;
-		} else if (route.path === "/menu/coffee") {
-			return "COFFEE";
-		} else {
-			return "Page not found";
-		}
-	});
-
-	const textBasedOnRoute = computed(function () {
-		if (route.path === "/") {
-			return "👋🏼";
-		} else if (route.path === "/menu") {
-			return "Our menu is full of great-tasting items that will get you going and keep you running throughout your busy day. Plus, they’re always made to order—just the way you like.";
-		} else if (route.path === "/menu/coffee") {
-			return "Freshly crafted beverages served in a variety of delicious flavors. Ask to try your favorite beverages hot or served over ice.";
-		} else {
-			return "Page not found";
-		}
+	const category = computed(function () {
+		return menu.categories.find(function (record) {
+			return record.slug == route.params.slug;
+		});
 	});
 </script>
 <template>
-	<module-thing>
+	<module-thing v-if="route.params.slug == `coffee`">
+		<h1 class="strict-voice">{{ category.title }}</h1>
+
+		<p class="intro">{{ category.info }}</p>
+	</module-thing>
+
+	<module-thing v-else>
 		<h1 class="strict-voice">{{ pageData.title }}</h1>
 
 		<p class="intro">

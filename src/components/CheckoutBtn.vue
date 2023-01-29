@@ -13,7 +13,7 @@
 		if (route.path === "/") {
 			return "menu";
 		} else {
-			return "/checkout";
+			return "checkout";
 		}
 	});
 
@@ -60,7 +60,7 @@
 		align-items: center;
 		gap: 15px;
 		width: 240px;
-		border: 2px solid black;
+		border: 1.5px solid black;
 		margin: 0 auto;
 		padding: 15px 25px;
 		border-radius: 20px;

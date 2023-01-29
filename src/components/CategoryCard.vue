@@ -23,7 +23,7 @@
 		border-radius: 10px;
 		gap: 20px;
 
-		border: 2px solid var(--support-mute);
+		border: 1.5px solid var(--support-mute);
 		padding: 10px;
 		padding-bottom: 25px;
 		height: 300px;

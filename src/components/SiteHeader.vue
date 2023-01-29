@@ -6,7 +6,7 @@
 	import burger from "@/assets/images/burger-icon.vue";
 	import SvgIcon from "../components/SvgIcon.vue";
 	import SignInBlock from "../components/SignInBlock.vue";
-	import CartModal from "../components/CartModal.vue";
+
 	import { useProfilesStore } from "../stores/Profiles";
 
 	const profiles = useProfilesStore();
@@ -16,10 +16,10 @@
 </script>
 
 <template>
-	<header :class="`${route.name} ${ui.menuClass} ${ui.cartClass}`">
+	<header :class="`${route.name} ${ui.menuClass}`">
 		<inner-column>
 			<nav class="top-row">
-				<button class="menu-toggle" @click="ui.toggleMenu()" type="submit" aria-label="Main Menu">
+				<button class="menu-toggle" @click="ui.toggleMenu()" type="submit">
 					<burger />
 				</button>
 
@@ -32,7 +32,7 @@
 					</div>
 				</div>
 			</nav>
-			<CartModal />
+
 			<nav class="site-menu bottom-row">
 				<SignInBlock />
 				<ul>
@@ -96,7 +96,7 @@
 		top: -9px;
 		right: -9px;
 		background-color: var(--color-soft);
-		border: 1px solid var(--color-mute);
+		border: 1.5px solid var(--color-mute);
 		color: var(--black-mute);
 		border-radius: 50px;
 		z-index: 10;
@@ -209,40 +209,6 @@
 	}
 
 	header.toggle-open {
-		signin-block {
-			display: grid;
-			grid-template-columns: 100px 100px;
-			text-align: center;
-			justify-content: center;
-			align-items: center;
-			row-gap: 10px;
-			padding: 7px;
-			background-color: var(--page-support);
-
-			a {
-				max-width: fit-content;
-				margin: 0 auto;
-				padding: 5px 10px;
-				text-transform: uppercase;
-				border-radius: 50px;
-				font-weight: 600;
-			}
-			a:first-of-type {
-				grid-column: 1;
-				color: var(--page);
-				background-color: var(--color-mute);
-				border: 1px solid var(--color-mute);
-			}
-			a:last-of-type {
-				grid-column: 2;
-				background-color: var(--page);
-				border: 1px solid var(--support);
-			}
-			span {
-				grid-column: span 2;
-			}
-		}
-
 		nav.site-menu {
 			position: fixed;
 			height: 100vh;
