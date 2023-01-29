@@ -11,7 +11,7 @@ export const useProfilesStore = defineStore("Profiles", function () {
 		},
 	]);
 
-	const currentUser = ref({});
+	const currentUser = ref();
 
 	const isLoggedIn = computed(function () {
 		if (currentUser.value) {

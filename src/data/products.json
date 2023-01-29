@@ -7,24 +7,7 @@
 		"category": "coffee",
 		"tagline": "THE PERFECT PICK-ME-UP",
 		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/iced_coffee.png",
-		"price": 3.99,
-		"sizes": [
-			{
-				"id": 1,
-				"size": "s",
-				"selected": false
-			},
-			{
-				"id": 2,
-				"size": "m",
-				"selected": true
-			},
-			{
-				"id": 3,
-				"size": "l",
-				"selected": false
-			}
-		]
+		"price": 3.99
 	},
 	{
 		"id": "fanlff3i92f82n",
