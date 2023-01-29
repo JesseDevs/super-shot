@@ -12,6 +12,7 @@
 		"deploy:dev": "vite build --mode development && cp dist/index.html dist/200.html && surge dist"
 	},
 	"dependencies": {
+		"lodash": "^4.17.21",
 		"pinia": "^2.0.28",
 		"sass": "^1.57.1",
 		"sass-loader": "^13.2.0",

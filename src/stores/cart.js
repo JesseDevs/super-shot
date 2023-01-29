@@ -1,5 +1,6 @@
 import { reactive, computed, onMounted, watch } from "vue";
 import { defineStore } from "pinia";
+import lodash from "lodash";
 
 export const useCartStore = defineStore("cart", function () {
 	const itemsInCart = computed(function () {
@@ -11,25 +12,13 @@ export const useCartStore = defineStore("cart", function () {
 		purchasingCart.forEach((item) => {
 			sum += item.price;
 		});
-		return sum;
+		return lodash.round(sum, 2);
 	});
 
-	const purchasingCart = reactive([
-		{
-			id: "fanlf2fn2f82n",
-			name: "Iced Coffee",
-			slug: "iced-coffee",
-			desc: "Freshly brewed and full of flavor, our Iced Coffee gets you energized and ready to go.",
-			category: "coffee",
-			tags: ["iced", "cold"],
-			price: 3.99,
-			size: "M",
-		},
-	]);
+	const purchasingCart = reactive([]);
 
 	function addItem(record) {
 		purchasingCart.push(record);
-		console.log(purchasingCart);
 	}
 
 	onMounted(function () {
