@@ -6,16 +6,7 @@
 	const route = useRoute();
 	const menu = useMenuStore();
 
-	const categories = menu.categories;
-	let allProducts = categories.flatMap((category) => category.products);
-
 	let searchString = ref("");
-
-	const filtered = computed(function () {
-		return allProducts.filter(function (item) {
-			return item.name.includes(searchString.value);
-		});
-	});
 </script>
 
 <template>
@@ -29,16 +20,16 @@
 			<h2 class="chant-voice" v-else>Results for All Products</h2>
 
 			<ul class="main-grid">
-				<li v-for="item in filtered">
-					<RouterLink :to="`menu/${item.category}/${item.id}`">
-						<category-card>
-							<picture>
-								<img :src="`${item.imageURL}`" alt="iced" loading="lazy" />
+				<li v-for="product in menu.products">
+					<RouterLink :to="`menu/${product.category}/${product.id}`">
+						<general-card>
+							<picture class="item-picture">
+								<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
 							</picture>
 							<div class="name-highlight">
-								<span>{{ item.name.toUpperCase() }}</span>
+								<span>{{ product.name.toUpperCase() }}</span>
 							</div>
-						</category-card>
+						</general-card>
 					</RouterLink>
 				</li>
 			</ul>

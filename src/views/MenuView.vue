@@ -18,8 +18,6 @@
 			<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" />
 
 			<RouterView :menu="menu" />
-
-			<CheckoutBtn />
 		</inner-column>
 	</section>
 </template>

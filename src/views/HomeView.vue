@@ -12,7 +12,6 @@
 
 <template>
 	<section>
-		<pre><code>{{ profiles }}</code></pre>
 		<inner-column>
 			<home-module :class="`${profiles.signInAnimate}`">
 				<ModuleThing :pageData="pageData" />
@@ -23,8 +22,6 @@
 
 				<button class="button" @click="profiles.signOut(profile)">Sign Out</button>
 				<button class="button" @click="profiles.signInAnimation(profile)">Sign In</button>
-
-				<CheckoutBtn />
 			</home-module>
 		</inner-column>
 	</section>
