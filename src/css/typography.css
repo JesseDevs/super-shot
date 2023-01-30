@@ -1,29 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root {
+	--fluid-min-width: 320;
+	--fluid-max-width: 1200;
+
+	--fluid-screen: 100vw;
+	--fluid-bp: calc((var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) / (var(--fluid-max-width) - var(--fluid-min-width)));
+}
+
+@media screen and (min-width: 1200px) {
+	:root {
+		--fluid-screen: calc(var(--fluid-max-width) * 1px);
+	}
+}
+
+:root {
+	--f--2-min: 12.64;
+	--f--2-max: 11.52;
+	--step--2: calc(((var(--f--2-min) / 16) * 1rem) + (var(--f--2-max) - var(--f--2-min)) * var(--fluid-bp));
+
+	--f--1-min: 14.22;
+	--f--1-max: 14.40;
+	--step--1: calc(((var(--f--1-min) / 16) * 1rem) + (var(--f--1-max) - var(--f--1-min)) * var(--fluid-bp));
+
+	--f-0-min: 16.00;
+	--f-0-max: 18.00;
+	--step-0: calc(((var(--f-0-min) / 16) * 1rem) + (var(--f-0-max) - var(--f-0-min)) * var(--fluid-bp));
+
+	--f-1-min: 18.00;
+	--f-1-max: 22.50;
+	--step-1: calc(((var(--f-1-min) / 16) * 1rem) + (var(--f-1-max) - var(--f-1-min)) * var(--fluid-bp));
+
+	--f-2-min: 20.25;
+	--f-2-max: 28.13;
+	--step-2: calc(((var(--f-2-min) / 16) * 1rem) + (var(--f-2-max) - var(--f-2-min)) * var(--fluid-bp));
+
+	--f-3-min: 22.78;
+	--f-3-max: 35.16;
+	--step-3: calc(((var(--f-3-min) / 16) * 1rem) + (var(--f-3-max) - var(--f-3-min)) * var(--fluid-bp));
+
+	--f-4-min: 25.63;
+	--f-4-max: 43.95;
+	--step-4: calc(((var(--f-4-min) / 16) * 1rem) + (var(--f-4-max) - var(--f-4-min)) * var(--fluid-bp));
+
+	--f-5-min: 28.83;
+	--f-5-max: 54.93;
+	--step-5: calc(((var(--f-5-min) / 16) * 1rem) + (var(--f-5-max) - var(--f-5-min)) * var(--fluid-bp));
+
+	--f-6-min: 32.44;
+	--f-6-max: 68.66;
+	--step-6: calc(((var(--f-6-min) / 16) * 1rem) + (var(--f-6-max) - var(--f-6-min)) * var(--fluid-bp));
+}
+
 .roar-voice {
-	font-size: clamp(3.36rem, calc(2.63rem + 3.65vw), 5.36rem);
-	font-weight: 700;
+	font-size: var(--step-6);
 	text-transform: uppercase;
 }
 
 .yell-voice {
-	font-size: clamp(2.80rem, calc(2.26rem + 2.71vw), 4.29rem);
+	font-size: var(--step-5);
 }
 
 .loud-voice {
-	font-size: clamp(2.33rem, calc(1.93rem + 2.00vw), 3.43rem);
+	font-size: var(--step-4);
 }
 
 .attention-voice {
-	font-size: clamp(1.94rem, calc(1.65rem + 1.46vw), 2.75rem);
+	font-size: var(--step-3);
 }
 
 .chant-voice {
-	font-size: clamp(1.62rem, calc(1.41rem + 1.05vw), 2.20rem);
+	font-size: var(--step-2);
 }
 
 .strict-voice {
-	font-size: clamp(1.35rem, calc(1.20rem + 0.74vw), 1.76rem);
+	font-size: var(--step-1);
 }
 
 .calm-voice,
@@ -31,17 +82,17 @@ p,
 li,
 a {
 
-	font-size: clamp(0.94rem, calc(0.87rem + 0.34vw), 1.13rem);
+	font-size: var(--step-0);
 
 }
 
 small,
 .small-voice {
-	font-size: clamp(0.78rem, calc(0.74rem + 0.22vw), 0.90rem);
+	font-size: var(--step--1);
 }
 
 .tiny-voice {
-	font-size: clamp(0.65rem, calc(0.63rem + 0.13vw), 0.72rem);
+	font-size: var(--step--2);
 }
 
 :is(.calm-voice, p, li) em {
