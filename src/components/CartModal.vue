@@ -16,23 +16,21 @@
 
 <template>
 	<cart-modal>
-		<inner-column>
-			<h2 class="chant-voice">Shopping Cart</h2>
-			<button v-if="cart.itemsInCart" @click="clear()">
-				<SvgIcon icon="trash" />
-			</button>
+		<h2 class="chant-voice">Shopping Cart</h2>
+		<button v-if="cart.itemsInCart" @click="clear()">
+			<SvgIcon icon="trash" />
+		</button>
 
-			<ul>
-				<li v-for="item in cart.purchasingCart">
-					{{ item.quantity }} - -{{ item.name }} - {{ item.price }}
-				</li>
-			</ul>
-			{{ cart.checkoutTotal }}
+		<ul>
+			<li v-for="item in cart.purchasingCart">
+				{{ item.quantity }} - -{{ item.name }} - {{ item.price }}
+			</li>
+		</ul>
+		{{ cart.checkoutTotal }}
 
-			<RouterLink class="button strict-voice" @click="ui.specificToggle()" to="/checkout"
-				>Checkout</RouterLink
-			>
-		</inner-column>
+		<RouterLink class="button strict-voice" @click="ui.specificToggle()" to="/checkout"
+			>Checkout</RouterLink
+		>
 	</cart-modal>
 </template>
 
@@ -46,6 +44,7 @@
 		height: 100%;
 		max-width: 75%;
 		max-height: 85vh;
+		padding: 1rem 2rem;
 
 		border-top-left-radius: 25px;
 		border-bottom-left-radius: 25px;
@@ -66,19 +65,14 @@
 			text-align: center;
 			align-self: center;
 		}
-		inner-column {
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
 
-			button {
-				appearance: none;
-				border: none;
-				outline: none;
-				background-color: transparent;
-			}
+		button {
+			appearance: none;
+			border: none;
+			outline: none;
+			background-color: transparent;
 		}
+
 		inner-column * {
 			opacity: 0;
 		}

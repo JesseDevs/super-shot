@@ -24,12 +24,12 @@
 
 				<form action="">
 					<div class="form-field">
-						<label for="search">Enter Product</label>
+						<label class="calm-voice" for="search">Enter Product</label>
 						<input type="text" id="search" v-model="searchString" />
 					</div>
 				</form>
-				<h2 class="chant-voice" v-if="searchString !== ''">Results for {{ searchString }}</h2>
-				<h2 class="chant-voice" v-else>Results for All Products</h2>
+				<h5 class="strict-voice" v-if="searchString !== ''">Results for {{ searchString }}</h5>
+				<h5 class="strict-voice" v-else>Results for All Products</h5>
 			</search-div>
 			<ul class="main-grid">
 				<li v-for="product in filtered">
@@ -56,7 +56,7 @@
 		}
 		label {
 			font-weight: 500;
-			padding-left: 25px;
+			padding-left: 20px;
 		}
 		display: flex;
 		flex-direction: column;
