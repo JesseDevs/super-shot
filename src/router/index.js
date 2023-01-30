@@ -69,11 +69,23 @@ const router = createRouter({
 		{
 			path: "/search",
 			name: "search",
+			props: {
+				pageData: {
+					title: "Search",
+					subHeading: "Let's find the right thing for you",
+				},
+			},
 			component: () => import("../views/SearchView.vue"),
 		},
 		{
 			path: "/profile",
 			name: "profile",
+			props: {
+				pageData: {
+					title: "This is your profile",
+					subHeading: "Your name",
+				},
+			},
 			component: () => import("../views/ProfileView.vue"),
 		},
 		{
@@ -84,9 +96,11 @@ const router = createRouter({
 		{
 			path: "/:pathMatch(.*)",
 			name: "not-found",
-			pageData: {
-				title: "404",
-				subHeading: "Off to the wrong foot...",
+			props: {
+				pageData: {
+					title: "404",
+					subHeading: "Off to the wrong foot...",
+				},
 			},
 			component: () => import("../views/MyErrorView.vue"),
 		},

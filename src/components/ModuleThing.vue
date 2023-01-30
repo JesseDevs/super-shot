@@ -43,13 +43,13 @@
 		padding-top: 10px;
 		padding-bottom: 1.5rem;
 		h1 {
-			max-width: 23ch;
 			font-weight: 800;
 			line-height: 1.3;
+			text-transform: uppercase;
 		}
 
 		.intro {
-			font-size: clamp(0.65rem, calc(0.63rem + 0.13vw), 0.72rem);
+			font-size: clamp(0.78rem, calc(0.74rem + 0.22vw), 0.9rem);
 			max-width: 45ch;
 		}
 
