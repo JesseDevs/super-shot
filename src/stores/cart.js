@@ -1,33 +1,48 @@
-import { reactive, computed, onMounted, watch } from "vue";
+import { computed, onMounted, watch, ref } from "vue";
 import { defineStore } from "pinia";
 import lodash from "lodash";
 
 export const useCartStore = defineStore("cart", function () {
+	// onMounted(function () {
+	// 	if (localStorage.getItem("myData")) {
+	// 		purchasingCart.value.items = JSON.parse(localStorage.getItem("myData"));
+	// 	} else {
+	// 		// nothin
+	// 	}
+	// });
+
 	const itemsInCart = computed(function () {
-		return purchasingCart.length;
+		let total = 0;
+		purchasingCart.value.forEach(function (item) {
+			total += item.quantity;
+		});
+		return total;
 	});
+
+	const purchasingCart = ref([]);
+
+	function addItem(record) {
+		const existingItem = purchasingCart.value.find((item) => item.id === record.id);
+		if (existingItem) {
+			existingItem.quantity++;
+		} else {
+			purchasingCart.value.push({ ...record, quantity: 1 });
+		}
+		localStorage.setItem("myData", JSON.stringify(purchasingCart.value));
+	}
 
 	const checkoutTotal = computed(function () {
 		var sum = 0;
-		purchasingCart.forEach((item) => {
-			sum += item.price;
+		purchasingCart.value.forEach((item) => {
+			sum += item.price * item.quantity;
 		});
 		return lodash.round(sum, 2);
 	});
 
-	const purchasingCart = reactive([]);
-
-	function addItem(record) {
-		purchasingCart.push(record);
+	function clear() {
+		purchasingCart.value = [];
+		localStorage.setItem("myData", []);
 	}
-
-	onMounted(function () {
-		if (localStorage.getItem("myData")) {
-			purchasingCart.items = JSON.parse(localStorage.getItem("myData"));
-		} else {
-			// nothin
-		}
-	});
 
 	watch(purchasingCart, function (newState, oldState) {
 		if (newState !== oldState) {
@@ -40,5 +55,6 @@ export const useCartStore = defineStore("cart", function () {
 		checkoutTotal,
 		purchasingCart,
 		itemsInCart,
+		clear,
 	};
 });

@@ -1,21 +1,37 @@
 <script setup>
 	import { useCartStore } from "../stores/cart";
+	import { useInterfaceStore } from "@/stores/interface";
 	import SvgIcon from "../components/SvgIcon.vue";
 	import { useProfilesStore } from "../stores/Profiles";
 
 	const profiles = useProfilesStore();
 	const cart = useCartStore();
+	const ui = useInterfaceStore();
+
+	function clear() {
+		cart.purchasingCart = [];
+		localStorage.setItem("myData", []);
+	}
 </script>
 
 <template>
 	<cart-modal>
 		<inner-column>
-			<h2 class="chant-voice">Cart</h2>
-			{{ cart.checkoutTotal }}
+			<h2 class="chant-voice">Shopping Cart</h2>
+			<button v-if="cart.itemsInCart" @click="clear()">
+				<SvgIcon icon="trash" />
+			</button>
 
 			<ul>
-				<li v-for="item in cart.purchasingCart">{{ item.name }} - {{ item.price }}</li>
+				<li v-for="item in cart.purchasingCart">
+					{{ item.quantity }} - -{{ item.name }} - {{ item.price }}
+				</li>
 			</ul>
+			{{ cart.checkoutTotal }}
+
+			<RouterLink class="button strict-voice" @click="ui.specificToggle()" to="/checkout"
+				>Checkout</RouterLink
+			>
 		</inner-column>
 	</cart-modal>
 </template>
@@ -28,6 +44,7 @@
 		top: 0;
 		width: 100%;
 		height: 100%;
+		max-width: 75%;
 		max-height: 85vh;
 
 		border-top-left-radius: 25px;
@@ -39,15 +56,41 @@
 
 		overflow-y: auto;
 		opacity: 0.4;
-		transform: translate(98%, 0);
+		transform: translate(100%, 0);
 		z-index: 200;
 		pointer-events: none;
 		transition: all 0.3s ease-in-out;
+
+		a.button {
+			background-color: var(--page);
+			text-align: center;
+			align-self: center;
+		}
+		inner-column {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+
+			button {
+				appearance: none;
+				border: none;
+				outline: none;
+				background-color: transparent;
+			}
+		}
+		inner-column * {
+			opacity: 0;
+		}
 	}
 	.cart-open cart-modal {
 		opacity: 1;
-		transform: translate(35%, 0);
+		transform: translate(0, 0);
 		pointer-events: initial;
+
+		inner-column * {
+			opacity: 1;
+		}
 	}
 
 	// header.toggle-open.cart-open cart-modal {
