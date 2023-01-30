@@ -26,6 +26,9 @@ export const useInterfaceStore = defineStore("interface", function () {
 		if (mainMenuOpen.value == true) {
 			mainMenuOpen.value = !mainMenuOpen.value;
 		}
+		if (cartMenuOpen.value == true) {
+			cartMenuOpen.value = !cartMenuOpen.value;
+		}
 	}
 
 	const menuClass = computed(() => {
