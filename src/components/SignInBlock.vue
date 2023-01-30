@@ -10,8 +10,10 @@
 
 <template>
 	<signin-block v-if="!profiles.isLoggedIn">
-		<button class="small-voice" @click="profiles.signInAnimation(profile)">Sign In</button>
-		<RouterLink class="small-voice" @click="ui.toggleMenu()" to="/sign-up"> Sign Up </RouterLink>
+		<button class="header-action small-voice" @click="profiles.signInAnimation(profile)">Sign In</button>
+		<RouterLink class="header-action small-voice" @click="ui.toggleMenu()" to="/sign-up">
+			Sign Up
+		</RouterLink>
 		<span class="tiny-voice">Not a Dunkin' Rewards memeber?</span>
 	</signin-block>
 
@@ -40,17 +42,20 @@
 			padding: 7px;
 			background-color: var(--page-support);
 
-			a {
+			.header-action {
 				max-width: fit-content;
 				margin: 0 auto;
-				padding: 5px 10px;
+				padding: 5px 15px;
 				text-transform: uppercase;
 				border-radius: 50px;
 				font-weight: 600;
+				line-height: 1.4;
 			}
 			button:first-of-type {
 				grid-column: 1;
+				text-align: center;
 				color: var(--page);
+				justify-self: center;
 				background-color: var(--color-mute);
 				border: 1px solid var(--color-mute);
 				max-width: fit-content;

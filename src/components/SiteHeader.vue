@@ -27,7 +27,7 @@
 
 				<div class="strict-voice" @click="ui.toggleCart()">
 					<SvgIcon icon="basket" />
-					<div class="items-cart-value">
+					<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
 						{{ cart.itemsInCart }}
 					</div>
 				</div>

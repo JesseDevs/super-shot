@@ -4,10 +4,10 @@ button {
 
 input,
 textarea {
-	border-radius: none;
+	border-radius: 50px;
 	width: 100%;
 	font-family: "Montserrat", sans-serif;
-	padding: 7px 10px;
+	padding: 10px 20px;
 	font-size: 1.1rem;
 	border: 1px solid var(--support);
 	outline: none;

@@ -26,7 +26,7 @@
 		border: 1.5px solid var(--support-mute);
 		padding: 10px;
 		padding-bottom: 25px;
-		height: 300px;
+		height: 100%;
 		transition: background-color ease-in-out 300ms;
 
 		&:hover {

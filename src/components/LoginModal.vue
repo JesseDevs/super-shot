@@ -31,21 +31,20 @@
 			<form class="main-form" autocomplete="off" @submit.prevent="checkLogin()">
 				<div class="form-field">
 					<label for="x">Username *</label>
-					<div>
-						<input id="x" type="text" required v-model="form.username" />
-						<span class="input-helper"></span>
-					</div>
+
+					<input id="x" type="text" required v-model="form.username" />
 				</div>
 				<div class="form-field">
 					<label for="y">Password *</label>
-					<div>
-						<input id="y" type="password" required v-model="form.password" />
-						<span class="input-helper"></span>
-					</div>
+
+					<input id="y" type="password" required v-model="form.password" />
 				</div>
 
 				<button class="button" type="submit">Log In</button>
 			</form>
+			<p></p>
 		</login-modal>
 	</inner-column>
 </template>
+
+<style lang="scss"></style>
