@@ -1,5 +1,4 @@
 <script setup>
-	import CheckoutBtn from "../components/CheckoutBtn.vue";
 	import ModuleThing from "../components/ModuleThing.vue";
 	import LoginModal from "../components/LoginModal.vue";
 
@@ -36,7 +35,6 @@
 		text-align: center;
 		gap: 10px;
 		h1 {
-			max-width: 23ch;
 			font-weight: 700;
 		}
 

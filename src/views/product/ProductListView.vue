@@ -26,7 +26,7 @@
 						<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
 					</picture>
 					<div class="name-highlight">
-						<span>{{ product.name }}</span>
+						<span class="small-voice">{{ product.name }}</span>
 					</div>
 				</general-card>
 			</RouterLink>

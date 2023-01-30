@@ -32,18 +32,14 @@
 	});
 
 	function saveNewProduct() {
-		const newRecord = { ...product };
-		newRecord.id = newID;
+		let newRecord = { ...product.value, ...newAdditions, id: newID.value };
 
-		// const record = {
-		// 	id: slugid.nice(),
-		// 	name: product.value.name,
-		// 	slug: product.value.name.toLowerCase().replace(/ /g, "-"),
-		// 	desc: product.value.desc,
-		// 	category: product.value.category.toLowerCase(),
-		// 	image: product.value.imageURL,
-		// };
-		// cart.addItem(record);
+		cart.addItem(newRecord);
+		localStorage.setItem("myData", JSON.stringify(cart.purchasingCart));
+	}
+
+	function revertToDefault() {
+		newAdditions.value = { size: "m", dairy: "None", flavor: "None", sweet: "None" };
 	}
 </script>
 
@@ -59,12 +55,16 @@
 				{{ product.desc }}
 			</p>
 
-			<button class="button" @click="saveNewProduct()">Add to cart</button>
+			<button class="button" @click="saveNewProduct()" v-if="cart.itemsInCart !== 0">Add to cart</button>
+			<button class="button" @click="saveNewProduct()" v-else>Start Order</button>
+
+			<p class="price">
+				Price: <span>${{ product.price }}</span>
+			</p>
 		</landing-block>
 
-		<form class="main-form edit-form" autocomplete="off" @submit.prevent="save()">
+		<form class="main-form edit-form" autocomplete="off" @submit.prevent="saveNewProduct()">
 			<div class="size-block" v-if="route.params.slug === 'coffee'">
-				{{ newAdditions }}
 				<h4 class="calm-voice">Size</h4>
 
 				<ul class="cup-size">
@@ -133,6 +133,11 @@
 		justify-content: center;
 		gap: 8px;
 
+		h4 {
+			font-weight: 700;
+			padding-left: 15px;
+		}
+
 		landing-block {
 			display: flex;
 			flex-direction: column;
@@ -140,6 +145,9 @@
 			justify-content: center;
 			text-align: center;
 			gap: 10px;
+			width: fit-content;
+			border-bottom: 1px solid var(--support);
+			padding-bottom: 1rem;
 			picture.item-picture img {
 				max-height: 160px;
 			}
