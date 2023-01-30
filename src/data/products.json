@@ -7,6 +7,12 @@
 		"category": "coffee",
 		"tagline": "THE PERFECT PICK-ME-UP",
 		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/iced_coffee.png",
+		"options": [
+			"size",
+			"dairy",
+			"sweetener",
+			"flavor"
+		],
 		"price": 3.99
 	},
 	{
@@ -16,6 +22,9 @@
 		"desc": "They’re made in a variety of delicious flavors and free of artificial dyes, so it’s easy to try them all.",
 		"category": "donuts",
 		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/donuts/DNK00840_5Munchkins_lib_RGB@2x.png",
+		"options": [
+			"miniDonutFlavor"
+		],
 		"price": 1.49
 	},
 	{
@@ -25,6 +34,11 @@
 		"desc": "Our energizing Frozen Coffee is smooth, creamy and full of real Dunkin’® flavor—making it the perfect way to cool off.",
 		"category": "frozen-drinks",
 		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/frozen-drinks/DNK00533_FrozenCoffee_200px@2x.png",
+		"options": [
+			"size",
+			"dairy",
+			"flavor"
+		],
 		"price": 3.99,
 		"size": "M"
 	},
@@ -35,6 +49,9 @@
 		"desc": "A breakfast classic featuring cherrywood smoked bacon, egg and American cheese.",
 		"category": "sandwiches",
 		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/sandwiches-and-more/DNK00686_BaconEggCheeseBagel_200px@2x.png",
+		"options": [
+			"bread"
+		],
 		"price": 4.99
 	}
 ]
