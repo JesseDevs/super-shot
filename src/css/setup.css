@@ -57,8 +57,6 @@ inner-column {
 	margin-right: auto;
 	margin-left: auto;
 	background: var(--page);
-	border-left: 1px solid black;
-	border-right: 1px solid black;
 	padding: 1.5rem 1rem;
 	max-width: 1300px;
 }
