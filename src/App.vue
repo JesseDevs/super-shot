@@ -22,9 +22,13 @@
 		<SpriteSheet />
 		<SiteHeader />
 
-		<main :class="`outlet ${addSpace} ${ui.cartClass}`" @click="ui.specificToggle()">
-			<CartModal />
-			<RouterView />
+		<main :class="`outlet ${addSpace} ${ui.cartClass}`">
+			<section>
+				<inner-column>
+					<CartModal />
+					<RouterView />
+				</inner-column>
+			</section>
 		</main>
 
 		<SiteFooter />
