@@ -25,7 +25,7 @@
 
 				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
-				<div class="strict-voice" @click="ui.toggleCart()">
+				<div class="strict-voice cart-container" @click="ui.toggleCart()">
 					<SvgIcon icon="basket" />
 					<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
 						{{ cart.itemsInCart }}
@@ -44,15 +44,12 @@
 						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/menu">Menu</RouterLink>
 					</li>
 
+					<li class="logo">
+						<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
+					</li>
+
 					<li>
-						<RouterLink
-							v-if="profiles.isLoggedIn"
-							@click="ui.specificToggle()"
-							class="small-voice"
-							to="/create"
-							>Create</RouterLink
-						>
-						<RouterLink v-else @click="ui.specificToggle()" class="small-voice" to="/search"
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/search"
 							>Search</RouterLink
 						>
 					</li>
@@ -72,7 +69,7 @@
 
 <style lang="scss">
 	header inner-column {
-		padding: 1rem 1rem;
+		padding: 0.5rem 1rem;
 		padding-bottom: 0px;
 		display: flex;
 		flex-direction: column;
@@ -113,6 +110,8 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		max-height: 40px;
+		padding-top: 5px;
 
 		a {
 			font-weight: 900;
@@ -126,10 +125,15 @@
 		margin: auto -1rem;
 		border-top: 2px solid var(--support-light);
 
+		.logo {
+			display: none;
+		}
+
 		ul {
 			display: flex;
 			flex-direction: row;
 			max-width: none;
+			align-items: center;
 			background-color: var(--page);
 			justify-content: space-between;
 			li {
@@ -154,15 +158,14 @@
 		}
 	}
 
-	.menu-toggle,
-	.location-btn {
+	.menu-toggle {
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
 		display: flex;
 		padding: 0;
 		width: 40px;
-		height: 50px;
+		height: 35px;
 	}
 	.location-btn {
 		width: 30px;
@@ -241,6 +244,73 @@
 						color: var(--color);
 					}
 				}
+			}
+		}
+	}
+
+	@media (min-width: 900px) {
+		header inner-column {
+			padding: 0 1rem;
+			z-index: 100;
+		}
+		nav.top-row {
+			display: none;
+		}
+
+		nav.bottom-row {
+			border: none;
+
+			.logo {
+				display: block;
+			}
+
+			ul li a {
+				border-bottom: none;
+				&:hover {
+					border: none;
+				}
+			}
+
+			.router-link-active {
+				border: none;
+				color: var(--off-color);
+			}
+		}
+		signin-block {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			padding: 13px 1rem;
+			gap: 8px;
+			border-bottom: 2px solid var(--support-light);
+
+			.header-action {
+				cursor: pointer;
+				outline: none;
+				border: none;
+				appearance: none;
+				max-width: fit-content;
+
+				font-size: var(--step--1);
+				padding: 4px 15px;
+				text-transform: uppercase;
+				border-radius: 50px;
+				font-weight: 600;
+				line-height: 1.4;
+			}
+
+			button.header-action {
+				background-color: var(--page);
+				border: 1px solid var(--black);
+			}
+
+			a.header-action {
+				background-color: var(--off-color);
+				border: 1px solid var(--off-color);
+				color: var(--page);
+			}
+			span {
+				display: none;
 			}
 		}
 	}

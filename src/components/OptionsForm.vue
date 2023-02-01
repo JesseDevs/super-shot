@@ -176,7 +176,7 @@
 		label {
 			cursor: default;
 			display: block;
-			width: 40px;
+			width: 43px;
 			height: 40px;
 			position: relative;
 		}
@@ -196,7 +196,7 @@
 			display: block;
 			display: grid;
 			place-items: center;
-			width: 40px;
+			width: 43px;
 			height: 40px;
 			text-align: center;
 			font-weight: 700;

@@ -17,7 +17,9 @@
 <template>
 	<return-nav>
 		<div>
-			<p>&lt;</p>
+			<div class="arrow-box">
+				<SvgIcon icon="angle-left" />
+			</div>
 			<RouterLink class="small-voice" to="/menu">Menu</RouterLink>
 			/
 			<a v-if="route.name == 'menu/detail/product-detail'" class="small-voice" @click="$router.back()">{{

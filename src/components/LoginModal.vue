@@ -26,25 +26,22 @@
 </script>
 
 <template>
-	<inner-column>
-		<login-modal>
-			<form class="main-form" autocomplete="off" @submit.prevent="checkLogin()">
-				<div class="form-field">
-					<label for="x">Username *</label>
+	<login-modal>
+		<form class="main-form" autocomplete="off" @submit.prevent="checkLogin()">
+			<div class="form-field">
+				<label for="x">Username *</label>
 
-					<input id="x" type="text" required v-model="form.username" />
-				</div>
-				<div class="form-field">
-					<label for="y">Password *</label>
+				<input id="x" type="text" required v-model="form.username" />
+			</div>
+			<div class="form-field">
+				<label for="y">Password *</label>
 
-					<input id="y" type="password" required v-model="form.password" />
-				</div>
+				<input id="y" type="password" required v-model="form.password" />
+			</div>
 
-				<button class="button" type="submit">Log In</button>
-			</form>
-			<p></p>
-		</login-modal>
-	</inner-column>
+			<button class="button" type="submit">Log In</button>
+		</form>
+	</login-modal>
 </template>
 
 <style lang="scss"></style>
