@@ -10,20 +10,16 @@
 </script>
 
 <template>
-	<section>
-		<inner-column>
-			<home-module :class="`${profiles.signInAnimate}`">
-				<ModuleThing :pageData="pageData" />
+	<home-module :class="`${profiles.signInAnimate}`">
+		<ModuleThing :pageData="pageData" />
 
-				<div class="display-animation">
-					<LoginModal />
-				</div>
+		<div class="display-animation">
+			<LoginModal />
+		</div>
 
-				<button class="button" @click="profiles.signOut(profile)">Sign Out</button>
-				<button class="button" @click="profiles.signInAnimation(profile)">Sign In</button>
-			</home-module>
-		</inner-column>
-	</section>
+		<button class="button" @click="profiles.signOut(profile)">Sign Out</button>
+		<button class="button" @click="profiles.signInAnimation(profile)">Sign In</button>
+	</home-module>
 </template>
 
 <style lang="scss">

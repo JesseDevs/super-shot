@@ -1,7 +1,6 @@
 <script setup>
 	import { RouterView } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
-	import CheckoutBtn from "../components/CheckoutBtn.vue";
 	import ReturnNav from "../components/ReturnNav.vue";
 	import ModuleThing from "../components/ModuleThing.vue";
 	import { useRoute } from "vue-router";
@@ -12,13 +11,11 @@
 </script>
 <template>
 	<section>
-		<inner-column>
-			<ReturnNav v-if="route.path !== '/menu'" />
+		<ReturnNav v-if="route.path !== '/menu'" />
 
-			<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" />
+		<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" />
 
-			<RouterView :menu="menu" />
-		</inner-column>
+		<RouterView :menu="menu" />
 	</section>
 </template>
 
