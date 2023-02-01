@@ -51,6 +51,13 @@ const router = createRouter({
 							path: ":id",
 							name: "menu/detail/product-detail",
 							component: ProductDetailView,
+							children: [
+								{
+									path: "update",
+									name: "update",
+									component: ProductDetailView,
+								},
+							],
 						},
 					],
 				},

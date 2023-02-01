@@ -22,5 +22,11 @@
 		"slug": "frozen-drinks",
 		"info": "Freshly blended creations that turn your favorite flavors into refreshingly frozen treats.",
 		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign/frozen-drinks/DNK00533_FrozenCoffee_200px@2x.png"
+	},
+	{
+		"title": "Teas & More",
+		"slug": "teas-and-more",
+		"info": "Delicious beverages served in a variety of flavors.",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/iced-tea.png"
 	}
 ]

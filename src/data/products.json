@@ -53,5 +53,34 @@
 			"bread"
 		],
 		"price": 4.99
+	},
+	{
+		"id": "8fnownfff",
+		"name": "Hot Chocolate",
+		"slug": "hot-chocolate",
+		"desc": "Cozy up with one of our creamy, craveable hot chocolates. Available in a variety of flavors sure to warm your soul.",
+		"category": "teas-and-more",
+		"tagline": "DRINK IN THE COZY",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/hot-chocolate.png",
+		"options": [
+			"size",
+			"flavor"
+		],
+		"price": 4.99
+	},
+	{
+		"id": "afof3fff3",
+		"name": "Cold Brew",
+		"slug": "hot-chocolate",
+		"desc": "100% Arabica beans steeped overnight in cold water for 12 hours to slowly extract the flavor, making it an ultra-smooth, full bodied cold coffee with a sweeter, rich chocolatey taste. Craft-brewed in small batches. Limited quantities available daily.",
+		"category": "coffee",
+		"tagline": "BREWED SLOW. SERVED FAST.",
+		"imageURL": "https://www.dunkindonuts.com/content/dam/dd/img/menu-redesign-v2/302x570/cold_brew.png",
+		"options": [
+			"size",
+			"dairy",
+			"sweetener"
+		],
+		"price": 4.99
 	}
 ]

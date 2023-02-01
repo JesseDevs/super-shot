@@ -4,6 +4,19 @@ import { defineStore } from "pinia";
 export const useInterfaceStore = defineStore("interface", function () {
 	const mainMenuOpen = ref(false);
 	const cartMenuOpen = ref(false);
+	const editProductMode = ref(false);
+
+	function toggleEditMode() {
+		editProductMode.value = !editProductMode.value;
+	}
+
+	const editModeClass = computed(() => {
+		if (editProductMode.value) {
+			return "edit-mode";
+		} else {
+			return "";
+		}
+	});
 
 	function toggleCart() {
 		cartMenuOpen.value = !cartMenuOpen.value;
@@ -47,5 +60,8 @@ export const useInterfaceStore = defineStore("interface", function () {
 		toggleCart,
 		specificToggle,
 		menuClass,
+		toggleEditMode,
+		editModeClass,
+		editProductMode,
 	};
 });
