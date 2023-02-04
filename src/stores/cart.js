@@ -3,14 +3,6 @@ import { defineStore } from "pinia";
 import lodash from "lodash";
 
 export const useCartStore = defineStore("cart", function () {
-	// onMounted(function () {
-	// 	if (localStorage.getItem("myData")) {
-	// 		purchasingCart.value.items = JSON.parse(localStorage.getItem("myData"));
-	// 	} else {
-	// 		// nothin
-	// 	}
-	// });
-
 	const itemsInCart = computed(function () {
 		let total = 0;
 		purchasingCart.value.forEach(function (item) {
@@ -19,7 +11,7 @@ export const useCartStore = defineStore("cart", function () {
 		return total;
 	});
 
-	const purchasingCart = ref([]);
+	const purchasingCart = ref(JSON.parse(localStorage.getItem("shoppingCart")) || []);
 
 	function addItem(record) {
 		const existingItem = purchasingCart.value.find((item) => item.id === record.id);
@@ -28,7 +20,7 @@ export const useCartStore = defineStore("cart", function () {
 		} else {
 			purchasingCart.value.push({ ...record, quantity: 1 });
 		}
-		localStorage.setItem("myData", JSON.stringify(purchasingCart.value));
+		localStorage.setItem("shoppingCart", JSON.stringify(purchasingCart.value));
 	}
 
 	const checkoutTotal = computed(function () {
@@ -41,12 +33,12 @@ export const useCartStore = defineStore("cart", function () {
 
 	function clear() {
 		purchasingCart.value = [];
-		localStorage.setItem("myData", []);
+		localStorage.setItem("shoppingCart", []);
 	}
 
 	watch(purchasingCart, function (newState, oldState) {
 		if (newState !== oldState) {
-			localStorage.setItem("myData", JSON.stringify(newState.items));
+			localStorage.setItem("shoppingCart", JSON.stringify(purchasingCart.value));
 		}
 	});
 
