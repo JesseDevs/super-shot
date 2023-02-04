@@ -1,12 +1,32 @@
 <script setup>
+	import { reactive } from "vue";
+	import { useFirestore, useCollection } from "vuefire";
+	import { collection, doc, addDoc, deleteDoc } from "firebase/firestore";
 	import ModuleThing from "../components/ModuleThing.vue";
 	import LoginModal from "../components/LoginModal.vue";
-
 	import { useProfilesStore } from "../stores/Profiles";
 	defineProps(["pageData"]);
 
+	const db = useFirestore();
+	const categories = useCollection(collection(db, "categories"));
+
 	const profiles = useProfilesStore();
 	const profile = profiles.currentUser;
+	const form = reactive({
+		title: "",
+	});
+
+	function addCategory() {
+		addDoc(collection(db, "categories"), {
+			title: form.title,
+		});
+		form.title = "";
+	}
+
+	function removeCategory(docID) {
+		const record = doc(db, "categories", docID);
+		deleteDoc(record);
+	}
 </script>
 
 <template>
@@ -16,6 +36,26 @@
 		<div class="display-animation">
 			<LoginModal />
 		</div>
+
+		<ul>
+			<li v-for="category in categories">
+				{{ category.title }}
+
+				<button @click="removeCategory(category.id)" type="button">X</button>
+
+				<button>Edit</button>
+			</li>
+		</ul>
+
+		<form @submit.prevent="addCategory()">
+			<div class="form-field">
+				<label for="title">Category title?</label>
+
+				<input id="title" type="text" required v-model="form.title" />
+			</div>
+
+			<button class="button" type="submit">Add</button>
+		</form>
 
 		<button class="button" @click="profiles.signOut(profile)">Sign Out</button>
 		<button class="button" @click="profiles.signInAnimation(profile)">Sign In</button>
