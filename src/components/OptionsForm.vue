@@ -147,6 +147,7 @@
 
 		select {
 			border-radius: 50px;
+			cursor: pointer;
 			width: 100%;
 			font-family: "Sofia Sans", sans-serif;
 			padding: 10px 20px;
@@ -200,6 +201,7 @@
 			height: 40px;
 			text-align: center;
 			font-weight: 700;
+			cursor: pointer;
 		}
 
 		.radio-button:checked {
