@@ -33,7 +33,7 @@
 		let newRecord = { ...product.value, ...newAdditions, id: newID.value };
 
 		cart.addItem(newRecord);
-		localStorage.setItem("myData", JSON.stringify(cart.purchasingCart));
+		localStorage.setItem("shoppingCart", JSON.stringify(cart.purchasingCart));
 	}
 </script>
 
