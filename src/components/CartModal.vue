@@ -1,4 +1,5 @@
 <script setup>
+	import { computed, ref } from "vue";
 	import { useCartStore } from "../stores/cart";
 	import { useInterfaceStore } from "@/stores/interface";
 	import SvgIcon from "../components/SvgIcon.vue";
@@ -10,10 +11,25 @@
 	const ui = useInterfaceStore();
 	const route = useRoute();
 
+	const quantityMode = ref(false);
+
+	function toggleQuantityMode() {
+		quantityMode.value = !quantityMode.value;
+	}
+
+	const quantityModeClass = computed(() => {
+		if (quantityMode.value) {
+			return "quantity-mode";
+		} else {
+			return "";
+		}
+	});
+
 	function remove(id) {
 		cart.purchasingCart.forEach(function (item, index) {
 			if (item.id === id) {
 				cart.purchasingCart.splice(index, 1);
+				route.push({ path: "/" });
 			}
 		});
 	}
@@ -24,7 +40,7 @@
 
 	function clear() {
 		cart.purchasingCart = [];
-		localStorage.setItem("myData", []);
+		localStorage.setItem("shoppingCart", []);
 	}
 </script>
 
@@ -39,22 +55,27 @@
 		<button v-else @click="ui.toggleEditMode()" class="tiny-button tiny-voice">Done</button>
 
 		<ul>
-			<li class="item-in-cart" v-for="item in cart.purchasingCart">
-				<RouterLink :to="`/menu/${item.category}/${item.id}`">
-					<cart-card :class="`${ui.editModeClass}`">
+			<li class="item-in-cart" v-for="product in cart.purchasingCart">
+				<RouterLink :to="`/menu/${product.category}/${product.id}`">
+					<cart-card :class="`${ui.editModeClass} ${quantityModeClass}`">
 						<text-content>
-							<p>{{ item.quantity }}</p>
-							<p>{{ item.name }}</p>
-							<p>${{ item.price }}</p>
+							<p class="quantity">{{ product.quantity }}</p>
+							<p>{{ product.name }}</p>
+							<p>${{ product.price }}</p>
 							<div class="arrow-box">
 								<SvgIcon icon="angle-right" />
 							</div>
 						</text-content>
 
 						<edit-links v-if="ui.editProductMode">
-							<button class="tiny-voice">Quantity</button>
-							<button class="tiny-voice" @click="remove(`${item.id}`)">Delete</button>
+							<button class="tiny-voice" @click="toggleQuantityMode()">Quantity</button>
+							<button class="tiny-voice" @click="remove(`${product.id}`)">Delete</button>
 						</edit-links>
+						<div v-if="quantityMode" class="quantity-counter">
+							<button>-</button>
+							{{ product.quantity }}
+							<button @click="increment(product.quantity)">+</button>
+						</div>
 					</cart-card>
 				</RouterLink>
 			</li>
@@ -144,6 +165,11 @@
 			p:nth-of-type(2) {
 				flex: 1;
 			}
+		}
+
+		p.quantity {
+			padding-left: 5px;
+			padding-right: 5px;
 		}
 	}
 	.cart-open cart-modal {
