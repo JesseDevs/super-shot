@@ -1,7 +1,7 @@
 <script setup>
-	import { reactive } from "vue";
+	import { reactive, ref } from "vue";
 	import { useFirestore, useCollection } from "vuefire";
-	import { collection, doc, addDoc, deleteDoc } from "firebase/firestore";
+	import { collection, doc, addDoc, deleteDoc, setDoc } from "firebase/firestore";
 	import ModuleThing from "../components/ModuleThing.vue";
 	import LoginModal from "../components/LoginModal.vue";
 	import { useProfilesStore } from "../stores/Profiles";
@@ -16,6 +16,8 @@
 		title: "",
 	});
 
+	const editing = ref(false);
+
 	function addCategory() {
 		addDoc(collection(db, "categories"), {
 			title: form.title,
@@ -23,9 +25,26 @@
 		form.title = "";
 	}
 
-	function removeCategory(docID) {
+	async function removeCategory(docID) {
 		const record = doc(db, "categories", docID);
-		deleteDoc(record);
+		if (confirm("Are you sure?")) {
+			await deleteDoc(record);
+		}
+	}
+
+	function editCategory(id) {
+		editing.value = id;
+	}
+
+	function updateCategory(id, c) {
+		setDoc(doc(db, "categories", id), {
+			title: c,
+		});
+		clearEdit();
+	}
+
+	function clearEdit() {
+		editing.value = false;
 	}
 </script>
 
@@ -43,7 +62,11 @@
 
 				<button @click="removeCategory(category.id)" type="button">X</button>
 
-				<button>Edit</button>
+				<button @click="editCategory(category.id)">Edit</button>
+
+				<div v-if="editing === category.id" />
+				<input type="text" v-model="category.title" />
+				<button>Update</button>
 			</li>
 		</ul>
 
