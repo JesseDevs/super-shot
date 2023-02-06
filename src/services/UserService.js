@@ -9,7 +9,6 @@ import {
 } from "firebase/auth";
 
 import { useCurrentUser } from "vuefire";
-import { Vue } from "vue-demi";
 
 export const useUserService = defineStore("user", function () {
 	const auth = getAuth();
@@ -17,11 +16,15 @@ export const useUserService = defineStore("user", function () {
 	const current = useCurrentUser();
 
 	const form = reactive({
+		firstName: "",
+		lastName: "",
 		username: "",
 		password: "",
 	});
 
 	function clearForm() {
+		form.firstName = "";
+		form.lastName = "";
 		form.username = "";
 		form.password = "";
 	}
@@ -30,7 +33,6 @@ export const useUserService = defineStore("user", function () {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				console.log("user.signUp");
-				clearForm();
 			})
 			.catch((error) => {
 				console.log(error.code, error.message);

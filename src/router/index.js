@@ -5,6 +5,7 @@ import MenuListView from "../views/menu/MenuListView.vue";
 import MenuDetailView from "../views/menu/MenuDetailView.vue";
 import ProductListView from "../views/product/ProductListView.vue";
 import ProductDetailView from "../views/product/ProductDetailView.vue";
+import AccountPage from "../views/profile/AccountPage.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,8 +15,8 @@ const router = createRouter({
 			name: "home",
 			props: {
 				pageData: {
-					title: "Welcome to the home page",
-					subHeading: "👋🏼",
+					title: "Dunkin' Rewards",
+					subHeading: "A NEW WAY TO RUN",
 				},
 			},
 			component: HomeView,
@@ -23,7 +24,7 @@ const router = createRouter({
 		{
 			path: "/menu",
 			name: "menu",
-			component: () => import("../views/MenuView.vue"),
+			component: () => import("../views/menu/MenuView.vue"),
 			props: {
 				pageData: {
 					title: "DUNKIN’ CLASSICS & NEW FAVORITES",
@@ -80,18 +81,29 @@ const router = createRouter({
 		{
 			path: "/profile",
 			name: "profile",
-			props: {
-				pageData: {
-					title: "This is your profile",
-					subHeading: "Your name",
+			component: () => import("../views/profile/ProfileView.vue"),
+			children: [
+				{
+					path: "/profile/account",
+					name: "account",
+					component: AccountPage,
 				},
-			},
-			component: () => import("../views/ProfileView.vue"),
+			],
+		},
+		{
+			path: "/sign-in",
+			name: "sign-in",
+			component: () => import("../views/SignInView.vue"),
 		},
 		{
 			path: "/sign-up",
 			name: "sign-up",
 			component: () => import("../views/SignUpView.vue"),
+		},
+		{
+			path: "/rewards",
+			name: "rewards",
+			component: () => import("../views/RewardsView.vue"),
 		},
 		{
 			path: "/:pathMatch(.*)",
