@@ -1,8 +1,8 @@
 <script setup>
 	import { RouterView } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
-	import ReturnNav from "../components/ReturnNav.vue";
-	import ModuleThing from "../components/ModuleThing.vue";
+	import ReturnNav from "@/partials/ReturnNav.vue";
+	import ModuleThing from "@/components/ModuleThing.vue";
 	import { useRoute } from "vue-router";
 	defineProps(["pageData"]);
 

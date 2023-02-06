@@ -1,6 +1,7 @@
 <script setup>
 	import { RouterLink, useRoute } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
+	import SvgIcon from "@/partials/SvgIcon.vue";
 
 	const menu = useMenuStore();
 	const route = useRoute();

@@ -1,15 +1,11 @@
 <script setup>
-	import { ref } from "vue";
 	import { RouterLink, useRoute } from "vue-router";
 	import { useInterfaceStore } from "@/stores/interface";
 	import { useCartStore } from "../stores/cart";
 	import burger from "@/assets/images/burger-icon.vue";
-	import SvgIcon from "../components/SvgIcon.vue";
-	import SignInBlock from "../components/SignInBlock.vue";
+	import SvgIcon from "@/partials/SvgIcon.vue";
+	import SignInBlock from "@/components/SignInBlock.vue";
 
-	import { useProfilesStore } from "../stores/Profiles";
-
-	const profiles = useProfilesStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
 	const cart = useCartStore();
@@ -212,6 +208,9 @@
 	}
 
 	header.toggle-open {
+		ad-block {
+			display: none;
+		}
 		nav.site-menu {
 			position: fixed;
 			height: 100vh;
