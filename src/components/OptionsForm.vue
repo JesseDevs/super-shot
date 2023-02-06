@@ -3,7 +3,7 @@
 	import { useRoute } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
 	import { useCartStore } from "@/stores/cart";
-	import SvgIcon from "@/components/SvgIcon.vue";
+	import SvgIcon from "@/partials/SvgIcon.vue";
 	import slugid from "slugid";
 
 	const cart = useCartStore();

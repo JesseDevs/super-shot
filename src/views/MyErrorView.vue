@@ -1,8 +1,4 @@
 <script setup>
-	import CheckoutBtn from "../components/CheckoutBtn.vue";
-	import ModuleThing from "../components/ModuleThing.vue";
-	import LoginModal from "../components/LoginModal.vue";
-
 	import { useProfilesStore } from "../stores/Profiles";
 	defineProps(["pageData"]);
 

@@ -44,7 +44,7 @@
 		margin: 0 auto;
 		padding: 10px;
 
-		width: 80%;
+		width: 90%;
 		max-width: 244px;
 		height: 40px;
 

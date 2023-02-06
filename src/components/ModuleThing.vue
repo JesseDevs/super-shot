@@ -24,7 +24,7 @@
 	</module-thing>
 
 	<module-thing v-else>
-		<h1 class="strict-voice">{{ pageData.title }}</h1>
+		<h1 class="attemtion-voice">{{ pageData.title }}</h1>
 
 		<p class="intro">
 			{{ pageData.subHeading }}

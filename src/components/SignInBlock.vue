@@ -3,6 +3,7 @@
 	import { useInterfaceStore } from "@/stores/interface";
 	import { useCartStore } from "../stores/cart";
 	import { useProfilesStore } from "../stores/Profiles";
+	import SvgIcon from "@/partials/SvgIcon.vue";
 
 	const profiles = useProfilesStore();
 	const ui = useInterfaceStore();

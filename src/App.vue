@@ -1,11 +1,11 @@
 <script setup>
 	import { computed } from "vue";
 	import { RouterView, useRoute } from "vue-router";
-	import SiteHeader from "./components/SiteHeader.vue";
-	import SiteFooter from "./components/SiteFooter.vue";
-	import SpriteSheet from "./components/SpriteSheet.vue";
 	import { useCartStore } from "@/stores/cart";
 	import { useInterfaceStore } from "@/stores/interface";
+	import SiteHeader from "@/partials/SiteHeader.vue";
+	import SiteFooter from "@/partials/SiteFooter.vue";
+	import SpriteSheet from "@/partials/SpriteSheet.vue";
 	import CartModal from "@/components/CartModal.vue";
 
 	const ui = useInterfaceStore();
