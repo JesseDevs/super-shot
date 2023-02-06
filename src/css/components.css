@@ -32,6 +32,10 @@ textarea:focus+span.input-helper {
 	bottom: 0%;
 }
 
+input:hover {
+	border-color: var(--color);
+}
+
 .button {
 	font-size: 15px;
 	font-weight: 600;
