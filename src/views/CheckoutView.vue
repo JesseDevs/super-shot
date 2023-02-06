@@ -2,7 +2,7 @@
 	import { computed, ref } from "vue";
 	import { useCartStore } from "../stores/cart";
 	import { useInterfaceStore } from "@/stores/interface";
-	import SvgIcon from "../components/SvgIcon.vue";
+	import SvgIcon from "../partials/SvgIcon.vue";
 	import { useProfilesStore } from "../stores/Profiles";
 	import { useRoute } from "vue-router";
 
