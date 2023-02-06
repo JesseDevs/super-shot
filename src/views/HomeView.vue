@@ -1,87 +1,61 @@
 <script setup>
-	import { reactive, ref } from "vue";
-	import { useFirestore, useCollection } from "vuefire";
-	import { collection, doc, addDoc, deleteDoc, setDoc } from "firebase/firestore";
-	import ModuleThing from "../components/ModuleThing.vue";
-	import LoginModal from "../components/LoginModal.vue";
-	import { useProfilesStore } from "../stores/Profiles";
 	defineProps(["pageData"]);
-
-	const db = useFirestore();
-	const categories = useCollection(collection(db, "categories"));
-
-	const profiles = useProfilesStore();
-	const profile = profiles.currentUser;
-	const form = reactive({
-		title: "",
-	});
-
-	const editing = ref(false);
-
-	function addCategory() {
-		addDoc(collection(db, "categories"), {
-			title: form.title,
-		});
-		form.title = "";
-	}
-
-	async function removeCategory(docID) {
-		const record = doc(db, "categories", docID);
-		if (confirm("Are you sure?")) {
-			await deleteDoc(record);
-		}
-	}
-
-	function editCategory(id) {
-		editing.value = id;
-	}
-
-	function updateCategory(id, c) {
-		setDoc(doc(db, "categories", id), {
-			title: c,
-		});
-		clearEdit();
-	}
-
-	function clearEdit() {
-		editing.value = false;
-	}
 </script>
 
 <template>
-	<home-module :class="`${profiles.signInAnimate}`">
-		<ModuleThing :pageData="pageData" />
+	<ad-block>
+		<p>Come run with us! Apply to join our exceptional team <RouterLink to="/sign-up">here</RouterLink>.</p>
+	</ad-block>
+	<home-module>
+		<h1 class="yell-voice">{{ pageData.title }}</h1>
 
-		<div class="display-animation">
-			<LoginModal />
-		</div>
+		<p class="intro">
+			{{ pageData.subHeading }}
+		</p>
 
 		<ul>
-			<li v-for="category in categories">
-				{{ category.title }}
-
-				<button @click="removeCategory(category.id)" type="button">X</button>
-
-				<button @click="editCategory(category.id)">Edit</button>
-
-				<div v-if="editing === category.id" />
-				<input type="text" v-model="category.title" />
-				<button>Update</button>
+			<li>
+				<dunkin-card>
+					<picture>
+						<img src="@/assets/dunkin-images/dunkin-card.png" alt="cards" />
+					</picture>
+					<text-content>
+						<h4 class="strict-voice">EARN POINTS WHEN YOU PAY</h4>
+						<p>
+							Order ahead in the app or scan your Dunkin’ Rewards ID in-store to earn 10 points per $1
+							spent
+						</p>
+					</text-content>
+				</dunkin-card>
+			</li>
+			<li>
+				<dunkin-card>
+					<picture>
+						<img src="@/assets/dunkin-images/dunkin-items.png" alt="items" />
+					</picture>
+					<text-content>
+						<h4 class="strict-voice">TURN POINTS INTO REWARDS</h4>
+						<p>Rewards start at just 150 points – only $15 spent!</p>
+					</text-content>
+				</dunkin-card>
+			</li>
+			<li>
+				<dunkin-card>
+					<picture>
+						<img src="@/assets/dunkin-images/dunkin-rocket.png" alt="rocket" />
+					</picture>
+					<text-content>
+						<h4 class="strict-voice">UNLOCK BOOSTED STATUS</h4>
+						<p>12 visits in a calendar month earns 12 points per dollar!</p>
+					</text-content>
+				</dunkin-card>
 			</li>
 		</ul>
 
-		<form @submit.prevent="addCategory()">
-			<div class="form-field">
-				<label for="title">Category title?</label>
-
-				<input id="title" type="text" required v-model="form.title" />
-			</div>
-
-			<button class="button" type="submit">Add</button>
-		</form>
-
-		<button class="button" @click="profiles.signOut(profile)">Sign Out</button>
-		<button class="button" @click="profiles.signInAnimation(profile)">Sign In</button>
+		<actions-block>
+			<RouterLink class="button" to="/sign-up">Sign Up</RouterLink>
+			<RouterLink class="button" to="/rewards">Learn More</RouterLink>
+		</actions-block>
 	</home-module>
 </template>
 
@@ -89,53 +63,122 @@
 	home-module {
 		display: flex;
 		flex-direction: column;
+		position: relative;
 		align-items: center;
 		justify-content: center;
 		text-align: center;
 		gap: 10px;
+		margin-top: 50px;
 		h1 {
 			font-weight: 700;
 		}
+		p.intro {
+			color: var(--color);
+		}
 
-		.display-animation {
-			position: fixed;
-			background-color: var(--page-opacity);
-			top: 114px;
-			right: 50;
-			width: 2%;
-			height: 100%;
+		ul {
+			margin: 10px auto;
+		}
+	}
 
-			display: block;
-			place-items: center;
+	ad-block {
+		display: block;
+		position: absolute;
+		width: 100%;
+		padding: 5px;
+		left: 0;
+		top: 0;
 
-			overflow-y: auto;
-			opacity: 0;
-			z-index: 200;
-			pointer-events: none;
-			transition: all 0.5s ease-in-out;
+		background-color: var(--off-color-soft);
 
-			login-modal {
-				display: block;
-				opacity: 0;
+		p {
+			text-align: center;
+			margin: 0 auto;
+		}
 
-				pointer-events: initial;
-				transition: all 1.2s ease-in-out;
+		p,
+		a {
+			font-size: var(--step--1);
+		}
+
+		p a {
+			color: var(--black);
+			&:hover {
+				background-color: var(--off-color);
+				color: var(--page);
 			}
 		}
 	}
 
-	home-module.in-animation {
-		.display-animation {
-			opacity: 1;
-			background-color: var(--page);
-			transform: translate(0, 0);
-			width: 100%;
-			pointer-events: initial;
-
-			login-modal {
-				opacity: 1;
-				pointer-events: initial;
+	dunkin-card {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		zoom: 0.7;
+		text-align: left;
+		gap: 10px;
+		text-content {
+			align-items: flex-start;
+		}
+		h4 {
+			font-weight: 600;
+		}
+		img {
+			transition: scale 200ms ease-in-out;
+			&:hover {
+				scale: 1.1;
 			}
+		}
+	}
+
+	header.toggle-open + main {
+		ad-block {
+			display: none;
+		}
+	}
+
+	actions-block {
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media (min-width: 450px) {
+		home-module ul {
+			margin: 20px auto;
+		}
+
+		dunkin-card {
+			zoom: 0.8;
+			gap: 20px;
+		}
+	}
+
+	@media (min-width: 600px) {
+		home-module ul {
+			display: grid;
+			width: 100%;
+			grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
+			gap: 20px;
+			margin: 40px auto;
+		}
+		dunkin-card {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
+
+	@media (min-width: 900px) {
+		home-module ul {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			max-width: 1000px;
+		}
+
+		dunkin-card {
+			flex-direction: column;
+			zoom: 1;
 		}
 	}
 </style>
