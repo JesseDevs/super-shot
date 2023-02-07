@@ -36,9 +36,7 @@
 </template>
 
 <style lang="scss">
-	main.addSpace {
-		section > inner-column {
-			padding-bottom: 120px;
-		}
-	}
+	// main {
+	// 	margin-top: 95.4px;
+	// }
 </style>
