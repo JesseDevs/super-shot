@@ -67,17 +67,18 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		gap: 10px;
-		margin-top: 50px;
+		gap: 1vh;
+		margin-top: 4vh;
 		h1 {
 			font-weight: 700;
 		}
 		p.intro {
 			color: var(--color);
+			font-weight: 600;
 		}
 
 		ul {
-			margin: 10px auto;
+			margin: 3vh auto;
 		}
 	}
 
@@ -161,11 +162,14 @@
 			width: 100%;
 			grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
 			gap: 20px;
-			margin: 40px auto;
+			margin: 3vh auto 7vh;
 		}
 		dunkin-card {
-			flex-direction: column;
 			text-align: center;
+			flex-direction: column;
+			h4 {
+				text-align: center;
+			}
 		}
 	}
 
@@ -173,7 +177,7 @@
 		home-module ul {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
-			max-width: 1000px;
+			max-width: 1120px;
 		}
 
 		dunkin-card {

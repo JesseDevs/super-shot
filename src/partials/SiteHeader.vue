@@ -1,4 +1,5 @@
 <script setup>
+	import { ref } from "vue";
 	import { RouterLink, useRoute } from "vue-router";
 	import { useInterfaceStore } from "@/stores/interface";
 	import { useCartStore } from "../stores/cart";
@@ -21,7 +22,13 @@
 
 				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
-				<div class="strict-voice cart-container" @click="ui.toggleCart()">
+				<div
+					class="strict-voice cart-container"
+					@click="
+						ui.toggleCart();
+						ui.toggleBodyClass();
+					"
+				>
 					<SvgIcon icon="basket" />
 					<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
 						{{ cart.itemsInCart }}
@@ -64,6 +71,10 @@
 </template>
 
 <style lang="scss">
+	body.menu-open {
+		display: block;
+		overflow: hidden;
+	}
 	header inner-column {
 		padding: 0.5rem 1rem;
 		padding-bottom: 0px;
@@ -75,11 +86,6 @@
 			color: var(--off-color);
 			text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
 		}
-	}
-
-	signin-block {
-		display: none;
-		transition: all ease-in-out 1000ms;
 	}
 
 	div.items-cart-value {
@@ -273,43 +279,6 @@
 			.router-link-active {
 				border: none;
 				color: var(--off-color);
-			}
-		}
-		signin-block {
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-			padding: 13px 1rem;
-			gap: 8px;
-			border-bottom: 2px solid var(--support-light);
-
-			.header-action {
-				cursor: pointer;
-				outline: none;
-				border: none;
-				appearance: none;
-				max-width: fit-content;
-
-				font-size: var(--step--1);
-				padding: 4px 15px;
-				text-transform: uppercase;
-				border-radius: 50px;
-				font-weight: 600;
-				line-height: 1.4;
-			}
-
-			button.header-action {
-				background-color: var(--page);
-				border: 1px solid var(--black);
-			}
-
-			a.header-action {
-				background-color: var(--off-color);
-				border: 1px solid var(--off-color);
-				color: var(--page);
-			}
-			span {
-				display: none;
 			}
 		}
 	}
