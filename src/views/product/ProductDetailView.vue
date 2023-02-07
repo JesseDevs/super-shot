@@ -1,14 +1,16 @@
 <script setup>
-	import { computed, reactive } from "vue";
+	import { computed, reactive, ref } from "vue";
 	import { useRoute } from "vue-router";
 	import { useMenuStore } from "@/stores/menu";
 	import { useCartStore } from "@/stores/cart";
 	import OptionsForm from "@/components/OptionsForm.vue";
 	import slugid from "slugid";
+	import { useInterfaceStore } from "@/stores/interface";
 
 	const cart = useCartStore();
 	const route = useRoute();
 	const menu = useMenuStore();
+	const ui = useInterfaceStore();
 
 	const product = computed(function () {
 		return menu.products.find(function (record) {
@@ -30,9 +32,13 @@
 	});
 
 	function saveNewProduct() {
+		ui.cartMenuOpen = true;
+		cart.itemAdded = true;
+		ui.toggleBodyClass();
 		let newRecord = { ...product.value, ...newAdditions, id: newID.value };
 
 		cart.addItem(newRecord);
+
 		localStorage.setItem("shoppingCart", JSON.stringify(cart.purchasingCart));
 	}
 </script>
@@ -51,32 +57,20 @@
 					{{ product.desc }}
 				</p>
 
-				<button class="button" @click="saveNewProduct()" v-if="cart.itemsInCart !== 0">
-					Add to cart
+				<button class="button" @click="saveNewProduct()">
+					<span class="price"> ${{ product.price }}</span
+					>Add to cart
 				</button>
-				<button class="button" @click="saveNewProduct()" v-else>Start Order</button>
 			</text-content>
 		</landing-block>
 		<OptionsForm />
-		<p class="price triangle-cut-out"><span>Price:</span> $ {{ product.price }}</p>
 	</edit-block>
 </template>
 
 <style lang="scss">
-	p.price {
-		font-weight: 500;
-		min-width: 50%;
-		position: absolute;
-		padding-left: 10%;
-		top: 0;
-		right: -1rem;
-		background-color: var(--off-color);
-		color: var(--page);
-
-		span {
-			font-weight: 600;
-			font-style: italic;
-		}
+	span.price {
+		padding-right: 15px;
+		font-size: var(--step-0);
 	}
 	edit-block {
 		display: flex;
@@ -135,15 +129,6 @@
 			justify-content: flex-start;
 			align-items: flex-start;
 
-			p.price {
-				bottom: -50px;
-				top: auto;
-				width: 5%;
-				left: -1rem;
-				padding: 0;
-				text-align: center;
-			}
-
 			landing-block {
 				&:after {
 					position: absolute;
@@ -155,7 +140,7 @@
 					height: 75vh;
 				}
 				border: none;
-				padding: 0 32px;
+				padding: 0 26px;
 			}
 
 			div.option-block {
