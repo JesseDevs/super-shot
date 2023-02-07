@@ -10,6 +10,7 @@
 	const cart = useCartStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
+	const opacity = ref(1);
 
 	const quantityMode = ref(false);
 
@@ -42,11 +43,30 @@
 		cart.purchasingCart = [];
 		localStorage.setItem("shoppingCart", []);
 	}
+
+	const itemAddedText = computed(function () {
+		if (cart.itemAdded) {
+			return "Item added!";
+		} else return "";
+	});
+
+	const itemAddedClass = computed(function () {
+		if (cart.itemAdded) {
+			return "confirmation";
+		} else return "";
+	});
+
+	setTimeout(function () {
+		opacity.value = 0;
+	}, 2000);
 </script>
 
 <template>
 	<cart-modal>
-		<h2 class="chant-voice">Shopping Cart</h2>
+		<h3 :class="`${itemAddedClass} strict-voice`">{{ itemAddedText }}</h3>
+
+		<h2 class="chant-voice" v-if="cart.itemsInCart">Shopping Cart</h2>
+		<h2 class="chant-voice" v-else>Empty Cart</h2>
 
 		<button v-if="!ui.editProductMode" @click="ui.toggleEditMode()" class="tiny-button tiny-voice">
 			Edit
@@ -92,24 +112,22 @@
 
 <style lang="scss">
 	cart-modal {
-		position: absolute;
+		position: fixed;
 		background-color: var(--off-color-soft);
 		right: 0;
-		top: 0;
+		top: 96px;
 		width: 100%;
 		height: 100%;
-		max-width: 80%;
-		max-height: 85vh;
-		padding: 1rem 1rem;
-
-		border-top-left-radius: 25px;
-		border-bottom-left-radius: 25px;
+		max-width: 90vh;
+		max-height: 90vh;
+		padding: 2rem;
 
 		display: flex;
 		align-items: flex-start;
 		flex-direction: column;
 
 		overflow-y: auto;
+		overflow-x: hidden;
 		opacity: 0;
 		transform: translate(100%, 0);
 		z-index: 200;
@@ -120,6 +138,34 @@
 			background-color: var(--page);
 			text-align: center;
 			align-self: center;
+		}
+
+		h2 {
+			font-weight: 600;
+			width: 100%;
+			padding-bottom: 20px;
+
+			&:after {
+				content: "";
+				width: 150%;
+				height: 1px;
+				background-color: black;
+				position: absolute;
+				bottom: 0;
+				left: -2rem;
+				z-index: 100;
+			}
+		}
+
+		h3.confirmation {
+			position: absolute;
+			top: 10px;
+			right: 50%;
+			transform: translate(50%, 0%);
+			color: green;
+			font-weight: 800;
+			opacity: v-bind(opacity);
+			transition: opacity 500ms ease-in-out;
 		}
 
 		button {
@@ -133,14 +179,14 @@
 		.tiny-button {
 			position: absolute;
 			right: 10px;
-			top: 1rem;
+			top: 2rem;
 		}
 
 		.trash-can {
 			cursor: pointer;
 			position: absolute;
 			right: 10px;
-			bottom: 1.5rem;
+			bottom: 2.6rem;
 
 			.contains-svg {
 				width: 25px;
@@ -149,9 +195,22 @@
 		}
 
 		ul {
-			flex: 1;
-			margin-top: 20px;
 			width: 100%;
+			flex: 1;
+		}
+
+		li a {
+			padding: 10px;
+			&:after {
+				content: "";
+				width: 150%;
+				height: 1px;
+				background-color: black;
+				position: absolute;
+				bottom: 0;
+				left: -2rem;
+				z-index: 100;
+			}
 		}
 
 		cart-card text-content {
@@ -192,6 +251,18 @@
 		button,
 		a {
 			font-weight: 500;
+		}
+	}
+
+	@media (min-width: 600px) {
+		cart-modal {
+			zoom: 0.8;
+			max-width: 400px;
+			right: 2rem;
+			top: 73px;
+			max-height: 80vh;
+			border-radius: 25px;
+			border: 2px solid black;
 		}
 	}
 </style>
