@@ -17,7 +17,7 @@
 	});
 </script>
 <template>
-	<module-thing v-if="route.params.slug == `coffee`">
+	<module-thing v-if="route.name === 'menu/detail/product-list'">
 		<h1 class="strict-voice">{{ category.title }}</h1>
 
 		<p class="intro">{{ category.info }}</p>
