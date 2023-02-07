@@ -5,6 +5,17 @@ export const useInterfaceStore = defineStore("interface", function () {
 	const mainMenuOpen = ref(false);
 	const cartMenuOpen = ref(false);
 	const editProductMode = ref(false);
+	const bodyElement = ref(document.body);
+
+	function toggleBodyClass() {
+		bodyElement.value.classList.toggle("menu-open");
+	}
+
+	const openMenu = computed(function () {
+		if (cartMenuOpen.value || mainMenuOpen.value) {
+			return "menu-open";
+		} else return "";
+	});
 
 	function toggleEditMode() {
 		editProductMode.value = !editProductMode.value;
@@ -63,5 +74,8 @@ export const useInterfaceStore = defineStore("interface", function () {
 		toggleEditMode,
 		editModeClass,
 		editProductMode,
+		openMenu,
+		bodyElement,
+		toggleBodyClass,
 	};
 });

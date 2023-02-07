@@ -42,11 +42,14 @@ export const useCartStore = defineStore("cart", function () {
 		}
 	});
 
+	const itemAdded = ref(false);
+
 	return {
 		addItem,
 		checkoutTotal,
 		purchasingCart,
 		itemsInCart,
 		clear,
+		itemAdded,
 	};
 });
