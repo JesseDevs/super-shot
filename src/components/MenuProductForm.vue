@@ -63,38 +63,4 @@ Enter Description...
 	</form>
 </template>
 
-<style lang="scss">
-	form.main-form {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-	}
-	div.form-field {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		position: relative;
-
-		div {
-			width: 85%;
-		}
-
-		div.contains-textarea {
-			height: 100px;
-		}
-
-		select {
-			appearance: none;
-			border: 1px solid black;
-		}
-
-		label {
-			text-align: left;
-			font-weight: 500;
-			padding-left: 25px;
-		}
-	}
-</style>
+<style lang="scss"></style>
