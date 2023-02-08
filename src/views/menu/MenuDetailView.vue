@@ -3,10 +3,6 @@
 	import { useMenuStore } from "@/stores/menu";
 	const route = useRoute();
 	const menu = useMenuStore();
-
-	const category = menu.categories.find(function (record) {
-		return record.slug == route.params.slug;
-	});
 </script>
 
 <template>

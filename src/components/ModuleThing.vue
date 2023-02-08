@@ -9,12 +9,6 @@
 	const profile = profiles.currentUser;
 	const route = useRoute();
 	const menu = useMenuStore();
-
-	const category = computed(function () {
-		return menu.categories.find(function (record) {
-			return record.slug == route.params.slug;
-		});
-	});
 </script>
 <template>
 	<module-thing v-if="route.name === 'menu/detail/product-list'">

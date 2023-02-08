@@ -25,7 +25,7 @@
 
 			<button class="button" type="submit">Add</button>
 		</form>
-
+		<!-- 
 		<ul>
 			<li v-for="category in categoryService.sortedList">
 				{{ category.title }}
@@ -38,7 +38,7 @@
 				<input type="text" v-model="category.title" />
 				<button>Update</button>
 			</li>
-		</ul>
+		</ul> -->
 	</create-thing>
 </template>
 <style lang="scss">

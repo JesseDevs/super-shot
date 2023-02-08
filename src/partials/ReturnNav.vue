@@ -5,14 +5,6 @@
 
 	const menu = useMenuStore();
 	const route = useRoute();
-
-	function findCategoryBySlug(slug) {
-		return menu.categories.find(function (item) {
-			return item.slug === slug;
-		});
-	}
-
-	const category = findCategoryBySlug(route.params.slug);
 </script>
 
 <template>
