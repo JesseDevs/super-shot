@@ -58,7 +58,8 @@
 
 	setTimeout(function () {
 		opacity.value = 0;
-	}, 2000);
+		cart.itemAdded = false;
+	}, 2500);
 </script>
 
 <template>
@@ -165,7 +166,7 @@
 			color: green;
 			font-weight: 800;
 			opacity: v-bind(opacity);
-			transition: opacity 500ms ease-in-out;
+			transition: opacity 2s ease-in-out;
 		}
 
 		button {
