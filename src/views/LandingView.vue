@@ -2,16 +2,12 @@
 	import { reactive, ref } from "vue";
 	import { useFirestore, useCollection } from "vuefire";
 	import { collection, doc, addDoc, deleteDoc, setDoc } from "firebase/firestore";
-	import ModuleThing from "../components/ModuleThing.vue";
-	import LoginModal from "../components/LoginModal.vue";
-	import { useProfilesStore } from "../stores/Profiles";
+
 	defineProps(["pageData"]);
 
 	const db = useFirestore();
 	const categories = useCollection(collection(db, "categories"));
 
-	const profiles = useProfilesStore();
-	const profile = profiles.currentUser;
 	const form = reactive({
 		title: "",
 	});
@@ -49,27 +45,7 @@
 </script>
 
 <template>
-	<home-module :class="`${profiles.signInAnimate}`">
-		<ModuleThing :pageData="pageData" />
-
-		<div class="display-animation">
-			<LoginModal />
-		</div>
-
-		<ul>
-			<li v-for="category in categories">
-				{{ category.title }}
-
-				<button @click="removeCategory(category.id)" type="button">X</button>
-
-				<button @click="editCategory(category.id)">Edit</button>
-
-				<div v-if="editing === category.id" />
-				<input type="text" v-model="category.title" />
-				<button>Update</button>
-			</li>
-		</ul>
-
+	<home-module>
 		<form @submit.prevent="addCategory()">
 			<div class="form-field">
 				<label for="title">Category title?</label>
@@ -79,9 +55,6 @@
 
 			<button class="button" type="submit">Add</button>
 		</form>
-
-		<button class="button" @click="profiles.signOut(profile)">Sign Out</button>
-		<button class="button" @click="profiles.signInAnimation(profile)">Sign In</button>
 	</home-module>
 </template>
 
