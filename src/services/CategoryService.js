@@ -5,9 +5,13 @@ import { defineStore } from "pinia";
 
 export const useCategoryService = defineStore("categories", function () {
 	const db = useFirestore();
+
+	// Get category data
 	const categoriesData = collection(db, "categories");
 	const sorted = query(categoriesData, orderBy("title"));
 	const sortedList = useCollection(sorted);
+
+	// Add category data
 	const editing = ref(false);
 
 	const form = reactive({
