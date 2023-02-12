@@ -22,13 +22,7 @@
 
 				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
 
-				<div
-					class="strict-voice cart-container"
-					@click="
-						ui.toggleCart();
-						ui.toggleBodyClass();
-					"
-				>
+				<div class="strict-voice cart-container" @click="ui.toggleCart()">
 					<SvgIcon icon="basket" />
 					<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
 						{{ cart.itemsInCart }}
