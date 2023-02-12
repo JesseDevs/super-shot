@@ -1,6 +1,6 @@
 <script setup>
+	import { ref } from "vue";
 	import { useUserService } from "@/services/UserService";
-
 	const user = useUserService();
 	const requirements = [
 		"8+ characters",
@@ -8,6 +8,14 @@
 		"Use at least one special character",
 		"Include at least one number",
 	];
+
+	const passwordVisibility = ref("password");
+	function togglePasswordVisibility() {
+		if (passwordVisibility.value == "password") {
+			passwordVisibility.value = "text";
+		}
+		passwordVisibility.value = "password";
+	}
 </script>
 
 <template>
@@ -33,12 +41,13 @@
 			<div class="form-field">
 				<label for="a">Email <span>*</span> </label>
 
-				<input id="a" type="text" required v-model="user.form.username" />
+				<input id="a" type="email" required v-model="user.form.email" />
 			</div>
 			<div class="form-field">
 				<label for="b">Password <span>*</span> </label>
 
-				<input id="b" type="password" required v-model="user.form.password" />
+				<input id="b" :type="passwordVisibility" required v-model="user.form.password" />
+				<button @click="togglePasswordVisibility()">See Password</button>
 
 				<ul class="requirements">
 					<li v-for="x in requirements">

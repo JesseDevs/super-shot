@@ -40,7 +40,7 @@
 				<div class="form-field">
 					<label for="a">Email </label>
 
-					<input id="a" type="text" required v-model="user.form.username" />
+					<input id="a" type="email" required v-model="user.form.username" />
 				</div>
 				<div class="form-field">
 					<label for="b">Password </label>
