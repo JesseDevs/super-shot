@@ -54,6 +54,16 @@ html {
 
 /* $animations*/
 
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
 @keyframes drop-in {
 	from {
 		transform: translateY(-200px);
