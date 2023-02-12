@@ -1,21 +1,4 @@
-<script setup>
-	import { computed } from "vue";
-	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-
-	const route = useRoute();
-	const menu = useMenuStore();
-
-	const allProductsInCategory = computed(function () {
-		var filtered = [];
-		menu.products.forEach((product) => {
-			if (product.category == route.params.slug) {
-				filtered.push(product);
-			}
-		});
-		return filtered;
-	});
-</script>
+<script setup></script>
 
 <template>
 	<ul class="main-grid">

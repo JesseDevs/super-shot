@@ -1,14 +1,19 @@
 <script setup>
 	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
+	import { useFirestore, useDocument } from "vuefire";
+	import { doc } from "@firebase/firestore";
+
 	const route = useRoute();
-	const menu = useMenuStore();
+	const db = useFirestore();
+	const category = useDocument(doc(db, "categories", "coffee"));
 </script>
 
 <template>
 	<detail-block>
 		<div class="product-outlet">
-			<RouterView :category="category" />
+			<h1>Detail</h1>
+			<p v-if="category">{{ category }}</p>
+			<!-- <RouterView /> -->
 		</div>
 	</detail-block>
 </template>

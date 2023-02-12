@@ -1,21 +1,22 @@
 <script setup>
 	import { RouterView } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
 	import ReturnNav from "@/partials/ReturnNav.vue";
 	import ModuleThing from "@/components/ModuleThing.vue";
+
+	import { useCategoryService } from "@/services/CategoryService";
 	import { useRoute } from "vue-router";
 	defineProps(["pageData"]);
 
+	const categories = useCategoryService();
 	const route = useRoute();
-	const menu = useMenuStore();
 </script>
 <template>
 	<section>
-		<ReturnNav v-if="route.path !== '/menu'" />
+		<!-- <ReturnNav v-if="route.path !== '/menu'" /> -->
 
 		<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" />
 
-		<RouterView :menu="menu" />
+		<RouterView :categories="categories.sortedList" />
 	</section>
 </template>
 

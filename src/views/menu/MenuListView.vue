@@ -1,22 +1,20 @@
 <script setup>
-	import { useCategoryService } from "@/services/CategoryService";
-	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-	import CategoryCard from "../../components/CategoryCard.vue";
+	import CategoryCard from "@/components/CategoryCard.vue";
 
-	const route = useRoute();
-	const menu = useMenuStore();
-
-	const categoryService = useCategoryService();
+	defineProps(["categories"]);
 </script>
 
 <template>
 	<menu-list>
-		<ul class="main-grid">
-			<li v-for="category in categoryService.sortedList">
+		<transition-group name="fade" tag="ul" class="list main-grid">
+			<li
+				v-for="(category, index) in categories"
+				:style="{ animationDelay: index * 200 + 'ms' }"
+				class="fade-item"
+			>
 				<CategoryCard :category="category" />
 			</li>
-		</ul>
+		</transition-group>
 	</menu-list>
 </template>
 

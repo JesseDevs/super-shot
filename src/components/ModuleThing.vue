@@ -1,14 +1,13 @@
 <script setup>
-	import { computed } from "vue";
 	import { useRoute } from "vue-router";
-	import { useProfilesStore } from "../stores/Profiles";
-	import { useMenuStore } from "@/stores/menu";
+	import { useFirestore, useDocument } from "vuefire";
+	import { doc } from "@firebase/firestore";
+
+	const route = useRoute();
+	const db = useFirestore();
+	const category = useDocument(doc(db, "categories", "coffee"));
 
 	defineProps(["pageData"]);
-	const profiles = useProfilesStore();
-	const profile = profiles.currentUser;
-	const route = useRoute();
-	const menu = useMenuStore();
 </script>
 <template>
 	<module-thing v-if="route.name === 'menu/detail/product-list'">
