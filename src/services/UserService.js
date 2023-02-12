@@ -9,6 +9,10 @@ import {
 } from "firebase/auth";
 
 import { useCurrentUser } from "vuefire";
+import { firebaseApp } from "@/firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { useFirestore } from "vuefire";
+const db = useFirestore();
 
 export const useUserService = defineStore("user", function () {
 	const auth = getAuth();
@@ -18,21 +22,30 @@ export const useUserService = defineStore("user", function () {
 	const form = reactive({
 		firstName: "",
 		lastName: "",
-		username: "",
+		email: "",
 		password: "",
 	});
 
 	function clearForm() {
 		form.firstName = "";
 		form.lastName = "";
-		form.username = "";
+		form.email = "";
 		form.password = "";
 	}
 
 	function signUp(email, password) {
 		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
+			.then(async (userCredential) => {
 				console.log("user.signUp");
+				// clearForm(form);
+
+				await addDoc(collection(db, "users"), {
+					// Add a new document with a generated id.
+					authUid: userCredential.user.uid,
+					roles: {
+						guest: true,
+					},
+				});
 			})
 			.catch((error) => {
 				console.log(error.code, error.message);
