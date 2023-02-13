@@ -13,8 +13,8 @@
 <template>
 	<section>
 		<!-- <ReturnNav v-if="route.path !== '/menu'" /> -->
-
-		<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" />
+		<!-- 
+		<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" /> -->
 
 		<RouterView :categories="categories.sortedList" />
 	</section>
