@@ -1,9 +1,9 @@
-import { fileURLToPath, URL } from "node:url";
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import eslint from "@rollup/plugin-eslint";
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import eslint from '@rollup/plugin-eslint';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,49 +11,52 @@ export default defineConfig({
 		vue({
 			template: {
 				compilerOptions: {
-					isCustomElement: (tag) => tag.includes("-"),
+					// treat all tags with a dash as custom elements
+					isCustomElement: (tag) => tag.includes('-'),
 				},
 			},
 		}),
+		{
+			...eslint({
+				include: 'src/**/*.+(js)',
+			}),
+			enforce: 'pre',
+			apply: 'build',
+		},
 		AutoImport({
-			include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
-
+			/* options */
 			imports: [
-				"vue",
-				"vue-router",
+				'vue',
+				'pinia',
 				{
-					"@vueuse/core": ["useMouse", ["useFetch", "useMyFetch"]],
-					axios: [["default", "axios"]],
-					"[package-name]": ["[import-names]", ["[from]", "[alias]"]],
+					vuefire: ['useCollection', 'useDocument', 'useFirestore'],
+					'vue-router': ['RouterView', 'useRoute', 'useRouter'],
+					'firebase/firestore': [
+						'collection',
+						'addDoc',
+						'getDocs',
+						'setDoc',
+						'doc',
+					],
 				},
+				{ '@/services/UserService': ['useUserService'] },
 			],
-
-			defaultExportByFilename: false,
-
-			dirs: ["./partials", "./components", "./components/**"],
-			dts: "./auto-imports.d.ts",
-			vueTemplate: false,
-
-			resolvers: [],
-			eslintrc: {
-				enabled: false, // Default `false`
-				filepath: "./.eslintrc-auto-import.json", // Default `./.eslintrc-auto-import.json`
-				globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
-			},
+			dirs: ['src/services'],
+			dts: true,
 		}),
 		Components({
-			dts: true,
-			types: [
-				{
-					from: "vue-router",
-					names: ["RouterLink", "RouterView"],
-				},
+			dirs: [
+				'src/views',
+				'src/components',
+				'src/views/pages',
+				'src/partials',
 			],
+			dts: true,
 		}),
 	],
 	resolve: {
 		alias: {
-			"@": fileURLToPath(new URL("./src", import.meta.url)),
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},
 	},
 });
