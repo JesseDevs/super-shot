@@ -4,11 +4,12 @@ button {
 }
 
 input,
-textarea {
-	border-radius: 50px;
+textarea,
+select {
+
 	width: 100%;
 	font-family: "Montserrat", sans-serif;
-	padding: 10px 20px;
+	padding: 10px 15px;
 	font-size: 1.1rem;
 	border: 1px solid var(--support);
 	outline: none;
@@ -18,23 +19,31 @@ textarea {
 input:focus,
 textarea:focus {
 	border: 1px solid var(--support);
-	outline: 1px solid var(--support);
 }
 
 textarea {
 	min-height: 100px;
 }
 
-input:focus+span.input-helper,
-select:focus+span.input-helper,
-textarea:focus+span.input-helper {
-	right: 0%;
-	bottom: 0%;
+
+.custom-select {
+	display: inline-block;
+	padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+	border: 1px solid var(--support);
+	line-height: 1.5;
+	color: #495057;
+	vertical-align: middle;
+	background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+	background-size: 8px 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
-input:hover {
-	border-color: var(--color);
+.custom-select::-ms-expand {
+	display: none;
 }
+
 
 .button {
 	font-size: 15px;
@@ -77,6 +86,7 @@ input:hover {
 	user-select: none;
 	-webkit-user-select: none;
 	touch-action: manipulation;
+	font-size: var(--step--2);
 }
 
 @media (min-width: 768px) {
