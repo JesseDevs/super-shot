@@ -40,7 +40,7 @@ const router = createRouter({
 				},
 				{
 					path: ":slug",
-					name: "menu/detail",
+					name: "category detail",
 					component: MenuDetailView,
 					children: [
 						{
