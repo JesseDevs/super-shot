@@ -1,29 +1,29 @@
 <script setup>
-	import { reactive, ref } from "vue";
-	import { useFirestore, useCollection } from "vuefire";
-	import { collection, doc, addDoc, deleteDoc, setDoc } from "firebase/firestore";
+	import { reactive, ref } from 'vue';
+	import { useFirestore, useCollection } from 'vuefire';
+	import { collection, doc, addDoc, deleteDoc, setDoc } from 'firebase/firestore';
 
-	defineProps(["pageData"]);
+	defineProps(['pageData']);
 
 	const db = useFirestore();
-	const categories = useCollection(collection(db, "categories"));
+	const categories = useCollection(collection(db, 'categories'));
 
 	const form = reactive({
-		title: "",
+		title: '',
 	});
 
 	const editing = ref(false);
 
 	function addCategory() {
-		addDoc(collection(db, "categories"), {
+		addDoc(collection(db, 'categories'), {
 			title: form.title,
 		});
-		form.title = "";
+		form.title = '';
 	}
 
 	async function removeCategory(docID) {
-		const record = doc(db, "categories", docID);
-		if (confirm("Are you sure?")) {
+		const record = doc(db, 'categories', docID);
+		if (confirm('Are you sure?')) {
 			await deleteDoc(record);
 		}
 	}
@@ -33,7 +33,7 @@
 	}
 
 	function updateCategory(id, c) {
-		setDoc(doc(db, "categories", id), {
+		setDoc(doc(db, 'categories', id), {
 			title: c,
 		});
 		clearEdit();
