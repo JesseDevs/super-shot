@@ -1,30 +1,40 @@
 <script setup>
-	import { useCategoryService } from "@/services/CategoryService";
-	const categoryService = useCategoryService();
+	import CategoryForm from '@/partials/CategoryForm.vue';
+	import ProductForm from '@/partials/ProductForm.vue';
+
+	const createWhat = ref('');
+	const formIntroClass = computed(function () {
+		if (createWhat === '') {
+			return 'form-intro';
+		}
+		return '';
+	});
 </script>
 
 <template>
 	<create-thing>
-		<h2 class="chant-voice">Create A Category</h2>
-
-		<form class="main-form" autocomplete="off" @submit.prevent="categoryService.addCategory()">
-			<div class="form-field">
-				<label for="title">Title?</label>
-				<input id="title" type="text" required v-model="categoryService.form.title" />
+		<div :class="`choose-path ${formIntroClass}`">
+			<h2 class="chant-voice">Create?</h2>
+			<div class="wrapper">
+				<div class="custom-input create-category">
+					<input type="radio" id="category" value="category" v-model="createWhat" />
+					<label for="category">Category</label>
+				</div>
+				<div class="custom-input create-product">
+					<input type="radio" id="product" v-model="createWhat" value="product" />
+					<label for="product">Product</label>
+				</div>
 			</div>
+		</div>
 
-			<div class="form-field">
-				<label for="info">Info blurb?</label>
-				<input id="info" type="text" required v-model="categoryService.form.info" />
-			</div>
+		<transition name="fade" appear>
+			<CategoryForm v-if="createWhat === 'category'" />
+		</transition>
 
-			<div class="form-field">
-				<label for="image">Image URL?</label>
-				<input id="image" type="text" required v-model="categoryService.form.imageURL" />
-			</div>
+		<transition name="fade" appear>
+			<ProductForm v-if="createWhat === 'product'" />
+		</transition>
 
-			<button class="button" type="submit">Add</button>
-		</form>
 		<!-- 
 		<ul>
 			<li v-for="category in categoryService.sortedList">
@@ -42,9 +52,61 @@
 	</create-thing>
 </template>
 <style lang="scss">
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: all 0.3s ease-in-out;
+	}
+	.fade-enter,
+	.fade-leave-to {
+		opacity: 0;
+		transform: translateX(-150px);
+	}
+
 	create-thing {
 		display: block;
 		max-width: 450px;
+		position: relative;
+
+		// form.main-form {
+		// 	position: absolute;
+		// 	width: 100%;
+		// 	height: 100%;
+		// 	top: 100px;
+		// 	left: 0;
+		// }
+
+		h2 {
+			text-align: center;
+		}
+
+		.wrapper {
+			display: flex;
+			padding: 4px;
+			// background-color: var(--off-color-mute);
+		}
+
+		.custom-input {
+			flex-grow: 1;
+		}
+
+		.custom-input input[type='radio'] {
+			display: none;
+		}
+
+		.custom-input label {
+			display: block;
+			padding: 6px 8px;
+			color: black;
+			font-weight: bold;
+			text-align: center;
+			transition: all 0.4s 0s ease;
+		}
+
+		.custom-input input[type='radio']:checked + label {
+			background-color: #f5f5f5;
+			color: #000;
+			border-radius: 4px;
+		}
 	}
 
 	form.main-form {
@@ -55,7 +117,8 @@
 	div.form-field {
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 3px;
+		padding: 8px;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
@@ -70,14 +133,27 @@
 		}
 
 		select {
-			appearance: none;
 			border: 1px solid black;
+			height: 100%;
+			width: 100%;
 		}
 
 		label {
 			text-align: left;
 			font-weight: 500;
-			padding-left: 25px;
+			padding-left: 8px;
+		}
+
+		&:hover {
+			background-color: rgba(var(--color-soft-rgb), 0.3);
+		}
+
+		&:hover :is(input, textarea, select) {
+			border-color: var(--color);
+		}
+
+		:is(input, textarea, select):focus {
+			box-shadow: 0 0 0 0.2rem rgba(233, 110, 76, 0.25);
 		}
 	}
 </style>
