@@ -1,20 +1,20 @@
 <script setup>
-	import { reactive } from "vue";
-	import { useMenuStore } from "@/stores/menu";
-	import slugid from "slugid";
+	import { reactive } from 'vue';
+	import { useMenuStore } from '@/stores/menu';
+	import slugid from 'slugid';
 
 	const menu = useMenuStore();
 
 	const product = reactive({
-		name: "",
-		age: "",
+		name: '',
+		age: '',
 	});
 
 	function save() {
 		const record = {
 			id: slugid.nice(),
 			name: product.name,
-			slug: product.name.toLowerCase().replace(/ /g, "-"),
+			slug: product.name.toLowerCase().replace(/ /g, '-'),
 			desc: product.desc,
 			category: product.category.toLowerCase(),
 			image: product.imageURL,
@@ -24,7 +24,7 @@
 	}
 
 	function clear() {
-		product.name = "";
+		product.name = '';
 	}
 </script>
 
@@ -32,7 +32,6 @@
 	<form class="main-form" autocomplete="off" @submit.prevent="save()">
 		<div class="form-field">
 			<label for="x">Name?</label>
-
 			<input id="x" type="text" required v-model="product.name" />
 		</div>
 		<div class="form-field">
