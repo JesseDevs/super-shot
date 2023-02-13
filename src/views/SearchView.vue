@@ -1,19 +1,22 @@
 <script setup>
-	import { ref, computed } from "vue";
-	import { useMenuStore } from "@/stores/menu";
-	import ModuleThing from "../components/ModuleThing.vue";
+	import { ref, computed } from 'vue';
+	import ModuleThing from '../components/ModuleThing.vue';
+	import { useProductsService } from '@/services/ProductsService';
 
-	const menu = useMenuStore();
-
-	let searchString = ref("");
+	const p = useProductsService();
+	let searchString = ref('');
 
 	const filtered = computed(function () {
-		return menu.products.filter(function (item) {
-			var itemVariable = item.name.toUpperCase();
-			return itemVariable.includes(searchString.value.toUpperCase());
-		});
+		if (searchString.value.length > 1) {
+			return p.list.filter(function (item) {
+				var itemVariable = item.name.toUpperCase();
+				return itemVariable.includes(searchString.value.toUpperCase());
+			});
+		}
+		return p.list;
 	});
-	defineProps(["pageData"]);
+
+	defineProps(['pageData']);
 </script>
 
 <template>
@@ -24,22 +27,49 @@
 
 				<form action="">
 					<div class="form-field">
-						<label class="calm-voice" for="search">Enter Product</label>
-						<input type="text" id="search" v-model="searchString" />
+						<label
+							class="calm-voice"
+							for="search"
+							>Enter Product</label
+						>
+						<input
+							type="text"
+							id="search"
+							v-model="searchString"
+						/>
 					</div>
 				</form>
-				<h5 class="strict-voice" v-if="searchString !== ''">Results for {{ searchString }}</h5>
-				<h5 class="strict-voice" v-else>Results for All Products</h5>
+				<h5
+					class="strict-voice"
+					v-if="searchString !== ''"
+				>
+					Results for {{ searchString }}
+				</h5>
+				<h5
+					class="strict-voice"
+					v-else
+				>
+					Results for All Products
+				</h5>
 			</search-div>
-			<ul class="main-grid">
+			<ul
+				v-if="p.list"
+				class="main-grid"
+			>
 				<li v-for="product in filtered">
 					<RouterLink :to="`menu/${product.category}/${product.id}`">
 						<general-card>
 							<picture class="item-picture">
-								<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
+								<img
+									:src="`${product.imageURL}`"
+									alt="iced"
+									loading="lazy"
+								/>
 							</picture>
 							<div class="name-highlight">
-								<span class="small-voice">{{ product.name.toUpperCase() }}</span>
+								<span class="small-voice">{{
+									product.name.toUpperCase()
+								}}</span>
 							</div>
 						</general-card>
 					</RouterLink>
