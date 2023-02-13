@@ -1,10 +1,10 @@
 <script setup>
-	import LoginModal from "../components/LoginModal.vue";
-	import { onMounted } from "vue";
-	import { getAuth, updateProfile } from "@firebase/auth";
-	import { reactive } from "vue";
-	import { useUserService } from "@/services/UserService";
-	import { useFirebaseAuth } from "vuefire";
+	import LoginModal from '../components/LoginModal.vue';
+	import { onMounted } from 'vue';
+	import { getAuth, updateProfile } from '@firebase/auth';
+	import { reactive } from 'vue';
+	import { useUserService } from '@/services/UserService';
+	import { useFirebaseAuth } from 'vuefire';
 
 	const user = useUserService();
 
