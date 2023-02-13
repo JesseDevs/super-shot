@@ -28,9 +28,11 @@ html {
 	--page-support: rgb(242, 230, 206);
 
 	--color: #c36b54;
-	--color-soft: #edbfb0;
+	--color-soft: rgb(237, 191, 176);
+	--color-soft-rgb: 237, 191, 176;
 	--color-mute: rgb(199 123 100);
 	--color-dark: rgb(144, 83, 69);
+
 
 	--off-color: #91577C;
 	--off-color-mute: #AA889B;
