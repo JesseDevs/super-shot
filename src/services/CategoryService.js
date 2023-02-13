@@ -1,7 +1,10 @@
-import { reactive, ref } from "vue";
-import { useFirestore, useCollection } from "vuefire";
-import { collection, doc, addDoc, deleteDoc, setDoc, query, orderBy } from "firebase/firestore";
+import { reactive, ref, computed } from "vue";
+import { useFirestore, useCollection, useDocument } from "vuefire";
+import { collection, doc, addDoc, deleteDoc, setDoc, query, orderBy, where, limit } from "firebase/firestore";
 import { defineStore } from "pinia";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 export const useCategoryService = defineStore("categories", function () {
 	const db = useFirestore();
@@ -10,6 +13,11 @@ export const useCategoryService = defineStore("categories", function () {
 	const categoriesData = collection(db, "categories");
 	const sorted = query(categoriesData, orderBy("title"));
 	const sortedList = useCollection(sorted);
+
+	// const selectedCategory = computed(function () {
+	// 	return query(categoriesData, where("slug", "==", route.params.slug), limit(1));
+	// });
+	// const current = useDocument(selectedCategory);
 
 	// Add category data
 	const editing = ref(false);
