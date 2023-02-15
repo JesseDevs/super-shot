@@ -20,40 +20,36 @@
 </script>
 
 <template>
-	<section>
-		<inner-column>
-			<search-div v-if="p">
-				<module-thing>
-					<h1 class="strict-voice">{{ pageData.title }}</h1>
+	<search-div v-if="p">
+		<module-thing>
+			<h1 class="loud-voice">{{ pageData.title }}</h1>
 
-					<p class="intro">{{ pageData.subHeading }}</p>
-				</module-thing>
+			<p class="intro">{{ pageData.subHeading }}</p>
+		</module-thing>
 
-				<form action="">
-					<div class="form-field">
-						<label class="calm-voice" for="search">Enter Product</label>
-						<input type="text" id="search" v-model="searchString" />
+		<form action="">
+			<div class="form-field">
+				<label class="calm-voice" for="search">Enter Product</label>
+				<input type="text" id="search" v-model="searchString" />
+			</div>
+		</form>
+		<h5 class="strict-voice" v-if="searchString !== ''">Results for {{ searchString }}</h5>
+		<h5 class="strict-voice" v-else>Results for All Products</h5>
+	</search-div>
+	<ul class="main-grid">
+		<li v-for="product in filtered">
+			<RouterLink :to="`menu/${product.category}/${product.id}`">
+				<general-card>
+					<picture class="item-picture">
+						<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
+					</picture>
+					<div class="name-highlight">
+						<span class="small-voice">{{ product.name.toUpperCase() }}</span>
 					</div>
-				</form>
-				<h5 class="strict-voice" v-if="searchString !== ''">Results for {{ searchString }}</h5>
-				<h5 class="strict-voice" v-else>Results for All Products</h5>
-			</search-div>
-			<ul class="main-grid">
-				<li v-for="product in filtered">
-					<RouterLink :to="`menu/${product.category}/${product.id}`">
-						<general-card>
-							<picture class="item-picture">
-								<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
-							</picture>
-							<div class="name-highlight">
-								<span class="small-voice">{{ product.name.toUpperCase() }}</span>
-							</div>
-						</general-card>
-					</RouterLink>
-				</li>
-			</ul>
-		</inner-column>
-	</section>
+				</general-card>
+			</RouterLink>
+		</li>
+	</ul>
 </template>
 
 <style lang="scss">
