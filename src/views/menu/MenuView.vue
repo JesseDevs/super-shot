@@ -15,7 +15,7 @@
 		<!-- <ReturnNav v-if="route.path !== '/menu'" /> -->
 
 		<module-thing v-if="route.name === 'menu/list'">
-			<h1 class="attemtion-voice">{{ pageData.title }}</h1>
+			<h1 class="loud-voice">{{ pageData.title }}</h1>
 
 			<p class="intro">
 				{{ pageData.subHeading }}

@@ -1,10 +1,10 @@
 <script setup>
-	import { computed, watch } from "vue";
-	import { RouterLink } from "vue-router";
-	import { useInterfaceStore } from "@/stores/interface";
-	import { useCartStore } from "../stores/cart";
-	import SvgIcon from "@/partials/SvgIcon.vue";
-	import { useUserService } from "@/services/UserService";
+	import { computed, watch } from 'vue';
+	import { RouterLink } from 'vue-router';
+	import { useInterfaceStore } from '@/stores/interface';
+	import { useCartStore } from '../stores/cart';
+	import SvgIcon from '@/partials/SvgIcon.vue';
+	import { useUserService } from '@/services/UserService';
 
 	const user = useUserService();
 	const ui = useInterfaceStore();
@@ -27,7 +27,7 @@
 			<button class="tiny-button" to="/rewards">Sign Out</button>
 		</actions-block>
 		<p class="tiny-voice">
-			Not a Dunkin' Rewards memeber?
+			Not a Dunkin’ Rewards memeber?
 			<RouterLink class="tiny-voice" to="/rewards">Learn More</RouterLink>
 		</p>
 		<div class="strict-voice cart-container" @click="ui.toggleCart()">
@@ -90,7 +90,7 @@
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
-			padding: 13px 1.5rem;
+			padding: 7px 1.5rem;
 			gap: 8px;
 			border-bottom: 2px solid var(--support-light);
 
@@ -101,6 +101,10 @@
 			actions-block {
 				margin-top: auto;
 				margin-right: 20px;
+			}
+
+			.contains-svg {
+				height: 25px;
 			}
 		}
 	}

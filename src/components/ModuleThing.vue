@@ -18,7 +18,7 @@
 </script>
 <template v-if="current">
 	<module-thing v-if="route.name === 'category-detail'">
-		<h1 class="strict-voice">{{ current[0].title }}</h1>
+		<h1 class="loud-voice">{{ current[0].title }}</h1>
 
 		<p class="intro">{{ current[0].info }}</p>
 	</module-thing>

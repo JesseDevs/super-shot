@@ -1,11 +1,11 @@
 <script setup>
-	import { ref } from "vue";
-	import { RouterLink, useRoute } from "vue-router";
-	import { useInterfaceStore } from "@/stores/interface";
-	import { useCartStore } from "../stores/cart";
-	import burger from "@/assets/images/burger-icon.vue";
-	import SvgIcon from "@/partials/SvgIcon.vue";
-	import SignInBlock from "@/components/SignInBlock.vue";
+	import { ref } from 'vue';
+	import { RouterLink, useRoute } from 'vue-router';
+	import { useInterfaceStore } from '@/stores/interface';
+	import { useCartStore } from '../stores/cart';
+	import burger from '@/assets/images/burger-icon.vue';
+	import SvgIcon from '@/partials/SvgIcon.vue';
+	import SignInBlock from '@/components/SignInBlock.vue';
 
 	const ui = useInterfaceStore();
 	const route = useRoute();
@@ -20,7 +20,9 @@
 					<burger />
 				</button>
 
-				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
+				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/"
+					><span class="main-color">Dunkin</span><span class="off-color">’ </span></RouterLink
+				>
 
 				<div class="strict-voice cart-container" @click="ui.toggleCart()">
 					<SvgIcon icon="basket" />
@@ -42,7 +44,9 @@
 					</li>
 
 					<li class="logo">
-						<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/">LOGO.</RouterLink>
+						<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/"
+							><span class="main-color">Dunkin</span><span class="off-color">’</span></RouterLink
+						>
 					</li>
 
 					<li>
@@ -51,8 +55,8 @@
 						>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/profile"
-							>Profile</RouterLink
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/rewards"
+							>Rewards</RouterLink
 						>
 					</li>
 					<li v-if="ui.mainMenuOpen">
@@ -216,7 +220,7 @@
 			height: 100vh;
 			width: 100%;
 			z-index: 10;
-			top: 76px;
+			top: 60px;
 			ul {
 				display: flex;
 				height: 80%;

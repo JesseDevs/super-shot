@@ -1,5 +1,5 @@
 <script setup>
-	defineProps(["pageData"]);
+	defineProps(['pageData']);
 </script>
 
 <template>
@@ -126,9 +126,9 @@
 		}
 		img {
 			transition: scale 200ms ease-in-out;
-			&:hover {
-				scale: 1.1;
-			}
+		}
+		&:hover img {
+			scale: 1.1;
 		}
 	}
 

@@ -22,7 +22,7 @@
 <template>
 	<detail-block v-if="current">
 		<module-thing v-if="route.name !== 'menu/product-detail'">
-			<h1 class="strict-voice">{{ current[0].title }}</h1>
+			<h1 class="attention-voice">{{ current[0].title }}</h1>
 
 			<p class="intro">{{ current[0].info }}</p>
 		</module-thing>
