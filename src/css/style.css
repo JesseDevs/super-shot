@@ -4,6 +4,16 @@
 @import 'typography.css';
 @import 'components.css';
 
+.main-color {
+	color: var(--color);
+	font-weight: 700;
+}
+
+.off-color {
+	color: var(--off-color);
+	font-weight: 700;
+}
+
 .main-grid {
 	display: flex;
 	flex-direction: column;
