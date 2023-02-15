@@ -1,7 +1,7 @@
 <script setup>
-	import CategoryCard from "@/components/CategoryCard.vue";
+	import CategoryCard from '@/components/CategoryCard.vue';
 
-	defineProps(["categories"]);
+	defineProps(['categories']);
 </script>
 
 <template>

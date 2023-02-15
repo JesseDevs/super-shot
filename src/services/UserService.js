@@ -1,45 +1,45 @@
-import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { defineStore } from 'pinia';
+import { reactive } from 'vue';
 
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
 	signOut as fbSignOut,
 	signInWithEmailAndPassword,
-} from "firebase/auth";
+} from 'firebase/auth';
 
-import { useCurrentUser } from "vuefire";
-import { firebaseApp } from "@/firebase";
-import { collection, addDoc } from "firebase/firestore";
-import { useFirestore } from "vuefire";
+import { useCurrentUser } from 'vuefire';
+import { firebaseApp } from '@/firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import { useFirestore } from 'vuefire';
 const db = useFirestore();
 
-export const useUserService = defineStore("user", function () {
+export const useUserService = defineStore('user', function () {
 	const auth = getAuth();
 
 	const current = useCurrentUser();
 
 	const form = reactive({
-		firstName: "",
-		lastName: "",
-		email: "",
-		password: "",
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: '',
 	});
 
 	function clearForm() {
-		form.firstName = "";
-		form.lastName = "";
-		form.email = "";
-		form.password = "";
+		form.firstName = '';
+		form.lastName = '';
+		form.email = '';
+		form.password = '';
 	}
 
 	function signUp(email, password) {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(async (userCredential) => {
-				console.log("user.signUp");
+				console.log('user.signUp');
 				// clearForm(form);
 
-				await addDoc(collection(db, "users"), {
+				await addDoc(collection(db, 'users'), {
 					// Add a new document with a generated id.
 					authUid: userCredential.user.uid,
 					roles: {
@@ -55,7 +55,7 @@ export const useUserService = defineStore("user", function () {
 	function signIn(email, password) {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
-				console.log("user.signIn");
+				console.log('user.signIn');
 				clearForm();
 			})
 			.catch((error) => {
@@ -66,7 +66,7 @@ export const useUserService = defineStore("user", function () {
 	function signOut() {
 		fbSignOut(auth)
 			.then(() => {
-				console.log("user.signOut");
+				console.log('user.signOut');
 			})
 			.catch((error) => {
 				console.log(error);

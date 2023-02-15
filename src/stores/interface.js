@@ -1,20 +1,20 @@
-import { computed, ref } from "vue";
-import { defineStore } from "pinia";
+import { computed, ref } from 'vue';
+import { defineStore } from 'pinia';
 
-export const useInterfaceStore = defineStore("interface", function () {
+export const useInterfaceStore = defineStore('interface', function () {
 	const mainMenuOpen = ref(false);
 	const cartMenuOpen = ref(false);
 	const editProductMode = ref(false);
 	const bodyElement = ref(document.body);
 
 	function toggleBodyClass() {
-		bodyElement.value.classList.toggle("menu-open");
+		bodyElement.value.classList.toggle('menu-open');
 	}
 
 	const openMenu = computed(function () {
 		if (cartMenuOpen.value || mainMenuOpen.value) {
-			return "menu-open";
-		} else return "";
+			return 'menu-open';
+		} else return '';
 	});
 
 	function toggleEditMode() {
@@ -23,9 +23,9 @@ export const useInterfaceStore = defineStore("interface", function () {
 
 	const editModeClass = computed(() => {
 		if (editProductMode.value) {
-			return "edit-mode";
+			return 'edit-mode';
 		} else {
-			return "";
+			return '';
 		}
 	});
 
@@ -35,9 +35,9 @@ export const useInterfaceStore = defineStore("interface", function () {
 
 	const cartClass = computed(() => {
 		if (cartMenuOpen.value) {
-			return "cart-open";
+			return 'cart-open';
 		} else {
-			return "cart-close";
+			return 'cart-close';
 		}
 	});
 
@@ -57,9 +57,9 @@ export const useInterfaceStore = defineStore("interface", function () {
 
 	const menuClass = computed(() => {
 		if (mainMenuOpen.value) {
-			return "toggle-open";
+			return 'toggle-open';
 		} else {
-			return "toggle-close";
+			return 'toggle-close';
 		}
 	});
 

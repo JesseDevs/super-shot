@@ -1,41 +1,36 @@
-import { reactive, ref, computed } from "vue";
-import { useFirestore, useCollection, useDocument } from "vuefire";
-import { collection, doc, addDoc, deleteDoc, setDoc, query, orderBy, where, limit } from "firebase/firestore";
-import { defineStore } from "pinia";
-import { useRoute } from "vue-router";
+import { reactive, ref, computed } from 'vue';
+import { useFirestore, useCollection, useDocument } from 'vuefire';
+import { collection, doc, addDoc, deleteDoc, setDoc, query, orderBy, where, limit } from 'firebase/firestore';
+import { defineStore } from 'pinia';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-export const useCategoryService = defineStore("categories", function () {
+export const useCategoryService = defineStore('categories', function () {
 	const db = useFirestore();
 
 	// Get category data
-	const categoriesData = collection(db, "categories");
-	const sorted = query(categoriesData, orderBy("title"));
+	const categoriesData = collection(db, 'categories');
+	const sorted = query(categoriesData, orderBy('title'));
 	const sortedList = useCollection(sorted);
-
-	// const selectedCategory = computed(function () {
-	// 	return query(categoriesData, where("slug", "==", route.params.slug), limit(1));
-	// });
-	// const current = useDocument(selectedCategory);
 
 	// Add category data
 	const editing = ref(false);
 
 	const form = reactive({
-		title: "",
-		info: "",
-		imageURL: "",
+		title: '',
+		info: '',
+		imageURL: '',
 	});
 
 	function clearForm() {
-		form.title = "";
-		form.info = "";
-		form.imageURL = "";
+		form.title = '';
+		form.info = '';
+		form.imageURL = '';
 	}
 
 	function addCategory() {
-		addDoc(collection(db, "categories"), {
+		addDoc(collection(db, 'categories'), {
 			title: form.title,
 			info: form.info,
 			imageURL: form.imageURL,
@@ -44,8 +39,8 @@ export const useCategoryService = defineStore("categories", function () {
 	}
 
 	async function removeCategory(docID) {
-		const record = doc(db, "categories", docID);
-		if (confirm("Are you sure?")) {
+		const record = doc(db, 'categories', docID);
+		if (confirm('Are you sure?')) {
 			await deleteDoc(record);
 		}
 	}
@@ -55,7 +50,7 @@ export const useCategoryService = defineStore("categories", function () {
 	}
 
 	function updateCategory(id, c) {
-		setDoc(doc(db, "categories", id), {
+		setDoc(doc(db, 'categories', id), {
 			title: c,
 		});
 		clearEdit();

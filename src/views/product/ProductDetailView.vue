@@ -1,69 +1,68 @@
 <script setup>
-	import { computed, reactive, ref } from "vue";
-	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-	import { useCartStore } from "@/stores/cart";
-	import OptionsForm from "@/components/OptionsForm.vue";
-	import slugid from "slugid";
-	import { useInterfaceStore } from "@/stores/interface";
-
-	const cart = useCartStore();
+	import { computed, reactive, ref } from 'vue';
+	import { useRoute } from 'vue-router';
+	import { useCartStore } from '@/stores/cart';
+	import OptionsForm from '@/components/OptionsForm.vue';
+	import slugid from 'slugid';
+	import { useInterfaceStore } from '@/stores/interface';
+	import { useFirestore, useDocument } from 'vuefire';
+	import { doc, collection, query, where, limit } from 'firebase/firestore';
+	import { useProductsService } from '@/services/ProductsService';
 	const route = useRoute();
-	const menu = useMenuStore();
-	const ui = useInterfaceStore();
 
-	const product = computed(function () {
-		return menu.products.find(function (record) {
-			return record.id == route.params.id;
-		});
-	});
+	const p = useProductsService();
+	const currentP = query(p.productsData, where('slug', '==', route.params.id));
+	const product = useDocument(currentP);
 
-	const newAdditions = reactive({
-		size: "m",
-		dairy: "None",
-		flavor: "None",
-		sweet: "None",
-		bread: "Bagel",
-		miniDonut: "Glazed",
-	});
+	// const cart = useCartStore();
+	// const ui = useInterfaceStore();
 
-	const newID = computed(function () {
-		return slugid.nice();
-	});
+	// const newAdditions = reactive({
+	// 	size: 'm',
+	// 	dairy: 'None',
+	// 	flavor: 'None',
+	// 	sweet: 'None',
+	// 	bread: 'Bagel',
+	// 	miniDonut: 'Glazed',
+	// });
 
-	function saveNewProduct() {
-		ui.cartMenuOpen = true;
-		cart.itemAdded = true;
-		ui.toggleBodyClass();
-		let newRecord = { ...product.value, ...newAdditions, id: newID.value };
+	// const newID = computed(function () {
+	// 	return slugid.nice();
+	// });
 
-		cart.addItem(newRecord);
+	// function saveNewProduct() {
+	// 	ui.cartMenuOpen = true;
+	// 	cart.itemAdded = true;
+	// 	ui.toggleBodyClass();
+	// 	let newRecord = { ...product.value, ...newAdditions, id: newID.value };
 
-		localStorage.setItem("shoppingCart", JSON.stringify(cart.purchasingCart));
-	}
+	// 	cart.addItem(newRecord);
+
+	// 	localStorage.setItem('shoppingCart', JSON.stringify(cart.purchasingCart));
+	// }
 </script>
 
 <template>
 	<edit-block>
-		<landing-block>
+		<landing-block v-if="product">
 			<picture class="item-picture">
-				<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
+				<img :src="`${product[0].imageURL}`" alt="iced" loading="lazy" />
 			</picture>
 
 			<text-content>
-				<h5 class="chant-voice">{{ product.name }}</h5>
-				<p class="tag">{{ product.tagline }}</p>
+				<h5 class="chant-voice">{{ product[0].name }}</h5>
+				<p class="tag">{{ product[0].tagline }}</p>
 				<p class="intro">
-					{{ product.desc }}
+					{{ product[0].desc }}
 				</p>
 
 				<button class="button" @click="saveNewProduct()">
-					<span class="price"> ${{ product.price }}</span
+					<span class="price"> ${{ product[0].price }}</span
 					>Add to cart
 				</button>
 			</text-content>
 		</landing-block>
-		<OptionsForm />
+		<!-- <OptionsForm /> -->
 	</edit-block>
 </template>
 
@@ -134,7 +133,7 @@
 					position: absolute;
 					top: 0;
 					right: 0;
-					content: "";
+					content: '';
 					background-color: var(--black);
 					width: 1px;
 					height: 75vh;

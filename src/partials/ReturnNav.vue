@@ -1,8 +1,7 @@
 <script setup>
-	import { RouterLink, useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-	import SvgIcon from "@/partials/SvgIcon.vue";
-	import { useCategoryService } from "@/services/CategoryService";
+	import { RouterLink, useRoute } from 'vue-router';
+	import SvgIcon from '@/partials/SvgIcon.vue';
+	import { useCategoryService } from '@/services/CategoryService';
 
 	const route = useRoute();
 </script>

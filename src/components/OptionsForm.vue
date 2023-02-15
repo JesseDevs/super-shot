@@ -1,21 +1,19 @@
 <script setup>
-	import { computed, reactive } from "vue";
-	import { useRoute } from "vue-router";
-	import { useMenuStore } from "@/stores/menu";
-	import { useCartStore } from "@/stores/cart";
-	import SvgIcon from "@/partials/SvgIcon.vue";
-	import slugid from "slugid";
+	import { computed, reactive } from 'vue';
+	import { useRoute } from 'vue-router';
+	import { useCartStore } from '@/stores/cart';
+	import SvgIcon from '@/partials/SvgIcon.vue';
+	import slugid from 'slugid';
 
 	const cart = useCartStore();
 	const route = useRoute();
-	const menu = useMenuStore();
 
-	const sizes = ["s", "m", "l", "xl"];
-	const dairies = ["None", "Coconutmilk", "Oatmilk", " Whole Milk", "Skim Milk"];
-	const sweets = ["None", "Sugar"];
-	const flavors = ["None", "Caramel Swirl", "French Vanilla", "Mocha Swirl"];
-	const breads = ["Bagel", "Biscuit", "Croissant", "English Muffin"];
-	const miniDonuts = ["Glazed", "Cinnamon", "BlueBerry", "Chocolate", "Old Fashioned", "Jelly", "Powdered"];
+	const sizes = ['s', 'm', 'l', 'xl'];
+	const dairies = ['None', 'Coconutmilk', 'Oatmilk', ' Whole Milk', 'Skim Milk'];
+	const sweets = ['None', 'Sugar'];
+	const flavors = ['None', 'Caramel Swirl', 'French Vanilla', 'Mocha Swirl'];
+	const breads = ['Bagel', 'Biscuit', 'Croissant', 'English Muffin'];
+	const miniDonuts = ['Glazed', 'Cinnamon', 'BlueBerry', 'Chocolate', 'Old Fashioned', 'Jelly', 'Powdered'];
 
 	const product = computed(function () {
 		return menu.products.find(function (record) {
@@ -24,12 +22,12 @@
 	});
 
 	const newAdditions = reactive({
-		size: "m",
-		dairy: "None",
-		flavor: "None",
-		sweet: "None",
-		bread: "Bagel",
-		miniDonut: "Glazed",
+		size: 'm',
+		dairy: 'None',
+		flavor: 'None',
+		sweet: 'None',
+		bread: 'Bagel',
+		miniDonut: 'Glazed',
 	});
 </script>
 
@@ -149,7 +147,7 @@
 			border-radius: 50px;
 			cursor: pointer;
 			width: 100%;
-			font-family: "Sofia Sans", sans-serif;
+			font-family: 'Sofia Sans', sans-serif;
 			padding: 10px 20px;
 			font-size: 1rem;
 			border: 1.5px solid var(--support-soft);

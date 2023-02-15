@@ -1,5 +1,4 @@
 <script setup>
-	import LoginModal from '../components/LoginModal.vue';
 	import { onMounted } from 'vue';
 	import { getAuth, updateProfile } from '@firebase/auth';
 	import { reactive } from 'vue';
@@ -29,7 +28,6 @@
 			<button type="button" @click="user.signOut()">Sign Out</button>
 
 			<h1 class="loud-voice">Log In</h1>
-			<!-- <LoginModal msg="Log In" /> -->
 
 			<form
 				class="main-form"

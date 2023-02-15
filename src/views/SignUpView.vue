@@ -1,20 +1,20 @@
 <script setup>
-	import { ref } from "vue";
-	import { useUserService } from "@/services/UserService";
+	import { ref } from 'vue';
+	import { useUserService } from '@/services/UserService';
 	const user = useUserService();
 	const requirements = [
-		"8+ characters",
-		"Include upper and lowercase letters",
-		"Use at least one special character",
-		"Include at least one number",
+		'8+ characters',
+		'Include upper and lowercase letters',
+		'Use at least one special character',
+		'Include at least one number',
 	];
 
-	const passwordVisibility = ref("password");
+	const passwordVisibility = ref('password');
 	function togglePasswordVisibility() {
-		if (passwordVisibility.value == "password") {
-			passwordVisibility.value = "text";
+		if (passwordVisibility.value == 'password') {
+			passwordVisibility.value = 'text';
 		}
-		passwordVisibility.value = "password";
+		passwordVisibility.value = 'password';
 	}
 </script>
 

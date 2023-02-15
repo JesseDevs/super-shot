@@ -1,12 +1,10 @@
 <script setup>
-	import { computed, ref } from "vue";
-	import { useCartStore } from "../stores/cart";
-	import { useInterfaceStore } from "@/stores/interface";
-	import { useProfilesStore } from "../stores/Profiles";
-	import { useRoute } from "vue-router";
-	import SvgIcon from "@/partials/SvgIcon.vue";
+	import { computed, ref } from 'vue';
+	import { useCartStore } from '../stores/cart';
+	import { useInterfaceStore } from '@/stores/interface';
+	import { useRoute } from 'vue-router';
+	import SvgIcon from '@/partials/SvgIcon.vue';
 
-	const profiles = useProfilesStore();
 	const cart = useCartStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
@@ -20,9 +18,9 @@
 
 	const quantityModeClass = computed(() => {
 		if (quantityMode.value) {
-			return "quantity-mode";
+			return 'quantity-mode';
 		} else {
-			return "";
+			return '';
 		}
 	});
 
@@ -30,7 +28,7 @@
 		cart.purchasingCart.forEach(function (item, index) {
 			if (item.id === id) {
 				cart.purchasingCart.splice(index, 1);
-				route.push({ path: "/" });
+				route.push({ path: '/' });
 			}
 		});
 	}
@@ -41,19 +39,19 @@
 
 	function clear() {
 		cart.purchasingCart = [];
-		localStorage.setItem("shoppingCart", []);
+		localStorage.setItem('shoppingCart', []);
 	}
 
 	const itemAddedText = computed(function () {
 		if (cart.itemAdded) {
-			return "Item added!";
-		} else return "";
+			return 'Item added!';
+		} else return '';
 	});
 
 	const itemAddedClass = computed(function () {
 		if (cart.itemAdded) {
-			return "confirmation";
-		} else return "";
+			return 'confirmation';
+		} else return '';
 	});
 
 	setTimeout(function () {
@@ -147,7 +145,7 @@
 			padding-bottom: 20px;
 
 			&:after {
-				content: "";
+				content: '';
 				width: 150%;
 				height: 1px;
 				background-color: black;
@@ -203,7 +201,7 @@
 		li a {
 			padding: 10px;
 			&:after {
-				content: "";
+				content: '';
 				width: 150%;
 				height: 1px;
 				background-color: black;

@@ -1,12 +1,10 @@
 <script setup>
-	import { computed, ref } from "vue";
-	import { useCartStore } from "../stores/cart";
-	import { useInterfaceStore } from "@/stores/interface";
-	import SvgIcon from "../partials/SvgIcon.vue";
-	import { useProfilesStore } from "../stores/Profiles";
-	import { useRoute } from "vue-router";
+	import { computed, ref } from 'vue';
+	import { useCartStore } from '../stores/cart';
+	import { useInterfaceStore } from '@/stores/interface';
+	import SvgIcon from '../partials/SvgIcon.vue';
+	import { useRoute } from 'vue-router';
 
-	const profiles = useProfilesStore();
 	const cart = useCartStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
@@ -19,9 +17,9 @@
 
 	const quantityModeClass = computed(() => {
 		if (quantityMode.value) {
-			return "quantity-mode";
+			return 'quantity-mode';
 		} else {
-			return "";
+			return '';
 		}
 	});
 
@@ -39,7 +37,7 @@
 
 	function clear() {
 		cart.purchasingCart = [];
-		localStorage.setItem("shoppingCart", []);
+		localStorage.setItem('shoppingCart', []);
 	}
 </script>
 

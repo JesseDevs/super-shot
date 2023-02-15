@@ -1,11 +1,11 @@
 <script setup>
-	import { RouterView } from "vue-router";
-	import ReturnNav from "@/partials/ReturnNav.vue";
-	import ModuleThing from "@/components/ModuleThing.vue";
+	import { RouterView } from 'vue-router';
+	import ReturnNav from '@/partials/ReturnNav.vue';
+	import ModuleThing from '@/components/ModuleThing.vue';
 
-	import { useCategoryService } from "@/services/CategoryService";
-	import { useRoute } from "vue-router";
-	defineProps(["pageData"]);
+	import { useCategoryService } from '@/services/CategoryService';
+	import { useRoute } from 'vue-router';
+	defineProps(['pageData']);
 
 	const categories = useCategoryService();
 	const route = useRoute();
@@ -13,8 +13,14 @@
 <template>
 	<section>
 		<!-- <ReturnNav v-if="route.path !== '/menu'" /> -->
-		<!-- 
-		<ModuleThing v-if="route.name !== 'menu/detail/product-detail'" :pageData="pageData" /> -->
+
+		<module-thing v-if="route.name === 'menu/list'">
+			<h1 class="attemtion-voice">{{ pageData.title }}</h1>
+
+			<p class="intro">
+				{{ pageData.subHeading }}
+			</p>
+		</module-thing>
 
 		<RouterView :categories="categories.sortedList" />
 	</section>

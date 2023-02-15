@@ -1,9 +1,5 @@
 <script setup>
-	import { useProfilesStore } from "../stores/Profiles";
-	defineProps(["pageData"]);
-
-	const profiles = useProfilesStore();
-	const profile = profiles.currentUser;
+	defineProps(['pageData']);
 </script>
 
 <template>
