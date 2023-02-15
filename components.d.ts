@@ -8,13 +8,14 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AccountPage: typeof import('./src/views/profile/AccountPage.vue')['default']
+    BillingPage: typeof import('./src/views/profile/BillingPage.vue')['default']
     CartModal: typeof import('./src/components/CartModal.vue')['default']
     CategoryCard: typeof import('./src/components/CategoryCard.vue')['default']
-    CategoryForm: typeof import('./src/partials/CategoryForm.vue')['default']
     CheckoutView: typeof import('./src/views/CheckoutView.vue')['default']
     CreateCategoryView: typeof import('./src/views/create/CreateCategoryView.vue')['default']
     CreateProductView: typeof import('./src/views/create/CreateProductView.vue')['default']
     CreateView: typeof import('./src/views/create/CreateView.vue')['default']
+    FavoritesPage: typeof import('./src/views/profile/FavoritesPage.vue')['default']
     HomeView: typeof import('./src/views/HomeView.vue')['default']
     LandingView: typeof import('./src/views/LandingView.vue')['default']
     MenuDetailView: typeof import('./src/views/menu/MenuDetailView.vue')['default']
@@ -24,7 +25,6 @@ declare module '@vue/runtime-core' {
     MyErrorView: typeof import('./src/views/MyErrorView.vue')['default']
     OptionsForm: typeof import('./src/components/OptionsForm.vue')['default']
     ProductDetailView: typeof import('./src/views/product/ProductDetailView.vue')['default']
-    ProductForm: typeof import('./src/partials/ProductForm.vue')['default']
     ProductListView: typeof import('./src/views/product/ProductListView.vue')['default']
     ProfileView: typeof import('./src/views/profile/ProfileView.vue')['default']
     ReturnNav: typeof import('./src/partials/ReturnNav.vue')['default']
