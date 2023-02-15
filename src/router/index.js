@@ -8,6 +8,8 @@ import ProductDetailView from '../views/product/ProductDetailView.vue';
 import CreateCategoryView from '../views/create/CreateCategoryView.vue';
 import CreateProductView from '../views/create/CreateProductView.vue';
 import AccountPage from '../views/profile/AccountPage.vue';
+import BillingPage from '../views/profile/BillingPage.vue';
+import FavoritesPage from '../views/profile/FavoritesPage.vue';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +19,7 @@ const router = createRouter({
 			name: 'home',
 			props: {
 				pageData: {
-					title: "Dunkin' Rewards",
+					title: 'Dunkin’ Rewards',
 					subHeading: 'A NEW WAY TO RUN',
 				},
 			},
@@ -63,18 +65,16 @@ const router = createRouter({
 			path: '/create',
 			name: 'create',
 			component: CreateView,
-			children: [
-				{
-					path: '/category',
-					name: 'create/category',
-					component: CreateCategoryView,
-				},
-				{
-					path: '/product',
-					name: 'create/product',
-					component: CreateProductView,
-				},
-			],
+		},
+		{
+			path: '/create-category',
+			name: 'create-category',
+			component: CreateCategoryView,
+		},
+		{
+			path: '/create-product',
+			name: 'create-product',
+			component: CreateProductView,
 		},
 		{
 			path: '/checkout',
@@ -101,6 +101,16 @@ const router = createRouter({
 					path: '/profile/account',
 					name: 'account',
 					component: AccountPage,
+				},
+				{
+					path: '/profile/billing',
+					name: 'billing',
+					component: BillingPage,
+				},
+				{
+					path: '/profile/favorites',
+					name: 'favorites',
+					component: FavoritesPage,
 				},
 			],
 		},
