@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     FavoritesPage: typeof import('./src/views/profile/FavoritesPage.vue')['default']
     HomeView: typeof import('./src/views/HomeView.vue')['default']
     LandingView: typeof import('./src/views/LandingView.vue')['default']
+    LoginForm: typeof import('./src/components/LoginForm.vue')['default']
     MenuDetailView: typeof import('./src/views/menu/MenuDetailView.vue')['default']
     MenuListView: typeof import('./src/views/menu/MenuListView.vue')['default']
     MenuView: typeof import('./src/views/menu/MenuView.vue')['default']
