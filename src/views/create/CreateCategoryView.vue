@@ -1,40 +1,42 @@
 <script setup>
-	import CategoryForm from '@/partials/CategoryForm.vue';
-	import ProductForm from '@/partials/ProductForm.vue';
-
-	const createWhat = ref('');
-	const formIntroClass = computed(function () {
-		if (createWhat === '') {
-			return 'form-intro';
-		}
-		return '';
-	});
+	import { useCategoryService } from '@/services/CategoryService';
+	const categoryService = useCategoryService();
 </script>
 
 <template>
-	<create-thing>
-		<div :class="`choose-path ${formIntroClass}`">
-			<h2 class="chant-voice">Create?</h2>
-			<div class="wrapper">
-				<div class="custom-input create-category">
-					<input type="radio" id="category" value="category" v-model="createWhat" />
-					<label for="category">Category</label>
-				</div>
-				<div class="custom-input create-product">
-					<input type="radio" id="product" v-model="createWhat" value="product" />
-					<label for="product">Product</label>
-				</div>
-			</div>
+	<form class="main-form" autocomplete="off" @submit.prevent="categoryService.addCategory()">
+		<div class="form-field">
+			<label for="title">Title</label>
+			<input id="title" type="text" required v-model="categoryService.form.title" />
 		</div>
 
-		<transition name="fade" appear>
-			<CategoryForm v-if="createWhat === 'category'" />
-		</transition>
+		<div class="form-field">
+			<label for="info">Info Blurb</label>
+			<textarea id="info" type="text" required v-model="categoryService.form.info" />
+		</div>
 
-		<transition name="fade" appear>
-			<ProductForm v-if="createWhat === 'product'" />
-		</transition>
-	</create-thing>
+		<div class="form-field">
+			<label for="image">Image URL</label>
+			<input id="image" type="text" required v-model="categoryService.form.imageURL" />
+		</div>
+
+		<button class="button" type="submit">Add</button>
+	</form>
+
+	<!-- 
+		<ul>
+			<li v-for="category in categoryService.sortedList">
+				{{ category.title }}
+
+				<button @click="categoryService.removeCategory(category.id)" type="button">X</button>
+
+				<button @click="categoryService.editCategory(category.id)">Edit</button>
+
+				<div v-if="categoryService.editing === category.id" />
+				<input type="text" v-model="category.title" />
+				<button>Update</button>
+			</li>
+		</ul> -->
 </template>
 <style lang="scss">
 	.fade-enter-active,
@@ -51,14 +53,6 @@
 		display: block;
 		max-width: 450px;
 		position: relative;
-
-		// form.main-form {
-		// 	position: absolute;
-		// 	width: 100%;
-		// 	height: 100%;
-		// 	top: 100px;
-		// 	left: 0;
-		// }
 
 		h2 {
 			text-align: center;
