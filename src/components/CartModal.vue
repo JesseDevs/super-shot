@@ -264,4 +264,12 @@
 			border: 2px solid black;
 		}
 	}
+
+	@media (min-width: 1400px) {
+		cart-modal {
+			zoom: 0.8;
+			max-width: 400px;
+			right: 8vw;
+		}
+	}
 </style>
