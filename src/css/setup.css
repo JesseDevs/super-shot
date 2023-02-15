@@ -97,7 +97,9 @@ p a {
 	display: inline-block;
 	text-decoration: underline;
 	color: inherit;
-	transition: color 200ms ease-in-out;
+	font-size: inherit;
+
+	transition: background-color 200ms ease-in-out;
 }
 
 p a:hover {

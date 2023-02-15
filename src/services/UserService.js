@@ -17,7 +17,7 @@ const db = useFirestore();
 export const useUserService = defineStore('user', function () {
 	const auth = getAuth();
 	// User
-	const current = useCurrentUser();
+	const authUser = useCurrentUser();
 	// firebase auth
 	const userDoc = useDocument(doc(db, 'user', 'avNPhmV1Y2ZiMLhGUqa1WiGNIBp1'));
 
@@ -59,7 +59,8 @@ export const useUserService = defineStore('user', function () {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(async (userCredential) => {
 				console.log('user.signUp');
-				// clearForm(form);
+				alsoCreateUserDoc(userCredential.user.uid);
+				route.push({ path: '/profile' });
 
 				await addDoc(collection(db, 'users'), {
 					// Add a new document with a generated id.
@@ -74,18 +75,21 @@ export const useUserService = defineStore('user', function () {
 				});
 			})
 			.catch((error) => {
-				console.log(error.code, error.message);
+				console.log('code', error.code);
+				console.log('message', error.message);
 			});
 	}
 
-	function signIn(email, password) {
+	function signIn(form) {
+		const { email, password } = form;
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				console.log('user.signIn');
-				clearForm();
+				clearForm(form);
+				route.push({ path: '/profile' });
 			})
 			.catch((error) => {
-				console.log(error.code, error.message);
+				console.log('error:', error);
 			});
 	}
 
@@ -93,6 +97,7 @@ export const useUserService = defineStore('user', function () {
 		fbSignOut(auth)
 			.then(() => {
 				console.log('user.signOut');
+				route.push({ path: '/' });
 			})
 			.catch((error) => {
 				console.log(error);
@@ -100,7 +105,7 @@ export const useUserService = defineStore('user', function () {
 	}
 
 	const info = computed(async function () {
-		const idTokenResult = await current.value.getIdTokenResult();
+		const idTokenResult = await authUser.value.getIdTokenResult();
 		const customClaims = idTokenResult.claims;
 
 		return {
@@ -115,7 +120,7 @@ export const useUserService = defineStore('user', function () {
 		signUp,
 		signIn,
 		signOut,
-		current,
+		authUser,
 		form,
 	};
 });

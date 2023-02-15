@@ -21,15 +21,11 @@
 </script>
 
 <template>
-	<signin-block v-if="!user.current">
+	<signin-block v-if="user.authUser">
+		<h3 class="strict-voice">Hi, {{ user.authUser.email }}</h3>
 		<actions-block>
-			<RouterLink class="tiny-button" to="/sign-up">Sign Up</RouterLink>
 			<button class="tiny-button" to="/rewards">Sign Out</button>
 		</actions-block>
-		<p class="tiny-voice">
-			Not a Dunkin’ Rewards memeber?
-			<RouterLink class="tiny-voice" to="/rewards">Learn More</RouterLink>
-		</p>
 		<div class="strict-voice cart-container" @click="ui.toggleCart()">
 			<SvgIcon icon="basket" />
 			<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
@@ -39,10 +35,14 @@
 	</signin-block>
 
 	<signin-block v-else>
-		<h3 class="strict-voice">Hi, User</h3>
 		<actions-block>
+			<RouterLink class="tiny-button" to="/sign-up">Sign Up</RouterLink>
 			<button class="tiny-button" to="/rewards">Sign Out</button>
 		</actions-block>
+		<p class="tiny-voice">
+			Not a Dunkin’ Rewards memeber?
+			<RouterLink class="tiny-voice" to="/rewards">Learn More</RouterLink>
+		</p>
 		<div class="strict-voice cart-container" @click="ui.toggleCart()">
 			<SvgIcon icon="basket" />
 			<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
