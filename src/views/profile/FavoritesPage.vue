@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-	<h1>Account PAge</h1>
+	<h1>Favorites</h1>
 </template>
 
 <style lang="scss"></style>
