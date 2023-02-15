@@ -1,27 +1,26 @@
 <script setup>
-	import { useRoute } from "vue-router";
-	import { useFirestore, useDocument } from "vuefire";
-	import { doc } from "@firebase/firestore";
+	import { useRoute } from 'vue-router';
+	import { useFirestore, useDocument } from 'vuefire';
+	import { doc, collection, query, where, limit } from 'firebase/firestore';
+	import { useCategoryService } from '@/services/CategoryService';
+	defineProps(['pageData']);
 
 	const route = useRoute();
-	const db = useFirestore();
-	const category = useDocument(doc(db, "categories", "coffee"));
+	console.log(route.params);
+	const c = useCategoryService();
 
-	defineProps(["pageData"]);
+	const selectedCategory = computed(() => {
+		const slug = route.params.slug;
+		console.log(slug);
+		return query(c.categoriesData, where('slug', '==', slug));
+	});
+	const current = useDocument(selectedCategory.value);
 </script>
-<template>
-	<module-thing v-if="route.name === 'menu/detail/product-list'">
-		<h1 class="strict-voice">{{ category.title }}</h1>
+<template v-if="current">
+	<module-thing v-if="route.name === 'category-detail'">
+		<h1 class="strict-voice">{{ current[0].title }}</h1>
 
-		<p class="intro">{{ category.info }}</p>
-	</module-thing>
-
-	<module-thing v-else>
-		<h1 class="attemtion-voice">{{ pageData.title }}</h1>
-
-		<p class="intro">
-			{{ pageData.subHeading }}
-		</p>
+		<p class="intro">{{ current[0].info }}</p>
 	</module-thing>
 </template>
 

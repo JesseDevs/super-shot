@@ -26,3 +26,18 @@
 		<button class="button" type="submit">Add</button>
 	</form>
 </template>
+
+<!-- 
+		<ul>
+			<li v-for="category in categoryService.sortedList">
+				{{ category.title }}
+
+				<button @click="categoryService.removeCategory(category.id)" type="button">X</button>
+
+				<button @click="categoryService.editCategory(category.id)">Edit</button>
+
+				<div v-if="categoryService.editing === category.id" />
+				<input type="text" v-model="category.title" />
+				<button>Update</button>
+			</li>
+		</ul> -->
