@@ -34,21 +34,6 @@
 		<transition name="fade" appear>
 			<ProductForm v-if="createWhat === 'product'" />
 		</transition>
-
-		<!-- 
-		<ul>
-			<li v-for="category in categoryService.sortedList">
-				{{ category.title }}
-
-				<button @click="categoryService.removeCategory(category.id)" type="button">X</button>
-
-				<button @click="categoryService.editCategory(category.id)">Edit</button>
-
-				<div v-if="categoryService.editing === category.id" />
-				<input type="text" v-model="category.title" />
-				<button>Update</button>
-			</li>
-		</ul> -->
 	</create-thing>
 </template>
 <style lang="scss">
