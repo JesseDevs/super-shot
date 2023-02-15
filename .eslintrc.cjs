@@ -7,17 +7,12 @@ module.exports = {
 	rules: {
 		'no-unused-vars': 'off',
 		'vue/require-v-for-key': 'off',
-	},
-	options: {
-		'prettier/prettier': [
-			'error',
-			{
-				singleQuote: true,
-				parser: 'flow',
-			},
-		],
+		'no-undef': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 'latest',
+	},
+	globals: {
+		vue: true,
 	},
 };
