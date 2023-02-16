@@ -3,7 +3,14 @@
 	import { useUserService } from '@/services/UserService';
 	import { useRoute } from 'vue-router';
 
+	defineProps({
+		buttonText: {
+			default: 'Sign In',
+		},
+	});
+
 	const route = useRoute();
+	const user = useUserService();
 	const requirements = [
 		'8+ characters',
 		'Include upper and lowercase letters',
@@ -11,18 +18,10 @@
 		'Include at least one number',
 	];
 
-	defineProps({
-		buttonText: {
-			default: 'Sign In',
-		},
-	});
-
 	const event = defineEmits(['formAction']);
 	function submit() {
 		event('formAction', form);
 	}
-
-	const user = useUserService();
 
 	const passwordVisibility = ref('password');
 	function togglePasswordVisibility() {
@@ -52,7 +51,7 @@
 				<label for="b">Password <span>*</span> </label>
 
 				<input id="b" :type="passwordVisibility" required v-model="user.form.password" />
-				<button @click="togglePasswordVisibility()">See Password</button>
+				<button type="button" @click="togglePasswordVisibility()">See Password</button>
 
 				<ul class="requirements" v-if="route.name === 'sign-up'">
 					<li v-for="x in requirements">

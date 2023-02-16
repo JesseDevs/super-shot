@@ -36,8 +36,8 @@
 
 	<signin-block v-else>
 		<actions-block>
+			<RouterLink class="tiny-button" to="/sign-in">Sign In</RouterLink>
 			<RouterLink class="tiny-button" to="/sign-up">Sign Up</RouterLink>
-			<button class="tiny-button" to="/rewards">Sign Out</button>
 		</actions-block>
 		<p class="tiny-voice">
 			Not a Dunkin’ Rewards memeber?
