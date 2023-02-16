@@ -12,7 +12,11 @@ import { useCurrentUser, useDocument } from 'vuefire';
 import { firebaseApp } from '@/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
+import { useRoute, useRouter } from 'vue-router';
 const db = useFirestore();
+
+const router = useRouter();
+const route = useRoute();
 
 export const useUserService = defineStore('user', function () {
 	const auth = getAuth();
@@ -56,23 +60,11 @@ export const useUserService = defineStore('user', function () {
 	}
 
 	function signUp(email, password) {
-		createUserWithEmailAndPassword(auth, email, password)
+		createUserWithEmailAndPassword(auth, form.email, form.password)
 			.then(async (userCredential) => {
 				console.log('user.signUp');
 				alsoCreateUserDoc(userCredential.user.uid);
 				route.push({ path: '/profile' });
-
-				await addDoc(collection(db, 'users'), {
-					// Add a new document with a generated id.
-					authUid: userCredential.user.uid,
-					email: form.email,
-					password: form.password,
-					firstName: form.firstName,
-					lastName: form.lastName,
-					roles: {
-						guest: true,
-					},
-				});
 			})
 			.catch((error) => {
 				console.log('code', error.code);
@@ -86,7 +78,7 @@ export const useUserService = defineStore('user', function () {
 			.then((userCredential) => {
 				console.log('user.signIn');
 				clearForm(form);
-				route.push({ path: '/profile' });
+				router.push(route.query.redirect || '/');
 			})
 			.catch((error) => {
 				console.log('error:', error);
