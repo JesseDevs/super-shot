@@ -5,15 +5,17 @@
 <template>
 	<!-- <picture class="reward-pic"> </picture> -->
 	<rewards-module>
-		<h1 class="yell-voice">
-			<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
-		</h1>
+		<module-thing>
+			<h1 class="yell-voice">
+				<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
+			</h1>
 
-		<p class="intro">
-			Runnin' has its rewards. Join <span class="main-color">Dunkin</span
-			><span class="off-color">’ Rewards</span> to earn your choice of free food and drinks, unlock Boosted
-			Status to earn points faster and score members-only exclusive offers.
-		</p>
+			<p class="intro">
+				Runnin' has its rewards. Join <span class="main-color">Dunkin</span
+				><span class="off-color">’ Rewards</span> to earn your choice of free food and drinks, unlock
+				Boosted Status to earn points faster and score members-only exclusive offers.
+			</p>
+		</module-thing>
 		<ul>
 			<li>
 				<reward-card>
@@ -58,7 +60,6 @@
 		justify-content: center;
 		text-align: center;
 		gap: 3vh;
-		margin-top: 4vh;
 
 		actions-block {
 			margin-top: 10px;
