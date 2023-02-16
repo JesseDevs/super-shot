@@ -11,6 +11,8 @@ import AccountPage from '../views/profile/AccountPage.vue';
 import BillingPage from '../views/profile/BillingPage.vue';
 import FavoritesPage from '../views/profile/FavoritesPage.vue';
 
+import { getCurrentUser } from 'vuefire';
+
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
@@ -65,16 +67,21 @@ const router = createRouter({
 			path: '/create',
 			name: 'create',
 			component: CreateView,
-		},
-		{
-			path: '/create-category',
-			name: 'create-category',
-			component: CreateCategoryView,
-		},
-		{
-			path: '/create-product',
-			name: 'create-product',
-			component: CreateProductView,
+			meta: { requireAuth: true },
+			children: [
+				{
+					path: '/create-category',
+					name: 'create-category',
+					component: CreateCategoryView,
+					meta: { requireAuth: true },
+				},
+				{
+					path: '/create-product',
+					name: 'create-product',
+					component: CreateProductView,
+					meta: { requireAuth: true },
+				},
+			],
 		},
 		{
 			path: '/checkout',
@@ -95,10 +102,11 @@ const router = createRouter({
 		{
 			path: '/profile',
 			name: 'profile',
+			meta: { requireAuth: true },
 			component: () => import('../views/profile/ProfileView.vue'),
 			children: [
 				{
-					path: '/profile/account',
+					path: '',
 					name: 'account',
 					component: AccountPage,
 				},
@@ -141,6 +149,22 @@ const router = createRouter({
 			component: () => import('../views/MyErrorView.vue'),
 		},
 	],
+});
+
+router.beforeEach(async (to) => {
+	if (to.meta.requiresAuth) {
+		const currentUser = await getCurrentUser();
+
+		if (!currentUser) {
+			return {
+				path: '/sign-in',
+				query: {
+					redirect: to.fullPath,
+				},
+			};
+		}
+	}
+	window.scrollTo(0, 0);
 });
 
 export default router;
