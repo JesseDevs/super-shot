@@ -10,36 +10,40 @@
 
 <template>
 	<create-thing>
-		<h2 class="chant-voice">Create?</h2>
-		<actions-block>
+		<h2 class="chant-voice">BUILD THE DATA</h2>
+		<actions-block class="create-actions">
 			<RouterLink class="small-voice" to="create-category">Category</RouterLink>
 			<RouterLink class="small-voice" to="create-product">Product</RouterLink>
 		</actions-block>
 	</create-thing>
+
+	<main class="outlet">
+		<RouterView />
+	</main>
 </template>
 <style lang="scss">
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: all 0.3s ease-in-out;
-	}
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
-		transform: translateX(-150px);
-	}
+	actions-block.create-actions {
+		background-color: var(--off-color);
+		color: var(--page);
+		gap: 30px;
+		padding: 5px;
+		a {
+			padding: 10px 25px;
+			transition: all 500ms ease-in-out;
+		}
 
+		.router-link-active {
+			background-color: rgba(245, 245, 245, 0.8);
+			color: black;
+		}
+	}
 	create-thing {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
 		max-width: 450px;
 		position: relative;
-
-		// form.main-form {
-		// 	position: absolute;
-		// 	width: 100%;
-		// 	height: 100%;
-		// 	top: 100px;
-		// 	left: 0;
-		// }
+		padding-bottom: 40px;
 
 		h2 {
 			text-align: center;
