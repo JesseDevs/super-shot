@@ -15,6 +15,9 @@ import { getCurrentUser } from 'vuefire';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
+	scrollBehavior(to, from, savedPosition) {
+		return { top: 0 };
+	},
 	routes: [
 		{
 			path: '/',
@@ -164,7 +167,6 @@ router.beforeEach(async (to) => {
 			};
 		}
 	}
-	window.scrollTo(0, 0);
 });
 
 export default router;
