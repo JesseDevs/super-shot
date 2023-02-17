@@ -14,13 +14,12 @@
 	const requirements = [
 		'8+ characters',
 		'Include upper and lowercase letters',
-		'Use at least one special character',
 		'Include at least one number',
 	];
 
 	const event = defineEmits(['formAction']);
 	function submit() {
-		event('formAction', form);
+		event('formAction', user.form);
 	}
 
 	const passwordVisibility = ref('password');
@@ -32,7 +31,7 @@
 <template>
 	<loginForm-block>
 		<form class="main-form" autocomplete="off" @submit.prevent="submit()">
-			<div class="form-field" v-if="route.name === 'sign-up'">
+			<!-- <div class="form-field" v-if="route.name === 'sign-up'">
 				<label for="fname">First Name <span>*</span> </label>
 
 				<input id="fname" type="text" required v-model="user.form.firstName" />
@@ -41,6 +40,11 @@
 				<label for="lname">Last Name <span>*</span> </label>
 
 				<input id="lname" type="text" required v-model="user.form.lastName" />
+			</div> -->
+			<div class="form-field" v-if="route.name === 'sign-up'">
+				<label for="username">Username <span>*</span> </label>
+
+				<input id="username" type="text" required v-model="user.form.lastName" />
 			</div>
 			<div class="form-field">
 				<label for="a">Email <span>*</span> </label>

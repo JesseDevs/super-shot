@@ -8,63 +8,60 @@ import {
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { useCurrentUser, useDocument } from 'vuefire';
+import { useCollection, useCurrentUser, useDocument } from 'vuefire';
 import { firebaseApp } from '@/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
 import { useRoute, useRouter } from 'vue-router';
-const db = useFirestore();
-
-const router = useRouter();
-const route = useRoute();
 
 export const useUserService = defineStore('user', function () {
 	const auth = getAuth();
-	// User
 	const authUser = useCurrentUser();
-	// firebase auth
-	const userDoc = useDocument(doc(db, 'user', 'avNPhmV1Y2ZiMLhGUqa1WiGNIBp1'));
+	const db = useFirestore();
 
-	async function alsoCreateUserDoc(authUser) {
-		// Add custom claims to the user's authentication token
-		await setCustomUserClaims(authUser.uid, {
-			roles: {
-				guest: true,
-			},
-			firstName: form.firstName,
-			lastName: form.lastName,
-		});
+	const userDoc = ref(null);
 
+	watch(authUser, async function (after, before) {
+		const id = authUser.value?.uid;
+
+		if (id) {
+			const found = doc(collection(db, 'users'), id);
+			const docSnap = await getDoc(found);
+			userDoc.value = docSnap.data();
+		} else {
+			console.log('id not ready');
+		}
+	});
+
+	const router = useRouter();
+	const route = useRoute();
+
+	function alsoCreateUserDoc(userId) {
 		// Create a new user document in Firestore
-		await setDoc(doc(db, 'user', authUser.uid), {
-			firstName: form.firstName,
-			lastName: form.lastName,
-			roles: {
-				guest: true,
-			},
+		setDoc(doc(db, 'users', userId), {
+			username: '',
 		});
 	}
 
 	const form = reactive({
-		firstName: '',
-		lastName: '',
 		email: '',
 		password: '',
+		username: '',
 	});
 
 	function clearForm() {
-		form.firstName = '';
-		form.lastName = '';
 		form.email = '';
 		form.password = '';
+		form.username = '';
 	}
 
 	function signUp(email, password) {
 		createUserWithEmailAndPassword(auth, form.email, form.password)
 			.then(async (userCredential) => {
-				console.log('user.signUp');
+				console.log('user.signUp', userCredential);
 				alsoCreateUserDoc(userCredential.user.uid);
-				route.push({ path: '/profile' });
+				clearForm(form);
+				router.push({ path: '/profile' });
 			})
 			.catch((error) => {
 				console.log('code', error.code);
@@ -89,7 +86,7 @@ export const useUserService = defineStore('user', function () {
 		fbSignOut(auth)
 			.then(() => {
 				console.log('user.signOut');
-				route.push({ path: '/' });
+				router.push({ path: '/' });
 			})
 			.catch((error) => {
 				console.log(error);
@@ -108,11 +105,19 @@ export const useUserService = defineStore('user', function () {
 		};
 	});
 
+	function changeUsername(newUsername) {
+		updateDoc(doc(db, 'users', authUser.value.uid), {
+			username: newUsername,
+		});
+	}
+
 	return {
 		signUp,
 		signIn,
 		signOut,
 		authUser,
 		form,
+		userDoc,
+		changeUsername,
 	};
 });

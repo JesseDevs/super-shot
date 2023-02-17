@@ -24,7 +24,7 @@
 	<signin-block v-if="user.authUser">
 		<h3 class="strict-voice">Hi, {{ user.authUser.email }}</h3>
 		<actions-block>
-			<button class="tiny-button" to="/rewards">Sign Out</button>
+			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>
 		</actions-block>
 		<div class="strict-voice cart-container" @click="ui.toggleCart()">
 			<SvgIcon icon="basket" />
@@ -36,8 +36,8 @@
 
 	<signin-block v-else>
 		<actions-block>
-			<RouterLink class="tiny-button" to="/sign-in">Sign In</RouterLink>
-			<RouterLink class="tiny-button" to="/sign-up">Sign Up</RouterLink>
+			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-in">Sign In</RouterLink>
+			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-up">Sign Up</RouterLink>
 		</actions-block>
 		<p class="tiny-voice">
 			Not a Dunkin’ Rewards memeber?

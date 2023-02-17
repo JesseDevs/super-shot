@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     SearchView: typeof import('./src/views/SearchView.vue')['default']
     SignInBlock: typeof import('./src/components/SignInBlock.vue')['default']
     SignInView: typeof import('./src/views/SignInView.vue')['default']
+    SignOutView: typeof import('./src/views/SignOutView.vue')['default']
     SignUpView: typeof import('./src/views/SignUpView.vue')['default']
     SiteFooter: typeof import('./src/partials/SiteFooter.vue')['default']
     SiteHeader: typeof import('./src/partials/SiteHeader.vue')['default']
