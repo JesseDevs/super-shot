@@ -4,25 +4,32 @@
 	const user = useUserService();
 
 	const form = reactive({
-		username: user.userDoc?.username,
+		username: 'user.userDoc?.username',
 	});
 
 	watch(user, function (a, b) {
-		form.username = user.userDoc?.username;
+		form.username = user?.username;
 	});
 
 	const editingUsername = ref(false);
 	function toggleUsernameEdit() {
 		editingUsername.value != editingUsername.value;
 	}
+	function updateUsername() {
+		if (user.changeUsername(form.username)) {
+			editingUsername.value = false;
+		}
+	}
 </script>
 
 <template>
 	<h1>Account Page</h1>
 	<p v-if="user.authUser" class="username">{{ user.authUser.email }}</p>
+
 	<p class="username">
-		{{ user.userDoc?.username }} <button type="button" @click="toggleUsernameEdit">Edit</button>
+		{{ user?.username }}
 	</p>
+	<button type="button" @click="toggleUsernameEdit">Edit</button>
 
 	<Transition>
 		<form

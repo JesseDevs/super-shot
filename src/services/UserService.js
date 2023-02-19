@@ -15,33 +15,32 @@ import { useFirestore } from 'vuefire';
 import { useRoute, useRouter } from 'vue-router';
 
 export const useUserService = defineStore('user', function () {
-	const auth = getAuth();
-	const authUser = useCurrentUser();
-	const db = useFirestore();
-
-	const userDoc = ref(null);
-
-	watch(authUser, async function (after, before) {
-		const id = authUser.value?.uid;
-
-		if (id) {
-			const found = doc(collection(db, 'users'), id);
-			const docSnap = await getDoc(found);
-			userDoc.value = docSnap.data();
-		} else {
-			console.log('id not ready');
-		}
-	});
-
 	const router = useRouter();
 	const route = useRoute();
+	const firebaseAuth = getAuth();
+	const authUser = useCurrentUser();
+	const db = useFirestore();
+	const userDoc = ref(null);
 
-	function alsoCreateUserDoc(userId) {
-		// Create a new user document in Firestore
-		setDoc(doc(db, 'users', userId), {
-			username: '',
+	function getUserDocument() {
+		const userDocumnetReference = computed(function () {
+			if (authUser.value.uid) {
+				return doc(collection(db, 'users'), authUser.value.uid);
+			} else {
+				return console.log('Reference is not ready..');
+			}
 		});
+		const userDocument = useDocument(userDocumnetReference);
+		const username = computed(function () {
+			return userDocument.value?.username;
+		});
+
+		const isAdmin = computed(() => userDocument.value?.roles.admin);
+
+		return { username, isAdmin };
 	}
+
+	const { username, isAdmin } = getUserDocument();
 
 	const form = reactive({
 		email: '',
@@ -49,17 +48,11 @@ export const useUserService = defineStore('user', function () {
 		username: '',
 	});
 
-	function clearForm() {
-		form.email = '';
-		form.password = '';
-		form.username = '';
-	}
-
 	function signUp(email, password) {
-		createUserWithEmailAndPassword(auth, form.email, form.password)
+		createUserWithEmailAndPassword(firebaseAuth, form.email, form.password)
 			.then(async (userCredential) => {
 				console.log('user.signUp', userCredential);
-				alsoCreateUserDoc(userCredential.user.uid);
+				alsoCreateUserDoc(userCredential.user.uid, form.username);
 				clearForm(form);
 				router.push({ path: '/profile' });
 			})
@@ -69,9 +62,16 @@ export const useUserService = defineStore('user', function () {
 			});
 	}
 
+	function alsoCreateUserDoc(userId, username) {
+		// Create a new user document in Firestore
+		setDoc(doc(db, 'users', userId), {
+			username: username,
+		});
+	}
+
 	function signIn(form) {
 		const { email, password } = form;
-		signInWithEmailAndPassword(auth, email, password)
+		signInWithEmailAndPassword(firebaseAuth, email, password)
 			.then((userCredential) => {
 				console.log('user.signIn');
 				clearForm(form);
@@ -83,7 +83,7 @@ export const useUserService = defineStore('user', function () {
 	}
 
 	function signOut() {
-		fbSignOut(auth)
+		fbSignOut(firebaseAuth)
 			.then(() => {
 				console.log('user.signOut');
 				router.push({ path: '/' });
@@ -105,10 +105,23 @@ export const useUserService = defineStore('user', function () {
 		};
 	});
 
-	function changeUsername(newUsername) {
-		updateDoc(doc(db, 'users', authUser.value.uid), {
+	async function changeUsername(newUsername) {
+		const updated = await updateDoc(doc(db, 'users', authUser.value.uid), {
 			username: newUsername,
 		});
+		console.log('updated');
+
+		if (updated) {
+			return true;
+		} else {
+			console.log("Update didn't work");
+		}
+	}
+
+	function clearForm() {
+		form.email = '';
+		form.password = '';
+		form.username = '';
 	}
 
 	return {
@@ -119,5 +132,7 @@ export const useUserService = defineStore('user', function () {
 		form,
 		userDoc,
 		changeUsername,
+		username,
+		isAdmin,
 	};
 });
