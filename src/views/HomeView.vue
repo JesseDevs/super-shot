@@ -169,6 +169,7 @@
 			flex-direction: column;
 			h4 {
 				text-align: center;
+				margin: 0 auto;
 			}
 		}
 	}

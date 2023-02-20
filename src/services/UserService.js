@@ -24,7 +24,7 @@ export const useUserService = defineStore('user', function () {
 
 	function getUserDocument() {
 		const userDocumnetReference = computed(function () {
-			if (authUser.value.uid) {
+			if (authUser.value?.uid) {
 				return doc(collection(db, 'users'), authUser.value.uid);
 			} else {
 				return console.log('Reference is not ready..');
@@ -32,15 +32,15 @@ export const useUserService = defineStore('user', function () {
 		});
 		const userDocument = useDocument(userDocumnetReference);
 		const username = computed(function () {
-			return userDocument.value?.username;
+			return form.value?.username;
 		});
 
-		const isAdmin = computed(() => userDocument.value?.roles.admin);
+		// const isAdmin = computed(() => userDocument.value?.roles.admin);
 
-		return { username, isAdmin };
+		return { username };
 	}
 
-	const { username, isAdmin } = getUserDocument();
+	const { username } = getUserDocument();
 
 	const form = reactive({
 		email: '',
@@ -48,11 +48,20 @@ export const useUserService = defineStore('user', function () {
 		username: '',
 	});
 
+	function addUserData(i, u) {
+		addDoc(collection(db, 'userData'), {
+			id: i,
+			username: u,
+			roles: { guest: true },
+		});
+		clearForm();
+	}
+
 	function signUp(email, password) {
 		createUserWithEmailAndPassword(firebaseAuth, form.email, form.password)
 			.then(async (userCredential) => {
 				console.log('user.signUp', userCredential);
-				alsoCreateUserDoc(userCredential.user.uid, form.username);
+				alsoCreateUserDoc(userCredential.user.uid, form.username, form.email);
 				clearForm(form);
 				router.push({ path: '/profile' });
 			})
@@ -62,10 +71,12 @@ export const useUserService = defineStore('user', function () {
 			});
 	}
 
-	function alsoCreateUserDoc(userId, username) {
+	function alsoCreateUserDoc(userId, u, e) {
 		// Create a new user document in Firestore
 		setDoc(doc(db, 'users', userId), {
-			username: username,
+			username: u,
+			email: e,
+			roles: { guest: true },
 		});
 	}
 
@@ -133,6 +144,5 @@ export const useUserService = defineStore('user', function () {
 		userDoc,
 		changeUsername,
 		username,
-		isAdmin,
 	};
 });

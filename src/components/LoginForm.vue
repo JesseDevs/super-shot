@@ -44,7 +44,7 @@
 			<div class="form-field" v-if="route.name === 'sign-up'">
 				<label for="username">Username <span>*</span> </label>
 
-				<input id="username" type="text" required v-model="user.form.lastName" />
+				<input id="username" type="text" required v-model="user.form.username" />
 			</div>
 			<div class="form-field">
 				<label for="a">Email <span>*</span> </label>

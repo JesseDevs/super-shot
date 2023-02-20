@@ -26,7 +26,7 @@
 	<h1>Account Page</h1>
 	<p v-if="user.authUser" class="username">{{ user.authUser.email }}</p>
 
-	<p class="username">
+	<p v-if="user.authUser" class="username">
 		{{ user?.username }}
 	</p>
 	<button type="button" @click="toggleUsernameEdit">Edit</button>
