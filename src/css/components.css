@@ -59,7 +59,7 @@ textarea {
 
 	max-width: 150px;
 	min-width: fit-content;
-	padding: var(--padding) calc(var(--padding) * 3);
+	padding: var(--padding) calc(var(--padding) * 2);
 	outline: 0;
 	border-radius: 50px;
 	border: 1.5px solid black;

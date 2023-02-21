@@ -71,3 +71,7 @@ picture img {
 	height: 25px;
 	width: 25px;
 }
+
+main inner-column {
+	padding-bottom: 4rem;
+}
