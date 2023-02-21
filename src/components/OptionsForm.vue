@@ -5,6 +5,8 @@
 	import SvgIcon from '@/partials/SvgIcon.vue';
 	import slugid from 'slugid';
 
+	defineProps(['product']);
+
 	const cart = useCartStore();
 	const route = useRoute();
 
@@ -15,11 +17,11 @@
 	const breads = ['Bagel', 'Biscuit', 'Croissant', 'English Muffin'];
 	const miniDonuts = ['Glazed', 'Cinnamon', 'BlueBerry', 'Chocolate', 'Old Fashioned', 'Jelly', 'Powdered'];
 
-	const product = computed(function () {
-		return menu.products.find(function (record) {
-			return record.id == route.params.id;
-		});
-	});
+	// const product = computed(function () {
+	// 	return menu.products.find(function (record) {
+	// 		return record.id == route.params.id;
+	// 	});
+	// });
 
 	const newAdditions = reactive({
 		size: 'm',
@@ -34,7 +36,7 @@
 <template>
 	<form class="main-form edit-form" autocomplete="off" @submit.prevent="saveNewProduct()">
 		<h5 class="strict-voice">CUSTOMIZATION</h5>
-		<div class="size-block option-block" v-if="product.options.includes('size')">
+		<div class="size-block option-block" v-if="product[0].options.includes('size')">
 			<h6 class="calm-voice">Size</h6>
 
 			<ul class="cup-size">
@@ -56,7 +58,7 @@
 			</ul>
 		</div>
 
-		<div class="dairy-block option-block" v-if="product.options.includes('dairy')">
+		<div class="dairy-block option-block" v-if="product[0].options.includes('dairy')">
 			<h6 class="calm-voice">Dairy</h6>
 
 			<div class="select-box-container">
@@ -67,7 +69,7 @@
 			</div>
 		</div>
 
-		<div class="sweetener-block option-block" v-if="product.options.includes('sweetener')">
+		<div class="sweetener-block option-block" v-if="product[0].options.includes('sweetener')">
 			<h6 class="calm-voice">Sweetener</h6>
 
 			<div class="select-box-container">
@@ -78,7 +80,7 @@
 			</div>
 		</div>
 
-		<div class="flavor-block option-block" v-if="product.options.includes('flavor')">
+		<div class="flavor-block option-block" v-if="product[0].options.includes('flavor')">
 			<h6 class="calm-voice">Flavor</h6>
 
 			<div class="select-box-container">
@@ -89,7 +91,7 @@
 			</div>
 		</div>
 
-		<div class="bread-block option-block" v-if="product.options.includes('bread')">
+		<div class="bread-block option-block" v-if="product[0].options.includes('bread')">
 			<h6 class="calm-voice">Bread</h6>
 
 			<div class="select-box-container">
@@ -100,7 +102,7 @@
 			</div>
 		</div>
 
-		<div class="mini-donut-flavor-block option-block" v-if="product.options.includes('miniDonutFlavor')">
+		<div class="mini-donut-flavor-block option-block" v-if="product[0].options.includes('miniDonutFlavor')">
 			<h6 class="calm-voice">Flavor</h6>
 
 			<div class="select-box-container">
