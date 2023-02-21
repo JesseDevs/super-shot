@@ -68,7 +68,7 @@
 		justify-content: center;
 		text-align: center;
 		gap: 1vh;
-		margin-top: 4vh;
+		margin-top: 5vh;
 		h1 {
 			font-weight: 700;
 		}
@@ -140,7 +140,7 @@
 
 	actions-block {
 		display: flex;
-		gap: 20px;
+		gap: 10px;
 		justify-content: center;
 		align-items: center;
 	}

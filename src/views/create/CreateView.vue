@@ -2,19 +2,26 @@
 	const createWhat = ref('');
 	const formIntroClass = computed(function () {
 		if (createWhat === '') {
-			return 'form-intro';
+			return '';
 		}
-		return '';
+		if (createWhat === 'category') {
+			return 'overlay-category';
+		}
+
+		if (createWhat === 'product') {
+			return 'overlay-product';
+		}
 	});
 </script>
 
 <template>
 	<create-thing>
 		<h2 class="chant-voice">BUILD THE DATA</h2>
-		<actions-block class="create-actions">
+		<create-block class="create-actions">
+			<overlay-block :class="formIntroClass"></overlay-block>
 			<RouterLink class="small-voice" to="create-category">Category</RouterLink>
 			<RouterLink class="small-voice" to="create-product">Product</RouterLink>
-		</actions-block>
+		</create-block>
 	</create-thing>
 
 	<main class="outlet">
@@ -22,21 +29,37 @@
 	</main>
 </template>
 <style lang="scss">
-	actions-block.create-actions {
+	create-block.create-actions {
+		display: flex;
+		flex-direction: row;
 		background-color: var(--off-color);
 		color: var(--page);
-		gap: 30px;
-		padding: 5px;
+		justify-content: space-around;
+		gap: 5px;
 		a {
-			padding: 10px 25px;
-			transition: all 500ms ease-in-out;
+			width: 100%;
+			text-align: center;
+			padding: 10px;
 		}
 
-		.router-link-active {
-			background-color: rgba(245, 245, 245, 0.8);
-			color: black;
+		overlay-block {
+			position: absolute;
+			background-color: red;
+			height: 100%;
+			width: 50%;
+			opacity: 0;
+		}
+
+		overlay-block.overlay-category {
+			left: 0;
+			opacity: 1;
+		}
+		overlay-block.overlay-product {
+			right: 0;
+			opacity: 1;
 		}
 	}
+
 	create-thing {
 		display: flex;
 		flex-direction: column;
