@@ -116,8 +116,9 @@
 		right: 0;
 		top: 96px;
 		width: 100%;
-		height: 100%;
+
 		max-width: 90vh;
+		min-height: 85vh;
 		max-height: 90vh;
 		padding: 2rem;
 
@@ -135,6 +136,7 @@
 
 		a.button {
 			background-color: var(--page);
+			color: var(--black);
 			text-align: center;
 			align-self: center;
 		}
