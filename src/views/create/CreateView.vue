@@ -1,17 +1,25 @@
 <script setup>
 	const createWhat = ref('');
 	const formIntroClass = computed(function () {
-		if (createWhat === '') {
+		if (createWhat.value === '') {
 			return '';
 		}
-		if (createWhat === 'category') {
+		if (createWhat.value === 'category') {
 			return 'overlay-category';
 		}
 
-		if (createWhat === 'product') {
+		if (createWhat.value === 'product') {
 			return 'overlay-product';
 		}
 	});
+
+	function handleCreateCategoryClick() {
+		createWhat.value = 'category';
+	}
+
+	function handleCreateProductClick() {
+		createWhat.value = 'product';
+	}
 </script>
 
 <template>
@@ -19,8 +27,12 @@
 		<h2 class="chant-voice">BUILD THE DATA</h2>
 		<create-block class="create-actions">
 			<overlay-block :class="formIntroClass"></overlay-block>
-			<RouterLink class="small-voice" to="create-category">Category</RouterLink>
-			<RouterLink class="small-voice" to="create-product">Product</RouterLink>
+			<RouterLink class="small-voice" to="create-category" @click="handleCreateCategoryClick()"
+				>Category</RouterLink
+			>
+			<RouterLink class="small-voice" to="create-product" @click="handleCreateProductClick()"
+				>Product</RouterLink
+			>
 		</create-block>
 	</create-thing>
 
@@ -32,10 +44,11 @@
 	create-block.create-actions {
 		display: flex;
 		flex-direction: row;
-		background-color: var(--off-color);
+		background-color: var(--off-color-mute);
 		color: var(--page);
 		justify-content: space-around;
 		gap: 5px;
+		overflow: hidden;
 		a {
 			width: 100%;
 			text-align: center;
@@ -44,19 +57,27 @@
 
 		overlay-block {
 			position: absolute;
-			background-color: red;
 			height: 100%;
 			width: 50%;
 			opacity: 0;
 		}
 
-		overlay-block.overlay-category {
-			left: 0;
+		overlay-block.overlay-category,
+		overlay-block.overlay-product {
+			border: 1px solid rgba(85, 85, 85, 0.569);
+			height: 100%;
+			transform: translateX(-100%);
+			background-color: rgba(85, 85, 85, 0.569);
+			transition: transform 0.3s ease-in-out;
 			opacity: 1;
 		}
+
+		overlay-block.overlay-category {
+			transform: translateX(-50%);
+		}
+
 		overlay-block.overlay-product {
-			right: 0;
-			opacity: 1;
+			transform: translateX(50%);
 		}
 	}
 
