@@ -48,13 +48,12 @@ export const useUserService = defineStore('user', function () {
 		username: '',
 	});
 
-	function addUserData(i, u) {
-		addDoc(collection(db, 'userData'), {
-			id: i,
+	function addUsernameData(id, u) {
+		setDoc(doc(db, 'usernameData', id), {
+			id: id,
 			username: u,
-			roles: { guest: true },
+			email: e,
 		});
-		clearForm();
 	}
 
 	function signUp(email, password) {
@@ -62,6 +61,7 @@ export const useUserService = defineStore('user', function () {
 			.then(async (userCredential) => {
 				console.log('user.signUp', userCredential);
 				alsoCreateUserDoc(userCredential.user.uid, form.username, form.email);
+				addUsernameData(userCredential.user.uid, form.username, form.email);
 				clearForm(form);
 				router.push({ path: '/profile' });
 			})

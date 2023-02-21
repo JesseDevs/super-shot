@@ -18,11 +18,15 @@
 	if (isMenuClosed.value) {
 		ui.mainMenuOpen = false;
 	}
+
+	const currentUser = computed(() => {
+		return collection(db, 'categories');
+	});
 </script>
 
 <template>
 	<signin-block v-if="user.authUser">
-		<h3 class="strict-voice">Hi, {{ user.authUser.email }}</h3>
+		<h3 class="strict-voice">Hi, {{ user.authUser.uid }}</h3>
 		<actions-block>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>
 		</actions-block>
@@ -36,8 +40,8 @@
 
 	<signin-block v-else>
 		<actions-block>
-			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-in">Sign In</RouterLink>
-			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-up">Sign Up</RouterLink>
+			<RouterLink class="tiny-button" @click="ui.specificToggle()" to="/sign-in">Sign In</RouterLink>
+			<RouterLink class="tiny-button" @click="ui.specificToggle()" to="/sign-up">Sign Up</RouterLink>
 		</actions-block>
 		<p class="tiny-voice">
 			Not a Dunkin’ Rewards memeber?
