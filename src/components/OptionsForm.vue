@@ -34,7 +34,7 @@
 </script>
 
 <template>
-	<form class="main-form edit-form" autocomplete="off" @submit.prevent="saveNewProduct()">
+	<form v-if="product" class="main-form edit-form" autocomplete="off" @submit.prevent="saveNewProduct()">
 		<h5 class="strict-voice">CUSTOMIZATION</h5>
 		<div class="size-block option-block" v-if="product[0].options.includes('size')">
 			<h6 class="calm-voice">Size</h6>

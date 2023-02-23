@@ -1,15 +1,16 @@
 <script setup>
 	import { computed, reactive, ref } from 'vue';
 	import { useRoute } from 'vue-router';
-	import { useCartStore } from '@/stores/cart';
+
 	import OptionsForm from '@/components/OptionsForm.vue';
-	import slugid from 'slugid';
 	import { useInterfaceStore } from '@/stores/interface';
 	import { useFirestore, useDocument } from 'vuefire';
 	import { doc, collection, query, where, limit } from 'firebase/firestore';
 	import { useProductsService } from '@/services/ProductsService';
-	const route = useRoute();
+	import { useUserService } from '../../services/UserService';
 
+	const route = useRoute();
+	const user = useUserService();
 	const p = useProductsService();
 	const currentP = query(p.productsData, where('slug', '==', route.params.id));
 	const product = useDocument(currentP);
@@ -56,13 +57,13 @@
 					{{ product[0].desc }}
 				</p>
 
-				<button class="button" @click="saveNewProduct()">
+				<button class="button" @click="user.addToCart(product[0])">
 					<span class="price"> ${{ product[0].price }}</span
 					>Add to cart
 				</button>
 			</text-content>
 		</landing-block>
-		<OptionsForm :product="product" />
+		<!-- <OptionsForm :product="product" /> -->
 	</edit-block>
 </template>
 
