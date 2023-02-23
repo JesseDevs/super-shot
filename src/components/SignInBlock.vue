@@ -18,15 +18,11 @@
 	if (isMenuClosed.value) {
 		ui.mainMenuOpen = false;
 	}
-
-	const currentUser = computed(() => {
-		return collection(db, 'categories');
-	});
 </script>
 
 <template>
 	<signin-block v-if="user.authUser">
-		<h3 class="strict-voice">Hi, {{ user.authUser.uid }}</h3>
+		<h3 class="strict-voice">Hi, {{ user.username }}</h3>
 		<actions-block>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>
 		</actions-block>
