@@ -63,7 +63,7 @@
 				</button>
 			</text-content>
 		</landing-block>
-		<!-- <OptionsForm :product="product" /> -->
+		<OptionsForm :product="product" />
 	</edit-block>
 </template>
 
