@@ -22,6 +22,20 @@ export const useUserService = defineStore('user', function () {
 	const db = useFirestore();
 	const userDoc = ref(null);
 
+	const isUserLoaded = ref(false);
+
+	function isUserLoadedPromise() {
+		return new Promise((resolve) => {
+			const interval = setInterval(() => {
+				if (isUserLoaded.value) {
+					console.log('>> resolve', authorizedUser.value?.uid, userId.value);
+					resolve();
+					clearInterval(interval);
+				}
+			}, 100);
+		});
+	}
+
 	const form = reactive({
 		email: '',
 		password: '',
@@ -41,11 +55,17 @@ export const useUserService = defineStore('user', function () {
 		const username = computed(function () {
 			return userDocument.value?.username;
 		});
+		const firstN = computed(function () {
+			return userDocument.value?.firstN;
+		});
+		const lastN = computed(function () {
+			return userDocument.value?.lastN;
+		});
 		// const isAdmin = computed(() => userDocument.value?.roles.admin);
-		return { username };
+		return { username, firstN, lastN };
 	}
 
-	const { username } = getUserDocument();
+	const { username, firstN, lastN } = getUserDocument();
 
 	// 	const xReference = computed( function() {
 	// 	if (authorizedUser.value?.uid) {
@@ -70,13 +90,17 @@ export const useUserService = defineStore('user', function () {
 		setDoc(doc(db, 'users', userId), {
 			username: u,
 			email: e,
+			firstN: '',
+			lastN: '',
 			roles: { guest: true },
 		});
 	}
 
-	async function changeUsername(newUsername) {
+	async function changeUsername(newUsername, firstName, lastName) {
 		const updated = await updateDoc(doc(db, 'users', authUser.value.uid), {
 			username: newUsername,
+			firstN: firstName,
+			lastN: lastName,
 		});
 		console.log('updated');
 
@@ -150,6 +174,8 @@ export const useUserService = defineStore('user', function () {
 		userDoc,
 		changeUsername,
 		username,
+		firstN,
+		lastN,
 		addToCart,
 	};
 });
