@@ -24,12 +24,18 @@
 					><span class="main-color">Dunkin</span><span class="off-color">’ </span></RouterLink
 				>
 
-				<div class="strict-voice cart-container" @click="ui.toggleCart()">
-					<SvgIcon icon="basket" />
-					<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
-						{{ cart.itemsInCart }}
+				<transition name="fade" mode="out-in">
+					<div v-if="!ui.cartMenuOpen" class="strict-voice cart-container" @click="ui.toggleCart()">
+						<SvgIcon icon="basket" />
+						<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
+							{{ cart.itemsInCart }}
+						</div>
 					</div>
-				</div>
+
+					<div v-else class="strict-voice cart-container" @click="ui.toggleCart()">
+						<SvgIcon icon="times" />
+					</div>
+				</transition>
 			</nav>
 
 			<nav class="site-menu bottom-row">
@@ -69,6 +75,16 @@
 </template>
 
 <style lang="scss">
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: opacity 0.2s;
+	}
+
+	.fade-enter,
+	.fade-leave-to {
+		opacity: 0;
+	}
+
 	body.menu-open {
 		display: block;
 		overflow: hidden;
@@ -212,8 +228,17 @@
 	}
 
 	header.toggle-open {
+		background-color: var(--page);
+		z-index: 200;
+		min-height: 90px;
 		ad-block {
 			display: none;
+		}
+
+		inner-column {
+			width: 100%;
+			position: fixed;
+			height: 100%;
 		}
 		nav.site-menu {
 			position: fixed;
@@ -255,6 +280,11 @@
 		header inner-column {
 			padding: 0 1rem;
 			z-index: 100;
+
+			h3 {
+				flex: 1;
+				font-weight: 600;
+			}
 		}
 		nav.top-row {
 			display: none;
