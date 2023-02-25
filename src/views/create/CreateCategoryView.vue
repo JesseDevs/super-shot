@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<form class="main-form" autocomplete="off" @submit.prevent="categoryService.addCategory()">
+	<form class="main-form create-form" autocomplete="off" @submit.prevent="categoryService.addCategory()">
 		<div class="form-field">
 			<label for="title">Title</label>
 			<input id="title" type="text" required v-model="categoryService.form.title" />
@@ -38,4 +38,10 @@
 			</li>
 		</ul> -->
 </template>
-<style lang="scss"></style>
+<style lang="scss">
+	.create-form {
+		button {
+			align-self: flex-end;
+		}
+	}
+</style>

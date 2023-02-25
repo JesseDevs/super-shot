@@ -24,7 +24,10 @@
 
 <template>
 	<create-thing>
-		<h2 class="chant-voice">BUILD THE DATA</h2>
+		<RouterLink class="small-voice" to="create" @click="handleCreateCategoryClick()">
+			<h2 class="chant-voice">BUILD THE DATA</h2>
+		</RouterLink>
+
 		<create-block class="create-actions">
 			<overlay-block :class="formIntroClass"></overlay-block>
 			<RouterLink class="small-voice" to="create-category" @click="handleCreateCategoryClick()"
@@ -41,14 +44,19 @@
 	</main>
 </template>
 <style lang="scss">
+	create-thing {
+		h2 {
+			font-weight: 600;
+		}
+	}
 	create-block.create-actions {
 		display: flex;
 		flex-direction: row;
-		background-color: var(--off-color-mute);
+		background-color: var(--off-color);
 		color: var(--page);
 		justify-content: space-around;
 		gap: 5px;
-		overflow: hidden;
+
 		a {
 			width: 100%;
 			text-align: center;
@@ -60,14 +68,19 @@
 			height: 100%;
 			width: 50%;
 			opacity: 0;
+			box-shadow: 0 3px 10px var(--off-color);
 		}
 
 		overlay-block.overlay-category,
 		overlay-block.overlay-product {
-			border: 1px solid rgba(85, 85, 85, 0.569);
 			height: 100%;
 			transform: translateX(-100%);
-			background-color: rgba(85, 85, 85, 0.569);
+			background: rgb(99, 99, 99);
+			background: radial-gradient(
+				circle,
+				rgba(99, 99, 99, 0.4590163934426229) 0%,
+				rgba(255, 255, 255, 0.2997658079625293) 65%
+			);
 			transition: transform 0.3s ease-in-out;
 			opacity: 1;
 		}

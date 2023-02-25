@@ -4,7 +4,7 @@
 </script>
 
 <template>
-	<form class="main-form" autocomplete="off" @submit.prevent="productsService.addCategory()">
+	<form class="main-form create-form" autocomplete="off" @submit.prevent="productsService.addCategory()">
 		<div class="form-field">
 			<label for="name">Name</label>
 			<input id="name" type="text" required v-model="productsService.form.name" />
@@ -41,11 +41,57 @@
 			<input id="price" type="text" required v-model="productsService.form.price" />
 		</div>
 
+		<div class="form-field checkbox-grid">
+			<ul>
+				<li>
+					<input type="checkbox" id="size" v-model="size" />
+					<label for="checkbox">Size</label>
+				</li>
+				<li>
+					<input type="checkbox" id="dairy" v-model="dairy" />
+					<label for="checkbox">Dairy</label>
+				</li>
+				<li>
+					<input type="checkbox" id="sweetener" v-model="sweetener" />
+					<label for="checkbox">Sweet</label>
+				</li>
+				<li>
+					<input type="checkbox" id="flavor" v-model="flavor" />
+					<label for="checkbox">Flavor</label>
+				</li>
+				<li>
+					<input type="checkbox" id="bread" v-model="bread" />
+					<label for="checkbox">Bread</label>
+				</li>
+				<li>
+					<input type="checkbox" id="miniDonutFlavor" v-model="miniDonutFlavor" />
+					<label for="checkbox">Donut</label>
+				</li>
+			</ul>
+		</div>
+
 		<button class="button" type="submit">Add</button>
 	</form>
 </template>
 <style lang="scss">
 	div.form-field.contains-number {
 		flex-direction: row;
+	}
+
+	div.checkbox-grid {
+		ul {
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+			gap: 10px;
+		}
+		li {
+			display: flex;
+			gap: 5px;
+			min-width: 30%;
+		}
+		label {
+			padding: 0;
+		}
 	}
 </style>
