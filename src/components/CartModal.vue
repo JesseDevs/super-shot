@@ -4,7 +4,9 @@
 	import { useInterfaceStore } from '@/stores/interface';
 	import { useRoute } from 'vue-router';
 	import SvgIcon from '@/partials/SvgIcon.vue';
+	import { useUserService } from '@/services/UserService';
 
+	const user = useUserService();
 	const cart = useCartStore();
 	const ui = useInterfaceStore();
 	const route = useRoute();
@@ -24,45 +26,23 @@
 		}
 	});
 
-	function remove(id) {
-		cart.purchasingCart.forEach(function (item, index) {
-			if (item.id === id) {
-				cart.purchasingCart.splice(index, 1);
-				route.push({ path: '/' });
-			}
-		});
-	}
-
-	function increment(x) {
-		x++;
-	}
-
-	function clear() {
-		cart.purchasingCart = [];
-		localStorage.setItem('shoppingCart', []);
-	}
-
-	const itemAddedText = computed(function () {
-		if (cart.itemAdded) {
-			return 'Item added!';
+	const itemAdded = computed(function () {
+		if (user.cart.itemAdded) {
+			return {
+				text: 'Item added!',
+				class: 'confirmation',
+			};
 		} else return '';
 	});
-
-	const itemAddedClass = computed(function () {
-		if (cart.itemAdded) {
-			return 'confirmation';
-		} else return '';
-	});
-
-	setTimeout(function () {
-		opacity.value = 0;
-		cart.itemAdded = false;
-	}, 2500);
 </script>
 
 <template>
 	<cart-modal>
-		<h3 :class="`${itemAddedClass} strict-voice`">{{ itemAddedText }}</h3>
+		<transition name="fade" mode="out-in">
+			<div class="box-modal">
+				<p class="confirmation strict-voice" v-if="user.cart.itemAdded">{{ itemAdded.text }}</p>
+			</div>
+		</transition>
 
 		<h2 class="chant-voice" v-if="cart.itemsInCart">Shopping Cart</h2>
 		<h2 class="chant-voice" v-else>Empty Cart</h2>
@@ -74,13 +54,13 @@
 		<button v-else @click="ui.toggleEditMode()" class="tiny-button tiny-voice">Done</button>
 
 		<ul>
-			<li class="item-in-cart" v-for="product in cart.purchasingCart">
-				<RouterLink :to="`/menu/${product.category}/${product.id}`">
+			<li class="item-in-cart" v-for="product in user.cart.groups">
+				<RouterLink :to="`/menu/${product[0].category}/${product[0].slug}`">
 					<cart-card :class="`${ui.editModeClass} ${quantityModeClass}`">
 						<text-content>
-							<p class="quantity">{{ product.quantity }}</p>
-							<p>{{ product.name }}</p>
-							<p>${{ product.price }}</p>
+							<p class="quantity">{{ product.length }}</p>
+							<p>{{ product[0].name }}</p>
+							<p>${{ product[0].price }}</p>
 							<div class="arrow-box">
 								<SvgIcon icon="angle-right" />
 							</div>
@@ -100,27 +80,36 @@
 			</li>
 		</ul>
 
-		<button class="trash-can" v-if="cart.itemsInCart" @click="clear()">
-			<SvgIcon icon="trash" />
-		</button>
-		<RouterLink class="button strict-voice" @click="ui.specificToggle()" to="/checkout"
-			>Checkout</RouterLink
-		>
+		<div class="total-block">
+			<text-content>
+				<p class="quantity">{{ user.cart.total }}</p>
+				<p>Total</p>
+				<p>$20</p>
+				<div class="arrow-box">
+					<SvgIcon icon="angle-right" />
+				</div>
+			</text-content>
+			<button class="trash-can" @click="clear()">
+				<SvgIcon icon="trash" />
+			</button>
+			<RouterLink class="checkout-btn button strict-voice" @click="ui.specificToggle()" to="/checkout"
+				>Checkout</RouterLink
+			>
+		</div>
 	</cart-modal>
 </template>
 
 <style lang="scss">
 	cart-modal {
 		position: fixed;
-		background-color: var(--off-color-soft);
+		background-color: var(--color-soft);
 		right: 0;
-		top: 96px;
+		top: 126px;
 		width: 100%;
 
 		max-width: 90vh;
-		min-height: 85vh;
+		min-height: 82vh;
 		max-height: 90vh;
-		padding: 2rem;
 
 		display: flex;
 		align-items: flex-start;
@@ -130,35 +119,28 @@
 		overflow-x: hidden;
 		opacity: 0;
 		transform: translate(100%, 0);
-		z-index: 200;
+		z-index: 400;
 		pointer-events: none;
 		transition: all 0.3s ease-in-out;
 
+		li:first-of-type {
+			border-top: 1px solid black;
+		}
+
 		a.button {
-			background-color: var(--page);
-			color: var(--black);
 			text-align: center;
 			align-self: center;
+			margin: 20px;
 		}
 
 		h2 {
 			font-weight: 600;
 			width: 100%;
 			padding-bottom: 20px;
-
-			&:after {
-				content: '';
-				width: 150%;
-				height: 1px;
-				background-color: black;
-				position: absolute;
-				bottom: 0;
-				left: -2rem;
-				z-index: 100;
-			}
+			padding: 2rem;
 		}
 
-		h3.confirmation {
+		p.confirmation {
 			position: absolute;
 			top: 10px;
 			right: 50%;
@@ -177,17 +159,23 @@
 			cursor: pointer;
 		}
 
+		.checkout-btn {
+			border: 2px solid black;
+			background-color: var(--off-color);
+		}
+
 		.tiny-button {
 			position: absolute;
-			right: 10px;
+			right: 1rem;
 			top: 2rem;
+			border: 2px solid black;
 		}
 
 		.trash-can {
 			cursor: pointer;
 			position: absolute;
-			right: 10px;
-			bottom: 2.6rem;
+			right: 1.5rem;
+			bottom: 1.6rem;
 
 			.contains-svg {
 				width: 25px;
@@ -201,20 +189,11 @@
 		}
 
 		li a {
-			padding: 10px;
-			&:after {
-				content: '';
-				width: 150%;
-				height: 1px;
-				background-color: black;
-				position: absolute;
-				bottom: 0;
-				left: -2rem;
-				z-index: 100;
-			}
+			padding: 10px 1.4rem;
+			border-bottom: 1px solid black;
 		}
 
-		cart-card text-content {
+		text-content {
 			flex-direction: row;
 			display: flex;
 			align-items: center;
@@ -255,6 +234,15 @@
 		}
 	}
 
+	div.total-block {
+		width: 100%;
+		text-content {
+			padding: 10px 1.4rem;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+		}
+	}
+
 	@media (min-width: 600px) {
 		cart-modal {
 			zoom: 0.8;
@@ -264,6 +252,10 @@
 			max-height: 80vh;
 			border-radius: 25px;
 			border: 2px solid black;
+
+			li a {
+				padding: 10px 2rem;
+			}
 		}
 	}
 
