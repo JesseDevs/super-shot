@@ -33,6 +33,10 @@
 
 }
 
+.letter-spacing {
+	letter-spacing: .07em;
+}
+
 @media (min-width:450px) {
 	.main-grid {
 		max-width: 1000px;
@@ -51,7 +55,8 @@
 }
 
 .main-form {
-	max-width: 500px;
+	max-width: 400px;
+	width: 100%;
 }
 
 picture {

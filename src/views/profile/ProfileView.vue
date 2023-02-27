@@ -47,6 +47,7 @@
 				background-color: var(--color-mute);
 				color: var(--page);
 				transition: all 0.2s ease-in-out;
+				font-weight: 600;
 
 				&:hover {
 					background-color: var(--color-soft);
