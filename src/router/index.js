@@ -12,6 +12,7 @@ import BillingPage from '../views/profile/BillingPage.vue';
 import FavoritesPage from '../views/profile/FavoritesPage.vue';
 
 import { getCurrentUser } from 'vuefire';
+import { useUserService } from '../services/UserService';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -70,19 +71,19 @@ const router = createRouter({
 			path: '/create',
 			name: 'create',
 			component: CreateView,
-			meta: { requireAuth: true },
+			meta: { requiresAuth: true },
 			children: [
 				{
 					path: '/create-category',
 					name: 'create-category',
 					component: CreateCategoryView,
-					meta: { requireAuth: true },
+					meta: { requiresAuth: true },
 				},
 				{
 					path: '/create-product',
 					name: 'create-product',
 					component: CreateProductView,
-					meta: { requireAuth: true },
+					meta: { requiresAuth: true },
 				},
 			],
 		},
@@ -105,8 +106,8 @@ const router = createRouter({
 		{
 			path: '/profile',
 			name: 'profile',
-			meta: { requireAuth: true },
 			component: () => import('../views/profile/ProfileView.vue'),
+			meta: { requiresAuth: true },
 			children: [
 				{
 					path: '',
@@ -160,8 +161,11 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
+	const user = useUserService();
+
 	if (to.meta.requiresAuth) {
 		const currentUser = await getCurrentUser();
+		await user.getUserDocument;
 
 		if (!currentUser) {
 			return {

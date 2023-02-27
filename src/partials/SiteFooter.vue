@@ -8,19 +8,19 @@
 					<h4 class="strict-voice">Quick Links</h4>
 					<ul>
 						<li>
-							<RouterLink class="small-voice" to="/">Home</RouterLink>
+							<RouterLink class="tiny-voice" to="/">Home</RouterLink>
 						</li>
 						<li>
-							<RouterLink class="small-voice" to="/menu">Menu</RouterLink>
+							<RouterLink class="tiny-voice" to="/menu">Menu</RouterLink>
 						</li>
 						<li>
-							<RouterLink class="small-voice" to="/menu/coffee">Coffee</RouterLink>
+							<RouterLink class="tiny-voice" to="/menu/coffee">Coffee</RouterLink>
 						</li>
 						<li>
-							<RouterLink class="small-voice" to="/rewards">Rewards</RouterLink>
+							<RouterLink class="tiny-voice" to="/rewards">Rewards</RouterLink>
 						</li>
 						<li>
-							<RouterLink class="small-voice" to="/sign-in">Sign In</RouterLink>
+							<RouterLink class="tiny-voice" to="/sign-in">Sign In</RouterLink>
 						</li>
 					</ul>
 				</div>
@@ -31,10 +31,18 @@
 
 <style lang="scss">
 	footer.site-footer {
-		border-top: 2px solid var(--support-light);
-		background-color: rgba(255, 255, 255, 0.209);
+		border-top: 1px solid var(--support-light);
+		background-color: rgba(241, 238, 238, 0.708);
 	}
 	footer {
+		.quick-links {
+			width: 260px;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
 		h4 {
 			text-align: center;
 			padding: 5px;
@@ -72,6 +80,7 @@
 
 			a {
 				text-decoration: underline;
+				text-align: left;
 			}
 
 			a:hover {
@@ -86,6 +95,7 @@
 			nav {
 				display: grid;
 				grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+				gap: 20px;
 			}
 		}
 	}
