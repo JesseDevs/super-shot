@@ -22,7 +22,10 @@
 
 <template>
 	<signin-block v-if="user.authUser">
-		<h3 class="strict-voice">{{ user.username }}</h3>
+		<h3 class="username-name">{{ user.username }}</h3>
+		<RouterLink class="username-link" @click="ui.specificToggle()" to="/profile"
+			><h3>{{ user.username }}</h3></RouterLink
+		>
 		<actions-block>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/profile">Profile</RouterLink>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>
@@ -82,11 +85,16 @@
 		signin-block {
 			h3 {
 				grid-column: span 2;
+				font-weight: 600;
 			}
+		}
+
+		a.username-link {
+			display: none;
 		}
 	}
 
-	@media (min-width: 900px) {
+	@media (min-width: 800px) {
 		signin-block {
 			display: flex;
 			justify-content: flex-end;
@@ -107,6 +115,19 @@
 			.contains-svg {
 				height: 25px;
 			}
+
+			h3.username-name {
+				display: none;
+			}
+
+			a.username-link {
+				display: block;
+				color: black;
+
+				flex: 1;
+				font-weight: 600;
+			}
+
 			h3.strict-voice {
 				font-size: var(--step-0);
 			}

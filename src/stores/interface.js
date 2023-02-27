@@ -7,6 +7,14 @@ export const useInterfaceStore = defineStore('interface', function () {
 	const editProductMode = ref(false);
 	const bodyElement = ref(document.body);
 
+	const toggleFixedHeader = computed(() => {
+		if (mainMenuOpen.value || cartMenuOpen.value) {
+			return 'fixed-header';
+		} else {
+			return '';
+		}
+	});
+
 	function toggleBodyClass() {
 		bodyElement.value.classList.toggle('menu-open');
 	}
@@ -77,5 +85,6 @@ export const useInterfaceStore = defineStore('interface', function () {
 		openMenu,
 		bodyElement,
 		toggleBodyClass,
+		toggleFixedHeader,
 	};
 });

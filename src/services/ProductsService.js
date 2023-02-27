@@ -20,7 +20,8 @@ export const useProductsService = defineStore('products', function () {
 		imageURL: '',
 		tagline: '',
 		price: '',
-		options: [],
+		category: '',
+		selectedOptions: [],
 	});
 
 	function clearForm() {
@@ -29,10 +30,30 @@ export const useProductsService = defineStore('products', function () {
 		form.imageURL = '';
 		form.tagline = '';
 		form.price = '';
-		form.options = [];
+		form.category = '';
 	}
 
 	function addCategory() {
+		const options = [];
+		if (form.selectedOptions.includes('size')) {
+			options.push('size');
+		}
+		if (form.selectedOptions.includes('dairy')) {
+			options.push('dairy');
+		}
+		if (form.selectedOptions.includes('sweetener')) {
+			options.push('sweetener');
+		}
+		if (form.selectedOptions.includes('flavor')) {
+			options.push('flavor');
+		}
+		if (form.selectedOptions.includes('bread')) {
+			options.push('bread');
+		}
+		if (form.selectedOptions.includes('miniDonutFlavor')) {
+			options.push('donut');
+		}
+
 		addDoc(collection(db, 'products'), {
 			name: form.name,
 			slug: form.name.toLowerCase().replace(/ /g, '-'),
@@ -41,7 +62,8 @@ export const useProductsService = defineStore('products', function () {
 			tagline: form.tagline,
 			size: 'M',
 			price: form.price,
-			options: form.options,
+			options: options,
+			category: form.category.toLowerCase().replace(/ /g, '-'),
 		});
 		clearForm();
 	}
