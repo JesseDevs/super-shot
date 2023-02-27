@@ -1,5 +1,5 @@
 <script setup>
-	defineProps(["icon"]);
+	defineProps(['icon']);
 </script>
 <template>
 	<div class="contains-svg">

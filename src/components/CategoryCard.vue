@@ -1,5 +1,5 @@
 <script setup>
-	defineProps(["category"]);
+	defineProps(['category']);
 </script>
 
 <template>
@@ -24,10 +24,12 @@
 		gap: 20px;
 
 		border: 1.5px solid var(--support-mute);
-		padding: 10px;
+		padding: 20px;
 		padding-bottom: 25px;
 		height: 100%;
 		transition: background-color ease-in-out 300ms;
+		max-width: 400px;
+		margin: 0 auto;
 
 		&:hover {
 			background-color: var(--color-soft);
