@@ -44,7 +44,7 @@
 			</div>
 		</transition>
 
-		<h2 class="chant-voice" v-if="cart.itemsInCart">Shopping Cart</h2>
+		<h2 class="chant-voice" v-if="user.cart.products.length">Shopping Cart</h2>
 		<h2 class="chant-voice" v-else>Empty Cart</h2>
 
 		<button v-if="!ui.editProductMode" @click="ui.toggleEditMode()" class="tiny-button tiny-voice">
@@ -61,6 +61,7 @@
 							<p class="quantity">{{ product.length }}</p>
 							<p>{{ product[0].name }}</p>
 							<p>${{ product[0].price }}</p>
+							<!-- <p>${{ product[0].price * product.length }}</p> -->
 							<div class="arrow-box">
 								<SvgIcon icon="angle-right" />
 							</div>
@@ -83,13 +84,10 @@
 		<div class="total-block">
 			<text-content>
 				<p class="quantity">{{ user.cart.total }}</p>
-				<p>Total</p>
-				<p>$20</p>
-				<div class="arrow-box">
-					<SvgIcon icon="angle-right" />
-				</div>
+				<p class="letter-spacing">TOTAL</p>
+				<p>Example $20</p>
 			</text-content>
-			<button class="trash-can" @click="clear()">
+			<button class="trash-can" @click="user.cart.clearCart()">
 				<SvgIcon icon="trash" />
 			</button>
 			<RouterLink class="checkout-btn button strict-voice" @click="ui.specificToggle()" to="/checkout"
@@ -129,7 +127,7 @@
 
 		a.button {
 			text-align: center;
-			align-self: center;
+			align-self: flex-end;
 			margin: 20px;
 		}
 
@@ -137,7 +135,7 @@
 			font-weight: 600;
 			width: 100%;
 			padding-bottom: 20px;
-			padding: 2rem;
+			padding: 1.5rem 2rem;
 		}
 
 		p.confirmation {
@@ -167,18 +165,18 @@
 		.tiny-button {
 			position: absolute;
 			right: 1rem;
-			top: 2rem;
+			top: 1.5rem;
 			border: 2px solid black;
 		}
 
 		.trash-can {
 			cursor: pointer;
 			position: absolute;
-			right: 1.5rem;
+			left: 1.5rem;
 			bottom: 1.6rem;
 
 			.contains-svg {
-				width: 25px;
+				width: 30px;
 				height: 30px;
 			}
 		}
@@ -186,6 +184,11 @@
 		ul {
 			width: 100%;
 			flex: 1;
+			background-color: var(--color-mute);
+
+			li {
+				background-color: var(--color-soft);
+			}
 		}
 
 		li a {
@@ -236,8 +239,10 @@
 
 	div.total-block {
 		width: 100%;
+		display: flex;
+		flex-direction: column;
 		text-content {
-			padding: 10px 1.4rem;
+			padding: 15px 2rem;
 			border-top: 1px solid black;
 			border-bottom: 1px solid black;
 		}

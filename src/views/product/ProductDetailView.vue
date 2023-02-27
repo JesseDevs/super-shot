@@ -91,12 +91,18 @@
 			padding-bottom: 2rem;
 			padding-top: 1rem;
 
+			text-content {
+				align-items: flex-start;
+			}
+
 			button {
 				margin-top: 20px;
+				align-self: flex-end;
+				border: 2px solid black !important;
 			}
 
 			picture.item-picture img {
-				max-height: 160px;
+				max-height: 230px;
 			}
 
 			h5 {
@@ -110,6 +116,7 @@
 			.intro {
 				font-size: clamp(0.65rem, calc(0.63rem + 0.13vw), 0.72rem);
 				max-width: 53ch;
+				text-align: left;
 			}
 
 			@media (min-width: 600px) {
