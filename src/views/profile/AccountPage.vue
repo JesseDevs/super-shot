@@ -3,14 +3,26 @@
 	import { useUserService } from '../../services/UserService';
 	const user = useUserService();
 
+	// const selectedFile = ref(null);
+	// const imageUrl = ref(null);
+
+	// const handleFileUpload = (event) => {
+	// 	const file = event.target.files[0];
+	// 	imageUrl.value = URL.createObjectURL(file);
+	// 	selectedFile.value = file;
+	// };
+
+	const userProfile = ref({
+		username: user.username,
+		firstN: user.firstN,
+		lastN: user.lastN,
+		email: user.email,
+	});
+
 	const form = reactive({
 		username: user.username,
 		firstN: user.firstN,
 		lastN: user.lastN,
-	});
-
-	watch(user, function (a, b) {
-		form.username = user?.username;
 	});
 
 	const editingUsername = ref(false);
@@ -23,40 +35,42 @@
 		window.scrollTo(0, 0);
 	}
 
-	function updateUsername() {
-		if (user.changeUsername(form.username, form.firstN, form.lastN)) {
+	function updateProfile() {
+		if (user.updateProfile(form)) {
 			editingUsername.value = false;
 		}
 	}
 </script>
 
 <template>
-	{{ user.firstN }}
-	<account-page v-if="user">
+	<account-page>
 		<div class="account-display-box">
-			<picture>
+			<picture v-if="!user.profilePic">
 				<img src="@/assets/profile/profile.webp" alt="pic" />
+			</picture>
+			<picture v-else>
+				<img :src="user.profilePic" alt="pic" />
 			</picture>
 		</div>
 		<div class="account-display-box">
-			<p>{{ user.authUser?.email }}</p>
+			<p>{{ user.email }}</p>
 			<h6 class="small-voice">Email</h6>
 		</div>
 		<div class="account-display-box">
 			<p>
-				{{ user?.username }}
+				{{ user.username }}
 			</p>
 			<h6 class="small-voice">Username</h6>
 		</div>
 		<div class="account-display-box">
 			<p>
-				{{ user?.firstN }}
+				{{ user.firstN }}
 			</p>
 			<h6 class="small-voice">First Name</h6>
 		</div>
 		<div class="account-display-box">
 			<p>
-				{{ user?.lastN }}
+				{{ user.lastN }}
 			</p>
 			<h6 class="small-voice">Last Name</h6>
 		</div>
@@ -67,7 +81,7 @@
 
 		<Transition>
 			<form
-				@sumbit.prevent="user.changeUsername(form.username)"
+				@submit.prevent="user.updateProfile(form)"
 				class="update-username main-form"
 				v-if="editingUsername"
 			>
@@ -85,6 +99,12 @@
 					<label for="lastN">Last Name</label>
 					<input id="lastN" type="text" required v-model="form.lastN" />
 				</div>
+
+				<!-- <div class="form-field">
+					<label for="img">Profile Picture</label>
+					<input type="file" id="img" @change="handleFileUpload" />
+					<img :src="imageUrl" alt="Selected Image" />
+				</div> -->
 
 				<actions-block>
 					<button class="button" type="submit">Update</button>
@@ -109,9 +129,11 @@
 		display: flex;
 		flex-direction: column;
 		position: relative;
+		max-width: 50ch;
 
 		p {
 			border-bottom: 1px solid var(--color);
+			background-color: var(--page);
 			min-height: 24px;
 		}
 		h6 {
@@ -121,6 +143,7 @@
 
 		picture {
 			margin: 0;
+			margin-bottom: 20px;
 		}
 	}
 	.v-enter-active,

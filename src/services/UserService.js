@@ -20,70 +20,87 @@ export const useUserService = defineStore('user', function () {
 	const firebaseAuth = getAuth();
 	const authUser = useCurrentUser();
 	const db = useFirestore();
-	const userDoc = ref(null);
-
-	const isUserLoaded = ref(false);
-
-	function isUserLoadedPromise() {
-		return new Promise((resolve) => {
-			const interval = setInterval(() => {
-				if (isUserLoaded.value) {
-					console.log('>> resolve', authorizedUser.value?.uid, userId.value);
-					resolve();
-					clearInterval(interval);
-				}
-			}, 100);
-		});
-	}
 
 	const form = reactive({
 		email: '',
 		password: '',
 		username: '',
+		firstN: '',
+		lastN: '',
+		// profilePic: '',
 	});
 
-	function getUserDocument() {
-		const userDocumnetReference = computed(function () {
+	const userDocumnetReference = computed(function () {
+		if (authUser.value?.uid) {
+			console.log('Success');
+			return doc(collection(db, 'users'), authUser.value.uid);
+		} else {
+			return console.log('Reference is not ready..');
+		}
+	});
+
+	const { data: userDocument, promise: getUserDocument } = useDocument(userDocumnetReference);
+
+	const username = computed(() => {
+		return userDocument.value?.username;
+	});
+	const firstN = computed(() => {
+		return userDocument.value?.firstN;
+	});
+	const lastN = computed(() => {
+		return userDocument.value?.lastN;
+	});
+
+	// const profilePic = computed(function () {
+	// 	return userDocument.value?.profilePic;
+	// });
+
+	const email = computed(function () {
+		return userDocument.value?.email;
+	});
+
+	function getCartDocument() {
+		const cartDocumnetReference = computed(function () {
 			if (authUser.value?.uid) {
-				return doc(collection(db, 'users'), authUser.value.uid);
+				const userRef = doc(collection(db, 'users'), authUser.value.uid);
+				const cartRef = collection(userRef, 'cart');
+				console.log('Success');
+				return cartRef;
 			} else {
-				return console.log('Reference is not ready..');
+				console.log('Reference is not ready..');
+				return null;
 			}
 		});
 
-		const userDocument = useDocument(userDocumnetReference);
-		const username = computed(function () {
-			return userDocument.value?.username;
+		const cartDocument = useDocument(cartDocumnetReference);
+		const total = computed(() => {
+			return cartDocument.value?.length;
 		});
-		const firstN = computed(function () {
-			return userDocument.value?.firstN;
+
+		const itemAdded = ref(false);
+
+		async function addToCart(item) {
+			addDoc(collection(db, 'users', authUser.value?.uid, 'cart'), item);
+
+			itemAdded.value = true;
+
+			setTimeout(() => {
+				itemAdded.value = false;
+			}, 1000);
+		}
+
+		const groups = computed(function () {
+			return cartDocument.value?.reduce(function (group, item) {
+				group[item.slug] = group[item.slug] || [];
+				group[item.slug].push(item);
+				return group;
+			}, {});
 		});
-		const lastN = computed(function () {
-			return userDocument.value?.lastN;
-		});
-		// const isAdmin = computed(() => userDocument.value?.roles.admin);
-		return { username, firstN, lastN };
+
+		return { products: cartDocument, total, addToCart, itemAdded, groups };
 	}
 
-	const { username, firstN, lastN } = getUserDocument();
-
-	// 	const xReference = computed( function() {
-	// 	if (authorizedUser.value?.uid) {
-	// 		return doc(collection... etc etc... get what you need (reference to doc/collection)
-	// 	} else {
-	// 		// : (
-	// 	}
-	// });
-
-	// const xDocument = useDocument(xReference);
-	// // or
-	// const xCollection = useCollection(xReference);
-
-	function addUsernameData(id, u) {
-		setDoc(doc(db, 'usernames', id), {
-			username: u,
-		});
-	}
+	const cart = getCartDocument();
 
 	function alsoCreateUserDoc(userId, u, e) {
 		// Create a new user document in Firestore
@@ -92,28 +109,21 @@ export const useUserService = defineStore('user', function () {
 			email: e,
 			firstN: '',
 			lastN: '',
+			profilePic: '',
 			roles: { guest: true },
 		});
 	}
 
-	async function changeUsername(newUsername, firstName, lastName) {
+	async function updateProfile(form) {
+		console.log('working');
 		const updated = await updateDoc(doc(db, 'users', authUser.value.uid), {
-			username: newUsername,
-			firstN: firstName,
-			lastN: lastName,
+			username: form.username,
+			firstN: form.firstN,
+			lastN: form.lastN,
 		});
 		console.log('updated');
 
-		if (updated) {
-			return true;
-		} else {
-			console.log("Update didn't work");
-		}
-	}
-
-	//CART STUFF
-	async function addToCart(item) {
-		addDoc(collection(db, 'users', authUser.value?.uid, 'cart'), item);
+		return true;
 	}
 
 	// SIGN UP
@@ -122,8 +132,6 @@ export const useUserService = defineStore('user', function () {
 			.then(async (userCredential) => {
 				console.log('user.signUp', userCredential);
 				alsoCreateUserDoc(userCredential.user.uid, form.username, form.email);
-				addUsernameData(userCredential.user.uid, form.username);
-				initiateCart(userCredential.user.uid);
 				clearForm(form);
 				router.push({ path: '/profile' });
 			})
@@ -171,11 +179,13 @@ export const useUserService = defineStore('user', function () {
 		signOut,
 		authUser,
 		form,
-		userDoc,
-		changeUsername,
+		updateProfile,
+		cart,
+		getUserDocument,
 		username,
 		firstN,
 		lastN,
-		addToCart,
+		email,
+		// profilePic,
 	};
 });

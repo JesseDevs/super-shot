@@ -1,4 +1,7 @@
 <script setup>
+	import { useUserService } from '../../services/UserService';
+
+	const user = useUserService();
 	const currentCardBackground = ref(Math.floor(Math.random() * 25 + 1));
 	const cardName = ref('');
 	const cardNumber = ref('');
@@ -189,17 +192,10 @@
 								<label for="cardName" class="card-item__info" ref="cardName">
 									<div class="card-item__holder">Card Holder</div>
 									<transition name="slide-fade-up">
-										<div class="card-item__name" v-if="cardName.length" key="1">
-											<transition-group name="slide-fade-right">
-												<span
-													class="card-item__nameItem"
-													v-for="(n, $index) in cardName.replace(/\s\s+/g, ' ')"
-													v-bind:key="$index + 1"
-													>{{ n }}</span
-												>
-											</transition-group>
+										<div class="card-item__name" v-if="user.firstN && user.lastN" key="2">
+											{{ user.firstN }} {{ user.lastN }}
 										</div>
-										<div class="card-item__name" v-else key="2">Full Name</div>
+										<div class="card-item__name" v-else>Full Name</div>
 									</transition>
 								</label>
 								<div class="card-item__date" ref="cardDate">
@@ -874,6 +870,7 @@
 				box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.35);
 			}
 			&.-select {
+				appearance: none;
 				background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAeCAYAAABuUU38AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNrM1sEJwkAQBdCsngXPHsQO9O5FS7AAMVYgdqAd2IGCDWgFnryLFQiCZ8EGnJUNimiyM/tnk4HNEAg/8y6ZmMRVqz9eUJvRaSbvutCZ347bXVJy/ZnvTmdJ862Me+hAbZCTs6GHpyUi1tTSvPnqTpoWZPUa7W7ncT3vK4h4zVejy8QzM3WhVUO8ykI6jOxoGA4ig3BLHcNFSCGqGAkig2yqgpEiMsjSfY9LxYQg7L6r0X6wS29YJiYQYecemY+wHrXD1+bklGhpAhBDeu/JfIVGxaAQ9sb8CI+CQSJ+QmJg0Ii/EE2MBiIXooHRQhRCkBhNhBcEhLkwf05ZCG8ICCOpk0MULmvDSY2M8UawIRExLIQIEgHDRoghihgRIgiigBEjgiFATBACAgFgghEwSAAGgoBCBBgYAg5hYKAIFYgHBo6w9RRgAFfy160QuV8NAAAAAElFTkSuQmCC');
 				background-size: 12px;
 				background-position: 90% center;
