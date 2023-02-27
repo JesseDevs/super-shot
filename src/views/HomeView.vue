@@ -7,7 +7,9 @@
 		<p>Come run with us! Apply to join our exceptional team <RouterLink to="/sign-up">here</RouterLink>.</p>
 	</ad-block>
 	<home-module>
-		<h1 class="yell-voice">{{ pageData.title }}</h1>
+		<h1 class="yell-voice">
+			<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
+		</h1>
 
 		<p class="intro">
 			{{ pageData.subHeading }}
@@ -73,8 +75,8 @@
 			font-weight: 700;
 		}
 		p.intro {
-			color: var(--color);
-			font-weight: 600;
+			color: var(--black);
+			font-weight: 700;
 		}
 
 		ul {
@@ -90,7 +92,8 @@
 		left: 0;
 		top: 0;
 
-		background-color: var(--off-color-soft);
+		background-color: var(--off-color);
+		color: var(--page);
 
 		p {
 			text-align: center;
@@ -103,10 +106,10 @@
 		}
 
 		p a {
-			color: var(--black);
+			color: var(--page);
 			&:hover {
-				background-color: var(--off-color);
-				color: var(--page);
+				background-color: var(--off-color-soft);
+				color: var(--black);
 			}
 		}
 	}
@@ -117,12 +120,12 @@
 		align-items: center;
 		zoom: 0.7;
 		text-align: left;
-		gap: 10px;
+		gap: 20px;
 		text-content {
 			align-items: flex-start;
 		}
 		h4 {
-			font-weight: 600;
+			font-weight: 700;
 		}
 		img {
 			transition: scale 200ms ease-in-out;

@@ -75,12 +75,8 @@
 		overlay-block.overlay-product {
 			height: 100%;
 			transform: translateX(-100%);
-			background: rgb(99, 99, 99);
-			background: radial-gradient(
-				circle,
-				rgba(99, 99, 99, 0.4590163934426229) 0%,
-				rgba(255, 255, 255, 0.2997658079625293) 65%
-			);
+			background: rgba(176, 175, 175, 0.488);
+
 			transition: transform 0.3s ease-in-out;
 			opacity: 1;
 		}

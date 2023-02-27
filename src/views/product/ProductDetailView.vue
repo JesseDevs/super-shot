@@ -1,11 +1,10 @@
 <script setup>
-	import { computed, reactive, ref } from 'vue';
 	import { useRoute } from 'vue-router';
 
 	import OptionsForm from '@/components/OptionsForm.vue';
 	import { useInterfaceStore } from '@/stores/interface';
-	import { useFirestore, useDocument } from 'vuefire';
-	import { doc, collection, query, where, limit } from 'firebase/firestore';
+	import { useDocument } from 'vuefire';
+	import { query, where } from 'firebase/firestore';
 	import { useProductsService } from '@/services/ProductsService';
 	import { useUserService } from '../../services/UserService';
 
@@ -57,7 +56,7 @@
 					{{ product[0].desc }}
 				</p>
 
-				<button class="button" @click="user.addToCart(product[0])">
+				<button class="button" @click="user.cart.addToCart(product[0])">
 					<span class="price"> ${{ product[0].price }}</span
 					>Add to cart
 				</button>
@@ -128,8 +127,10 @@
 			grid-template-columns: 50% 50%;
 			justify-content: flex-start;
 			align-items: flex-start;
+			padding: 40px 0;
 
 			landing-block {
+				min-height: 300px;
 				&:after {
 					position: absolute;
 					top: 0;
@@ -137,10 +138,14 @@
 					content: '';
 					background-color: var(--black);
 					width: 1px;
-					height: 75vh;
+					height: 62vh;
 				}
 				border: none;
 				padding: 0 26px;
+			}
+
+			form.edit-form {
+				min-height: 300px;
 			}
 
 			div.option-block {
@@ -201,6 +206,7 @@
 			max-width: none;
 			min-width: auto;
 			width: 100%;
+			min-height: 200px;
 
 			div.option-block {
 				width: 100%;
@@ -210,6 +216,9 @@
 			h5 {
 				text-align: left;
 				grid-column: span 5;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
 			}
 		}
 	}
