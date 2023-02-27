@@ -1,17 +1,17 @@
-@import 'reset.css';
-@import 'setup.css';
-@import 'variables.css';
-@import 'typography.css';
-@import 'components.css';
+@import 'reset.scss';
+@import 'setup.scss';
+@import 'variables.scss';
+@import 'typography.scss';
+@import 'components.scss';
 
 .main-color {
 	color: var(--color);
-	font-weight: 700;
+	font-weight: 800;
 }
 
 .off-color {
 	color: var(--off-color);
-	font-weight: 700;
+	font-weight: 800;
 }
 
 .main-grid {
@@ -38,7 +38,7 @@
 		max-width: 1000px;
 		margin: 0 auto;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 
 	}
 }

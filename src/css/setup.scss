@@ -29,8 +29,6 @@ vue-app {
 	scroll-behavior: smooth;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
-	overflow: hidden
 }
 
 @media (min-width:500px) {
@@ -60,7 +58,7 @@ inner-column {
 	margin-left: auto;
 	background: var(--page);
 	padding: 1.5rem 1rem;
-	max-width: 1300px;
+	max-width: 1200px;
 	position: relative;
 }
 
