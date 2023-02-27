@@ -13,7 +13,7 @@
 </script>
 
 <template>
-	<header :class="`${route.name} ${ui.menuClass}`">
+	<header :class="`${route.name} ${ui.menuClass} ${ui.toggleFixedHeader} site-header`">
 		<inner-column>
 			<nav class="top-row">
 				<button class="menu-toggle" @click="ui.toggleMenu()" type="submit">
@@ -41,10 +41,11 @@
 			<nav class="site-menu bottom-row">
 				<SignInBlock />
 				<ul>
-					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/">Home</RouterLink>
+					<li class="desktop-view">
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/profile"
+							>Profile</RouterLink
+						>
 					</li>
-
 					<li>
 						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/menu">Menu</RouterLink>
 					</li>
@@ -74,7 +75,16 @@
 	</header>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	header.site-header.fixed-header {
+		position: fixed;
+		width: 100%;
+	}
+	header.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 300;
+	}
 	.fade-enter-active,
 	.fade-leave-active {
 		transition: opacity 0.2s;
@@ -97,8 +107,13 @@
 		gap: 10px;
 
 		.logo {
+			font-size: var(--step-5);
 			color: var(--off-color);
 			text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+
+			.main-color {
+				font-weight: 900;
+			}
 		}
 	}
 
@@ -126,7 +141,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		max-height: 40px;
+		height: 70px;
 		padding-top: 5px;
 
 		a {
@@ -152,6 +167,9 @@
 			align-items: center;
 			background-color: var(--page);
 			justify-content: space-between;
+			li.desktop-view {
+				display: none;
+			}
 			li {
 				width: 100%;
 			}
@@ -245,7 +263,7 @@
 			height: 100vh;
 			width: 100%;
 			z-index: 10;
-			top: 60px;
+			top: 90px;
 			ul {
 				display: flex;
 				height: 80%;
@@ -276,15 +294,10 @@
 		}
 	}
 
-	@media (min-width: 900px) {
+	@media (min-width: 800px) {
 		header inner-column {
 			padding: 0 1rem;
 			z-index: 100;
-
-			h3 {
-				flex: 1;
-				font-weight: 600;
-			}
 		}
 		nav.top-row {
 			display: none;
@@ -295,6 +308,32 @@
 
 			.logo {
 				display: block;
+				font-size: var(--step-2);
+			}
+
+			ul {
+				gap: 15px;
+				li.desktop-view {
+					display: block;
+				}
+
+				li:not(.logo) {
+					&:after {
+						content: '';
+						position: absolute;
+						bottom: 6px;
+						left: 50%;
+						transform: translateX(-50%);
+						width: 0;
+						height: 1px;
+						background-color: var(--color);
+						transition: width 0.3s ease-in-out; /* This will add a smooth transition effect to the border */
+					}
+
+					&:hover::after {
+						width: 50%;
+					}
+				}
 			}
 
 			ul li a {
