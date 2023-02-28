@@ -26,7 +26,7 @@ export const useUserService = defineStore('user', function () {
 		username: '',
 		firstN: '',
 		lastN: '',
-		// profilePic: '',
+		profilePic: '',
 	});
 
 	const userDocumnetReference = computed(function () {
@@ -45,10 +45,7 @@ export const useUserService = defineStore('user', function () {
 	const firstN = computed(() => userDocument.value?.firstN);
 	const lastN = computed(() => userDocument.value?.lastN);
 	const isAdmin = computed(() => userDocument.value?.roles?.admin);
-
-	// const profilePic = computed(function () {
-	// 	return userDocument.value?.profilePic;
-	// });
+	const profilePic = computed(() => userDocument.value?.profilePic);
 
 	function getCartDocument() {
 		const cartDocumnetReference = computed(function () {
@@ -114,7 +111,7 @@ export const useUserService = defineStore('user', function () {
 			email: e,
 			firstN: '',
 			lastN: '',
-			profilePic: '',
+			profilePic: '@/assets/profile/profile.webp',
 			roles: { guest: true },
 		});
 	}
@@ -191,6 +188,6 @@ export const useUserService = defineStore('user', function () {
 		firstN,
 		lastN,
 		email,
-		// profilePic,
+		profilePic,
 	};
 });
