@@ -6,11 +6,11 @@
 	<!-- <picture class="reward-pic"> </picture> -->
 	<rewards-module>
 		<module-thing>
-			<h1 class="yell-voice">
+			<h1 class="attention-voice">
 				<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
 			</h1>
 
-			<p class="intro">
+			<p class="intro tiny-voice">
 				Runnin' has its rewards. Join <span class="main-color">Dunkin</span
 				><span class="off-color">’ Rewards</span> to earn your choice of free food and drinks, unlock
 				Boosted Status to earn points faster and score members-only exclusive offers.

@@ -44,14 +44,14 @@
 			</div>
 		</transition>
 
-		<h2 class="chant-voice" v-if="user.cart.products.length">Shopping Cart</h2>
-		<h2 class="chant-voice" v-else>Empty Cart</h2>
-
-		<button v-if="!ui.editProductMode" @click="ui.toggleEditMode()" class="tiny-button tiny-voice">
-			Edit
-		</button>
-
-		<button v-else @click="ui.toggleEditMode()" class="tiny-button tiny-voice">Done</button>
+		<h2 class="chant-voice" v-if="user.cart.products?.length">Shopping Cart</h2>
+		<h2 class="chant-voice if-scenario" v-else>Empty Cart</h2>
+		<cart-actions v-if="user.cart.products?.length">
+			<button v-if="!ui.editProductMode" @click="ui.toggleEditMode()" class="tiny-button tiny-voice">
+				Edit
+			</button>
+			<button v-else @click="ui.toggleEditMode()" class="tiny-button tiny-voice">Done</button>
+		</cart-actions>
 
 		<ul>
 			<li class="item-in-cart" v-for="product in user.cart.groups">
@@ -81,11 +81,11 @@
 			</li>
 		</ul>
 
-		<div class="total-block">
+		<div class="total-block" v-if="user.cart.products?.length">
 			<text-content>
 				<p class="quantity">{{ user.cart.total }}</p>
 				<p class="letter-spacing">TOTAL</p>
-				<p>Example $20</p>
+				<p>Ex: $20</p>
 			</text-content>
 			<button class="trash-can" @click="user.cart.clearCart()">
 				<SvgIcon icon="trash" />
@@ -98,28 +98,32 @@
 </template>
 
 <style lang="scss">
+	cart-actions {
+		display: contents;
+	}
 	cart-modal {
 		position: fixed;
 		background-color: var(--color-soft);
 		right: 0;
-		top: 126px;
+		top: 129px;
 		width: 100%;
 
 		max-width: 90vh;
 		min-height: 82vh;
-		max-height: 90vh;
+		height: calc(100% - 130px);
+		max-height: 100vh;
 
 		display: flex;
 		align-items: flex-start;
 		flex-direction: column;
 
-		overflow-y: auto;
+		overflow-y: hidden;
 		overflow-x: hidden;
 		opacity: 0;
 		transform: translate(100%, 0);
 		z-index: 400;
 		pointer-events: none;
-		transition: all 0.3s ease-in-out;
+		transition: all 0.2s ease-in-out;
 
 		li:first-of-type {
 			border-top: 1px solid black;
@@ -136,6 +140,16 @@
 			width: 100%;
 			padding-bottom: 20px;
 			padding: 1.5rem 2rem;
+		}
+
+		h2.if-scenario {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			z-index: 500;
+			background-color: var(--off-color-soft);
+			height: 100%;
 		}
 
 		p.confirmation {
@@ -214,13 +228,16 @@
 			padding-right: 5px;
 		}
 	}
-	.cart-open cart-modal {
-		opacity: 1;
-		transform: translate(0, 0);
-		pointer-events: initial;
-
-		inner-column * {
+	.cart-open {
+		margin-top: 130px;
+		cart-modal {
 			opacity: 1;
+			transform: translate(0, 0);
+			pointer-events: initial;
+
+			inner-column * {
+				opacity: 1;
+			}
 		}
 	}
 

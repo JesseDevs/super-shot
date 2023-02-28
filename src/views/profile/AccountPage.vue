@@ -45,10 +45,7 @@
 <template>
 	<account-page>
 		<div class="account-display-box">
-			<picture v-if="!user.profilePic">
-				<img src="@/assets/profile/profile.webp" alt="pic" />
-			</picture>
-			<picture v-else>
+			<picture>
 				<img :src="user.profilePic" alt="pic" />
 			</picture>
 		</div>

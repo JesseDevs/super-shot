@@ -18,9 +18,9 @@
 </script>
 <template v-if="current">
 	<module-thing v-if="route.name === 'category-detail'">
-		<h1 class="loud-voice">{{ current[0].title }}</h1>
+		<h1 class="attention-voice">{{ current[0].title }}</h1>
 
-		<p class="intro">{{ current[0].info }}</p>
+		<p class="intro tiny-voice">{{ current[0].info }}</p>
 	</module-thing>
 </template>
 
@@ -41,13 +41,11 @@
 		}
 
 		.intro {
-			font-size: clamp(0.78rem, calc(0.74rem + 0.22vw), 0.9rem);
 			max-width: 45ch;
 		}
 
 		@media (min-width: 600px) {
 			.intro {
-				font-size: clamp(0.94rem, calc(0.87rem + 0.34vw), 1.13rem);
 				max-width: 64ch;
 			}
 		}

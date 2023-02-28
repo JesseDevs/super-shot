@@ -22,9 +22,9 @@
 <template>
 	<search-div v-if="p">
 		<module-thing>
-			<h1 class="loud-voice">{{ pageData.title }}</h1>
+			<h1 class="attention-voice">{{ pageData.title }}</h1>
 
-			<p class="intro">{{ pageData.subHeading }}</p>
+			<p class="intro tiny-voice">{{ pageData.subHeading }}</p>
 		</module-thing>
 
 		<form action="">
@@ -38,13 +38,13 @@
 	</search-div>
 	<ul class="main-grid">
 		<li v-for="product in filtered">
-			<RouterLink :to="`menu/${product.category}/${product.id}`">
+			<RouterLink :to="`menu/${product.category}/${product.slug}`">
 				<general-card>
 					<picture class="item-picture">
 						<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
 					</picture>
 					<div class="name-highlight">
-						<span class="small-voice">{{ product.name.toUpperCase() }}</span>
+						<span class="tiny-voice">{{ product.name.toUpperCase() }}</span>
 					</div>
 				</general-card>
 			</RouterLink>
