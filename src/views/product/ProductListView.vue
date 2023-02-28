@@ -12,7 +12,7 @@
 							<img :src="`${product.imageURL}`" alt="iced" loading="lazy" />
 						</picture>
 						<div class="name-highlight">
-							<span class="small-voice">{{ product.name }}</span>
+							<span class="tiny-voice">{{ product.name }}</span>
 						</div>
 					</general-card>
 				</RouterLink>
@@ -63,13 +63,11 @@
 				margin: 5px 0;
 			}
 			.intro {
-				font-size: clamp(0.65rem, calc(0.63rem + 0.13vw), 0.72rem);
 				max-width: 53ch;
 			}
 
 			@media (min-width: 600px) {
 				.intro {
-					font-size: clamp(0.94rem, calc(0.87rem + 0.34vw), 1.13rem);
 					max-width: 64ch;
 				}
 			}

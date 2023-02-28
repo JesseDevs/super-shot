@@ -22,10 +22,10 @@
 
 <template>
 	<signin-block v-if="user.authUser">
-		<h3 class="username-name">{{ user.username }}</h3>
-		<RouterLink class="username-link" @click="ui.specificToggle()" to="/profile"
-			><h3>{{ user.username }}</h3></RouterLink
-		>
+		<h3 class="username-name strict-voice">{{ user.username }}</h3>
+		<RouterLink class="username-link small-voice" @click="ui.specificToggle()" to="/profile">
+			<h3>{{ user.username }}</h3>
+		</RouterLink>
 		<actions-block>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/profile">Profile</RouterLink>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>

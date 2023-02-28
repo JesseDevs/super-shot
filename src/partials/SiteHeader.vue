@@ -1,15 +1,14 @@
 <script setup>
-	import { ref } from 'vue';
 	import { RouterLink, useRoute } from 'vue-router';
 	import { useInterfaceStore } from '@/stores/interface';
-	import { useCartStore } from '../stores/cart';
 	import burger from '@/assets/images/burger-icon.vue';
 	import SvgIcon from '@/partials/SvgIcon.vue';
 	import SignInBlock from '@/components/SignInBlock.vue';
+	import { useUserService } from '@/services/UserService';
 
+	const user = useUserService();
 	const ui = useInterfaceStore();
 	const route = useRoute();
-	const cart = useCartStore();
 </script>
 
 <template>
@@ -20,15 +19,15 @@
 					<burger />
 				</button>
 
-				<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/"
+				<RouterLink class="chant-voice logo" @click="ui.specificToggle()" to="/"
 					><span class="main-color">Dunkin</span><span class="off-color">’ </span></RouterLink
 				>
 
 				<transition name="fade" mode="out-in">
 					<div v-if="!ui.cartMenuOpen" class="strict-voice cart-container" @click="ui.toggleCart()">
 						<SvgIcon icon="basket" />
-						<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
-							{{ cart.itemsInCart }}
+						<div class="items-cart-value" v-if="user.cart.products?.length">
+							{{ user.cart.products?.length }}
 						</div>
 					</div>
 
@@ -42,12 +41,12 @@
 				<SignInBlock />
 				<ul>
 					<li class="desktop-view">
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/profile"
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/profile"
 							>Profile</RouterLink
 						>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/menu">Menu</RouterLink>
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/menu">Menu</RouterLink>
 					</li>
 
 					<li class="logo">
@@ -57,17 +56,15 @@
 					</li>
 
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/search"
-							>Search</RouterLink
-						>
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/search">Search</RouterLink>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/rewards"
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/rewards"
 							>Rewards</RouterLink
 						>
 					</li>
 					<li v-if="ui.mainMenuOpen">
-						<a target="git" href="https://github.com/JesseDevs/super-shot">GitHub</a>
+						<a target="git" class="tiny-voice" href="https://github.com/JesseDevs/super-shot">GitHub</a>
 					</li>
 				</ul>
 			</nav>
@@ -107,7 +104,6 @@
 		gap: 10px;
 
 		.logo {
-			font-size: var(--step-5);
 			color: var(--off-color);
 			text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
 
@@ -258,6 +254,7 @@
 			position: fixed;
 			height: 100%;
 		}
+
 		nav.site-menu {
 			position: fixed;
 			height: 100vh;
@@ -275,6 +272,9 @@
 
 				li {
 					width: 100%;
+				}
+				a.tiny-voice {
+					font-size: var(--step-2);
 				}
 				a {
 					padding: 7px 50px;

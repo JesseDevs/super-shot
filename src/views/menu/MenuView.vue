@@ -15,11 +15,11 @@
 		<!-- <ReturnNav v-if="route.path !== '/menu'" /> -->
 
 		<module-thing v-if="route.name === 'menu/list'">
-			<h1 class="loud-voice">
+			<h1 class="attention-voice">
 				<span class="main-color">Dunkin</span><span class="off-color">’ </span> CLASSICS & NEW FAVORITES
 			</h1>
 
-			<p class="intro">
+			<p class="intro tiny-voice">
 				{{ pageData.subHeading }}
 			</p>
 		</module-thing>

@@ -8,7 +8,7 @@
 			<picture class="item-picture">
 				<img :src="`${category.imageURL}`" :alt="`${category.slug}`" loading="lazy" />
 			</picture>
-			<div class="name-highlight">
+			<div class="name-highlight small-voice">
 				<span>{{ category.title.toUpperCase() }}</span>
 			</div>
 		</general-card>
@@ -45,8 +45,7 @@
 		border-radius: 50px;
 		margin: 0 auto;
 		padding: 10px;
-
-		width: 90%;
+		width: 100%;
 		max-width: 244px;
 		height: 40px;
 

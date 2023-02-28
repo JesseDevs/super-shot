@@ -51,8 +51,8 @@
 
 			<text-content>
 				<h5 class="chant-voice">{{ product[0].name }}</h5>
-				<p class="tag">{{ product[0].tagline }}</p>
-				<p class="intro">
+				<p class="tag small-voice">{{ product[0].tagline }}</p>
+				<p class="intro tiny-voice">
 					{{ product[0].desc }}
 				</p>
 
@@ -84,7 +84,7 @@
 			align-items: center;
 			justify-content: center;
 			position: relative;
-			text-align: center;
+			text-align: left;
 			gap: 10px;
 			width: fit-content;
 			border-bottom: 1px solid var(--black);
@@ -93,6 +93,7 @@
 
 			text-content {
 				align-items: flex-start;
+				gap: 8px;
 			}
 
 			button {
@@ -110,18 +111,17 @@
 			}
 
 			p.tag {
-				font-weight: 600;
+				font-weight: 500;
 				margin: 5px 0;
+				color: var(--color-mute);
 			}
 			.intro {
-				font-size: clamp(0.65rem, calc(0.63rem + 0.13vw), 0.72rem);
 				max-width: 53ch;
 				text-align: left;
 			}
 
 			@media (min-width: 600px) {
 				.intro {
-					font-size: clamp(0.94rem, calc(0.87rem + 0.34vw), 1.13rem);
 					max-width: 64ch;
 				}
 			}

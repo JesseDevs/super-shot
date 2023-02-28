@@ -11,7 +11,7 @@
 			<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
 		</h1>
 
-		<p class="intro">
+		<p class="intro tiny-voice">
 			{{ pageData.subHeading }}
 		</p>
 
@@ -81,6 +81,9 @@
 
 		ul {
 			margin: 3vh auto;
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
 		}
 	}
 
@@ -98,6 +101,7 @@
 		p {
 			text-align: center;
 			margin: 0 auto;
+			max-width: 80%;
 		}
 
 		p,
