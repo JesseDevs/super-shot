@@ -71,19 +71,19 @@ const router = createRouter({
 			path: '/create',
 			name: 'create',
 			component: CreateView,
-			meta: { requiresAuth: true },
+			meta: { requiresAuth: true, requiresAdmin: true },
 			children: [
 				{
 					path: '/create-category',
 					name: 'create-category',
 					component: CreateCategoryView,
-					meta: { requiresAuth: true },
+					meta: { requiresAuth: true, requiresAdmin: true },
 				},
 				{
 					path: '/create-product',
 					name: 'create-product',
 					component: CreateProductView,
-					meta: { requiresAuth: true },
+					meta: { requiresAuth: true, requiresAdmin: true },
 				},
 			],
 		},
@@ -170,6 +170,17 @@ router.beforeEach(async (to) => {
 		if (!currentUser) {
 			return {
 				path: '/sign-in',
+				query: {
+					redirect: to.fullPath,
+				},
+			};
+		}
+	}
+	if (to.meta.requiresAuth) {
+		await user.getUserDocument;
+		if (!user.isAdmin) {
+			return {
+				path: '/',
 				query: {
 					redirect: to.fullPath,
 				},
