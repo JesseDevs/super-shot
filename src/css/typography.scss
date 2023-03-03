@@ -1,60 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-	/* Step -1: 14.22px → 14.40px */
-	--step--1: clamp(0.89rem, calc(0.88rem + 0.02vw), 0.90rem);
-
-	/* Step 0: 16.00px → 18.00px */
+	--step--2: clamp(0.78rem, calc(0.79rem + -0.02vw), 0.79rem);
+	--step--1: clamp(0.89rem, calc(0.87rem + 0.09vw), 0.94rem);
 	--step-0: clamp(1.00rem, calc(0.95rem + 0.23vw), 1.13rem);
-
-	/* Step 1: 18.00px → 22.50px */
-	--step-1: clamp(1.13rem, calc(1.02rem + 0.51vw), 1.41rem);
-
-	/* Step 2: 20.25px → 28.13px */
-	--step-2: clamp(1.27rem, calc(1.09rem + 0.90vw), 1.76rem);
-
-	/* Step 3: 22.78px → 35.16px */
-	--step-3: clamp(1.42rem, calc(1.14rem + 1.41vw), 2.20rem);
-
-	/* Step 4: 25.63px → 43.95px */
-	--step-4: clamp(1.60rem, calc(1.19rem + 2.08vw), 2.75rem);
-
-	/* Step 5: 28.83px → 54.93px */
-	--step-5: clamp(1.80rem, calc(1.21rem + 2.97vw), 3.43rem);
-
-	/* Step 6: 32.44px → 68.66px */
-	--step-6: clamp(2.03rem, calc(1.20rem + 4.12vw), 4.29rem);
-
-	/* Step 7: 36.49px → 85.83px */
-	--step-7: clamp(2.28rem, calc(1.16rem + 5.61vw), 5.36rem);
-
-	/* Step 8: 41.05px → 107.29px */
-	--step-8: clamp(2.57rem, calc(1.06rem + 7.53vw), 6.71rem);
+	--step-1: clamp(1.13rem, calc(1.04rem + 0.41vw), 1.35rem);
+	--step-2: clamp(1.27rem, calc(1.14rem + 0.64vw), 1.62rem);
+	--step-3: clamp(1.42rem, calc(1.23rem + 0.95vw), 1.94rem);
+	--step-4: clamp(1.60rem, calc(1.34rem + 1.33vw), 2.33rem);
+	--step-5: clamp(1.80rem, calc(1.44rem + 1.81vw), 2.80rem);
+	--step-6: clamp(2.03rem, calc(1.54rem + 2.42vw), 3.36rem);
 }
 
 .roar-voice {
-	font-size: var(--step-8);
+	font-size: var(--step-6);
 	text-transform: uppercase;
 }
 
 .yell-voice {
-	font-size: var(--step-7);
-}
-
-.loud-voice {
-	font-size: var(--step-6);
-}
-
-.attention-voice {
 	font-size: var(--step-5);
 }
 
-.chant-voice {
+.loud-voice {
 	font-size: var(--step-4);
 }
 
-.strict-voice {
+.attention-voice {
 	font-size: var(--step-3);
+}
+
+.chant-voice {
+	font-size: var(--step-2);
+}
+
+.strict-voice {
+	font-size: var(--step-1);
 }
 
 .calm-voice,
@@ -63,17 +43,17 @@ li,
 a,
 button {
 
-	font-size: var(--step-2);
+	font-size: var(--step-0);
 
 }
 
 small,
 .small-voice {
-	font-size: var(--step-1);
+	font-size: var(--step--1);
 }
 
 .tiny-voice {
-	font-size: var(--step-0);
+	font-size: var(--step--2);
 }
 
 :is(.calm-voice, p, li) em {

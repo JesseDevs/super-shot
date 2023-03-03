@@ -4,6 +4,24 @@
 @import 'typography.scss';
 @import 'components.scss';
 
+.cart-open {
+	margin-top: 126px;
+
+	cart-modal {
+		opacity: 1;
+		transform: translate(0, 0);
+		pointer-events: initial;
+
+		inner-column * {
+			opacity: 1;
+		}
+	}
+
+	@media (min-width: 600px) {
+		margin-top: 0;
+	}
+}
+
 .main-color {
 	color: var(--color);
 	font-weight: 800;
