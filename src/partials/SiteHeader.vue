@@ -19,7 +19,7 @@
 					<burger />
 				</button>
 
-				<RouterLink class="chant-voice logo" @click="ui.specificToggle()" to="/"
+				<RouterLink class="loud-voice logo" @click="ui.specificToggle()" to="/"
 					><span class="main-color">Dunkin</span><span class="off-color">’ </span></RouterLink
 				>
 
@@ -41,30 +41,34 @@
 				<SignInBlock />
 				<ul>
 					<li class="desktop-view">
-						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/profile"
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/profile"
 							>Profile</RouterLink
 						>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/menu">Menu</RouterLink>
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/menu">Menu</RouterLink>
 					</li>
 
 					<li class="logo">
-						<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/"
+						<RouterLink class="attention-voice logo" @click="ui.specificToggle()" to="/"
 							><span class="main-color">Dunkin</span><span class="off-color">’</span></RouterLink
 						>
 					</li>
 
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/search">Search</RouterLink>
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/search"
+							>Search</RouterLink
+						>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/rewards"
+						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/rewards"
 							>Rewards</RouterLink
 						>
 					</li>
 					<li v-if="ui.mainMenuOpen">
-						<a target="git" class="tiny-voice" href="https://github.com/JesseDevs/super-shot">GitHub</a>
+						<a target="git" class="small-voice" href="https://github.com/JesseDevs/super-shot"
+							>GitHub</a
+						>
 					</li>
 				</ul>
 			</nav>
@@ -76,7 +80,12 @@
 	header.site-header.fixed-header {
 		position: fixed;
 		width: 100%;
+
+		@media (min-width: 600px) {
+			position: static;
+		}
 	}
+
 	header.site-header {
 		position: sticky;
 		top: 0;
@@ -273,9 +282,7 @@
 				li {
 					width: 100%;
 				}
-				a.tiny-voice {
-					font-size: var(--step-2);
-				}
+
 				a {
 					padding: 7px 50px;
 					color: var(--support);
@@ -308,7 +315,6 @@
 
 			.logo {
 				display: block;
-				font-size: var(--step-2);
 			}
 
 			ul {
