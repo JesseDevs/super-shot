@@ -45,6 +45,7 @@
 </template>
 <style lang="scss">
 	create-thing {
+		margin: 0 auto;
 		h2 {
 			font-weight: 600;
 		}

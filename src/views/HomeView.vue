@@ -4,17 +4,18 @@
 
 <template>
 	<ad-block>
-		<p>Come run with us! Apply to join our exceptional team <RouterLink to="/sign-up">here</RouterLink>.</p>
+		<p class="small-voice">
+			Come run with us! Apply to join our exceptional team <RouterLink to="/sign-up">here</RouterLink>.
+		</p>
 	</ad-block>
 	<home-module>
 		<h1 class="yell-voice">
 			<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
 		</h1>
 
-		<p class="intro tiny-voice">
+		<p class="intro strict-voice">
 			{{ pageData.subHeading }}
 		</p>
-
 		<ul>
 			<li>
 				<dunkin-card>
@@ -69,8 +70,7 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		gap: 1vh;
-		margin-top: 5vh;
+		margin-top: 8vh;
 		h1 {
 			font-weight: 700;
 		}
@@ -106,7 +106,7 @@
 
 		p,
 		a {
-			font-size: var(--step--1);
+			font-size: var(--step-0);
 		}
 
 		p a {
