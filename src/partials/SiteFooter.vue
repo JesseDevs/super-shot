@@ -5,7 +5,10 @@
 		<inner-column>
 			<nav>
 				<div class="quick-links">
-					<h4 class="strict-voice">Quick Links</h4>
+					<h4>
+						<span></span>
+						<p class="tiny-voice">Quick Links</p>
+					</h4>
 					<ul>
 						<li>
 							<RouterLink class="tiny-voice" to="/">Home</RouterLink>
@@ -24,6 +27,63 @@
 						</li>
 					</ul>
 				</div>
+
+				<div class="quick-links">
+					<h4>
+						<span></span>
+						<p class="tiny-voice">Follow Us</p>
+					</h4>
+					<ul class="follow-link">
+						<li>
+							<a class="tiny-voice" target="social" href="https://twitter.com/dunkindonuts?lang=en">
+								<SvgIcon icon="social-twitter" />
+							</a>
+						</li>
+						<li>
+							<a class="tiny-voice" target="social" href="https://www.instagram.com/dunkin/?hl=en">
+								<SvgIcon icon="social-instagram" />
+							</a>
+						</li>
+						<li>
+							<a class="tiny-voice" target="social" href="https://www.pinterest.com/DunkinDonuts/">
+								<SvgIcon icon="social-pinterest" />
+							</a>
+						</li>
+						<li>
+							<a class="tiny-voice" target="social" href="https://www.youtube.com/user/dunkindonuts#">
+								<SvgIcon icon="social-youtube" />
+							</a>
+						</li>
+						<li>
+							<a class="tiny-voice" target="social" href="https://www.facebook.com/DunkinUS/">
+								<SvgIcon icon="social-facebook" />
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="quick-links">
+					<h4>
+						<span></span>
+						<p class="tiny-voice">Our Partners</p>
+					</h4>
+					<ul class="partner-list">
+						<li>
+							<a href="http://www.jetblue.com/" target="partner">
+								<picture>
+									<img src="@/assets/dunkin-images/jetblue.png" alt="" />
+								</picture>
+							</a>
+						</li>
+						<li>
+							<a href="http://www.baskinrobbins.com/" target="partner">
+								<picture>
+									<img src="@/assets/dunkin-images/BR_Logo_New.png" alt="" />
+								</picture>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</nav>
 		</inner-column>
 	</footer>
@@ -32,42 +92,38 @@
 <style lang="scss">
 	footer.site-footer {
 		border-top: 1px solid var(--support-light);
-		background-color: rgba(241, 238, 238, 0.708);
+		background-color: rgba(239, 237, 237);
 	}
 	footer {
 		.quick-links {
-			width: 260px;
+			width: 100%;
 			margin: 0 auto;
 			display: flex;
 			flex-direction: column;
-			gap: 20px;
+			gap: 10px;
 		}
 
 		h4 {
 			text-align: center;
-			padding: 5px;
-			z-index: 21;
-			&:before {
-				width: 25%;
+			text-transform: uppercase;
+
+			p {
+				width: fit-content;
+				margin: 0 auto;
+				z-index: 21;
+				background-color: rgba(239, 237, 237);
+				padding: 5px 10px;
+			}
+			span {
+				width: 100%;
 				position: absolute;
 				height: 1px;
 				background-color: var(--support-mute);
 				content: '';
 
 				right: 0;
-				top: 50%;
-				z-index: 20;
-			}
-			&:after {
-				width: 25%;
-				position: absolute;
-				height: 1px;
-				background-color: var(--support-mute);
-				content: '';
-
-				left: 0;
-				top: 50%;
-				z-index: 20;
+				top: 15px;
+				z-index: 19;
 			}
 		}
 
@@ -88,6 +144,17 @@
 				text-decoration: none;
 			}
 		}
+
+		.partner-list {
+			gap: 25px;
+			align-items: center;
+		}
+
+		.follow-link {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+		}
 		inner-column {
 			padding: 2rem 2rem;
 			background-color: transparent;
@@ -95,8 +162,14 @@
 			nav {
 				display: grid;
 				grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-				gap: 20px;
+				gap: 30px;
 			}
+		}
+		picture img {
+			max-width: 70px;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
 		}
 	}
 </style>
