@@ -45,8 +45,8 @@
 <template>
 	<account-page>
 		<div class="account-display-box">
-			<picture>
-				<img :src="user.profilePic" alt="pic" />
+			<picture class="profile-poc">
+				<img src="@/assets/profile/profile.webp" alt="pic" />
 			</picture>
 		</div>
 		<div class="account-display-box">
@@ -141,6 +141,12 @@
 		picture {
 			margin: 0;
 			margin-bottom: 20px;
+			img {
+				max-height: none;
+				width: fit-content;
+				height: fit-content;
+				max-width: 300px;
+			}
 		}
 	}
 	.v-enter-active,

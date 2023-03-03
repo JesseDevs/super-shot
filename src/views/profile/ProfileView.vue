@@ -5,7 +5,7 @@
 </script>
 
 <template>
-	<project-page>
+	<profile-page>
 		<h1 class="loud-voice">Welcome, {{ user.username }}</h1>
 		<nav>
 			<ul>
@@ -24,14 +24,14 @@
 		<main class="outlet">
 			<RouterView />
 		</main>
-	</project-page>
+	</profile-page>
 </template>
 
 <style lang="scss">
-	project-page {
+	profile-page {
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 30px;
 
 		nav ul {
 			display: flex;
