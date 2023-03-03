@@ -69,12 +69,12 @@
 
 						<edit-links v-if="ui.editProductMode">
 							<button class="tiny-voice" @click="toggleQuantityMode()">Quantity</button>
-							<button class="tiny-voice" @click="remove(`${product.id}`)">Delete</button>
+							<button class="tiny-voice" @click="nothing()">Delete</button>
 						</edit-links>
 						<div v-if="quantityMode" class="quantity-counter">
-							<button>-</button>
+							<button @click="user.cart.groupMinus(product[0])">-</button>
 							{{ product.quantity }}
-							<button @click="increment(product.quantity)">+</button>
+							<button @click="user.cart.groupPlus(product[0])">+</button>
 						</div>
 					</cart-card>
 				</RouterLink>
@@ -100,17 +100,28 @@
 <style lang="scss">
 	cart-actions {
 		display: contents;
+
+		button {
+			border: 2px solid black;
+			background-color: var(--color);
+
+			&:hover {
+				box-shadow: inset 0 0 0 2em white;
+				color: var(--black);
+				border-color: var(--off-color-mute);
+			}
+		}
 	}
 	cart-modal {
 		position: fixed;
-		background-color: var(--color-soft);
+		background-color: var(--off-color-soft);
 		right: 0;
-		top: 129px;
+		top: 126px;
 		width: 100%;
 
 		max-width: 90vh;
 		min-height: 82vh;
-		height: calc(100% - 130px);
+		height: calc(100% - 126px);
 		max-height: 100vh;
 
 		display: flex;
@@ -173,7 +184,13 @@
 
 		.checkout-btn {
 			border: 2px solid black;
-			background-color: var(--off-color);
+			background-color: var(--color);
+
+			&:hover {
+				box-shadow: inset 0 0 0 2em white;
+				color: var(--black);
+				border-color: var(--off-color-mute);
+			}
 		}
 
 		.tiny-button {
@@ -181,6 +198,13 @@
 			right: 1rem;
 			top: 1.5rem;
 			border: 2px solid black;
+			background-color: var(--color);
+
+			&:hover {
+				box-shadow: inset 0 0 0 2em white;
+				color: var(--black);
+				border-color: var(--off-color-mute);
+			}
 		}
 
 		.trash-can {
@@ -192,16 +216,20 @@
 			.contains-svg {
 				width: 30px;
 				height: 30px;
+
+				svg * {
+					fill: black;
+				}
 			}
 		}
 
 		ul {
 			width: 100%;
 			flex: 1;
-			background-color: var(--color-mute);
+			background-color: var(--off-color-mute);
 
 			li {
-				background-color: var(--color-soft);
+				background-color: var(--off-color-soft);
 			}
 		}
 
@@ -226,18 +254,6 @@
 		p.quantity {
 			padding-left: 5px;
 			padding-right: 5px;
-		}
-	}
-	.cart-open {
-		margin-top: 130px;
-		cart-modal {
-			opacity: 1;
-			transform: translate(0, 0);
-			pointer-events: initial;
-
-			inner-column * {
-				opacity: 1;
-			}
 		}
 	}
 
@@ -270,7 +286,7 @@
 			zoom: 0.8;
 			max-width: 400px;
 			right: 2rem;
-			top: 73px;
+			top: 85px;
 			max-height: 80vh;
 			border-radius: 25px;
 			border: 2px solid black;

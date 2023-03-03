@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { computed, reactive } from 'vue';
-
 import {
 	getAuth,
 	createUserWithEmailAndPassword,
@@ -9,7 +8,7 @@ import {
 } from 'firebase/auth';
 
 import { useCurrentUser, useDocument } from 'vuefire';
-import { collection, addDoc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, doc, addDoc, deleteDoc, setDoc, query, where, limit } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -90,16 +89,29 @@ export const useUserService = defineStore('user', function () {
 			const cartRef = collection(userRef, 'cart');
 
 			const cartQuerySnapshot = await getDocs(cartRef);
-			console.log(cartQuerySnapshot);
 			const cartDocs = cartQuerySnapshot.docs;
-			console.log(cartDocs);
 
 			cartDocs.forEach(async (doc) => {
 				await deleteDoc(doc.ref);
 			});
 		}
 
-		return { products: cartDocument, total, addToCart, itemAdded, groups, clearCart };
+		async function groupPlus(item) {
+			await addDoc(collection(db, 'users', id.value, 'cart'), item);
+		}
+
+		async function groupMinus(item) {}
+
+		return {
+			products: cartDocument,
+			total,
+			addToCart,
+			itemAdded,
+			groups,
+			clearCart,
+			groupPlus,
+			groupMinus,
+		};
 	}
 
 	const cart = getCartDocument();
@@ -189,5 +201,6 @@ export const useUserService = defineStore('user', function () {
 		lastN,
 		email,
 		profilePic,
+		isAdmin,
 	};
 });
