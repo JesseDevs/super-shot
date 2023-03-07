@@ -1,15 +1,11 @@
 <script setup>
 	import { computed, ref } from 'vue';
-	import { useCartStore } from '../stores/cart';
 	import { useInterfaceStore } from '@/stores/interface';
-	import { useRoute } from 'vue-router';
 	import SvgIcon from '@/partials/SvgIcon.vue';
 	import { useUserService } from '@/services/UserService';
 
 	const user = useUserService();
-	const cart = useCartStore();
 	const ui = useInterfaceStore();
-	const route = useRoute();
 	const opacity = ref(1);
 
 	const quantityMode = ref(false);
@@ -72,7 +68,7 @@
 							<button class="tiny-voice" @click="nothing()">Delete</button>
 						</edit-links>
 						<div v-if="quantityMode" class="quantity-counter">
-							<button @click="user.cart.groupMinus(product[0])">-</button>
+							<button @click="user.cart.groupMinus(product[0].slug)">-</button>
 							{{ product.quantity }}
 							<button @click="user.cart.groupPlus(product[0])">+</button>
 						</div>

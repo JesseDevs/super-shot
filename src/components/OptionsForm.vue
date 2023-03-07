@@ -174,6 +174,15 @@
 		display: flex;
 		gap: 10px;
 
+		li {
+			transition: background-color 0.3s ease-in-out;
+			border-radius: 50%;
+		}
+
+		li:hover {
+			background-color: var(--off-color-soft);
+		}
+
 		label {
 			cursor: default;
 			display: block;
