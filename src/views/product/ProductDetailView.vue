@@ -2,7 +2,6 @@
 	import { useRoute } from 'vue-router';
 
 	import OptionsForm from '@/components/OptionsForm.vue';
-	import { useInterfaceStore } from '@/stores/interface';
 	import { useDocument } from 'vuefire';
 	import { query, where } from 'firebase/firestore';
 	import { useProductsService } from '@/services/ProductsService';
@@ -45,6 +44,9 @@
 <template>
 	<edit-block>
 		<landing-block v-if="product">
+			<button type="button" :class="`heart ${user.favs.favSelected}`" @click="user.favs.toggleFavMode()">
+				<SvgIcon icon="heart" />
+			</button>
 			<picture class="item-picture">
 				<img :src="`${product[0].imageURL}`" alt="iced" loading="lazy" />
 			</picture>
@@ -71,6 +73,7 @@
 		padding-right: 15px;
 		font-size: var(--step-0);
 	}
+
 	edit-block {
 		display: flex;
 		flex-direction: column;
@@ -99,7 +102,6 @@
 			button {
 				margin-top: 20px;
 				align-self: flex-end;
-				border: 2px solid black !important;
 			}
 
 			picture.item-picture img {
@@ -118,6 +120,27 @@
 			.intro {
 				max-width: 53ch;
 				text-align: left;
+			}
+
+			button.heart {
+				position: absolute;
+				top: 0;
+				left: 26px;
+				padding: 10px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 50%;
+				outline: none;
+				background-color: var(--support-light);
+
+				border: none !important;
+
+				&.selected-fav {
+					.contains-svg * {
+						fill: red;
+					}
+				}
 			}
 
 			@media (min-width: 600px) {
