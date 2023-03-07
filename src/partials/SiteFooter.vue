@@ -93,6 +93,10 @@
 	footer.site-footer {
 		border-top: 1px solid var(--support-light);
 		background-color: rgba(239, 237, 237);
+		inner-column {
+			max-width: 600px;
+			margin: 0 auto;
+		}
 	}
 	footer {
 		.quick-links {
@@ -101,6 +105,10 @@
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
+		}
+
+		.quick-links:last-of-type {
+			grid-column: span 2;
 		}
 
 		h4 {
@@ -160,8 +168,8 @@
 			background-color: transparent;
 
 			nav {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+				display: flex;
+				flex-direction: column;
 				gap: 30px;
 			}
 		}
@@ -170,6 +178,17 @@
 			justify-content: center;
 			align-items: center;
 			margin: 0 auto;
+		}
+	}
+
+	@media (min-width: 600px) {
+		footer {
+			inner-column {
+				nav {
+					display: grid;
+					grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+				}
+			}
 		}
 	}
 </style>

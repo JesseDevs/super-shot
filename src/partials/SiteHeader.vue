@@ -91,15 +91,6 @@
 		top: 0;
 		z-index: 300;
 	}
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: opacity 0.2s;
-	}
-
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
-	}
 
 	body.menu-open {
 		display: block;
