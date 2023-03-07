@@ -6,6 +6,7 @@ import {
 	signOut as fbSignOut,
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
+import slugid from 'slugid';
 
 import { useCurrentUser, useDocument } from 'vuefire';
 import { collection, doc, addDoc, deleteDoc, setDoc, query, where, limit } from 'firebase/firestore';
@@ -46,6 +47,27 @@ export const useUserService = defineStore('user', function () {
 	const isAdmin = computed(() => userDocument.value?.roles?.admin);
 	const profilePic = computed(() => userDocument.value?.profilePic);
 
+	function getFavoritesDocument() {
+		const fav = ref(false);
+		function toggleFavMode() {
+			fav.value = !fav.value;
+		}
+		const favSelected = computed(() => {
+			if (fav.value) {
+				return 'selected-fav';
+			} else return 'blank';
+		});
+		async function addToFavorites(item) {
+			addDoc(collection(db, 'users', id.value, 'favorites'), item);
+		}
+
+		return {
+			addToFavorites,
+			toggleFavMode,
+			favSelected,
+		};
+	}
+
 	function getCartDocument() {
 		const cartDocumnetReference = computed(function () {
 			if (id.value) {
@@ -67,13 +89,9 @@ export const useUserService = defineStore('user', function () {
 		const itemAdded = ref(false);
 
 		async function addToCart(item) {
-			addDoc(collection(db, 'users', id.value, 'cart'), item);
-
-			itemAdded.value = true;
-
-			setTimeout(() => {
-				itemAdded.value = false;
-			}, 1000);
+			const itemId = slugid.nice();
+			const itemWithId = { itemId, ...item };
+			await addDoc(collection(db, 'users', id.value, 'cart'), itemWithId);
 		}
 
 		const groups = computed(function () {
@@ -100,7 +118,16 @@ export const useUserService = defineStore('user', function () {
 			await addDoc(collection(db, 'users', id.value, 'cart'), item);
 		}
 
-		async function groupMinus(item) {}
+		async function groupMinus(slug) {
+			const querySnapshot = await getDocs(collection(db, 'users', id.value, 'cart'));
+			for (let item of querySnapshot.docs) {
+				console.log(item);
+				if (item.slug == slug) {
+					await deleteDoc(doc(db, 'users', id.value, 'cart', item.id));
+					break;
+				}
+			}
+		}
 
 		return {
 			products: cartDocument,
@@ -115,6 +142,7 @@ export const useUserService = defineStore('user', function () {
 	}
 
 	const cart = getCartDocument();
+	const favs = getFavoritesDocument();
 
 	function alsoCreateUserDoc(userId, u, e) {
 		// Create a new user document in Firestore
@@ -195,6 +223,7 @@ export const useUserService = defineStore('user', function () {
 		form,
 		updateProfile,
 		cart,
+		favs,
 		getUserDocument,
 		username,
 		firstN,

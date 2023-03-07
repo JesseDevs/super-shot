@@ -94,12 +94,7 @@ export const useProductsService = defineStore('products', function () {
 		db,
 		list,
 		productsData,
-		// editing,
 		form,
 		addCategory,
-		// removeCategory,
-		// editCategory,
-		// updateCategory,
-		// clearEdit,
 	};
 });
