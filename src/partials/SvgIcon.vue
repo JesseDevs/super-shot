@@ -11,6 +11,10 @@
 	div.contains-svg {
 		width: 30px;
 		height: 30px;
+
+		* {
+			transition: fill 0.1s ease-in-out;
+		}
 		svg * {
 			fill: var(--support);
 		}
