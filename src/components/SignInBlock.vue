@@ -30,12 +30,18 @@
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/profile">Profile</RouterLink>
 			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>
 		</actions-block>
-		<div class="strict-voice cart-container" @click="ui.toggleCart()">
-			<SvgIcon icon="basket" />
-			<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
-				{{ cart.itemsInCart }}
+		<transition name="fade" mode="out-in">
+			<div v-if="!ui.cartMenuOpen" class="strict-voice cart-container" @click="ui.toggleCart()">
+				<SvgIcon icon="basket" />
+				<div class="items-cart-value" v-if="user.cart.products?.length">
+					{{ user.cart.products?.length }}
+				</div>
 			</div>
-		</div>
+
+			<div v-else class="strict-voice cart-container" @click="ui.toggleCart()">
+				<SvgIcon icon="times" />
+			</div>
+		</transition>
 	</signin-block>
 
 	<signin-block v-else>
@@ -47,18 +53,47 @@
 			Not a Dunkin’ Rewards memeber?
 			<RouterLink class="tiny-voice" to="/rewards">Learn More</RouterLink>
 		</p>
-		<div class="strict-voice cart-container" @click="ui.toggleCart()">
-			<SvgIcon icon="basket" />
-			<div class="items-cart-value" v-if="cart.itemsInCart !== 0">
-				{{ cart.itemsInCart }}
+		<transition name="fade" mode="out-in">
+			<div v-if="!ui.cartMenuOpen" class="strict-voice cart-container" @click="ui.toggleCart()">
+				<SvgIcon icon="basket" />
+				<div class="items-cart-value" v-if="user.cart.products?.length">
+					{{ user.cart.products?.length }}
+				</div>
 			</div>
-		</div>
+
+			<div v-else class="strict-voice cart-container" @click="ui.toggleCart()">
+				<SvgIcon icon="times" />
+			</div>
+		</transition>
 	</signin-block>
 </template>
 <style lang="scss">
 	signin-block {
 		display: none;
 		transition: all ease-in-out 1000ms;
+
+		div.cart-container {
+			margin-right: 10px;
+		}
+
+		div.items-cart-value {
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			bottom: -8px;
+			right: -12px;
+			background-color: var(--color-soft);
+			border: 1.5px solid var(--color-mute);
+			color: var(--black-mute);
+			border-radius: 50px;
+			z-index: 10;
+			font-size: 0.75rem;
+			font-weight: 600;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		}
 	}
 
 	header.toggle-open {
