@@ -1,6 +1,7 @@
 <script setup>
 	import { reactive, watch, ref } from 'vue';
 	import { useUserService } from '../../services/UserService';
+	import SvgIcon from '@/partials/SvgIcon.vue';
 	const user = useUserService();
 
 	// const selectedFile = ref(null);
@@ -32,7 +33,7 @@
 
 	function closeUsernameEdit() {
 		editingUsername.value = false;
-		window.scrollTo(0, 0);
+		// window.scrollTo(0, 0);
 	}
 
 	function updateProfile() {
@@ -40,113 +41,160 @@
 			editingUsername.value = false;
 		}
 	}
+
+	const thumbnailSource = computed(function () {
+		if (user.url) {
+			return url;
+		} else {
+			return;
+		}
+	});
+
+	// make the form appear on top of their current info then submit
+	//have a button appear on the photo to add a photo when the customize button is clicked
 </script>
 
 <template>
-	<account-page>
-		<div class="account-display-box">
-			<picture class="profile-poc">
+	<account-page class="wrapper">
+		<div class="account-display-box profile-pic-container">
+			<picture class="profile-pic" v-if="user.profilePic == ''">
 				<img src="@/assets/profile/profile.webp" alt="pic" />
 			</picture>
-		</div>
-		<div class="account-display-box">
-			<p>{{ user.email }}</p>
-			<h6 class="small-voice">Email</h6>
-		</div>
-		<div class="account-display-box">
-			<p>
-				{{ user.username }}
-			</p>
-			<h6 class="small-voice">Username</h6>
-		</div>
-		<div class="account-display-box">
-			<p>
-				{{ user.firstN }}
-			</p>
-			<h6 class="small-voice">First Name</h6>
-		</div>
-		<div class="account-display-box">
-			<p>
-				{{ user.lastN }}
-			</p>
-			<h6 class="small-voice">Last Name</h6>
-		</div>
 
-		<button v-if="!editingUsername" class="button" type="button" @click="toggleUsernameEdit()">
-			Personalize
-		</button>
-
-		<Transition>
+			<!-- <picture class="profile-pic" v-else>
+				<img :src="user.url" alt="" />
+			</picture> -->
+			<button class="add-portrait">
+				<SvgIcon icon="pencil" />
+			</button>
+		</div>
+		<profile-block-inner>
 			<form
 				@submit.prevent="user.updateProfile(form)"
+				enctype="multipart/form-data"
 				class="update-username main-form"
-				v-if="editingUsername"
 			>
-				<div class="form-field">
-					<label for="username">Username </label>
-					<input id="username" type="text" required v-model="form.username" />
+				<div class="account-display-box">
+					<input id="username" type="text" required v-model="form.username" v-if="editingUsername" />
+					<p @click="toggleUsernameEdit()" v-else class="strict-voice">
+						{{ user.username }}
+					</p>
+					<h6 class="small-voice">Username</h6>
 				</div>
-
-				<div class="form-field">
-					<label for="firstN">First Name</label>
-					<input id="firstN" type="text" required v-model="form.firstN" />
+				<div class="account-display-box">
+					<input id="firstN" type="text" required v-model="form.firstN" v-if="editingUsername" />
+					<p @click="toggleUsernameEdit()" v-else class="strict-voice">
+						{{ user.firstN }}
+					</p>
+					<h6 class="small-voice">First Name</h6>
 				</div>
-
-				<div class="form-field">
-					<label for="lastN">Last Name</label>
-					<input id="lastN" type="text" required v-model="form.lastN" />
+				<div class="account-display-box">
+					<input id="lastN" type="text" required v-if="editingUsername" v-model="form.lastN" />
+					<p @click="toggleUsernameEdit()" v-else class="strict-voice">
+						{{ user.lastN }}
+					</p>
+					<h6 class="small-voice">Last Name</h6>
 				</div>
-
-				<!-- <div class="form-field">
-					<label for="img">Profile Picture</label>
-					<input type="file" id="img" @change="handleFileUpload" />
-					<img :src="imageUrl" alt="Selected Image" />
-				</div> -->
-
-				<actions-block>
+				<div class="account-display-box">
+					<p class="strict-voice">{{ user.email }}</p>
+					<h6 class="small-voice">Email</h6>
+				</div>
+				<actions-block v-if="editingUsername">
 					<button class="button" type="submit">Update</button>
 					<button class="button" type="button" @click.prevent="closeUsernameEdit()">Cancel</button>
 				</actions-block>
 			</form>
-		</Transition>
+		</profile-block-inner>
 	</account-page>
 </template>
 
 <style lang="scss">
 	account-page {
+		display: block;
+		position: relative;
+
+		.add-portrait {
+			position: absolute;
+			z-index: 20;
+			bottom: 30px;
+			right: 20px;
+			background-color: var(--color-soft);
+			border-radius: 50%;
+			padding: 10px;
+
+			border: 2px solid var(--color);
+
+			svg * {
+				fill: black;
+			}
+		}
+
+		.profile-pic-container {
+			position: absolute;
+			z-index: 3;
+			border-radius: 5px;
+			left: 0;
+			top: 0;
+			width: 100%;
+			transition: all 0.35s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+			picture {
+				margin: 0;
+				margin-bottom: 20px;
+				border-radius: 50%;
+				overflow: hidden;
+				img {
+					max-height: none;
+					width: 100%;
+					height: 100%;
+					max-width: 300px;
+				}
+			}
+		}
+	}
+
+	profile-block-inner {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+
+		background: #fff;
+		box-shadow: 0 30px 60px 0 var(--off-color-soft);
+		border-radius: 10px;
+
+		margin-top: 110px;
+		padding: 50px 20px;
+		padding-top: 175px;
+
 		> button {
 			align-self: flex-end;
 			margin-top: 20px;
 		}
 	}
+
 	.account-display-box {
 		display: flex;
 		flex-direction: column;
 		position: relative;
 		max-width: 50ch;
 
+		input {
+			border-bottom: 2px solid var(--color);
+
+			&:focus {
+				border-bottom: 2px solid var(--color);
+				background-color: rgb(var(--color-soft-rgb), 0.3);
+			}
+		}
+
 		p {
 			border-bottom: 1px solid var(--color);
-			background-color: var(--page);
+			background-color: #fff;
 			min-height: 24px;
+			font-weight: 600;
 		}
 		h6 {
 			align-self: flex-end;
 			pointer-events: none;
-		}
-
-		picture {
-			margin: 0;
-			margin-bottom: 20px;
-			img {
-				max-height: none;
-				width: fit-content;
-				height: fit-content;
-				max-width: 300px;
-			}
 		}
 	}
 	.v-enter-active,
@@ -157,5 +205,15 @@
 	.v-enter-from,
 	.v-leave-to {
 		opacity: 0;
+	}
+
+	.wrapper {
+		min-height: 80vh;
+		display: flex;
+		padding: 50px 0;
+		@media screen and (max-width: 700px), (max-height: 500px) {
+			flex-wrap: wrap;
+			flex-direction: column;
+		}
 	}
 </style>
