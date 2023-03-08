@@ -64,31 +64,10 @@ export const useProductsService = defineStore('products', function () {
 			price: form.price,
 			options: options,
 			category: form.category.toLowerCase().replace(/ /g, '-'),
+			model: 'base',
 		});
 		clearForm();
 	}
-
-	// async function removeCategory(docID) {
-	// 	const record = doc(db, "categories", docID);
-	// 	if (confirm("Are you sure?")) {
-	// 		await deleteDoc(record);
-	// 	}
-	// }
-
-	// function editCategory(id) {
-	// 	editing.value = id;
-	// }
-
-	// function updateCategory(id, c) {
-	// 	setDoc(doc(db, "categories", id), {
-	// 		title: c,
-	// 	});
-	// 	clearEdit();
-	// }
-
-	// function clearEdit() {
-	// 	editing.value = false;
-	// }
 
 	return {
 		db,
