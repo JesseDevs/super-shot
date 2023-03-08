@@ -9,7 +9,7 @@
 		<transition-group name="fade" tag="ul" class="list main-grid">
 			<li
 				v-for="(category, index) in categories"
-				:style="{ animationDelay: index * 200 + 'ms' }"
+				:style="{ animationDelay: index * 150 + 'ms' }"
 				class="fade-item"
 			>
 				<CategoryCard :category="category" />
