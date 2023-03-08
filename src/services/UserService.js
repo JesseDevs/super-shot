@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
 import { computed, reactive } from 'vue';
 import {
 	getAuth,
@@ -8,14 +9,17 @@ import {
 } from 'firebase/auth';
 import slugid from 'slugid';
 
-import { useCurrentUser, useDocument } from 'vuefire';
-import { collection, doc, addDoc, deleteDoc, setDoc, query, where, limit } from 'firebase/firestore';
+import { useCurrentUser, useDocument, useStorageFile } from 'vuefire';
+import { useFileDialog } from '@vueuse/core';
+import { collection, doc, addDoc, deleteDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
 import { useRoute, useRouter } from 'vue-router';
 
 export const useUserService = defineStore('user', function () {
 	const router = useRouter();
 	const route = useRoute();
+	const storage = getStorage();
+	const { files, open, reset } = useFileDialog();
 	const firebaseAuth = getAuth();
 	const authUser = useCurrentUser();
 	const db = useFirestore();
@@ -44,30 +48,80 @@ export const useUserService = defineStore('user', function () {
 	const username = computed(() => userDocument.value?.username);
 	const firstN = computed(() => userDocument.value?.firstN);
 	const lastN = computed(() => userDocument.value?.lastN);
-	const isAdmin = computed(() => userDocument.value?.roles?.admin);
 	const profilePic = computed(() => userDocument.value?.profilePic);
+	const isAdmin = computed(() => userDocument.value?.roles?.admin);
+
+	// const fullImagePath = computed(() => `images/${files.value?.item(0).name}`);
+	// const imageFileName = computed(() => `${files.value?.item(0).name}`);
+
+	// const imageReference = computed(function () {
+	// 	if (!profilePic.value) {
+	// 		return storageRef(storage, fullImagePath.value);
+	// 	} else {
+	// 		return storageRef(storage, 'images/' + profilePic.value);
+	// 	}
+	// });
+
+	// const { upload, url, refresh } = useStorageFile(imageReference);
+
+	// async function addThumbnailUrlToUser() {
+	// 	getUserDocument;
+	// 	await updateDoc(doc(db, 'users', id.value), {
+	// 		profilePic: imageFileName.value,
+	// 	});
+	// 	console.log(`>>> ${imageFileName.value} added to ${username.value}`);
+	// }
+
+	// async function uploadThumbnail() {
+	// 	const imageFile = files.value?.item(0);
+	// 	if (imageFile) {
+	// 		await upload(imageFile);
+	// 		await addThumbnailUrlToUser();
+	// 	} else {
+	// 		alert('No image bud');
+	// 	}
+	// }
+	// Favorites
 
 	function getFavoritesDocument() {
 		const fav = ref(false);
-		function toggleFavMode() {
-			fav.value = !fav.value;
-		}
-		const favSelected = computed(() => {
-			if (fav.value) {
-				return 'selected-fav';
-			} else return 'blank';
-		});
-		async function addToFavorites(item) {
-			addDoc(collection(db, 'users', id.value, 'favorites'), item);
+
+		async function toggleFavorites(item) {
+			if (fav.value == false) {
+				fav.value = true;
+				const itemId = slugid.nice();
+				const selectedFav = 'selected-fav';
+				const newItem = { itemId, selectedFav, ...item };
+
+				await setDoc(doc(db, 'users', id.value, 'favorites', newItem.slug), newItem);
+			}
+			if (fav.value == true) {
+				fav.value = false;
+				const querySnapshot = await getDocs(collection(db, 'users', id.value, 'favorites'));
+
+				querySnapshot.forEach((doc) => {
+					if (doc.id === item.slug) {
+						deleteDoc(doc.ref);
+					}
+				});
+			}
 		}
 
+		const selectedFav = computed(async () => {
+			const querySnapshot = await getDocs(collection(db, 'users', id.value, 'favorites'));
+			return querySnapshot.forEach((doc) => {
+				if (doc.id === item.slug) {
+					return doc.id;
+				}
+			});
+		});
+
 		return {
-			addToFavorites,
-			toggleFavMode,
-			favSelected,
+			toggleFavorites,
 		};
 	}
 
+	// CART
 	function getCartDocument() {
 		const cartDocumnetReference = computed(function () {
 			if (id.value) {
@@ -91,7 +145,10 @@ export const useUserService = defineStore('user', function () {
 		async function addToCart(item) {
 			const itemId = slugid.nice();
 			const itemWithId = { itemId, ...item };
-			await addDoc(collection(db, 'users', id.value, 'cart'), itemWithId);
+			const variable = itemWithId.slug + '-' + itemWithId.itemId;
+			if (itemWithId.model == 'base') {
+				await setDoc(doc(db, 'users', id.value, 'cart', variable), itemWithId);
+			}
 		}
 
 		const groups = computed(function () {
@@ -115,18 +172,19 @@ export const useUserService = defineStore('user', function () {
 		}
 
 		async function groupPlus(item) {
-			await addDoc(collection(db, 'users', id.value, 'cart'), item);
+			const newId = slugid.nice();
+			const variable = item.slug + '-' + newId;
+			await setDoc(doc(db, 'users', id.value, 'cart', variable), item);
 		}
 
-		async function groupMinus(slug) {
+		async function groupMinus(item) {
 			const querySnapshot = await getDocs(collection(db, 'users', id.value, 'cart'));
-			for (let item of querySnapshot.docs) {
-				console.log(item);
-				if (item.slug == slug) {
-					await deleteDoc(doc(db, 'users', id.value, 'cart', item.id));
-					break;
+			console.log(querySnapshot);
+			querySnapshot.forEach((doc) => {
+				if (doc.id === item.slug + '-' + item.itemId) {
+					deleteDoc(doc.ref);
 				}
-			}
+			});
 		}
 
 		return {
@@ -143,6 +201,8 @@ export const useUserService = defineStore('user', function () {
 
 	const cart = getCartDocument();
 	const favs = getFavoritesDocument();
+
+	//edit profile picture
 
 	function alsoCreateUserDoc(userId, u, e) {
 		// Create a new user document in Firestore
@@ -231,5 +291,9 @@ export const useUserService = defineStore('user', function () {
 		email,
 		profilePic,
 		isAdmin,
+		files,
+		open,
+		// url,
+		// uploadThumbnail,
 	};
 });

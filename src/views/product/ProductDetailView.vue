@@ -13,17 +13,14 @@
 	const currentP = query(p.productsData, where('slug', '==', route.params.id));
 	const product = useDocument(currentP);
 
-	// const cart = useCartStore();
-	// const ui = useInterfaceStore();
-
-	// const newAdditions = reactive({
-	// 	size: 'm',
-	// 	dairy: 'None',
-	// 	flavor: 'None',
-	// 	sweet: 'None',
-	// 	bread: 'Bagel',
-	// 	miniDonut: 'Glazed',
-	// });
+	const customizations = reactive({
+		size: 'm',
+		dairy: 'None',
+		flavor: 'None',
+		sweet: 'None',
+		bread: 'Bagel',
+		miniDonut: 'Glazed',
+	});
 
 	// const newID = computed(function () {
 	// 	return slugid.nice();
@@ -39,14 +36,20 @@
 
 	// 	localStorage.setItem('shoppingCart', JSON.stringify(cart.purchasingCart));
 	// }
+
+	// function handleFavorites() {
+	// 	if()
+	//concept to add/ remove favorites dependant on the heart
+	// }
 </script>
 
 <template>
 	<edit-block>
 		<landing-block v-if="product">
-			<button type="button" :class="`heart ${user.favs.favSelected}`" @click="user.favs.toggleFavMode()">
+			<button type="button" class="heart" @click="user.favs.toggleFavorites(product[0])">
 				<SvgIcon icon="heart" />
 			</button>
+
 			<picture class="item-picture">
 				<img :src="`${product[0].imageURL}`" alt="iced" loading="lazy" />
 			</picture>
@@ -93,6 +96,7 @@
 			border-bottom: 1px solid var(--black);
 			padding-bottom: 2rem;
 			padding-top: 1rem;
+			min-height: 55vh;
 
 			text-content {
 				align-items: flex-start;
@@ -133,8 +137,13 @@
 				border-radius: 50%;
 				outline: none;
 				background-color: var(--support-light);
-
+				cursor: pointer;
 				border: none !important;
+				z-index: 200;
+
+				.contains-svg {
+					padding-top: 4.3px;
+				}
 
 				&.selected-fav {
 					.contains-svg * {
