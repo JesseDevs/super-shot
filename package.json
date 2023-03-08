@@ -12,6 +12,7 @@
 		"deploy:dev": "vite build --mode development && cp dist/index.html dist/200.html && surge dist"
 	},
 	"dependencies": {
+		"@vueuse/core": "^9.13.0",
 		"firebase": "^9.17.0",
 		"lodash": "^4.17.21",
 		"pinia": "^2.0.28",
