@@ -1,14 +1,8 @@
 <script setup>
 	import { computed, reactive } from 'vue';
-	import { useRoute } from 'vue-router';
-	import { useCartStore } from '@/stores/cart';
 	import SvgIcon from '@/partials/SvgIcon.vue';
-	import slugid from 'slugid';
 
 	defineProps(['product']);
-
-	const cart = useCartStore();
-	const route = useRoute();
 
 	const sizes = ['s', 'm', 'l', 'xl'];
 	const dairies = ['None', 'Coconutmilk', 'Oatmilk', ' Whole Milk', 'Skim Milk'];
@@ -17,13 +11,7 @@
 	const breads = ['Bagel', 'Biscuit', 'Croissant', 'English Muffin'];
 	const miniDonuts = ['Glazed', 'Cinnamon', 'BlueBerry', 'Chocolate', 'Old Fashioned', 'Jelly', 'Powdered'];
 
-	// const product = computed(function () {
-	// 	return menu.products.find(function (record) {
-	// 		return record.id == route.params.id;
-	// 	});
-	// });
-
-	const newAdditions = reactive({
+	const customizations = reactive({
 		size: 'm',
 		dairy: 'None',
 		flavor: 'None',
@@ -50,7 +38,7 @@
 							:value="size"
 							:aria-label="size"
 							:key="size"
-							v-model="newAdditions.size"
+							v-model="customizations.size"
 						/>
 						<span> {{ size.toUpperCase() }}</span>
 					</label>
@@ -62,7 +50,7 @@
 			<h6 class="calm-voice">Dairy</h6>
 
 			<div class="select-box-container">
-				<select v-model="newAdditions.dairy" class="custom-select">
+				<select v-model="customizations.dairy" class="custom-select">
 					<option v-for="dairy in dairies" :value="dairy" :key="dairy">{{ dairy }}</option>
 				</select>
 				<span> <SvgIcon icon="angle-down" /></span>
@@ -73,7 +61,7 @@
 			<h6 class="calm-voice">Sweetener</h6>
 
 			<div class="select-box-container">
-				<select v-model="newAdditions.sweet" class="custom-select">
+				<select v-model="customizations.sweet" class="custom-select">
 					<option v-for="sweet in sweets" :value="sweet" :key="sweet">{{ sweet }}</option>
 				</select>
 				<span> <SvgIcon icon="angle-down" /></span>
@@ -84,7 +72,7 @@
 			<h6 class="calm-voice">Flavor</h6>
 
 			<div class="select-box-container">
-				<select v-model="newAdditions.flavor" class="custom-select">
+				<select v-model="customizations.flavor" class="custom-select">
 					<option v-for="flavor in flavors" :value="flavor" :key="flavor">{{ flavor }}</option>
 				</select>
 				<span> <SvgIcon icon="angle-down" /></span>
@@ -95,7 +83,7 @@
 			<h6 class="calm-voice">Bread</h6>
 
 			<div class="select-box-container">
-				<select v-model="newAdditions.bread" class="custom-select">
+				<select v-model="customizations.bread" class="custom-select">
 					<option v-for="bread in breads" :value="bread" :key="bread">{{ bread }}</option>
 				</select>
 				<span> <SvgIcon icon="angle-down" /></span>
@@ -106,7 +94,7 @@
 			<h6 class="calm-voice">Flavor</h6>
 
 			<div class="select-box-container">
-				<select v-model="newAdditions.miniDonut" class="custom-select">
+				<select v-model="customizations.miniDonut" class="custom-select">
 					<option v-for="miniDonut in miniDonuts" :value="miniDonut" :key="miniDonut">
 						{{ miniDonut }}
 					</option>

@@ -68,7 +68,7 @@
 							<button class="tiny-voice" @click="nothing()">Delete</button>
 						</edit-links>
 						<div v-if="quantityMode" class="quantity-counter">
-							<button @click="user.cart.groupMinus(product[0].slug)">-</button>
+							<button @click="user.cart.groupMinus(product[0])">-</button>
 							{{ product.quantity }}
 							<button @click="user.cart.groupPlus(product[0])">+</button>
 						</div>

@@ -23,12 +23,12 @@
 <template>
 	<signin-block v-if="user.authUser">
 		<h3 class="username-name strict-voice">{{ user.username }}</h3>
-		<RouterLink class="username-link small-voice" @click="ui.specificToggle()" to="/profile">
+		<RouterLink class="username-link small-voice" @click="ui.specificToggle()" to="/">
 			<h3>{{ user.username }}</h3>
 		</RouterLink>
 		<actions-block>
-			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/profile">Profile</RouterLink>
-			<RouterLink class="tiny-button" @click="ui.toggleMenu()" to="/sign-out">Sign Out</RouterLink>
+			<RouterLink class="tiny-button" @click="ui.specificToggle()" to="/profile">Profile</RouterLink>
+			<RouterLink class="tiny-button" @click="ui.specificToggle()" to="/sign-out">Sign Out</RouterLink>
 		</actions-block>
 		<transition name="fade" mode="out-in">
 			<div v-if="!ui.cartMenuOpen" class="strict-voice cart-container" @click="ui.toggleCart()">
