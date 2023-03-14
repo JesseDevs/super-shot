@@ -149,6 +149,11 @@ export const useUserService = defineStore('user', function () {
 			if (itemWithId.model == 'base') {
 				await setDoc(doc(db, 'users', id.value, 'cart', variable), itemWithId);
 			}
+
+			itemAdded.value = true;
+			setTimeout(function () {
+				itemAdded.value = false;
+			}, 2000);
 		}
 
 		const groups = computed(function () {
@@ -169,6 +174,10 @@ export const useUserService = defineStore('user', function () {
 			cartDocs.forEach(async (doc) => {
 				await deleteDoc(doc.ref);
 			});
+		}
+
+		async function clearGroup() {
+			const cartItems = cartDocument.value;
 		}
 
 		async function groupPlus(item) {

@@ -9,6 +9,15 @@
 	const user = useUserService();
 	const ui = useInterfaceStore();
 	const route = useRoute();
+
+	const itemAdded = computed(function () {
+		if (user.cart.itemAdded) {
+			return {
+				text: 'Item added!',
+				class: 'confirmation',
+			};
+		} else return '';
+	});
 </script>
 
 <template>
@@ -72,11 +81,30 @@
 					</li>
 				</ul>
 			</nav>
+
+			<transition name="fade" mode="out-in">
+				<div :class="`box-modal ${itemAdded.class}`">
+					<p class="small-voice" v-if="user.cart.itemAdded">
+						{{ itemAdded.text }}
+					</p>
+				</div>
+			</transition>
 		</inner-column>
 	</header>
 </template>
 
 <style lang="scss" scoped>
+	@keyframes fadeInOut {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
 	header.site-header.fixed-header {
 		position: fixed;
 		width: 100%;
@@ -84,6 +112,48 @@
 		@media (min-width: 600px) {
 			position: static;
 		}
+	}
+
+	div.box-modal {
+		width: 150px;
+		min-height: 50px;
+		position: absolute;
+		top: 75px;
+		right: 13px;
+		opacity: 0;
+
+		padding: 15px;
+		color: #000;
+		background: var(--color);
+		background: linear-gradient(180deg, rgba(var(--color-soft-rgb), 0.5) 0%, var(--color-soft) 60%);
+
+		border-radius: 10px;
+
+		display: grid;
+		place-items: center;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: -15px; /* value = - border-top-width - border-bottom-width */
+			right: 7%; /* controls horizontal position */
+			bottom: auto;
+			left: auto;
+			border-width: 0 15px 15px;
+			border-style: solid;
+			border-color: rgba(var(--color-soft-rgb), 0.3) transparent;
+			/* reduce the damage in FF3.0 */
+			display: block;
+			width: 0;
+		}
+
+		p {
+			font-weight: 600;
+		}
+	}
+
+	div.confirmation {
+		animation: fadeInOut 2s forwards;
 	}
 
 	header.site-header {
@@ -296,6 +366,11 @@
 		header inner-column {
 			padding: 0 1rem;
 			z-index: 100;
+		}
+
+		div.box-modal {
+			top: 55px;
+			right: 23px;
 		}
 		nav.top-row {
 			display: none;

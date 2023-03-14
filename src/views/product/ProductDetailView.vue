@@ -184,7 +184,9 @@
 			}
 
 			form.edit-form {
-				min-height: 300px;
+				min-height: auto;
+				row-gap: 15px;
+				column-gap: 30px;
 			}
 
 			div.option-block {
@@ -234,6 +236,11 @@
 						max-width: none;
 						max-height: none;
 					}
+				}
+
+				button.heart {
+					bottom: 86px;
+					top: auto;
 				}
 			}
 		}

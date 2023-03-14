@@ -1,5 +1,9 @@
 <script setup>
+	import { useUserService } from '@/services/UserService';
+
 	defineProps(['pageData']);
+
+	const user = useUserService();
 </script>
 
 <template>
