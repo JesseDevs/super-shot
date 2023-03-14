@@ -6,20 +6,22 @@
 
 <template>
 	<profile-page>
-		<h1 class="loud-voice">Welcome, {{ user.username }}</h1>
-		<nav>
-			<ul>
-				<li>
-					<RouterLink to="/profile"> Account </RouterLink>
-				</li>
-				<li>
-					<RouterLink to="/profile/billing"> Billing </RouterLink>
-				</li>
-				<li>
-					<RouterLink to="/profile/favorites"> Favorites </RouterLink>
-				</li>
-			</ul>
-		</nav>
+		<profile-nav>
+			<h1 class="loud-voice">Welcome, {{ user.username }}</h1>
+			<nav>
+				<ul>
+					<li>
+						<RouterLink to="/profile"> Account </RouterLink>
+					</li>
+					<li>
+						<RouterLink to="/profile/billing"> Billing </RouterLink>
+					</li>
+					<li>
+						<RouterLink to="/profile/favorites"> Favorites </RouterLink>
+					</li>
+				</ul>
+			</nav>
+		</profile-nav>
 
 		<main class="outlet">
 			<RouterView />
@@ -54,6 +56,17 @@
 					color: var(--black);
 				}
 			}
+		}
+
+		profile-nav {
+			display: flex;
+			width: 100%;
+			flex-direction: column;
+			gap: 20px;
+			background-color: var(--page);
+			position: sticky;
+			top: 126px;
+			z-index: 300;
 		}
 	}
 </style>

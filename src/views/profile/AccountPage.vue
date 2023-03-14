@@ -135,6 +135,7 @@
 			border-radius: 5px;
 			left: 0;
 			top: 0;
+			max-width: 300px;
 			width: 100%;
 			transition: all 0.35s cubic-bezier(0.71, 0.03, 0.56, 0.85);
 			picture {
@@ -142,6 +143,7 @@
 				margin-bottom: 20px;
 				border-radius: 50%;
 				overflow: hidden;
+
 				img {
 					max-height: none;
 					width: 100%;
@@ -158,7 +160,7 @@
 		gap: 10px;
 
 		background: #fff;
-		box-shadow: 0 30px 60px 0 var(--off-color-soft);
+		// box-shadow: 0 30px 60px 0 var(--off-color-soft);
 		border-radius: 10px;
 
 		margin-top: 110px;
@@ -209,11 +211,7 @@
 
 	.wrapper {
 		min-height: 80vh;
-		display: flex;
+
 		padding: 50px 0;
-		@media screen and (max-width: 700px), (max-height: 500px) {
-			flex-wrap: wrap;
-			flex-direction: column;
-		}
 	}
 </style>
