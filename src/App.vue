@@ -1,7 +1,6 @@
 <script setup>
 	import { computed } from 'vue';
 	import { RouterView, useRoute } from 'vue-router';
-	import { useCartStore } from '@/stores/cart';
 	import { useInterfaceStore } from '@/stores/interface';
 	import SiteHeader from '@/partials/SiteHeader.vue';
 	import SiteFooter from '@/partials/SiteFooter.vue';
@@ -9,7 +8,6 @@
 	import CartModal from '@/components/CartModal.vue';
 
 	const ui = useInterfaceStore();
-	const cart = useCartStore();
 	const route = useRoute();
 
 	const addSpace = computed(function () {

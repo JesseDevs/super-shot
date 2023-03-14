@@ -28,7 +28,7 @@
 		padding-bottom: 25px;
 		height: 100%;
 		transition: background-color ease-in-out 300ms;
-		max-width: 400px;
+		max-width: 450px;
 		margin: 0 auto;
 
 		&:hover {
