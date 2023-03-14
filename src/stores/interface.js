@@ -25,10 +25,6 @@ export const useInterfaceStore = defineStore('interface', function () {
 		} else return '';
 	});
 
-	function toggleEditMode() {
-		editProductMode.value = !editProductMode.value;
-	}
-
 	const editModeClass = computed(() => {
 		if (editProductMode.value) {
 			return 'edit-mode';
@@ -79,7 +75,6 @@ export const useInterfaceStore = defineStore('interface', function () {
 		toggleCart,
 		specificToggle,
 		menuClass,
-		toggleEditMode,
 		editModeClass,
 		editProductMode,
 		openMenu,

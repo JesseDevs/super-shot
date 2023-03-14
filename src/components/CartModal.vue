@@ -22,31 +22,23 @@
 		}
 	});
 
-	const itemAdded = computed(function () {
-		if (user.cart.itemAdded) {
-			return {
-				text: 'Item added!',
-				class: 'confirmation',
-			};
-		} else return '';
-	});
+	function toggleEditMode() {
+		ui.editProductMode = !ui.editProductMode;
+		if (quantityMode.value) {
+			quantityMode.value = false;
+		}
+	}
 </script>
 
 <template>
 	<cart-modal>
-		<transition name="fade" mode="out-in">
-			<div class="box-modal">
-				<p class="confirmation strict-voice" v-if="user.cart.itemAdded">{{ itemAdded.text }}</p>
-			</div>
-		</transition>
-
 		<h2 class="chant-voice" v-if="user.cart.products?.length">Shopping Cart</h2>
 		<h2 class="chant-voice if-scenario" v-else>Empty Cart</h2>
 		<cart-actions v-if="user.cart.products?.length">
-			<button v-if="!ui.editProductMode" @click="ui.toggleEditMode()" class="tiny-button tiny-voice">
+			<button v-if="!ui.editProductMode" @click="toggleEditMode()" class="tiny-button tiny-voice">
 				Edit
 			</button>
-			<button v-else @click="ui.toggleEditMode()" class="tiny-button tiny-voice">Done</button>
+			<button v-else @click="toggleEditMode()" class="tiny-button tiny-voice">Done</button>
 		</cart-actions>
 
 		<ul>
