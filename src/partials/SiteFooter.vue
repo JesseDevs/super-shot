@@ -91,11 +91,14 @@
 
 <style lang="scss">
 	footer.site-footer {
-		border-top: 1px solid var(--support-light);
-		background-color: rgba(239, 237, 237);
 		inner-column {
-			max-width: 600px;
-			margin: 0 auto;
+			border-top: 1px solid var(--support-light);
+			background-color: rgba(239, 237, 237);
+
+			nav {
+				max-width: 600px;
+				margin: 0 auto;
+			}
 		}
 	}
 	footer {
