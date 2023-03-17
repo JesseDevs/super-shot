@@ -77,6 +77,7 @@
 		margin-top: 8vh;
 		h1 {
 			font-weight: 700;
+			line-height: 1;
 		}
 		p.intro {
 			color: var(--black);

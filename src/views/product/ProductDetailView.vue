@@ -10,7 +10,9 @@
 	const route = useRoute();
 	const user = useUserService();
 	const p = useProductsService();
-	const currentP = query(p.productsData, where('slug', '==', route.params.id));
+	const currentP = computed(function () {
+		return query(p.productsData, where('slug', '==', route.params.id));
+	});
 	const product = useDocument(currentP);
 
 	const customizations = reactive({
@@ -41,12 +43,24 @@
 	// 	if()
 	//concept to add/ remove favorites dependant on the heart
 	// }
+
+	const isFavorited = computed(function () {
+		if (product && product.value && product.value.length > 0) {
+			return user.favorites.find(function (f) {
+				console.log(f.id);
+				return f.id == product?.value[0].id;
+			});
+		} else {
+			return false;
+		}
+	});
 </script>
 
 <template>
 	<edit-block>
+		{{ isFavorited }}
 		<landing-block v-if="product">
-			<button type="button" class="heart" @click="user.favs.toggleFavorites(product[0])">
+			<button type="button" class="heart" @click="user.toggleFavorite(product[0].id)">
 				<SvgIcon icon="heart" />
 			</button>
 

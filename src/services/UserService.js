@@ -9,9 +9,9 @@ import {
 } from 'firebase/auth';
 import slugid from 'slugid';
 
-import { useCurrentUser, useDocument, useStorageFile } from 'vuefire';
+import { useCollection, useCurrentUser, useDocument, useStorageFile } from 'vuefire';
 import { useFileDialog } from '@vueuse/core';
-import { collection, doc, addDoc, deleteDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, addDoc, deleteDoc, setDoc, updateDoc, getDoc, getDocs } from 'firebase/firestore';
 import { useFirestore } from 'vuefire';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -33,7 +33,7 @@ export const useUserService = defineStore('user', function () {
 		profilePic: '',
 	});
 
-	const userDocumnetReference = computed(function () {
+	const userDocumentReference = computed(function () {
 		if (authUser.value?.uid) {
 			return doc(collection(db, 'users'), authUser.value.uid);
 		} else {
@@ -41,7 +41,7 @@ export const useUserService = defineStore('user', function () {
 		}
 	});
 
-	const { data: userDocument, promise: getUserDocument } = useDocument(userDocumnetReference);
+	const { data: userDocument, promise: getUserDocument } = useDocument(userDocumentReference);
 
 	const id = computed(() => authUser.value?.uid);
 	const email = computed(() => userDocument.value?.email);
@@ -83,47 +83,32 @@ export const useUserService = defineStore('user', function () {
 	// }
 	// Favorites
 
-	function getFavoritesDocument() {
-		const fav = ref(false);
+	async function toggleFavorite(itemId) {
+		const docRef = doc(db, 'users', id.value, 'favorites', itemId);
+		const favDoc = await getDoc(docRef);
 
-		async function toggleFavorites(item) {
-			if (fav.value == false) {
-				fav.value = true;
-				const itemId = slugid.nice();
-				const selectedFav = 'selected-fav';
-				const newItem = { itemId, selectedFav, ...item };
-
-				await setDoc(doc(db, 'users', id.value, 'favorites', newItem.slug), newItem);
-			}
-			if (fav.value == true) {
-				fav.value = false;
-				const querySnapshot = await getDocs(collection(db, 'users', id.value, 'favorites'));
-
-				querySnapshot.forEach((doc) => {
-					if (doc.id === item.slug) {
-						deleteDoc(doc.ref);
-					}
-				});
-			}
+		if (favDoc.exists()) {
+			await deleteDoc(docRef);
+			console.log('removed: ', itemId);
+		} else {
+			await setDoc(docRef, { itemId });
+			console.log('added', itemId);
 		}
-
-		const selectedFav = computed(async () => {
-			const querySnapshot = await getDocs(collection(db, 'users', id.value, 'favorites'));
-			return querySnapshot.forEach((doc) => {
-				if (doc.id === item.slug) {
-					return doc.id;
-				}
-			});
-		});
-
-		return {
-			toggleFavorites,
-		};
 	}
+
+	const favoritesDocumentReference = computed(function () {
+		if (id.value) {
+			return collection(db, 'users', id.value, 'favorites');
+		} else {
+			return null;
+		}
+	});
+
+	const favorites = useCollection(favoritesDocumentReference);
 
 	// CART
 	function getCartDocument() {
-		const cartDocumnetReference = computed(function () {
+		const cartDocumentReference = computed(function () {
 			if (id.value) {
 				const userRef = doc(collection(db, 'users'), id.value);
 				const cartRef = collection(userRef, 'cart');
@@ -135,7 +120,7 @@ export const useUserService = defineStore('user', function () {
 			}
 		});
 
-		const cartDocument = useDocument(cartDocumnetReference);
+		const cartDocument = useDocument(cartDocumentReference);
 		const total = computed(() => {
 			return cartDocument.value?.length;
 		});
@@ -176,8 +161,13 @@ export const useUserService = defineStore('user', function () {
 			});
 		}
 
-		async function clearGroup() {
-			const cartItems = cartDocument.value;
+		async function clearGroup(item) {
+			const querySnapshot = await getDocs(collection(db, 'users', id.value, 'cart'));
+			querySnapshot.forEach((doc) => {
+				if (doc.id.startsWith(item.slug)) {
+					deleteDoc(doc.ref);
+				}
+			});
 		}
 
 		async function groupPlus(item) {
@@ -188,7 +178,6 @@ export const useUserService = defineStore('user', function () {
 
 		async function groupMinus(item) {
 			const querySnapshot = await getDocs(collection(db, 'users', id.value, 'cart'));
-			console.log(querySnapshot);
 			querySnapshot.forEach((doc) => {
 				if (doc.id === item.slug + '-' + item.itemId) {
 					deleteDoc(doc.ref);
@@ -205,11 +194,11 @@ export const useUserService = defineStore('user', function () {
 			clearCart,
 			groupPlus,
 			groupMinus,
+			clearGroup,
 		};
 	}
 
 	const cart = getCartDocument();
-	const favs = getFavoritesDocument();
 
 	//edit profile picture
 
@@ -292,7 +281,6 @@ export const useUserService = defineStore('user', function () {
 		form,
 		updateProfile,
 		cart,
-		favs,
 		getUserDocument,
 		username,
 		firstN,
@@ -302,6 +290,8 @@ export const useUserService = defineStore('user', function () {
 		isAdmin,
 		files,
 		open,
+		toggleFavorite,
+		favorites,
 		// url,
 		// uploadThumbnail,
 	};
