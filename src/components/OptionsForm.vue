@@ -106,7 +106,6 @@
 </template>
 <style lang="scss">
 	.edit-form {
-		min-width: 280px;
 		padding-top: 16px;
 
 		@media (min-width: 570px) {
