@@ -131,6 +131,7 @@
 
 		display: grid;
 		place-items: center;
+		z-index: -200;
 
 		&:after {
 			content: '';
@@ -154,12 +155,17 @@
 
 	div.confirmation {
 		animation: fadeInOut 2s forwards;
+		z-index: 200;
 	}
 
 	header.site-header {
 		position: sticky;
 		top: 0;
 		z-index: 300;
+
+		div.cart-container {
+			margin-right: 5px;
+		}
 	}
 
 	body.menu-open {

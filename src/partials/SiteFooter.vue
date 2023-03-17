@@ -194,4 +194,12 @@
 			}
 		}
 	}
+
+	footer.site-footer {
+		.partner-list {
+			a:hover {
+				background-color: transparent;
+			}
+		}
+	}
 </style>
