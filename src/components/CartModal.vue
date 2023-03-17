@@ -28,6 +28,10 @@
 			quantityMode.value = false;
 		}
 	}
+
+	function closeCart() {
+		ui.cartMenuOpen = false;
+	}
 </script>
 
 <template>
@@ -43,29 +47,29 @@
 
 		<ul>
 			<li class="item-in-cart" v-for="product in user.cart.groups">
-				<RouterLink :to="`/menu/${product[0].category}/${product[0].slug}`">
-					<cart-card :class="`${ui.editModeClass} ${quantityModeClass}`">
-						<text-content>
-							<p class="quantity">{{ product.length }}</p>
-							<p>{{ product[0].name }}</p>
-							<p>${{ product[0].price }}</p>
-							<!-- <p>${{ product[0].price * product.length }}</p> -->
+				<cart-card :class="`${ui.editModeClass} ${quantityModeClass}`">
+					<text-content>
+						<p class="quantity">{{ product.length }}</p>
+						<p>{{ product[0].name }}</p>
+						<p>${{ product[0].price }}</p>
+						<!-- <p>${{ product[0].price * product.length }}</p> -->
+						<RouterLink @click="closeCart()" :to="`/menu/${product[0].category}/${product[0].slug}`">
 							<div class="arrow-box">
 								<SvgIcon icon="angle-right" />
 							</div>
-						</text-content>
+						</RouterLink>
+					</text-content>
 
-						<edit-links v-if="ui.editProductMode">
-							<button class="tiny-voice" @click="toggleQuantityMode()">Quantity</button>
-							<button class="tiny-voice" @click="nothing()">Delete</button>
-						</edit-links>
-						<div v-if="quantityMode" class="quantity-counter">
-							<button @click="user.cart.groupMinus(product[0])">-</button>
-							{{ product.quantity }}
-							<button @click="user.cart.groupPlus(product[0])">+</button>
-						</div>
-					</cart-card>
-				</RouterLink>
+					<edit-links v-if="ui.editProductMode">
+						<button class="tiny-voice" @click="toggleQuantityMode()">Quantity</button>
+						<button class="tiny-voice" @click="user.cart.clearGroup(product[0])">Delete</button>
+					</edit-links>
+					<div v-if="quantityMode" class="quantity-counter">
+						<button @click="user.cart.groupMinus(product[0])">-</button>
+						{{ product.length }}
+						<button @click="user.cart.groupPlus(product[0])">+</button>
+					</div>
+				</cart-card>
 			</li>
 		</ul>
 
@@ -218,12 +222,21 @@
 
 			li {
 				background-color: var(--off-color-soft);
-			}
-		}
+				padding: 10px 1.4rem;
+				border-bottom: 1px solid black;
 
-		li a {
-			padding: 10px 1.4rem;
-			border-bottom: 1px solid black;
+				p {
+					pointer-events: none;
+				}
+
+				a {
+					pointer-events: stroke;
+
+					&:hover svg * {
+						fill: var(--color);
+					}
+				}
+			}
 		}
 
 		text-content {
@@ -267,6 +280,12 @@
 			border-top: 1px solid black;
 			border-bottom: 1px solid black;
 		}
+	}
+
+	div.quantity-counter {
+		background-color: red;
+
+		width: 100%;
 	}
 
 	@media (min-width: 600px) {
