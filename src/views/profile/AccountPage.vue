@@ -125,7 +125,7 @@
 			border: 2px solid var(--color);
 
 			svg * {
-				fill: black;
+				fill: var(--color-text);
 			}
 		}
 

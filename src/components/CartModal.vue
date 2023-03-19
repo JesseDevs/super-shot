@@ -99,7 +99,7 @@
 
 			&:hover {
 				box-shadow: inset 0 0 0 2em white;
-				color: var(--black);
+				color: var(--color-text);
 				border-color: var(--off-color-mute);
 			}
 		}
@@ -170,7 +170,7 @@
 
 			&:hover {
 				box-shadow: inset 0 0 0 2em white;
-				color: var(--black);
+				color: var(--color-text);
 				border-color: var(--off-color-mute);
 			}
 		}
@@ -184,7 +184,7 @@
 
 			&:hover {
 				box-shadow: inset 0 0 0 2em white;
-				color: var(--black);
+				color: var(--color-text);
 				border-color: var(--off-color-mute);
 			}
 		}
@@ -200,7 +200,7 @@
 				height: 30px;
 
 				svg * {
-					fill: black;
+					fill: var(--color-text);
 				}
 			}
 		}

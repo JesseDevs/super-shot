@@ -114,7 +114,7 @@
 		.custom-input label {
 			display: block;
 			padding: 6px 8px;
-			color: black;
+			color: var(--color-text);
 			font-weight: bold;
 			text-align: center;
 			transition: all 0.4s 0s ease;

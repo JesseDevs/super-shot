@@ -193,7 +193,7 @@
 		right: -9px;
 		background-color: var(--color-soft);
 		border: 1.5px solid var(--color-mute);
-		color: var(--black-mute);
+		color: var(--color-text);
 		border-radius: 50px;
 		z-index: 10;
 		font-size: 0.75rem;

@@ -53,7 +53,7 @@
 
 				&:hover {
 					background-color: var(--color-soft);
-					color: var(--black);
+					color: var(--color-text);
 				}
 			}
 		}

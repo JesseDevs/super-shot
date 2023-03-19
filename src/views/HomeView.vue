@@ -84,7 +84,6 @@
 			z-index: 5;
 		}
 		p.intro {
-			color: var(--black);
 			font-weight: 100;
 			font-family: 'Dunkin Sans', sans-serif;
 			z-index: 5;
@@ -142,7 +141,7 @@
 			color: var(--page);
 			&:hover {
 				background-color: var(--off-color-soft);
-				color: var(--black);
+				color: var(--color-text);
 			}
 		}
 	}

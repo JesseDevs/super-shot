@@ -87,7 +87,7 @@
 					top: 0;
 					right: 0;
 					content: '';
-					background-color: var(--black);
+					background-color: var(--color-text);
 					width: 1px;
 					height: 75vh;
 				}
