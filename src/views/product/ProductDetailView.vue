@@ -10,9 +10,7 @@
 	const route = useRoute();
 	const user = useUserService();
 	const p = useProductsService();
-	const currentP = computed(function () {
-		return query(p.productsData, where('slug', '==', route.params.id));
-	});
+	const currentP = query(p.productsData, where('slug', '==', route.params.id));
 	const product = useDocument(currentP);
 
 	const customizations = reactive({
@@ -58,9 +56,12 @@
 
 <template>
 	<edit-block>
-		{{ isFavorited }}
 		<landing-block v-if="product">
-			<button type="button" class="heart" @click="user.toggleFavorite(product[0].id)">
+			<button
+				type="button"
+				:class="`heart ${isFavorited?.class}`"
+				@click="user.toggleFavorite(product[0].id)"
+			>
 				<SvgIcon icon="heart" />
 			</button>
 
@@ -74,11 +75,11 @@
 				<p class="intro tiny-voice">
 					{{ product[0].desc }}
 				</p>
+				<p class="price">
+					<span class="price"> ${{ product[0].price }}</span>
+				</p>
 
-				<button class="button" @click="user.cart.addToCart(product[0])">
-					<span class="price"> ${{ product[0].price }}</span
-					>Add to cart
-				</button>
+				<button class="button" @click="user.cart.addToCart(product[0])">Add to cart</button>
 			</text-content>
 		</landing-block>
 		<OptionsForm :product="product" />
@@ -97,6 +98,11 @@
 		align-items: center;
 		justify-content: center;
 		gap: 8px;
+
+		p.price {
+			align-self: flex-end;
+			font-weight: 600;
+		}
 
 		landing-block {
 			display: flex;
@@ -127,7 +133,8 @@
 			}
 
 			h5 {
-				font-weight: 700;
+				font-weight: 100;
+				text-transform: uppercase;
 			}
 
 			p.tag {
@@ -163,6 +170,12 @@
 					.contains-svg * {
 						fill: red;
 					}
+				}
+			}
+
+			button.redHeart {
+				.contains-svg * {
+					fill: red;
 				}
 			}
 

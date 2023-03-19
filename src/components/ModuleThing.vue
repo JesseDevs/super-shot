@@ -41,7 +41,7 @@
 		}
 
 		.intro {
-			max-width: 45ch;
+			max-width: 49ch;
 		}
 
 		@media (min-width: 600px) {

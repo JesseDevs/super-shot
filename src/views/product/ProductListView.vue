@@ -4,8 +4,12 @@
 
 <template>
 	<div class="product-outlet">
-		<ul v-if="allProducts" class="main-grid">
-			<li v-for="product in allProducts">
+		<transition-group name="fade" tag="ul" v-if="allProducts" class="main-grid">
+			<li
+				v-for="(product, index) in allProducts"
+				:style="{ animationDelay: index * 150 + 'ms' }"
+				class="fade-item"
+			>
 				<RouterLink :to="`${product.category}/${product.slug}`">
 					<general-card>
 						<picture class="item-picture">
@@ -17,15 +21,11 @@
 					</general-card>
 				</RouterLink>
 			</li>
-		</ul>
+		</transition-group>
 	</div>
 </template>
 
 <style lang="scss">
-	span.price {
-		padding-right: 15px;
-		font-size: var(--step-0);
-	}
 	edit-block {
 		display: flex;
 		flex-direction: column;

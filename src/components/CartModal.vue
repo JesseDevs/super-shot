@@ -108,7 +108,7 @@
 		position: fixed;
 		background-color: var(--off-color-soft);
 		right: 0;
-		top: 126px;
+		top: 122.5px;
 		width: 100%;
 
 		max-width: 90vh;
@@ -143,6 +143,7 @@
 			width: 100%;
 			padding-bottom: 20px;
 			padding: 1.5rem 2rem;
+			font-family: 'Montserrat', sans-serif;
 		}
 
 		h2.if-scenario {
@@ -153,17 +154,6 @@
 			z-index: 500;
 			background-color: var(--off-color-soft);
 			height: 100%;
-		}
-
-		p.confirmation {
-			position: absolute;
-			top: 10px;
-			right: 50%;
-			transform: translate(50%, 0%);
-			color: green;
-			font-weight: 800;
-			opacity: v-bind(opacity);
-			transition: opacity 2s ease-in-out;
 		}
 
 		button {

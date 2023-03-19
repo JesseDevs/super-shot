@@ -25,7 +25,7 @@
 	<form v-if="product" class="main-form edit-form" autocomplete="off" @submit.prevent="saveNewProduct()">
 		<h5 class="strict-voice">CUSTOMIZATION</h5>
 		<div class="size-block option-block" v-if="product[0].options.includes('size')">
-			<h6 class="calm-voice">Size</h6>
+			<p class="calm-voice">Size</p>
 
 			<ul class="cup-size">
 				<li v-for="size in sizes">
@@ -47,7 +47,7 @@
 		</div>
 
 		<div class="dairy-block option-block" v-if="product[0].options.includes('dairy')">
-			<h6 class="calm-voice">Dairy</h6>
+			<p class="calm-voice">Dairy</p>
 
 			<div class="select-box-container">
 				<select v-model="customizations.dairy" class="custom-select">
@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="sweetener-block option-block" v-if="product[0].options.includes('sweetener')">
-			<h6 class="calm-voice">Sweetener</h6>
+			<p class="calm-voice">Sweetener</p>
 
 			<div class="select-box-container">
 				<select v-model="customizations.sweet" class="custom-select">
@@ -69,7 +69,7 @@
 		</div>
 
 		<div class="flavor-block option-block" v-if="product[0].options.includes('flavor')">
-			<h6 class="calm-voice">Flavor</h6>
+			<p class="calm-voice">Flavor</p>
 
 			<div class="select-box-container">
 				<select v-model="customizations.flavor" class="custom-select">
@@ -80,7 +80,7 @@
 		</div>
 
 		<div class="bread-block option-block" v-if="product[0].options.includes('bread')">
-			<h6 class="calm-voice">Bread</h6>
+			<p class="calm-voice">Bread</p>
 
 			<div class="select-box-container">
 				<select v-model="customizations.bread" class="custom-select">
@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="mini-donut-flavor-block option-block" v-if="product[0].options.includes('miniDonutFlavor')">
-			<h6 class="calm-voice">Flavor</h6>
+			<p class="calm-voice">Flavor</p>
 
 			<div class="select-box-container">
 				<select v-model="customizations.miniDonut" class="custom-select">
@@ -120,7 +120,7 @@
 	.option-block {
 		display: flex;
 		flex-direction: column;
-		h6 {
+		p {
 			padding-bottom: 5px;
 		}
 	}
@@ -136,7 +136,7 @@
 			border-radius: 50px;
 			cursor: pointer;
 			width: 100%;
-			font-family: 'Sofia Sans', sans-serif;
+			font-family: 'Montserrat', sans-serif;
 			padding: 10px 20px;
 			font-size: 1rem;
 			border: 1.5px solid var(--support-soft);
