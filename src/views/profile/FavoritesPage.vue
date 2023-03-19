@@ -1,26 +1,59 @@
 <script setup>
-	const selectedFile = ref(null);
-	const imageUrl = ref(null);
+	import { useUserService } from '@/services/UserService';
+	import { useProductsService } from '@/services/ProductsService';
 
-	const handleFileUpload = (event) => {
-		// Get the selected file
-		const file = event.target.files[0];
+	const p = useProductsService();
 
-		// Create a URL for the selected file
-		imageUrl.value = URL.createObjectURL(file);
+	// const filtered = computed(function () {
+	// 	return p.list.filter(function (item) {
+	// 		var itemVariable = item.name.toUpperCase();
+	// 		return itemVariable.includes(searchString.value.toUpperCase());
+	// 	});
+	// });
 
-		// Save the selected file for uploading
-		selectedFile.value = file;
-	};
+	const user = useUserService();
 </script>
 
 <template>
-	<h1>Favorites</h1>
+	<favorites-list>
+		<text-content>
+			<p class="attention-voice">Favorites List</p>
+			<p class="intro tag"><em>Sweet Delectables</em></p>
+		</text-content>
 
-	<div class="form-field">
-		<input type="file" @change="handleFileUpload" />
-		<img :src="imageUrl" alt="Selected Image" />
-	</div>
+		<ul>
+			<!-- <li class="item-in-cart" v-for="product in user.cart.groups">
+			<picture class="item-picture">
+				<img :src="`${product[0].imageURL}`" alt="iced" loading="lazy" />
+			</picture>
+			<p>{{ product[0].name }}</p>
+			<div class="quantityBox">
+				<button @click="user.cart.groupPlus(product[0])">
+					<SvgIcon icon="sort-asc" />
+				</button>
+				{{ product.length }}
+				<button @click="user.cart.groupMinus(product[0])">
+					<SvgIcon icon="sort-desc" />
+				</button>
+			</div>
+			<p>${{ product[0].price }}</p>
+		</li> -->
+			<p>thing</p>
+		</ul>
+	</favorites-list>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+	favorites-list {
+		display: flex;
+		flex-direction: column;
+		text-content {
+			text-align: left;
+			align-items: flex-start;
+
+			p.tag {
+				color: var(--off-color);
+			}
+		}
+	}
+</style>

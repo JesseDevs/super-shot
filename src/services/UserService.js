@@ -84,6 +84,10 @@ export const useUserService = defineStore('user', function () {
 	// Favorites
 
 	async function toggleFavorite(itemId) {
+		const favItem = {
+			id: itemId,
+			class: 'redHeart',
+		};
 		const docRef = doc(db, 'users', id.value, 'favorites', itemId);
 		const favDoc = await getDoc(docRef);
 
@@ -91,7 +95,7 @@ export const useUserService = defineStore('user', function () {
 			await deleteDoc(docRef);
 			console.log('removed: ', itemId);
 		} else {
-			await setDoc(docRef, { itemId });
+			await setDoc(docRef, favItem);
 			console.log('added', itemId);
 		}
 	}
