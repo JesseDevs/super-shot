@@ -117,7 +117,7 @@
 		h4 {
 			text-align: center;
 			text-transform: uppercase;
-
+			font-family: 'Montserrat', sans-serif;
 			p {
 				width: fit-content;
 				margin: 0 auto;

@@ -103,12 +103,6 @@
 			text-align: center;
 		}
 
-		.wrapper {
-			display: flex;
-			padding: 4px;
-			// background-color: var(--off-color-mute);
-		}
-
 		.custom-input {
 			flex-grow: 1;
 		}

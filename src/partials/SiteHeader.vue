@@ -28,8 +28,8 @@
 					<burger />
 				</button>
 
-				<RouterLink class="loud-voice logo" @click="ui.specificToggle()" to="/"
-					><span class="main-color">Dunkin</span><span class="off-color">’ </span></RouterLink
+				<RouterLink class="attention-voice logo" @click="ui.specificToggle()" to="/"
+					><span class="main-color">DUNKIN</span><span class="off-color">’ </span></RouterLink
 				>
 
 				<transition name="fade" mode="out-in">
@@ -50,41 +50,37 @@
 				<SignInBlock />
 				<ul>
 					<li class="desktop-view">
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/profile"
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/profile"
 							>Profile</RouterLink
 						>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/menu">Menu</RouterLink>
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/menu">Menu</RouterLink>
 					</li>
 
 					<li class="logo">
-						<RouterLink class="attention-voice logo" @click="ui.specificToggle()" to="/"
+						<RouterLink class="strict-voice logo" @click="ui.specificToggle()" to="/"
 							><span class="main-color">Dunkin</span><span class="off-color">’</span></RouterLink
 						>
 					</li>
 
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/search"
-							>Search</RouterLink
-						>
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/search">Search</RouterLink>
 					</li>
 					<li>
-						<RouterLink @click="ui.specificToggle()" class="small-voice" to="/rewards"
+						<RouterLink @click="ui.specificToggle()" class="tiny-voice" to="/rewards"
 							>Rewards</RouterLink
 						>
 					</li>
 					<li v-if="ui.mainMenuOpen">
-						<a target="git" class="small-voice" href="https://github.com/JesseDevs/super-shot"
-							>GitHub</a
-						>
+						<a target="git" class="tiny-voice" href="https://github.com/JesseDevs/super-shot">GitHub</a>
 					</li>
 				</ul>
 			</nav>
 
 			<transition name="fade" mode="out-in">
 				<div :class="`box-modal ${itemAdded.class}`">
-					<p class="small-voice" v-if="user.cart.itemAdded">
+					<p class="tiny-voice" v-if="user.cart.itemAdded">
 						{{ itemAdded.text }}
 					</p>
 				</div>
@@ -142,7 +138,7 @@
 			left: auto;
 			border-width: 0 15px 15px;
 			border-style: solid;
-			border-color: rgba(var(--color-soft-rgb), 0.3) transparent;
+			border-color: rgba(var(--color-soft-rgb), 0.6) transparent;
 			/* reduce the damage in FF3.0 */
 			display: block;
 			width: 0;
@@ -165,6 +161,7 @@
 
 		div.cart-container {
 			margin-right: 5px;
+			cursor: pointer;
 		}
 	}
 
@@ -181,7 +178,6 @@
 
 		.logo {
 			color: var(--off-color);
-			text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
 
 			.main-color {
 				font-weight: 900;
@@ -226,7 +222,7 @@
 		position: static;
 		height: auto;
 		margin: auto -1rem;
-		border-top: 2px solid var(--support-light);
+		border-top: 1px solid var(--support-light);
 
 		.logo {
 			display: none;
@@ -249,6 +245,7 @@
 				padding: 7px 7px;
 				color: var(--support);
 				font-weight: 700;
+				text-transform: uppercase;
 				text-align: center;
 				border-bottom: 2px solid var(--support-light);
 
@@ -396,6 +393,7 @@
 				}
 
 				li:not(.logo) {
+					padding-top: 5px;
 					&:after {
 						content: '';
 						position: absolute;
@@ -408,6 +406,10 @@
 						transition: width 0.3s ease-in-out; /* This will add a smooth transition effect to the border */
 					}
 
+					a {
+						border-bottom: none;
+					}
+
 					&:hover::after {
 						width: 50%;
 					}
@@ -416,6 +418,7 @@
 
 			ul li a {
 				border-bottom: none;
+
 				&:hover {
 					border: none;
 				}
