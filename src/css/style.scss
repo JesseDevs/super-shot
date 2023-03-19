@@ -4,8 +4,19 @@
 @import 'typography.scss';
 @import 'components.scss';
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo {
+	font-family: 'Dunkin', sans-serif;
+
+}
+
 .cart-open {
-	margin-top: 126px;
+	margin-top: 122.5px;
 
 	cart-modal {
 		opacity: 1;

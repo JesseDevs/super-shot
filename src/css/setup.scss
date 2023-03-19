@@ -7,7 +7,8 @@
 	font-weight: normal;
 }
 
-body, #app {
+body,
+#app {
 	display: contents;
 	line-height: 1.4;
 
@@ -58,7 +59,7 @@ inner-column {
 	margin-left: auto;
 	background: var(--page);
 	padding: 1.5rem 1rem;
-	max-width: 1200px;
+	max-width: 1500px;
 	position: relative;
 }
 

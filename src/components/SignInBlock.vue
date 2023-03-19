@@ -22,9 +22,9 @@
 
 <template>
 	<signin-block v-if="user.authUser">
-		<h3 class="username-name strict-voice">{{ user.username }}</h3>
+		<p class="username-name strict-voice">Welcome, {{ user.username }}</p>
 		<RouterLink class="username-link small-voice" @click="ui.specificToggle()" to="/">
-			<h3>{{ user.username }}</h3>
+			<p>{{ user.username }}</p>
 		</RouterLink>
 		<actions-block>
 			<RouterLink class="tiny-button" @click="ui.specificToggle()" to="/profile">Profile</RouterLink>
@@ -103,8 +103,9 @@
 			text-align: center;
 			justify-content: center;
 			align-items: center;
-			row-gap: 10px;
+			row-gap: 20px;
 			padding: 7px;
+			padding: 40px;
 
 			background-color: var(--page-support);
 
@@ -137,6 +138,7 @@
 			padding: 7px 1.5rem;
 			gap: 8px;
 			border-bottom: 2px solid var(--support-light);
+			zoom: 0.9;
 
 			p {
 				display: none;

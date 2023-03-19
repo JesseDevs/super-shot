@@ -12,7 +12,7 @@ textarea,
 select {
 
 	width: 100%;
-	font-family: "Montserrat", sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	padding: 10px 15px;
 	font-size: 1.1rem;
 	border: 1px solid var(--support);
@@ -49,9 +49,9 @@ textarea {
 
 
 .button {
-	font-size: 15px;
+	font-size: var(--step--1);
 	font-weight: 600;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
 	letter-spacing: .05em;
 
@@ -101,7 +101,7 @@ textarea {
 
 @media (min-width: 768px) {
 	.button {
-		padding: 13px 45px;
+		padding: 13px 32px;
 	}
 }
 
@@ -133,7 +133,7 @@ textarea {
 	color: #363636;
 	cursor: pointer;
 	display: inline-flex;
-	font-family: 'Montserrat', sans-serif;
+
 	font-family: 'Montserrat', sans-serif;
 	font-size: 1rem;
 	height: 2.5em;
