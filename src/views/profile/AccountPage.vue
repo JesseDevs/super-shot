@@ -79,25 +79,25 @@
 					<p @click="toggleUsernameEdit()" v-else class="strict-voice">
 						{{ user.username }}
 					</p>
-					<h6 class="small-voice">Username</h6>
+					<em class="small-voice">Username</em>
 				</div>
 				<div class="account-display-box">
 					<input id="firstN" type="text" required v-model="form.firstN" v-if="editingUsername" />
 					<p @click="toggleUsernameEdit()" v-else class="strict-voice">
 						{{ user.firstN }}
 					</p>
-					<h6 class="small-voice">First Name</h6>
+					<em class="small-voice">First Name</em>
 				</div>
 				<div class="account-display-box">
 					<input id="lastN" type="text" required v-if="editingUsername" v-model="form.lastN" />
 					<p @click="toggleUsernameEdit()" v-else class="strict-voice">
 						{{ user.lastN }}
 					</p>
-					<h6 class="small-voice">Last Name</h6>
+					<em class="small-voice">Last Name</em>
 				</div>
 				<div class="account-display-box">
 					<p class="strict-voice">{{ user.email }}</p>
-					<h6 class="small-voice">Email</h6>
+					<em class="small-voice">Email</em>
 				</div>
 				<actions-block v-if="editingUsername">
 					<button class="button" type="submit">Update</button>
@@ -194,7 +194,7 @@
 			min-height: 24px;
 			font-weight: 600;
 		}
-		h6 {
+		em {
 			align-self: flex-end;
 			pointer-events: none;
 		}
@@ -210,7 +210,7 @@
 	}
 
 	.wrapper {
-		min-height: 80vh;
+		min-height: 75vh;
 
 		padding: 50px 0;
 	}

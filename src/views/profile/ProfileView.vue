@@ -7,7 +7,7 @@
 <template>
 	<profile-page>
 		<profile-nav>
-			<h1 class="loud-voice">Welcome, {{ user.username }}</h1>
+			<p class="loud-voice">Hello! {{ user.username }}</p>
 			<nav>
 				<ul>
 					<li>
@@ -45,7 +45,7 @@
 			}
 			a {
 				padding: 10px;
-				border: 2px solid var(--color);
+				border: 2px solid var(--color-mute);
 				background-color: var(--color-mute);
 				color: var(--page);
 				transition: all 0.2s ease-in-out;
@@ -65,8 +65,12 @@
 			gap: 20px;
 			background-color: var(--page);
 			position: sticky;
-			top: 126px;
-			z-index: 300;
+			top: 122.5px;
+			z-index: 299;
+			padding-top: 30px;
+			nav {
+				max-width: 600px;
+			}
 		}
 	}
 </style>
