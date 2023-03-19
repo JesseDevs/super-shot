@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchView: typeof import('./src/views/SearchView.vue')['default']
+    ShowCode: typeof import('./src/components/ShowCode.vue')['default']
     SignInBlock: typeof import('./src/components/SignInBlock.vue')['default']
     SignInView: typeof import('./src/views/SignInView.vue')['default']
     SignOutView: typeof import('./src/views/SignOutView.vue')['default']
