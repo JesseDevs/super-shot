@@ -12,12 +12,15 @@
 			Come run with us! Apply to join our exceptional team <RouterLink to="/sign-up">here</RouterLink>.
 		</p>
 	</ad-block>
+	<picture class="bkg-top-img">
+		<img src="@/assets/dunkin-images/bcac.png" alt="" />
+	</picture>
 	<home-module>
-		<h1 class="yell-voice">
+		<h1 class="chant-voice">
 			<span class="main-color">Dunkin</span><span class="off-color">’ Rewards</span>
 		</h1>
 
-		<p class="intro strict-voice">
+		<p class="intro attention-voice">
 			{{ pageData.subHeading }}
 		</p>
 		<ul>
@@ -74,21 +77,40 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		margin-top: 8vh;
+		margin-top: 10vh;
 		h1 {
 			font-weight: 700;
 			line-height: 1;
+			z-index: 5;
 		}
 		p.intro {
 			color: var(--black);
-			font-weight: 700;
+			font-weight: 100;
+			font-family: 'Dunkin Sans', sans-serif;
+			z-index: 5;
 		}
 
 		ul {
-			margin: 3vh auto;
+			margin: 60px auto 5vh;
 			display: flex;
 			flex-direction: column;
-			row-gap: 10px;
+			row-gap: 15px;
+		}
+	}
+
+	.bkg-top-img {
+		position: absolute;
+		width: 100%;
+		z-index: 2;
+		top: 51px;
+		left: 0;
+		display: none;
+		pointer-events: none;
+
+		img {
+			width: 100%;
+			max-width: initial;
+			max-height: initial;
 		}
 	}
 
@@ -98,7 +120,8 @@
 		width: 100%;
 		padding: 5px;
 		left: 0;
-		top: 0;
+		top: 1px;
+		z-index: 3;
 
 		background-color: var(--off-color);
 		color: var(--page);
@@ -106,7 +129,8 @@
 		p {
 			text-align: center;
 			margin: 0 auto;
-			max-width: 80%;
+			max-width: 100%;
+			padding: 10px 0;
 		}
 
 		p,
@@ -130,11 +154,14 @@
 		zoom: 0.7;
 		text-align: left;
 		gap: 20px;
+		z-index: 5;
 		text-content {
 			align-items: flex-start;
+			gap: 10px;
 		}
 		h4 {
 			font-weight: 700;
+			font-family: 'Montserrat', sans-serif;
 		}
 		img {
 			transition: scale 200ms ease-in-out;
@@ -159,26 +186,32 @@
 
 	@media (min-width: 450px) {
 		home-module ul {
-			margin: 20px auto;
+			margin-top: 70px;
+			row-gap: 20px;
 		}
 
 		dunkin-card {
-			zoom: 0.8;
+			zoom: 0.9;
 			gap: 20px;
 		}
 	}
 
 	@media (min-width: 600px) {
+		.bkg-top-img {
+			display: block;
+		}
 		home-module ul {
 			display: grid;
 			width: 100%;
 			grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
 			gap: 20px;
+			column-gap: 25px;
 			margin: 3vh auto 7vh;
 		}
 		dunkin-card {
 			text-align: center;
 			flex-direction: column;
+
 			h4 {
 				text-align: center;
 				margin: 0 auto;
@@ -191,11 +224,11 @@
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
 			max-width: 1120px;
+			margin-top: 6vh;
 		}
 
 		dunkin-card {
 			flex-direction: column;
-			zoom: 1;
 		}
 	}
 </style>
