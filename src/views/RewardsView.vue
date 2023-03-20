@@ -16,6 +16,10 @@
 				Boosted Status to earn points faster and score members-only exclusive offers.
 			</p>
 		</module-thing>
+		<actions-block>
+			<RouterLink class="button" to="/sign-up">Join Now</RouterLink>
+			<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
+		</actions-block>
 		<ul>
 			<li>
 				<reward-card>
@@ -32,10 +36,6 @@
 				</reward-card>
 			</li>
 		</ul>
-		<actions-block>
-			<RouterLink class="button" to="/sign-up">Join Now</RouterLink>
-			<RouterLink class="button" to="/sign-in">Sign In</RouterLink>
-		</actions-block>
 	</rewards-module>
 </template>
 
@@ -81,6 +81,7 @@
 				max-width: fit-content;
 				margin: 0 auto;
 				text-align: center;
+				line-height: 1.2;
 			}
 
 			p {
