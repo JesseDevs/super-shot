@@ -36,8 +36,12 @@
 		<h5 class="strict-voice" v-if="searchString !== ''">Results: {{ searchString }}</h5>
 		<h5 class="strict-voice" v-else>Results: All&nbsp;Products</h5>
 	</search-div>
-	<ul class="main-grid">
-		<li v-for="product in filtered">
+	<transition-group name="fade" tag="ul" class="list main-grid">
+		<li
+			v-for="(product, index) in filtered"
+			:style="{ animationDelay: index * 150 + 'ms' }"
+			class="fade-item"
+		>
 			<RouterLink :to="`menu/${product.category}/${product.slug}`">
 				<general-card>
 					<picture class="item-picture">
@@ -49,7 +53,7 @@
 				</general-card>
 			</RouterLink>
 		</li>
-	</ul>
+	</transition-group>
 </template>
 
 <style lang="scss">
