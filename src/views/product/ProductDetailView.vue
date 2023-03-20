@@ -22,10 +22,6 @@
 		miniDonut: 'Glazed',
 	});
 
-	// const newID = computed(function () {
-	// 	return slugid.nice();
-	// });
-
 	// function saveNewProduct() {
 	// 	ui.cartMenuOpen = true;
 	// 	cart.itemAdded = true;
@@ -70,13 +66,13 @@
 			</picture>
 
 			<text-content>
+				<p class="price">
+					<span class="price"> ${{ product[0].price }}</span>
+				</p>
 				<h5 class="chant-voice">{{ product[0].name }}</h5>
 				<p class="tag small-voice">{{ product[0].tagline }}</p>
 				<p class="intro tiny-voice">
 					{{ product[0].desc }}
-				</p>
-				<p class="price">
-					<span class="price"> ${{ product[0].price }}</span>
 				</p>
 
 				<button class="button" @click="user.cart.addToCart(product[0])">Add to cart</button>
@@ -100,7 +96,7 @@
 		gap: 8px;
 
 		p.price {
-			align-self: flex-end;
+			align-self: flex-start;
 			font-weight: 600;
 		}
 
@@ -160,7 +156,7 @@
 				background-color: var(--support-light);
 				cursor: pointer;
 				border: none !important;
-				z-index: 200;
+				z-index: 100;
 
 				.contains-svg {
 					padding-top: 4.3px;
@@ -266,7 +262,7 @@
 				}
 
 				button.heart {
-					bottom: 86px;
+					bottom: 0;
 					top: auto;
 				}
 			}

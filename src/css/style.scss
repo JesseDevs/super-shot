@@ -12,11 +12,11 @@ h5,
 h6,
 .logo {
 	font-family: 'Dunkin', sans-serif;
-
+	font-weight: 100;
 }
 
 .cart-open {
-	margin-top: 122.5px;
+	margin-top: var(--header-space);
 
 	cart-modal {
 		opacity: 1;

@@ -87,6 +87,7 @@
 			font-weight: 100;
 			font-family: 'Dunkin Sans', sans-serif;
 			z-index: 5;
+			line-height: 1.3;
 		}
 
 		ul {
@@ -154,6 +155,10 @@
 		text-align: left;
 		gap: 20px;
 		z-index: 5;
+
+		p {
+			max-width: 40ch;
+		}
 		text-content {
 			align-items: flex-start;
 			gap: 10px;
@@ -161,6 +166,7 @@
 		h4 {
 			font-weight: 700;
 			font-family: 'Montserrat', sans-serif;
+			line-height: 1.2;
 		}
 		img {
 			transition: scale 200ms ease-in-out;
@@ -190,8 +196,8 @@
 		}
 
 		dunkin-card {
-			zoom: 0.9;
 			gap: 20px;
+			zoom: 0.8;
 		}
 	}
 
@@ -210,6 +216,7 @@
 		dunkin-card {
 			text-align: center;
 			flex-direction: column;
+			zoom: 0.9;
 
 			h4 {
 				text-align: center;

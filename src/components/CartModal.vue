@@ -108,12 +108,12 @@
 		position: fixed;
 		background-color: var(--off-color-soft);
 		right: 0;
-		top: 122.5px;
+		top: var(--header-space);
 		width: 100%;
 
 		max-width: 90vh;
 		min-height: 82vh;
-		height: calc(100% - 126px);
+		height: calc(100% - var(--header-space));
 		max-height: 100vh;
 
 		display: flex;
@@ -212,7 +212,7 @@
 
 			li {
 				background-color: var(--off-color-soft);
-				padding: 10px 1.4rem;
+				padding: 15px 1.4rem;
 				border-bottom: 1px solid black;
 
 				p {

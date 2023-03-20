@@ -109,12 +109,12 @@ textarea {
 
 	.button:hover,
 	.tiny-button:hover {
-		box-shadow: inset 0 0 0 2em var(--off-color-soft);
+		background-color: var(--off-color-soft);
 		color: var(--color-text);
 	}
 
 	.button+.button:hover {
-		box-shadow: inset 0 0 0 2em var(--off-color-soft);
+		background-color: var(--off-color-soft);
 		color: var(--color-text);
 	}
 

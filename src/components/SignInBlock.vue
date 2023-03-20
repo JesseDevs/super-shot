@@ -68,6 +68,15 @@
 	</signin-block>
 </template>
 <style lang="scss">
+	@keyframes move {
+		0% {
+			transform: translateX(-100%);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+
 	signin-block {
 		display: none;
 		transition: all ease-in-out 1000ms;
@@ -97,6 +106,9 @@
 	}
 
 	header.toggle-open {
+		nav.bottom-row {
+			animation: move 0.5s forwards;
+		}
 		signin-block {
 			display: grid;
 			grid-template-columns: 125px 125px;

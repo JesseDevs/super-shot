@@ -114,32 +114,31 @@
 		width: 150px;
 		min-height: 50px;
 		position: absolute;
-		top: 75px;
+		top: 90px;
 		right: 13px;
 		opacity: 0;
 
 		padding: 15px;
 		color: #000;
 		background: var(--color);
-		background: linear-gradient(180deg, rgba(var(--color-soft-rgb), 0.5) 0%, var(--color-soft) 60%);
+		background: linear-gradient(180deg, rgb(241, 209, 198) 0%, var(--color-soft) 60%);
 
 		border-radius: 10px;
-
-		display: grid;
 		place-items: center;
 		z-index: -200;
+
+		display: none;
 
 		&:after {
 			content: '';
 			position: absolute;
-			top: -15px; /* value = - border-top-width - border-bottom-width */
-			right: 7%; /* controls horizontal position */
+			top: -15px;
+			right: 7%;
 			bottom: auto;
 			left: auto;
 			border-width: 0 15px 15px;
 			border-style: solid;
 			border-color: rgba(var(--color-soft-rgb), 0.6) transparent;
-			/* reduce the damage in FF3.0 */
 			display: block;
 			width: 0;
 		}
@@ -152,6 +151,7 @@
 	div.confirmation {
 		animation: fadeInOut 2s forwards;
 		z-index: 200;
+		display: grid;
 	}
 
 	header.site-header {
@@ -374,6 +374,7 @@
 		div.box-modal {
 			top: 55px;
 			right: 23px;
+			display: grid;
 		}
 		nav.top-row {
 			display: none;

@@ -118,12 +118,15 @@
 			text-align: center;
 			text-transform: uppercase;
 			font-family: 'Montserrat', sans-serif;
+
 			p {
 				width: fit-content;
 				margin: 0 auto;
 				z-index: 21;
 				background-color: rgba(239, 237, 237);
 				padding: 5px 10px;
+				color: var(--black);
+				font-weight: 400;
 			}
 			span {
 				width: 100%;
