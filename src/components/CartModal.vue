@@ -65,7 +65,9 @@
 						<button class="tiny-voice" @click="user.cart.clearGroup(product[0])">Delete</button>
 					</edit-links>
 					<div v-if="quantityMode" class="quantity-counter">
-						<button @click="user.cart.groupMinus(product[0])">-</button>
+						<button @click="user.cart.groupMinus(product[0])">
+							<SvgIcon icon="minus-square" />
+						</button>
 						{{ product.length }}
 						<button @click="user.cart.groupPlus(product[0])">+</button>
 					</div>
@@ -273,9 +275,8 @@
 	}
 
 	div.quantity-counter {
-		background-color: red;
-
 		width: 100%;
+		display: flex;
 	}
 
 	@media (min-width: 600px) {
@@ -286,7 +287,7 @@
 			top: 85px;
 			max-height: 80vh;
 			border-radius: 25px;
-			border: 2px solid black;
+			border: 1.5px solid var(--color-text);
 
 			li a {
 				padding: 10px 2rem;
