@@ -176,7 +176,7 @@ router.beforeEach(async (to) => {
 			};
 		}
 	}
-	if (to.meta.requiresAuth) {
+	if (to.meta.requiresAdmin) {
 		await user.getUserDocument;
 		if (!user.isAdmin) {
 			return {
