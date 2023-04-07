@@ -31,13 +31,7 @@ export default defineConfig({
 				{
 					vuefire: ['useCollection', 'useDocument', 'useFirestore'],
 					'vue-router': ['RouterView', 'useRoute', 'useRouter'],
-					'firebase/firestore': [
-						'collection',
-						'addDoc',
-						'getDocs',
-						'setDoc',
-						'doc',
-					],
+					'firebase/firestore': ['collection', 'addDoc', 'getDocs', 'setDoc', 'doc'],
 				},
 				{ '@/services/UserService': ['useUserService'] },
 			],
@@ -45,12 +39,7 @@ export default defineConfig({
 			dts: true,
 		}),
 		Components({
-			dirs: [
-				'src/views',
-				'src/components',
-				'src/views/pages',
-				'src/partials',
-			],
+			dirs: ['src/views', 'src/components', 'src/views/pages', 'src/partials'],
 			dts: true,
 		}),
 	],
